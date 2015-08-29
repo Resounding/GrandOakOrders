@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrandOakOrders", "GrandOakOrders\GrandOakOrders.csproj", "{E847A31D-6728-4978-A0AF-6C4FE4089970}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{7ADB4EC1-C294-4678-938E-4030B329AD55}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Gruntfile.js = Gruntfile.js
+		Gulpfile.js = Gulpfile.js
+		package.json = package.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{DC5592AD-370F-44C5-9447-31E5D03255C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{CE8D41E9-CF88-4799-8829-DD73D120789B}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1 = PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{B9A51132-3686-4EBE-8BAA-E1ECA4A90D18}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Templates\GrandOakOrders.json = PublishScripts\Templates\GrandOakOrders.json
+		PublishScripts\Templates\GrandOakOrders.param.dev.json = PublishScripts\Templates\GrandOakOrders.param.dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E847A31D-6728-4978-A0AF-6C4FE4089970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E847A31D-6728-4978-A0AF-6C4FE4089970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E847A31D-6728-4978-A0AF-6C4FE4089970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E847A31D-6728-4978-A0AF-6C4FE4089970}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CE8D41E9-CF88-4799-8829-DD73D120789B} = {DC5592AD-370F-44C5-9447-31E5D03255C0}
+		{B9A51132-3686-4EBE-8BAA-E1ECA4A90D18} = {DC5592AD-370F-44C5-9447-31E5D03255C0}
+	EndGlobalSection
+EndGlobal

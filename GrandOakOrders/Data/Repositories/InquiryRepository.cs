@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using GrandOakOrders.Data.Entities;
+
+namespace GrandOakOrders.Data.Repositories
+{
+    public class InquiryRepository
+    {
+        private GrandOakDbContext _context = new GrandOakDbContext();
+
+        public async Task<List<Inquiry>> OpenInquiries()
+        {
+            var inquiries = await _context.Inquiries
+                .Include(i => i.Outcome)
+                .Where(i => i.OutcomeId == null)
+                .OrderBy(i => i.UpdatedAt)
+                .ToListAsync();
+
+            return inquiries;
+        }
+
+        public async Task<Inquiry> GetOne(int id)
+        {
+            var inquiry = await _context.Inquiries
+                .Include(i => i.Outcome)
+                .FirstOrDefaultAsync(i => i.Id == id);
+
+            return inquiry;
+        }
+
+        public async Task<Inquiry> Create(Inquiry inquiry, string who)
+        {
+            inquiry.CreatedAt = inquiry.UpdatedAt = DateTime.Now;
+            inquiry.CreatedBy = inquiry.UpdatedBy = who;
+            _context.Inquiries.Add(inquiry);
+            await _context.SaveChangesAsync();
+
+            return inquiry;
+        }
+
+        public async Task<Inquiry> Edit(Inquiry inquiry, string who)
+        {
+            inquiry.UpdatedAt = DateTime.Now;
+            inquiry.UpdatedBy = who;
+            _context.Entry(inquiry).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return inquiry;
+        }
+
+        public async Task Delete(int id)
+        {
+            var inquiry = new Inquiry {
+                Id = id
+            };
+            _context.Inquiries.Attach(inquiry);
+            _context.Inquiries.Remove(inquiry);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Close(int id, string who)
+        {
+            var inquiry = await _context.Inquiries.FindAsync(id);
+            if(inquiry != null) {
+                inquiry.UpdatedAt = DateTime.Now;
+                inquiry.UpdatedBy = who;
+                inquiry.OutcomeId = InquiryOutcome.ClosedId;
+
+                await _context.SaveChangesAsync();
+            }
+        }
+    }
+}

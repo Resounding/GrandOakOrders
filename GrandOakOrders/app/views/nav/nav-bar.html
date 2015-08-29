@@ -1,0 +1,23 @@
+<template>
+    <require from='../auth/user-profile'></require>
+    <require from='../auth/logout-button'></require>
+    
+    <nav>
+        <div class="nav-wrapper">
+            <a class="center brand-logo">
+                Grand Oak Culinary Orders
+            </a>
+            <a href="/" class="brand-logo left">
+                <img src="/img/logo.png" alt="Logo">
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <user-profile></user-profile>
+                </li>
+                <li>
+                    <logout-button></logout-button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</template>

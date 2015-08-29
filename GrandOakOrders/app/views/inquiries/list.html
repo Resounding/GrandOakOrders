@@ -1,0 +1,27 @@
+<template>
+	<h3>This is the list of inquiries</h3>
+	<a href="#">Go home</a>
+	
+	<div class="container">
+		<ul class="collection">
+			<li class="collection-item avatar" repeat.for="request of requests">
+				<img src="/img/phone.png" class="circle" alt="Phone">
+				<span class="title">${request.organization} (${request.contact_person})</span>
+				<p>
+					<strong>${request.description}</strong>
+					<br>
+					<em>Taken by ${request.createdBy} on ${request.createdDate} @ ${request.createdTime}</em>
+				</p>
+				<a href="#/inquiries/${request.id}" class="secondary-content">
+					<img src="/img/go.png" width="30px" height="30px" alt="Go">
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="fixed-action-btn">	
+		<a class="btn-floating btn-large red" href="#/inquiries/new">
+			<i class="large material-icons">add</i>
+		</a>
+	</div>
+</template>

@@ -1,0 +1,56 @@
+<template>
+	<form class="container" name="newInquiryForm" ref="newInquiryForm">
+		<div class="row">
+			<form class="col s12">
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="organization" type="text" class="validate ${organizationInvalid ? 'invalid' : ''}" value.bind="organization" required>
+						<label for="organization">Organization:</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="caller" type="text" value.bind="contact_person">
+						<label for="caller">Person Calling:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="date" ref="datepicker" type="text" class="datepicker" value.bind="event_date">
+						<label for="date" class="active">Event Date:</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="time" type="text" class="timepicker" value.bind="event_time">
+						<label for="time" class="active">Event Time:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s2">
+						<input id="people" type="number" min="0" value.bind="people" required>
+						<label for="people" class="active"># People:</label>
+					</div>
+					<div class="input-field col s10">
+						<input id="summary" type="text" value.bind="summary" required>
+						<label for="summary">Summary:</label>
+					</div>
+				</div>
+				<div class="row">
+					<p class="col s12">
+						<input type="checkbox" id="quote" checked.bind="isQuoteRequired">
+						<label for="quote">Quote Required?</label>
+					</p>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea id="description" class="materialize-textarea" value.bind="description"></textarea>
+						<label for="caller">Description:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="right">
+						<a class="btn waves-effect waves-light white blue-text" href="#/inquiries">Cancel</a>
+						<button type="submit" class="btn waves-effect waves-light blue" click.trigger="save($event)">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</form>
+</template>

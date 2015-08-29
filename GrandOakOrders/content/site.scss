@@ -1,0 +1,40 @@
+﻿@import 'materialize/sass/materialize.scss';
+
+nav {
+  @extend .blue, .lighten-2;
+  
+  .brand-logo,
+  .brand-logo.center {
+      @media #{$medium-and-down} {
+        left: 0;
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+        
+        // applies only to title
+        &.center {
+          font-size: 1em;
+          text-align: center;
+          margin-left: 75px;
+          right: 0;
+        }
+      }      
+      
+      img {
+        max-height: 100px;
+        margin-left: 10px;
+        
+        @media #{$small-and-down} {
+          max-width: 75px;
+          margin-left: 0;  
+        }
+      }
+    }
+  }
+  
+  .fixed-action-btn {
+    bottom: 45px;
+    right: 24px;
+  }

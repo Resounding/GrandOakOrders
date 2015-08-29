@@ -1,0 +1,32 @@
+{
+  "siteName": {
+    "value": "gocm"
+  },
+  "hostingPlanName": {
+    "value": "Default1"
+  },
+  "siteLocation": {
+    "value": "East US"
+  },
+  "sku": {
+    "value": "Standard"
+  },
+  "workerSize": {
+    "value": "0"
+  },
+  "serverName": {
+    "value": "goc"
+  },
+  "serverLocation": {
+    "value": "East US"
+  },
+  "administratorLogin": {
+    "value": "GrandOakUser"
+  },
+  "administratorLoginPassword": {
+    "value": "Gr@nd0ak"
+  },
+  "databaseName": {
+    "value": "gocm_db"
+  }
+}

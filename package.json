@@ -1,0 +1,73 @@
+{
+  "name": "GrandOakOrders",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Grand Oak Culinary Markets ordering site",
+  "scripts": {
+    "start": "IISExpress.exe /Site:GrandOakOrders"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Resounding/GrandOakOrders.git"
+  },
+  "author": "Cliffe Hodgkinson",
+  "homepage": "https://gocm.azurewebsites.net",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-concurrent": "^1.0.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-exec": "^0.4.6",
+    "grunt-open": "^0.2.3",
+    "grunt-touch": "^0.1.0",
+    "gulp": "^3.9.0",
+    "gulp-typescript": "^2.8.1",
+    "http-server": "^0.6.1",
+    "jspm": "^0.16.2",
+    "matchdep": "^0.3.0"
+  },
+  "jspm": {
+    "dependencies": {
+      "aurelia-animator-css": "github:aurelia/animator-css@^0.15.0",
+      "aurelia-binding": "github:aurelia/binding@^0.8.6",
+      "aurelia-bootstrapper": "github:aurelia/bootstrapper@^0.16.0",
+      "aurelia-dependency-injection": "github:aurelia/dependency-injection@^0.9.2",
+      "aurelia-event-aggregator": "github:aurelia/event-aggregator@^0.7.0",
+      "aurelia-fetch-client": "github:aurelia/fetch-client@^0.1.2",
+      "aurelia-framework": "github:aurelia/framework@^0.15.0",
+      "aurelia-history": "github:aurelia/history@^0.6.1",
+      "aurelia-history-browser": "github:aurelia/history-browser@^0.7.0",
+      "aurelia-loader": "github:aurelia/loader@^0.8.7",
+      "aurelia-loader-default": "github:aurelia/loader-default@^0.9.5",
+      "aurelia-logging": "github:aurelia/logging@^0.6.4",
+      "aurelia-metadata": "github:aurelia/metadata@^0.7.3",
+      "aurelia-path": "github:aurelia/path@^0.8.1",
+      "aurelia-route-recognizer": "github:aurelia/route-recognizer@^0.6.2",
+      "aurelia-router": "github:aurelia/router@^0.11.0",
+      "aurelia-task-queue": "github:aurelia/task-queue@^0.6.2",
+      "aurelia-templating": "github:aurelia/templating@^0.14.1",
+      "aurelia-templating-binding": "github:aurelia/templating-binding@^0.14.0",
+      "aurelia-templating-resources": "github:aurelia/templating-resources@^0.14.0",
+      "aurelia-templating-router": "github:aurelia/templating-router@^0.15.0",
+      "clean-css": "npm:clean-css@^3.3.8",
+      "core-js": "npm:core-js@^0.9.4",
+      "css": "github:systemjs/plugin-css@^0.1.11",
+      "fetch": "github:github/fetch@^0.9.0",
+      "paulvanbladel/aurelia-auth": "github:paulvanbladel/aurelia-auth@^0.9.10",
+      "text": "github:systemjs/plugin-text@^0.0.2"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
+      "core-js": "npm:core-js@^0.9.4",
+      "typescript": "npm:typescript@^1.6.0-dev.20150818"
+    },
+    "overrides": {
+      "npm:core-js@0.9.18": {
+        "main": "client/shim.min"
+      }
+    }
+  },
+  "dependencies": {
+    "typescript": "^1.5.3"
+  }
+}
