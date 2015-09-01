@@ -2,7 +2,7 @@
 {
     public class InquiryOutcome
     {
-        public static string QuoteId = "QUOTE";
+        public static string WaitId = "WAIT";
         public static string OrderId = "ORDER";
         public static string ClosedId = "CLOSE";
 

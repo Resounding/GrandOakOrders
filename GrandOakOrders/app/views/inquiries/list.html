@@ -1,16 +1,18 @@
 <template>
 	<h3>This is the list of inquiries</h3>
-	<a href="#">Go home</a>
+	<a href="#">Go home!</a>
 	
 	<div class="container">
 		<ul class="collection">
 			<li class="collection-item avatar" repeat.for="request of requests">
 				<img src="/img/phone.png" class="circle" alt="Phone">
-				<span class="title">${request.organization} (${request.contact_person})</span>
+				<span class="title">${request.title}</span>
 				<p>
-					<strong>${request.description}</strong>
-					<br>
-					<em>Taken by ${request.createdBy} on ${request.createdDate} @ ${request.createdTime}</em>
+					<strong>${request.summary}</strong>
+                    <br if.bind="request.date">
+                    <span if.bind="request.date">${request.date}</span>
+                    <br>
+					<em>Entered by ${request.createdBy} on ${request.createdDate} @ ${request.createdTime}</em>
 				</p>
 				<a href="#/inquiries/${request.id}" class="secondary-content">
 					<img src="/img/go.png" width="30px" height="30px" alt="Go">

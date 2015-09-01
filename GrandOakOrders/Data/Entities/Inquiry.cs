@@ -12,6 +12,9 @@ namespace GrandOakOrders.Data.Entities
         public string Summary { get; set; }
         public string Description { get; set; }
         public bool IsQuoteRequired { get; set; }
+        public bool NeedsConfirmation { get; set; }
+        public DateTime? ConfirmationDate { get; set; }
+        public string ClosureComments { get; set; }
         public string OutcomeId { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }

@@ -23,6 +23,19 @@ namespace GrandOakOrders.Controllers
             return Ok(inquiries);
         }
 
+        [Route("{id:int}")]
+        [HttpGet]
+        public async Task<IHttpActionResult> Get(int id)
+        {
+            var user = Request.GetOwinContext().Request.User;
+            var inquiry = await _repo.GetOne(id);
+            if(inquiry == null) {
+                return NotFound();
+            }
+
+            return Ok(inquiry);
+        }
+
         [Route("")]
         [HttpPost]
         public async Task<IHttpActionResult> Create(Inquiry inquiry)
@@ -46,16 +59,6 @@ namespace GrandOakOrders.Controllers
         public async Task<IHttpActionResult> Delete(int id)
         {
             await _repo.Delete(id);
-            return Ok();
-        }
-
-        [Route("{id:int}/Close")]
-        [HttpPost]
-        public async Task<IHttpActionResult> Close(int id)
-        {
-            var user = Request.GetOwinContext().Request.User;
-            await _repo.Close(id, user.Identity.Name);
-
             return Ok();
         }
     }

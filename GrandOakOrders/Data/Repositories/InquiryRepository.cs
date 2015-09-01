@@ -15,7 +15,7 @@ namespace GrandOakOrders.Data.Repositories
         {
             var inquiries = await _context.Inquiries
                 .Include(i => i.Outcome)
-                .Where(i => i.OutcomeId == null)
+                .Where(i => i.OutcomeId == null || i.ConfirmationDate.HasValue && i.ConfirmationDate.Value > DateTime.Today)
                 .OrderBy(i => i.UpdatedAt)
                 .ToListAsync();
 
@@ -43,9 +43,25 @@ namespace GrandOakOrders.Data.Repositories
 
         public async Task<Inquiry> Edit(Inquiry inquiry, string who)
         {
-            inquiry.UpdatedAt = DateTime.Now;
-            inquiry.UpdatedBy = who;
-            _context.Entry(inquiry).State = EntityState.Modified;
+            
+            var dbinquiry = await _context.Inquiries.FirstOrDefaultAsync(i => i.Id == inquiry.Id);
+            if(dbinquiry == null) {
+                return null;
+            }
+
+            dbinquiry.Organization = inquiry.Organization;
+            dbinquiry.ContactPerson = inquiry.ContactPerson;
+            dbinquiry.EventDate = inquiry.EventDate;
+            dbinquiry.People = inquiry.People;
+            dbinquiry.Summary = inquiry.Summary;
+            dbinquiry.IsQuoteRequired = inquiry.IsQuoteRequired;
+            dbinquiry.NeedsConfirmation = inquiry.NeedsConfirmation;
+            dbinquiry.ConfirmationDate = inquiry.ConfirmationDate;
+            dbinquiry.Description = inquiry.Description;
+            dbinquiry.OutcomeId = inquiry.OutcomeId;
+            dbinquiry.ClosureComments = inquiry.ClosureComments;
+            dbinquiry.UpdatedAt = DateTime.Now;
+            dbinquiry.UpdatedBy = who;
             await _context.SaveChangesAsync();
 
             return inquiry;

@@ -3,81 +3,59 @@ import {AuthService} from 'paulvanbladel/aurelia-auth';
 import {HttpClient} from 'aurelia-http-client';
 import {Router} from 'aurelia-router';
 import moment from 'moment';
+import {InquiryValidator, NewInquiryViewModel} from '../../models/inquiry';
 
 @inject(AuthService, HttpClient, Router)
 export class NewInquiry {
 	
-	newInquiryForm:HTMLFormElement;
-	_organization = '';
-	contact_person = '';
-	event_date:Date;
-	event_time:Date;
-	people = 0;
-	summary = '';
-	isQuoteRequired = false;
-	description = '';
-	createdBy = '';
+    _errors: InquiryValidator;
+    _errorMessages: Array<string> = [];
+    _model = new NewInquiryViewModel();
+	_submitted = false;
 	
-	organizationInvalid = false;
-	submitted = false;
-	
-	constructor(private auth:AuthService, private httpClient:HttpClient, private router:Router) {
-		this.auth.getMe()
-			.then((me) => {
-				let now = moment();
-				this.event_date = now.format('D MMMM, YYYY');
-				this.event_time = now.startOf('hour').format('H:mm A');
-				this.createdBy = me.name;		
-			}
-		);
-	}
+	constructor(private auth:AuthService, private httpClient:HttpClient, private router:Router) { }
 	
 	activate() {
-		window.setTimeout(function() {
-			$('.datepicker').pickadate();
+        window.setTimeout(() => {
+            $('.datepicker')
+                .pickadate({
+                    format: 'dddd mmmm d, yyyy'
+                })
+                .on('change', (e) => {
+                    this._model.EventDate = e.target.value;
+                });
+
+            $('.timepicker')
+                .pickatime({
+                    format: 'h:i A',
+                    formatLabel: 'h:i A'
+                })
+                .on('change', (e) => {
+                    this._model.EventTime = e.target.value;
+                });
+            $('[autofocus]').focus();
 		}, 500);
 	}
 	
 	save(e) {
-		this.submit();
+		this._submitted = true;
 				
-		if(!this.newInquiryForm.checkValidity()) {
-		e.preventDefault();
-		} else {
-			var	time = moment(this.event_time, 'H:mm A'), 
-				date = moment(this.event_date, 'D MMMM, YYYY')
-					.hours(time.hours())
-					.minutes(time.minutes()),
-				request = {
-					organization: this.organization,
-					contact_person: this.contact_person,
-					event_date: date.toISOString(),
-					people: this.people,
-					summary: this.summary,
-					description: this.description,
-					createdBy: this.createdBy,
-					outcome: null,
-					isQuoteRequired: this.isQuoteRequired
-				};
+        if (!this._model.isValid()) {
+            e.preventDefault();
+            this._errorMessages = this._model.errorMessages();
+            this._errors = this._model.allErrors;
+        } else {
+            
+            this._errorMessages = null;
+            this._errors = null;
+
+            var inquiry = this._model.toJSON();
 			
-			this.httpClient.post('/api/requests', request)
+			this.httpClient.post('/api/inquiries', inquiry)
 				.then((response) => {
 					console.log(response);
 					this.router.navigateToRoute('inquiries');
 				})
 		}
-	}
-	
-	submit() {
-		this.submitted = true;
-		this.organization = this.organization;
-	}
-	
-	set organization(value) {
-		this._organization = value;
-		this.organizationInvalid = this.submitted && !value;
-	}
-	get organization() {
-		return this._organization;
-	}
+	}	
 }

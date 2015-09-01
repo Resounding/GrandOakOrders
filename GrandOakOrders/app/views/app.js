@@ -28,7 +28,7 @@ export let App = class {
             { route: ['/', 'home'], name: 'home', moduleId: './home/index', nav: true, auth: true },
             { route: 'inquiries', name: 'inquiries', moduleId: './inquiries/list', nav: true, auth: true },
             { route: 'inquiries/new', name: 'new inquiry', moduleId: './inquiries/new', nav: false, auth: true },
-            { route: 'inquiries/{id}', name: 'edit inquiry', moduleId: './inquiries/detail', nav: false, auth: true }
+            { route: 'inquiries/:id', name: 'edit inquiry', moduleId: './inquiries/edit', nav: false, auth: true }
         ]);
     }
 };

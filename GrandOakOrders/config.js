@@ -2,8 +2,8 @@ System.config({
   baseURL: "/",
   defaultJSExtensions: true,
   transpiler: "babel",
-   babelOptions: {
-    optional: [
+  babelOptions: {
+    "optional": [
       "runtime"
     ]
   },
@@ -11,7 +11,9 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+
   map: {
+    "amsul/pickadate.js": "github:amsul/pickadate.js@3.5.6",
     "aurelia-animator-css": "github:aurelia/animator-css@0.15.0",
     "aurelia-binding": "github:aurelia/binding@0.8.6",
     "aurelia-bootstrapper": "github:aurelia/bootstrapper@0.16.0",
@@ -21,6 +23,7 @@ System.config({
     "aurelia-framework": "github:aurelia/framework@0.15.0",
     "aurelia-history": "github:aurelia/history@0.6.1",
     "aurelia-history-browser": "github:aurelia/history-browser@0.7.0",
+    "aurelia-http-client": "github:aurelia/http-client@0.10.3",
     "aurelia-loader": "github:aurelia/loader@0.8.7",
     "aurelia-loader-default": "github:aurelia/loader-default@0.9.5",
     "aurelia-logging": "github:aurelia/logging@0.6.4",
@@ -39,9 +42,12 @@ System.config({
     "core-js": "npm:core-js@0.9.18",
     "css": "github:systemjs/plugin-css@0.1.15",
     "fetch": "github:github/fetch@0.9.0",
+    "jquery": "github:components/jquery@2.1.4",
+    "moment": "github:moment/moment@2.10.6",
     "paulvanbladel/aurelia-auth": "github:paulvanbladel/aurelia-auth@0.9.10",
     "text": "github:systemjs/plugin-text@0.0.2",
     "typescript": "npm:typescript@1.6.0-dev.20150825",
+    "underscore": "npm:underscore@1.8.3",
     "github:aurelia/animator-css@0.15.0": {
       "aurelia-metadata": "github:aurelia/metadata@0.7.3",
       "aurelia-templating": "github:aurelia/templating@0.14.4"

@@ -13,26 +13,42 @@ import { inject } from 'aurelia-framework';
 import { AuthService } from 'paulvanbladel/aurelia-auth';
 import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
-import { NewInquiryViewModel } from '../../models/inquiry';
-export let NewInquiry = class {
-    constructor(auth, httpClient, router) {
+import _ from 'underscore';
+import { EditInquiryViewModel } from '../../models/inquiry';
+export let EditInquiry = class {
+    constructor(auth, httpClient, router, element) {
         this.auth = auth;
         this.httpClient = httpClient;
         this.router = router;
+        this.element = element;
         this._errorMessages = [];
-        this._model = new NewInquiryViewModel();
         this._submitted = false;
     }
-    activate() {
-        window.setTimeout(() => {
-            $('.datepicker')
-                .pickadate({
+    activate(params) {
+        this.httpClient.get(`/api/inquiries/${params.id}`)
+            .then((res) => {
+            var inquiry = res.content;
+            this._model = new EditInquiryViewModel(inquiry);
+        });
+        window.setTimeout(_.bind(() => {
+            var $eventDate = $('#date', this.element), $confirmationDate = $('#confirmationDate', this.element), $timepicker = $('.timepicker', this.element), $select = $('select', this.element);
+            $eventDate.pickadate({
                 format: 'dddd mmmm d, yyyy'
             })
                 .on('change', (e) => {
                 this._model.EventDate = e.target.value;
             });
-            $('.timepicker')
+            $eventDate.pickadate('picker')
+                .set('select', this._model.EventDate);
+            $confirmationDate.pickadate({
+                format: 'dddd mmmm d, yyyy'
+            })
+                .on('change', (e) => {
+                this._model.ConfirmationDate = e.target.value;
+            });
+            $confirmationDate.pickadate('picker')
+                .set('select', this._model.ConfirmationDate);
+            $timepicker
                 .pickatime({
                 format: 'h:i A',
                 formatLabel: 'h:i A'
@@ -40,8 +56,10 @@ export let NewInquiry = class {
                 .on('change', (e) => {
                 this._model.EventTime = e.target.value;
             });
-            $('[autofocus]').focus();
-        }, 500);
+            $timepicker.pickatime('picker')
+                .set('select', this._model.EventTime);
+            $select.material_select();
+        }, this), 500);
     }
     save(e) {
         this._submitted = true;
@@ -54,15 +72,20 @@ export let NewInquiry = class {
             this._errorMessages = null;
             this._errors = null;
             var inquiry = this._model.toJSON();
-            this.httpClient.post('/api/inquiries', inquiry)
+            this.httpClient.put(`/api/inquiries/${inquiry.Id}`, inquiry)
                 .then((response) => {
                 console.log(response);
-                this.router.navigateToRoute('inquiries');
+                if (inquiry.OutcomeId == "ORDER") {
+                    this.router.navigateToRoute(`orders/new?inquiryId=${inquiry.id}`);
+                }
+                else {
+                    this.router.navigateToRoute('inquiries');
+                }
             });
         }
     }
 };
-NewInquiry = __decorate([
-    inject(AuthService, HttpClient, Router), 
-    __metadata('design:paramtypes', [(typeof AuthService !== 'undefined' && AuthService) || Object, (typeof HttpClient !== 'undefined' && HttpClient) || Object, (typeof Router !== 'undefined' && Router) || Object])
-], NewInquiry);
+EditInquiry = __decorate([
+    inject(AuthService, HttpClient, Router, Element), 
+    __metadata('design:paramtypes', [(typeof AuthService !== 'undefined' && AuthService) || Object, (typeof HttpClient !== 'undefined' && HttpClient) || Object, (typeof Router !== 'undefined' && Router) || Object, HTMLElement])
+], EditInquiry);

@@ -9,6 +9,7 @@ namespace GrandOakOrders.Data.Maps
         {
             HasOptional(i => i.Outcome).WithMany().HasForeignKey(i => i.OutcomeId);
             Property(i => i.Description).IsMaxLength();
+            Property(i => i.ClosureComments).IsMaxLength();
         }
     }
 }

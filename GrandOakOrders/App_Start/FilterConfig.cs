@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -43,6 +44,7 @@ namespace GrandOakOrders
 
     public class AuthenticationFilter : ActionFilterAttribute, IAuthenticationFilter
     {
+        private static IDictionary<string, User> _session = new Dictionary<string, User>();
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             var request = context.Request;
@@ -56,14 +58,24 @@ namespace GrandOakOrders
                 return;
             }
 
-            if (string.IsNullOrEmpty(authorization.Parameter)) {
+            var token = authorization.Parameter;
+
+            if (string.IsNullOrEmpty(token)) {
                 context.ErrorResult = new AuthenticationFailureResult("Missing credentials", request);
                 return;
             }
 
-            var userManager = context.Request.GetOwinContext().GetUserManager<GrandOakUserManager>();
-            var loginInfo = new UserLoginInfo("google", authorization.Parameter);
-            var user = await userManager.FindAsync(loginInfo);
+            var user = default(User);
+            if (_session.ContainsKey(token)) {
+                user = _session[token];
+            } else {
+                var userManager = context.Request.GetOwinContext().GetUserManager<GrandOakUserManager>();
+                var loginInfo = new UserLoginInfo("google", token);
+                user = await userManager.FindAsync(loginInfo);
+                if(user != null) {
+                    _session[token] = user;
+                }
+            }
 
             if(user == null) {
                 context.ErrorResult = new AuthenticationFailureResult("Invalid bearer token", request);
