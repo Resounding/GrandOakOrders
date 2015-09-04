@@ -3,14 +3,12 @@ import {AuthService} from 'paulvanbladel/aurelia-auth';
 import {HttpClient} from 'aurelia-http-client';
 import {Router} from 'aurelia-router';
 import moment from 'moment';
-import {InquiryValidator, NewInquiryViewModel} from '../../models/inquiry';
+import {InquiryViewModel} from '../../models/inquiry';
 
 @inject(AuthService, HttpClient, Router)
 export class NewInquiry {
 	
-    _errors: InquiryValidator;
-    _errorMessages: Array<string> = [];
-    _model = new NewInquiryViewModel();
+    _model = new InquiryViewModel();
 	_submitted = false;
 	
 	constructor(private auth:AuthService, private httpClient:HttpClient, private router:Router) { }
@@ -42,12 +40,7 @@ export class NewInquiry {
 				
         if (!this._model.isValid()) {
             e.preventDefault();
-            this._errorMessages = this._model.errorMessages();
-            this._errors = this._model.allErrors;
         } else {
-            
-            this._errorMessages = null;
-            this._errors = null;
 
             var inquiry = this._model.toJSON();
 			

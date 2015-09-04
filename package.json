@@ -6,6 +6,9 @@
   "scripts": {
     "start": "IISExpress.exe /Site:GrandOakOrders"
   },
+  "engines": {
+    "node": "0.12.x"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Resounding/GrandOakOrders.git"

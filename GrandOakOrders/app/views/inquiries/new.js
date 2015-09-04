@@ -13,14 +13,13 @@ import { inject } from 'aurelia-framework';
 import { AuthService } from 'paulvanbladel/aurelia-auth';
 import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
-import { NewInquiryViewModel } from '../../models/inquiry';
+import { InquiryViewModel } from '../../models/inquiry';
 export let NewInquiry = class {
     constructor(auth, httpClient, router) {
         this.auth = auth;
         this.httpClient = httpClient;
         this.router = router;
-        this._errorMessages = [];
-        this._model = new NewInquiryViewModel();
+        this._model = new InquiryViewModel();
         this._submitted = false;
     }
     activate() {
@@ -47,12 +46,8 @@ export let NewInquiry = class {
         this._submitted = true;
         if (!this._model.isValid()) {
             e.preventDefault();
-            this._errorMessages = this._model.errorMessages();
-            this._errors = this._model.allErrors;
         }
         else {
-            this._errorMessages = null;
-            this._errors = null;
             var inquiry = this._model.toJSON();
             this.httpClient.post('/api/inquiries', inquiry)
                 .then((response) => {

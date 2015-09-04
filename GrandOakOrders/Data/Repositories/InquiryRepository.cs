@@ -15,7 +15,7 @@ namespace GrandOakOrders.Data.Repositories
         {
             var inquiries = await _context.Inquiries
                 .Include(i => i.Outcome)
-                .Where(i => i.OutcomeId == null || i.ConfirmationDate.HasValue && i.ConfirmationDate.Value > DateTime.Today)
+                .Where(i => i.OutcomeId == null)
                 .OrderBy(i => i.UpdatedAt)
                 .ToListAsync();
 
@@ -52,11 +52,10 @@ namespace GrandOakOrders.Data.Repositories
             dbinquiry.Organization = inquiry.Organization;
             dbinquiry.ContactPerson = inquiry.ContactPerson;
             dbinquiry.EventDate = inquiry.EventDate;
+            dbinquiry.EventTime = inquiry.EventTime;
             dbinquiry.People = inquiry.People;
             dbinquiry.Summary = inquiry.Summary;
             dbinquiry.IsQuoteRequired = inquiry.IsQuoteRequired;
-            dbinquiry.NeedsConfirmation = inquiry.NeedsConfirmation;
-            dbinquiry.ConfirmationDate = inquiry.ConfirmationDate;
             dbinquiry.Description = inquiry.Description;
             dbinquiry.OutcomeId = inquiry.OutcomeId;
             dbinquiry.ClosureComments = inquiry.ClosureComments;

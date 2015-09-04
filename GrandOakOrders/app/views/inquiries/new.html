@@ -4,8 +4,8 @@
 			<div class="col s12">
 				<div class="row">
 					<div class="input-field col s6">
-						<input id="organization" type="text" class="validate ${_errors.organization ? 'invalid' : ''}" value.bind="_model.Organization" required autofocus>
-						<label for="organization">Organization:</label>
+						<input id="organization" type="text" class="validate ${(_submitted && !_model.Organization) ? 'invalid' : ''}" value.bind="_model.Organization" required autofocus>
+						<label for="organization" data-error="Organization is required" data-success="">Organization:</label>
 					</div>
 					<div class="input-field col s6">
 						<input id="caller" type="text" value.bind="_model.ContactPerson">
@@ -14,24 +14,24 @@
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
-						<input id="date" ref="datepicker" type="text" class="datepicker ${_errors.event_date ? 'invalid' : ''}"
+						<input id="date" ref="datepicker" type="text" class="datepicker"
                                value.bind="_model.EventDate">
 						<label for="date" class="active">Event Date:</label>
 					</div>
 					<div class="input-field col s6">
-						<input id="time" type="text" class="timepicker ${_errors.event_time ? 'invalid' : ''}"
+						<input id="time" type="text" class="timepicker"
                                value.bind="_model.EventTime">
 						<label for="time" class="active">Event Time:</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s2">
-						<input id="people" type="number" class="validate ${_errors.people ? 'invalid' : ''}" min="0" value.bind="_model.People">
+						<input id="people" type="number" class="validate" min="0" value.bind="_model.People">
 						<label for="people" class="active"># People:</label>
 					</div>
 					<div class="input-field col s10">
-						<input id="summary" type="text" value.bind="_model.Summary" class="validate ${_errors.summary ? 'invalid' : ''}" required>
-						<label for="summary">Summary:</label>
+						<input id="summary" type="text" value.bind="_model.Summary" class="validate ${_submitted && !_model.Summary ? 'invalid' : ''}" required>
+						<label for="summary" data-error="Summary is required">Summary:</label>
 					</div>
 				</div>
 				<div class="row">
@@ -48,9 +48,6 @@
 				</div>
 				<div class="row">
 					<div class="right">
-                        <ul class="mdi-alert-error" show.bind="_submitted && _errorMessages.length">
-                            <li repeat.for="error of _errorMessages">${error}</li>
-                        </ul>
 						<a class="btn waves-effect waves-light white blue-text" href="#/inquiries">Cancel</a>
 						<button type="submit" class="btn waves-effect waves-light blue" click.trigger="save($event)">Save</button>
 					</div>

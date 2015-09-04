@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishSc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{CE8D41E9-CF88-4799-8829-DD73D120789B}"
 	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Scripts\.deployment = PublishScripts\Scripts\.deployment
 		PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1 = PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1
+		PublishScripts\Scripts\deploy.sh = PublishScripts\Scripts\deploy.sh
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{B9A51132-3686-4EBE-8BAA-E1ECA4A90D18}"

@@ -7,9 +7,10 @@ namespace GrandOakOrders.Data.Maps
     {
         public InquiryMap()
         {
-            HasOptional(i => i.Outcome).WithMany().HasForeignKey(i => i.OutcomeId);
             Property(i => i.Description).IsMaxLength();
             Property(i => i.ClosureComments).IsMaxLength();
+            Property(i => i.EventDate).HasColumnType("Date");
+            HasOptional(i => i.Outcome).WithMany().HasForeignKey(i => i.OutcomeId);
         }
     }
 }

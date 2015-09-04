@@ -14,24 +14,23 @@ import { AuthService } from 'paulvanbladel/aurelia-auth';
 import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
 import _ from 'underscore';
-import { EditInquiryViewModel } from '../../models/inquiry';
+import { InquiryViewModel } from '../../models/inquiry';
 export let EditInquiry = class {
     constructor(auth, httpClient, router, element) {
         this.auth = auth;
         this.httpClient = httpClient;
         this.router = router;
         this.element = element;
-        this._errorMessages = [];
         this._submitted = false;
     }
     activate(params) {
         this.httpClient.get(`/api/inquiries/${params.id}`)
             .then((res) => {
             var inquiry = res.content;
-            this._model = new EditInquiryViewModel(inquiry);
+            this._model = new InquiryViewModel(inquiry);
         });
         window.setTimeout(_.bind(() => {
-            var $eventDate = $('#date', this.element), $confirmationDate = $('#confirmationDate', this.element), $timepicker = $('.timepicker', this.element), $select = $('select', this.element);
+            var $eventDate = $('#date', this.element), $timepicker = $('.timepicker', this.element), $select = $('select', this.element);
             $eventDate.pickadate({
                 format: 'dddd mmmm d, yyyy'
             })
@@ -40,14 +39,6 @@ export let EditInquiry = class {
             });
             $eventDate.pickadate('picker')
                 .set('select', this._model.EventDate);
-            $confirmationDate.pickadate({
-                format: 'dddd mmmm d, yyyy'
-            })
-                .on('change', (e) => {
-                this._model.ConfirmationDate = e.target.value;
-            });
-            $confirmationDate.pickadate('picker')
-                .set('select', this._model.ConfirmationDate);
             $timepicker
                 .pickatime({
                 format: 'h:i A',
@@ -65,12 +56,8 @@ export let EditInquiry = class {
         this._submitted = true;
         if (!this._model.isValid()) {
             e.preventDefault();
-            this._errorMessages = this._model.errorMessages();
-            this._errors = this._model.allErrors;
         }
         else {
-            this._errorMessages = null;
-            this._errors = null;
             var inquiry = this._model.toJSON();
             this.httpClient.put(`/api/inquiries/${inquiry.Id}`, inquiry)
                 .then((response) => {
