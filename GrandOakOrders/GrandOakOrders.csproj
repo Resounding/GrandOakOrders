@@ -315,6 +315,7 @@
     <Content Include="content\materialize\sass\font\roboto\Roboto-Thin.ttf" />
     <Content Include="content\materialize\sass\font\roboto\Roboto-Thin.woff" />
     <Content Include="content\materialize\sass\font\roboto\Roboto-Thin.woff2" />
+    <Content Include="connectionStrings.config" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
