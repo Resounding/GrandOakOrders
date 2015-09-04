@@ -27,7 +27,6 @@
     "gulp-open": "^1.0.0",
     "gulp-typescript": "^2.8.1",
     "http-server": "^0.6.1",
-    "jspm": "^0.16.2",
     "matchdep": "^0.3.0",
     "touch": "^1.0.0"
   },
@@ -81,6 +80,7 @@
     }
   },
   "dependencies": {
-    "typescript": "^1.6.0-beta"
+    "typescript": "^1.6.0-beta",
+    "jspm": "^0.16.2"
   }
 }
