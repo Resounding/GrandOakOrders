@@ -94,8 +94,11 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
 echo Installing npm packages
 call npm install --production
 IF !ERRORLEVEL! NEQ 0 goto error
+echo Installing jspm
+call npm install jspm -g
+IF !ERRORLEVEL! NEQ 0 goto error
 echo Installing jspm packages
-call node jspm install
+call jspm install
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: Post deployment stub
