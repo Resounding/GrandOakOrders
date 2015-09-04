@@ -91,8 +91,10 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: 4. Install NPM Packages
+echo Installing npm packages
 call npm install --production
 IF !ERRORLEVEL! NEQ 0 goto error
+echo Installing jspm packages
 call node_modules/.bin/jspm install
 IF !ERRORLEVEL! NEQ 0 goto error
 
