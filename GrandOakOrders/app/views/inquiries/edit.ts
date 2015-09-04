@@ -2,16 +2,15 @@
 import {AuthService} from 'paulvanbladel/aurelia-auth';
 import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
 import {Router} from 'aurelia-router';
-import moment from 'moment';
-import _ from 'underscore';
 import {InquiryViewModel, InquiryPojo} from '../../models/inquiry';
+import _ from 'underscore';
 
 @inject(AuthService, HttpClient, Router, Element)
 export class EditInquiry {
     _model:InquiryViewModel;
     _submitted = false;
 
-    constructor(private auth: AuthService, private httpClient: HttpClient, private router:Router, private element: HTMLElement) {
+    constructor(private auth: AuthService, private httpClient: HttpClient, private router:Router, private element: Element) {
         
     }
 
@@ -62,8 +61,8 @@ export class EditInquiry {
             this.httpClient.put(`/api/inquiries/${inquiry.Id}`, inquiry)
                 .then((response) => {
                     console.log(response);
-                    if (inquiry.OutcomeId == "ORDER") {
-                        this.router.navigateToRoute(`orders/new?inquiryId=${inquiry.id}`);
+                    if (response.statusCode == 201) {
+                        this.router.navigateToRoute('edit order', { id: response.content.Id });
                     } else {
                         this.router.navigateToRoute('inquiries');
                     }

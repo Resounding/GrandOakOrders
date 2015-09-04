@@ -57,6 +57,8 @@
       "aurelia-templating-binding": "github:aurelia/templating-binding@^0.14.0",
       "aurelia-templating-resources": "github:aurelia/templating-resources@^0.14.0",
       "aurelia-templating-router": "github:aurelia/templating-router@^0.15.0",
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
       "clean-css": "npm:clean-css@^3.3.8",
       "core-js": "npm:core-js@^0.9.4",
       "css": "github:systemjs/plugin-css@^0.1.11",
@@ -65,13 +67,8 @@
       "moment": "github:moment/moment@^2.10.6",
       "paulvanbladel/aurelia-auth": "github:paulvanbladel/aurelia-auth@^0.9.10",
       "text": "github:systemjs/plugin-text@^0.0.2",
+      "typescript": "npm:typescript@^1.6.0-beta",
       "underscore": "npm:underscore@^1.8.3"
-    },
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.1.13",
-      "babel-runtime": "npm:babel-runtime@^5.1.13",
-      "core-js": "npm:core-js@^0.9.4",
-      "typescript": "npm:typescript@^1.6.0-beta"
     },
     "overrides": {
       "npm:core-js@0.9.18": {

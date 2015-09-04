@@ -34,5 +34,6 @@ export let Login = class {
 };
 Login = __decorate([
     inject(AuthService, Router, EventAggregator), 
-    __metadata('design:paramtypes', [(typeof AuthService !== 'undefined' && AuthService) || Object, (typeof Router !== 'undefined' && Router) || Object, (typeof EventAggregator !== 'undefined' && EventAggregator) || Object])
+    __metadata('design:paramtypes', [(typeof (_a = typeof AuthService !== 'undefined' && AuthService) === 'function' && _a) || Object, (typeof (_b = typeof Router !== 'undefined' && Router) === 'function' && _b) || Object, (typeof (_c = typeof EventAggregator !== 'undefined' && EventAggregator) === 'function' && _c) || Object])
 ], Login);
+var _a, _b, _c;

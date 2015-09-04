@@ -1,17 +1,17 @@
+/// <reference path="../../../typings/jquery/jquery.d.ts" />
+
 import {inject} from 'aurelia-framework';
-import {AuthService} from 'paulvanbladel/aurelia-auth';
-import {HttpClient} from 'aurelia-http-client';
+import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
 import {Router} from 'aurelia-router';
-import moment from 'moment';
 import {InquiryViewModel} from '../../models/inquiry';
 
-@inject(AuthService, HttpClient, Router)
+@inject(HttpClient, Router)
 export class NewInquiry {
 	
     _model = new InquiryViewModel();
 	_submitted = false;
 	
-	constructor(private auth:AuthService, private httpClient:HttpClient, private router:Router) { }
+	constructor(private httpClient:HttpClient, private router:Router) { }
 	
 	activate() {
         window.setTimeout(() => {
@@ -45,7 +45,7 @@ export class NewInquiry {
             var inquiry = this._model.toJSON();
 			
 			this.httpClient.post('/api/inquiries', inquiry)
-				.then((response) => {
+				.then((response:HttpResponseMessage) => {
 					console.log(response);
 					this.router.navigateToRoute('inquiries');
 				})

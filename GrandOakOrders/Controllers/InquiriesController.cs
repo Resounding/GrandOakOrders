@@ -51,7 +51,14 @@ namespace GrandOakOrders.Controllers
         {
             var user = Request.GetOwinContext().Request.User;
             var updated = await _repo.Edit(inquiry, user.Identity.Name);
-            return Ok(updated);
+
+            if (updated.OutcomeId == InquiryOutcome.OrderId) {
+                var orderRepo = new OrderRepository();
+                var order = await orderRepo.Create(updated.Id, user.Identity.Name);
+                return Created("/API/Orders/" + order.Id, order);
+            } else {
+                return Ok();
+            }
         }
 
         [Route("{id:int}")]

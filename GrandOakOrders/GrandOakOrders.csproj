@@ -218,6 +218,7 @@
     <Content Include="app\components\auth\auth-config.js" />
     <Content Include="app\components\main.js" />
     <Content Include="app\models\inquiry.js" />
+    <Content Include="app\models\order.js" />
     <Content Include="app\views\app.html" />
     <Content Include="app\views\app.js" />
     <Content Include="app\views\auth\login.html" />
@@ -236,6 +237,12 @@
     <Content Include="app\views\inquiries\new.js" />
     <Content Include="app\views\nav\nav-bar.html" />
     <Content Include="app\views\nav\nav-bar.js" />
+    <Content Include="app\views\orders\edit.js" />
+    <Content Include="app\views\orders\list.html" />
+    <Content Include="app\views\orders\list.js" />
+    <Content Include="app\views\orders\edit.html" />
+    <Content Include="app\views\orders\orderItem.html" />
+    <Content Include="app\views\orders\orderItem.js" />
     <Content Include="config.js" />
     <Content Include="content\materialize\css\materialize.css" />
     <Content Include="content\materialize\css\materialize.min.css" />
@@ -245,6 +252,7 @@
     <Content Include="content\materialize\sass\font\material-design-icons\Material-Design-Icons.svg" />
     <Content Include="img\go.png" />
     <Content Include="img\logo.png" />
+    <Content Include="img\meal.png" />
     <Content Include="img\phone.png" />
     <Content Include="Index.html" />
     <Content Include="content\materialize\font\roboto\Roboto-Thin.woff2" />
@@ -333,12 +341,19 @@
     <Compile Include="Auth\GrandOakUserManager.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\InquiriesController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Data\Entities\Inquiry.cs" />
     <Compile Include="Data\Entities\InquiryOutcome.cs" />
+    <Compile Include="Data\Entities\Order.cs" />
+    <Compile Include="Data\Entities\OrderItem.cs" />
+    <Compile Include="Data\Entities\Tax.cs" />
     <Compile Include="Data\Entities\User.cs" />
     <Compile Include="Data\GrandOakDbContext.cs" />
+    <Compile Include="Data\Maps\OrderItemMap.cs" />
+    <Compile Include="Data\Maps\OrderMap.cs" />
     <Compile Include="Data\Maps\InquiryMap.cs" />
     <Compile Include="Data\Repositories\InquiryRepository.cs" />
+    <Compile Include="Data\Repositories\OrderRepository.cs" />
     <Compile Include="Data\Repositories\UserRepository.cs" />
     <Compile Include="Migrations\201508291348252_Users.cs" />
     <Compile Include="Migrations\201508291348252_Users.Designer.cs">
@@ -347,6 +362,10 @@
     <Compile Include="Migrations\201508291435152_Inquiries.cs" />
     <Compile Include="Migrations\201508291435152_Inquiries.Designer.cs">
       <DependentUpon>201508291435152_Inquiries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509041556579_Orders.cs" />
+    <Compile Include="Migrations\201509041556579_Orders.Designer.cs">
+      <DependentUpon>201509041556579_Orders.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\GoogleProfileResponse.cs" />
@@ -427,10 +446,17 @@
     <EmbeddedResource Include="Migrations\201508291435152_Inquiries.resx">
       <DependentUpon>201508291435152_Inquiries.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509041556579_Orders.resx">
+      <DependentUpon>201509041556579_Orders.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\models\inquiry.ts" />
     <Content Include="app\views\inquiries\edit.ts" />
+    <Content Include="app\models\order.ts" />
+    <Content Include="app\views\orders\edit.ts" />
+    <Content Include="app\views\orders\list.ts" />
+    <Content Include="app\views\orders\orderItem.ts" />
     <TypeScriptCompile Include="typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="typings\underscore\underscore.d.ts" />
   </ItemGroup>

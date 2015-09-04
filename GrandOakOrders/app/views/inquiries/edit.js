@@ -13,8 +13,8 @@ import { inject } from 'aurelia-framework';
 import { AuthService } from 'paulvanbladel/aurelia-auth';
 import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
-import _ from 'underscore';
 import { InquiryViewModel } from '../../models/inquiry';
+import _ from 'underscore';
 export let EditInquiry = class {
     constructor(auth, httpClient, router, element) {
         this.auth = auth;
@@ -62,8 +62,8 @@ export let EditInquiry = class {
             this.httpClient.put(`/api/inquiries/${inquiry.Id}`, inquiry)
                 .then((response) => {
                 console.log(response);
-                if (inquiry.OutcomeId == "ORDER") {
-                    this.router.navigateToRoute(`orders/new?inquiryId=${inquiry.id}`);
+                if (response.statusCode == 201) {
+                    this.router.navigateToRoute('edit order', { id: response.content.Id });
                 }
                 else {
                     this.router.navigateToRoute('inquiries');
@@ -74,5 +74,6 @@ export let EditInquiry = class {
 };
 EditInquiry = __decorate([
     inject(AuthService, HttpClient, Router, Element), 
-    __metadata('design:paramtypes', [(typeof AuthService !== 'undefined' && AuthService) || Object, (typeof HttpClient !== 'undefined' && HttpClient) || Object, (typeof Router !== 'undefined' && Router) || Object, HTMLElement])
+    __metadata('design:paramtypes', [(typeof (_a = typeof AuthService !== 'undefined' && AuthService) === 'function' && _a) || Object, (typeof (_b = typeof HttpClient !== 'undefined' && HttpClient) === 'function' && _b) || Object, (typeof (_c = typeof Router !== 'undefined' && Router) === 'function' && _c) || Object, Element])
 ], EditInquiry);
+var _a, _b, _c;

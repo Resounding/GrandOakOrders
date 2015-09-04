@@ -7,10 +7,10 @@ const DATE_FORMAT: string = 'ddd MMM D';
 const TIME_FORMAT: string = 'h:mm A';
 
 @inject(HttpClient)
-export class List {
+export class InquiriesList {
 	requests = [];
 	
-	constructor(private httpClient:HttpClient) {		
+	constructor(private httpClient:HttpClient) {
 		
 		this.httpClient.get('/api/inquiries')
 			.then((res) => {

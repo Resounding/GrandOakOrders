@@ -15,7 +15,7 @@ import moment from 'moment';
 import _ from 'underscore';
 const DATE_FORMAT = 'ddd MMM D';
 const TIME_FORMAT = 'h:mm A';
-export let List = class {
+export let InquiriesList = class {
     constructor(httpClient) {
         this.httpClient = httpClient;
         this.requests = [];
@@ -45,7 +45,8 @@ export let List = class {
         });
     }
 };
-List = __decorate([
+InquiriesList = __decorate([
     inject(HttpClient), 
-    __metadata('design:paramtypes', [(typeof HttpClient !== 'undefined' && HttpClient) || Object])
-], List);
+    __metadata('design:paramtypes', [(typeof (_a = typeof HttpClient !== 'undefined' && HttpClient) === 'function' && _a) || Object])
+], InquiriesList);
+var _a;

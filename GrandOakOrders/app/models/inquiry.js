@@ -1,17 +1,5 @@
 ///<reference path="../../typings/moment/moment.d.ts" />
 ///<reference path="../../typings/underscore/underscore.d.ts" />
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-        case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
-        case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
-        case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
-    }
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-import { computedFrom } from 'aurelia-binding';
 import moment from 'moment';
 import _ from 'underscore';
 const DATE_FORMAT = 'dddd MMMM D, YYYY';
@@ -103,18 +91,3 @@ export class InquiryViewModel {
         return json;
     }
 }
-Object.defineProperty(InquiryViewModel.prototype, "outcomeCanCreateOrder",
-    __decorate([
-        computedFrom('OutcomeId'), 
-        __metadata('design:type', Object)
-    ], InquiryViewModel.prototype, "outcomeCanCreateOrder", Object.getOwnPropertyDescriptor(InquiryViewModel.prototype, "outcomeCanCreateOrder")));
-Object.defineProperty(InquiryViewModel.prototype, "outcomeCanSave",
-    __decorate([
-        computedFrom('OutcomeId'), 
-        __metadata('design:type', Object)
-    ], InquiryViewModel.prototype, "outcomeCanSave", Object.getOwnPropertyDescriptor(InquiryViewModel.prototype, "outcomeCanSave")));
-Object.defineProperty(InquiryViewModel.prototype, "isCloseOutcome",
-    __decorate([
-        computedFrom('OutcomeId'), 
-        __metadata('design:type', Object)
-    ], InquiryViewModel.prototype, "isCloseOutcome", Object.getOwnPropertyDescriptor(InquiryViewModel.prototype, "isCloseOutcome")));

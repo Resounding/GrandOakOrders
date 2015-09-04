@@ -9,24 +9,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { customElement } from 'aurelia-framework';
 import { inject } from 'aurelia-framework';
-import { EventAggregator } from 'aurelia-event-aggregator';
-import { AuthService } from 'paulvanbladel/aurelia-auth';
-export let LogoutButton = class {
-    constructor(auth, events, element) {
-        this.auth = auth;
-        this.events = events;
-        this.element = element;
-    }
-    logout() {
-        this.auth.logout();
-        this.events.publish('user:changed');
+import { HttpClient } from 'aurelia-http-client';
+import { OrderViewModel } from '../../models/order';
+import _ from 'underscore';
+const DATE_FORMAT = 'ddd MMM D';
+const TIME_FORMAT = 'h:mm A';
+export let OrdersList = class {
+    constructor(httpClient) {
+        this.httpClient = httpClient;
+        this.orders = [];
+        this.httpClient.get('/api/orders')
+            .then((res) => {
+            this.orders = _.map(res.content, (order) => new OrderViewModel(order));
+        }, (err) => {
+            console.log(err);
+        });
     }
 };
-LogoutButton = __decorate([
-    inject(AuthService, EventAggregator, Element),
-    customElement('logout-button'), 
-    __metadata('design:paramtypes', [(typeof (_a = typeof AuthService !== 'undefined' && AuthService) === 'function' && _a) || Object, (typeof (_b = typeof EventAggregator !== 'undefined' && EventAggregator) === 'function' && _b) || Object, ])
-], LogoutButton);
-var _a, _b;
+OrdersList = __decorate([
+    inject(HttpClient), 
+    __metadata('design:paramtypes', [(typeof (_a = typeof HttpClient !== 'undefined' && HttpClient) === 'function' && _a) || Object])
+], OrdersList);
+var _a;

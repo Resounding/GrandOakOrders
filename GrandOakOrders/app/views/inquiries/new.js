@@ -1,3 +1,4 @@
+/// <reference path="../../../typings/jquery/jquery.d.ts" />
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
     switch (arguments.length) {
@@ -10,13 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { inject } from 'aurelia-framework';
-import { AuthService } from 'paulvanbladel/aurelia-auth';
 import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
 import { InquiryViewModel } from '../../models/inquiry';
 export let NewInquiry = class {
-    constructor(auth, httpClient, router) {
-        this.auth = auth;
+    constructor(httpClient, router) {
         this.httpClient = httpClient;
         this.router = router;
         this._model = new InquiryViewModel();
@@ -58,6 +57,7 @@ export let NewInquiry = class {
     }
 };
 NewInquiry = __decorate([
-    inject(AuthService, HttpClient, Router), 
-    __metadata('design:paramtypes', [(typeof AuthService !== 'undefined' && AuthService) || Object, (typeof HttpClient !== 'undefined' && HttpClient) || Object, (typeof Router !== 'undefined' && Router) || Object])
+    inject(HttpClient, Router), 
+    __metadata('design:paramtypes', [(typeof (_a = typeof HttpClient !== 'undefined' && HttpClient) === 'function' && _a) || Object, (typeof (_b = typeof Router !== 'undefined' && Router) === 'function' && _b) || Object])
 ], NewInquiry);
+var _a, _b;

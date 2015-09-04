@@ -1,0 +1,21 @@
+﻿<template>
+    <h3>This is the list of orders</h3>
+    <a href="#">Go home!</a>
+
+    <div class="container">
+        <ul class="collection">
+            <li class="collection-item avatar" repeat.for="order of orders">
+                <img src="/img/meal.png" class="circle" alt="Order">
+                <span class="title">${order.HeaderText}</span>
+                <p>
+                    <strong>${order.Inquiry.Summary}</strong>
+                    <br if.bind="order.DateAndTime">
+                    <span if.bind="order.DateAndTime">${order.DateAndTime}</span>
+                </p>
+                <a href="#/orders/${order.Id}" class="secondary-content">
+                    <img src="/img/go.png" width="30px" height="30px" alt="Go">
+                </a>
+            </li>
+        </ul>
+    </div>
+</template>

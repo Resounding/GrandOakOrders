@@ -38,3 +38,18 @@ nav {
     bottom: 45px;
     right: 24px;
   }
+
+/* Collapsibles, with popout */
+.collapsible-header.double-header {
+    height: $collapsible-height * 2;
+}
+.container .popout li.active {
+  margin: 0 -20px;
+}
+.container .popout li.active .collapsible-header {
+  color: #ddd;
+}
+.container .popout li.active .collapsible-body {
+  padding: 20px 20px 0;
+}
+/* end Collapsibles, with popout */

@@ -32,5 +32,6 @@ export let UserProfile = class {
 UserProfile = __decorate([
     inject(AuthService, EventAggregator),
     customElement('user-profile'), 
-    __metadata('design:paramtypes', [(typeof AuthService !== 'undefined' && AuthService) || Object, (typeof EventAggregator !== 'undefined' && EventAggregator) || Object])
+    __metadata('design:paramtypes', [(typeof (_a = typeof AuthService !== 'undefined' && AuthService) === 'function' && _a) || Object, (typeof (_b = typeof EventAggregator !== 'undefined' && EventAggregator) === 'function' && _b) || Object])
 ], UserProfile);
+var _a, _b;

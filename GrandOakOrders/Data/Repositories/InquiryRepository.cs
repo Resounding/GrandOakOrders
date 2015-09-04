@@ -43,7 +43,6 @@ namespace GrandOakOrders.Data.Repositories
 
         public async Task<Inquiry> Edit(Inquiry inquiry, string who)
         {
-            
             var dbinquiry = await _context.Inquiries.FirstOrDefaultAsync(i => i.Id == inquiry.Id);
             if(dbinquiry == null) {
                 return null;

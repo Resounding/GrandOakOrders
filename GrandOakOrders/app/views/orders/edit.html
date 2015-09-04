@@ -1,0 +1,99 @@
+﻿<template>
+    <require from="./orderItem"></require>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h2>New Order</h2>
+            </div>
+        </div>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <h4>Order #${_model.Id}</h4>
+                    </div>
+                </div>
+                <ul class="collapsible popout" data-collapsible="expandable">
+                    <li>
+                        <div class="collapsible-header ${_model.DateAndTime ? 'double-header' : ''}">
+                            <div>${_model.HeaderText}</div>
+                            <div show.bind="_model.DateAndTime">${_model.DateAndTime}</div>
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="organization" type="text" value.bind="_model.Inquiry.Organization">
+                                    <label for="organization" class="active">Organization:</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="caller" type="text"  value.bind="_model.Inquiry.ContactPerson">
+                                    <label for="caller" class="active">Person Calling:</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="date" type="text" class="datepicker" value.bind="_model.Inquiry.EventDate">
+                                    <label for="date" class="active">Event Date:</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="time" type="text" class="timepicker" value.bind="_model.Inquiry.EventTime">
+                                    <label for="time" class="active">Event Time:</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s2">
+                                    <input id="people" type="number" min="0" value.bind="_model.Inquiry.People">
+                                    <label for="people" class="active"># People:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">
+                            ${_model.Inquiry.Summary}
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="input-field col s10">
+                                    <input id="summary" type="text" value.bind="_model.Inquiry.Summary">
+                                    <label for="summary" class="active">Summary:</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="description" class="materialize-textarea" value.bind="_model.Inquiry.Description"></textarea>
+                                    <label for="caller" class="active">Description:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="divider"></div>
+                <div class="section">
+                    <h5>Order Details</h5>
+                    <order-item repeat.for="item of _model.Items" item.bind="item"></order-item>
+                    <div class="row">
+                        <button type="button" class="btn right green" click.trigger="addItem()">
+                            <i class="mdi-content-add"></i>
+                        </button>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="row">
+                        <h5 class="col s1">Total</h5>
+                        <h5 class="col s2 offset-s9" style="text-align: right;">
+                            ${ _model.TotalPrice }
+                        </h5>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="right">
+                        <a class="btn waves-effect waves-light white blue-text" href="#/orders">Cancel</a>
+                        <a class="btn waves-effect waves-light blue" click.trigger="save($event)">Save</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>

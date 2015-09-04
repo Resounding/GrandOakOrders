@@ -24,6 +24,9 @@ namespace GrandOakOrders.Data
 
         public virtual DbSet<Inquiry> Inquiries { get; set; }
         public virtual DbSet<InquiryOutcome> InquiryOutcomes { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<Tax> Taxes { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

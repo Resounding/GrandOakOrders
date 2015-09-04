@@ -20,16 +20,17 @@ namespace GrandOakOrders.Migrations
                 Id = InquiryOutcome.OrderId,
                 Name = "Create Order"
             };
-            var wait = new InquiryOutcome {
-                Id = InquiryOutcome.WaitId,
-                Name = "Wait for Confirmation"
-            };
             var close = new InquiryOutcome {
                 Id = InquiryOutcome.ClosedId,
                 Name = "Close Inquiry"
             };
+            context.InquiryOutcomes.AddOrUpdate(o => o.Id, order, close);
 
-            context.InquiryOutcomes.AddOrUpdate(o => o.Id, order, wait, close);
+            var hst = new Tax {
+                Id = "HST",
+                Rate = 0.13M
+            };
+            context.Taxes.AddOrUpdate(t => t.Id, hst);
         }
     }
 }

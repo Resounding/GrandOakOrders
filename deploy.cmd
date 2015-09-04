@@ -95,7 +95,7 @@ echo Installing npm packages
 call npm install --production
 IF !ERRORLEVEL! NEQ 0 goto error
 echo Installing jspm
-call npm install jspm -g
+call npm install jspm -g --silent
 IF !ERRORLEVEL! NEQ 0 goto error
 echo Installing jspm packages
 call jspm install

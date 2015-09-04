@@ -28,11 +28,14 @@ export let App = class {
             { route: ['/', 'home'], name: 'home', moduleId: './home/index', nav: true, auth: true },
             { route: 'inquiries', name: 'inquiries', moduleId: './inquiries/list', nav: true, auth: true },
             { route: 'inquiries/new', name: 'new inquiry', moduleId: './inquiries/new', nav: false, auth: true },
-            { route: 'inquiries/:id', name: 'edit inquiry', moduleId: './inquiries/edit', nav: false, auth: true }
+            { route: 'inquiries/:id', name: 'edit inquiry', moduleId: './inquiries/edit', nav: false, auth: true },
+            { route: 'orders', name: 'orders', moduleId: './orders/list', nav: true, auth: true },
+            { route: 'orders/:id', name: 'edit order', moduleId: './orders/edit', nav: false, auth: true }
         ]);
     }
 };
 App = __decorate([
     inject(HttpClientConfig), 
-    __metadata('design:paramtypes', [(typeof HttpClientConfig !== 'undefined' && HttpClientConfig) || Object])
+    __metadata('design:paramtypes', [(typeof (_a = typeof HttpClientConfig !== 'undefined' && HttpClientConfig) === 'function' && _a) || Object])
 ], App);
+var _a;

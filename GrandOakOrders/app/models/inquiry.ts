@@ -1,7 +1,6 @@
 ﻿///<reference path="../../typings/moment/moment.d.ts" />
 ///<reference path="../../typings/underscore/underscore.d.ts" />
 
-import {computedFrom} from 'aurelia-binding';
 import moment from 'moment';
 import _ from 'underscore';
 
@@ -85,17 +84,14 @@ export class InquiryViewModel implements InquiryPojo {
         return true;
     }
 
-    @computedFrom('OutcomeId')
     get outcomeCanCreateOrder() {
         return this.OutcomeId && this.OutcomeId !== 'CLOSE';
     }
 
-    @computedFrom('OutcomeId')
     get outcomeCanSave() {
         return !this.OutcomeId;
     }
 
-    @computedFrom('OutcomeId')
     get isCloseOutcome() {
         return this.OutcomeId === 'CLOSE';
     }
