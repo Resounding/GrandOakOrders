@@ -95,7 +95,7 @@ echo Installing npm packages
 call npm install --production
 IF !ERRORLEVEL! NEQ 0 goto error
 echo Installing jspm packages
-call node_modules/.bin/jspm install
+call node node_modules/.bin/jspm install
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: Post deployment stub

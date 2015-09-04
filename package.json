@@ -72,7 +72,7 @@
       "babel": "npm:babel-core@^5.1.13",
       "babel-runtime": "npm:babel-runtime@^5.1.13",
       "core-js": "npm:core-js@^0.9.4",
-      "typescript": "npm:typescript@^1.6.0-dev.20150818"
+      "typescript": "npm:typescript@^1.6.0-beta"
     },
     "overrides": {
       "npm:core-js@0.9.18": {
@@ -81,6 +81,6 @@
     }
   },
   "dependencies": {
-    "typescript": "^1.5.3"
+    "typescript": "^1.6.0-beta"
   }
 }
