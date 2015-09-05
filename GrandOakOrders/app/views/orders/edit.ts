@@ -10,7 +10,7 @@ import _ from 'underscore';
 @inject(HttpClient, Router, Element)
 export class EditOrder {
     _model: OrderViewModel;
-    _submitted: boolean: false;
+    _submitted: boolean = false;
 
     constructor(private httpClient: HttpClient, private router: Router, private element:HTMLElement) { }
 

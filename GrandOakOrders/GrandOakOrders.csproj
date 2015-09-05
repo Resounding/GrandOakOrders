@@ -256,6 +256,7 @@
     <Content Include="img\inquiry.jpg" />
     <Content Include="img\logo.png" />
     <Content Include="img\meal.png" />
+    <Content Include="img\order.jpg" />
     <Content Include="img\phone.png" />
     <Content Include="Index.html" />
     <Content Include="content\materialize\font\roboto\Roboto-Thin.woff2" />

@@ -64,3 +64,18 @@ img.header-image {
     margin-bottom: 25px;
 }
 /* end Homepage*/
+
+.list {
+    & > header {
+        height: 150px;
+        overflow-y: hidden;
+
+        img {
+            display: block;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 25px;
+        }
+    }
+}

@@ -20,6 +20,7 @@ export let EditOrder = class {
         this.httpClient = httpClient;
         this.router = router;
         this.element = element;
+        this._submitted = false;
     }
     activate(params) {
         this.httpClient.get(`/api/orders/${params.id}`)
