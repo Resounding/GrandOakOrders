@@ -42,7 +42,7 @@ System.config({
     "core-js": "npm:core-js@0.9.18",
     "css": "github:systemjs/plugin-css@0.1.15",
     "fetch": "github:github/fetch@0.9.0",
-    "jquery": "github:jquery/jquery@2.1.4",
+    "jquery": "github:components/jquery@2.1.4",
     "moment": "github:moment/moment@2.10.6",
     "paulvanbladel/aurelia-auth": "github:paulvanbladel/aurelia-auth@0.9.10",
     "text": "github:systemjs/plugin-text@0.0.2",
