@@ -106,7 +106,7 @@ echo cleaning
 call jspm clean
 :: IF !ERRORLEVEL! NEQ 0 goto error
 echo Installing jspm packages
-call jspm install -y
+call jspm install
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: Post deployment stub
