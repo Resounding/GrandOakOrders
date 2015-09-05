@@ -162,7 +162,7 @@ ClientBin/
 *.publishsettings
 node_modules/
 bower_components/
-GrandOakOrders/jspm_packages
+#GrandOakOrders/jspm_packages
 
 # RIA/Silverlight projects
 Generated_Code/
