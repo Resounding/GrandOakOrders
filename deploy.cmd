@@ -91,6 +91,8 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: 4. Install NPM Packages
+echo updating npm
+npm install -g
 echo Installing npm packages
 call npm install --production
 IF !ERRORLEVEL! NEQ 0 goto error
@@ -104,7 +106,7 @@ echo cleaning
 call jspm clean
 :: IF !ERRORLEVEL! NEQ 0 goto error
 echo Installing jspm packages
-call jspm install
+call jspm install -y
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: Post deployment stub
