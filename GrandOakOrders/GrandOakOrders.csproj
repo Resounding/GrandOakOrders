@@ -663,17 +663,13 @@
     <Content Include="jspm_packages\npm\punycode%401.3.2\.jspm-hash" />
     <Content Include="jspm_packages\npm\punycode%401.3.2\.jspm.json" />
     <Content Include="jspm_packages\npm\punycode%401.3.2\package.json" />
-    <Content Include="jspm_packages\npm\querystring%400.2.0\.History.md.un~" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\.jspm-hash" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\.jspm.json" />
-    <Content Include="jspm_packages\npm\querystring%400.2.0\.package.json.un~" />
-    <Content Include="jspm_packages\npm\querystring%400.2.0\.Readme.md.un~" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\.travis.yml" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\History.md" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\License.md" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\package.json" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\Readme.md" />
-    <Content Include="jspm_packages\npm\querystring%400.2.0\test\.index.js.un~" />
     <Content Include="jspm_packages\npm\readable-stream%401.1.13\.jspm-hash" />
     <Content Include="jspm_packages\npm\readable-stream%401.1.13\.jspm.json" />
     <Content Include="jspm_packages\npm\readable-stream%401.1.13\.npmignore" />
