@@ -501,7 +501,6 @@
     <Content Include="jspm_packages\github\webcomponents\webcomponentsjs%400.6.3\.jspm-hash" />
     <Content Include="jspm_packages\github\webcomponents\webcomponentsjs%400.6.3\.jspm.json" />
     <Content Include="jspm_packages\github\webcomponents\webcomponentsjs%400.6.3\bower.json" />
-    <Content Include="jspm_packages\github\webcomponents\webcomponentsjs%400.6.3\build.log" />
     <Content Include="jspm_packages\github\webcomponents\webcomponentsjs%400.6.3\package.json" />
     <Content Include="jspm_packages\github\webcomponents\webcomponentsjs%400.6.3\README.md" />
     <Content Include="jspm_packages\npm\amdefine%401.0.0\.jspm-hash" />
