@@ -53,3 +53,14 @@ nav {
   padding: 20px 20px 0;
 }
 /* end Collapsibles, with popout */
+
+/* Homepage */
+.home img,
+img.header-image {
+    display: block;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+}
+/* end Homepage*/

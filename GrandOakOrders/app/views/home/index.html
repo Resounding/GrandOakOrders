@@ -1,5 +1,55 @@
 <template>
-	<h1 class="center">Home at last</h1>
-	<a href="#/inquiries">View Inquiries</a>
-    <a href="#/orders">View Orders</a>
+    <div class="home">
+        <img src="/img/goc-full.jpg" alt="Grand Oak Culinary">
+
+        <div class="row">
+            <div class="col s6">
+                <div class="card small">
+                    <div class="card-image">
+                        <img src="img/inquiry.jpg">
+                        <span class="card-title">
+                            <i class="material-icons">perm_phone_msg</i>
+                            Inquiries
+                        </span>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            Open Inquiries
+                            <span class="new badge red" show.bind="content.Inquiries.length">${content.Inquiries.length}</span>
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#/inquiries" class="btn waves-effect waves-light white">
+                            View
+                        </a>
+                        <a href="#/inquiries/new" class="btn right waves-effect waves-light blue white-text" style="margin-right: 0;">
+                            New
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s6">
+                <div class="card small">
+                    <div class="card-image">
+                        <img src="img/inquiry.jpg">
+                        <span class="card-title">
+                            <i class="material-icons">perm_phone_msg</i>
+                            Orders
+                        </span>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            Open Orders
+                            <span class="new badge red" show.bind="content.Inquiries.length">${content.Orders.length}</span>
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#/orders" class="btn waves-effect waves-light white">
+                            View
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

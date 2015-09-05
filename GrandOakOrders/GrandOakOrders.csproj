@@ -251,6 +251,9 @@
     <Content Include="content\materialize\sass\font\material-design-icons\LICENSE.txt" />
     <Content Include="content\materialize\sass\font\material-design-icons\Material-Design-Icons.svg" />
     <Content Include="img\go.png" />
+    <Content Include="img\goc-full.jpg" />
+    <Content Include="img\icon.jpg" />
+    <Content Include="img\inquiry.jpg" />
     <Content Include="img\logo.png" />
     <Content Include="img\meal.png" />
     <Content Include="img\phone.png" />
@@ -340,6 +343,7 @@
     <Compile Include="Auth\GrandOakOAuthProvider.cs" />
     <Compile Include="Auth\GrandOakUserManager.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InquiriesController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Data\Entities\Inquiry.cs" />
