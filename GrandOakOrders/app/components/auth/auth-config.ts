@@ -18,7 +18,7 @@ const productionConfig = {
 	providers: {
 		google: {
 			clientId: '233717436720-9ia97orckf475kgkugc02p04482svl44.apps.googleusercontent.com',
-			redirectUri: 'http://goc.resounding.ca/auth/callback',
+			redirectUri: 'https://grandoakorders.azurewebsites.net/auth/callback',
 			url: '/login'
 		}
 	}
