@@ -250,6 +250,12 @@
     <Content Include="content\materialize\font\material-design-icons\Material-Design-Icons.svg" />
     <Content Include="content\materialize\sass\font\material-design-icons\LICENSE.txt" />
     <Content Include="content\materialize\sass\font\material-design-icons\Material-Design-Icons.svg" />
+    <Content Include="content\site.css">
+      <DependentUpon>site.scss</DependentUpon>
+    </Content>
+    <Content Include="content\site.min.css">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
     <Content Include="img\go.png" />
     <Content Include="img\goc-full.jpg" />
     <Content Include="img\icon.jpg" />
@@ -732,6 +738,10 @@
     <Content Include="jspm_packages\system-csp-production.js.map" />
     <Content Include="jspm_packages\system-polyfills.js.map" />
     <Content Include="jspm_packages\system.js.map" />
+    <None Include="compilerconfig.json" />
+    <Content Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="jspm_packages\github\amsul\pickadate.js%403.5.6.js" />
     <Content Include="jspm_packages\github\amsul\pickadate.js%403.5.6\Gruntfile.js" />
