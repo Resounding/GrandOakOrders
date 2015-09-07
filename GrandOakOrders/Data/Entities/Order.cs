@@ -30,7 +30,7 @@ namespace GrandOakOrders.Data.Entities
         public DateTime UpdatedAt { get; set; }
 
         public Inquiry Inquiry { get; set; }
-        public ICollection<OrderItem> Items { get; set; }
+        public List<OrderItem> Items { get; set; }
         public Tax Tax { get; set; }
     }
 }

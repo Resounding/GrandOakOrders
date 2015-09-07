@@ -12,6 +12,7 @@ namespace GrandOakOrders
 
             FilterConfig.RegisterGlobalFilters(httpConfig.Filters);
             AuthConfig.Configure(app);
+            MediaFormattersConfig.RegisterFormatters(httpConfig.Formatters);
             WebApiConfig.Configure(app, httpConfig);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
