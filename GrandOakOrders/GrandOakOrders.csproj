@@ -74,8 +74,14 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GrapeCity.ActiveReports.Chart.v9, Version=9.4.4600.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
-    <Reference Include="GrapeCity.ActiveReports.Diagnostics.v9, Version=9.4.4600.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
+    <Reference Include="GrapeCity.ActiveReports.Chart.v9, Version=9.4.4600.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\GrapeCity.ActiveReports.Chart.v9.dll</HintPath>
+    </Reference>
+    <Reference Include="GrapeCity.ActiveReports.Diagnostics.v9, Version=9.4.4600.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\GrapeCity.ActiveReports.Diagnostics.v9.dll</HintPath>
+    </Reference>
     <Reference Include="GrapeCity.ActiveReports.Document.v9, Version=9.4.4600.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\GrapeCity.ActiveReports.Document.v9.dll</HintPath>
@@ -84,7 +90,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\GrapeCity.ActiveReports.Export.Pdf.v9.dll</HintPath>
     </Reference>
-    <Reference Include="GrapeCity.ActiveReports.Extensibility.v9, Version=9.4.4600.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
+    <Reference Include="GrapeCity.ActiveReports.Extensibility.v9, Version=9.4.4600.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\GrapeCity.ActiveReports.Extensibility.v9.dll</HintPath>
+    </Reference>
     <Reference Include="GrapeCity.ActiveReports.v9, Version=9.4.4600.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\GrapeCity.ActiveReports.v9.dll</HintPath>
