@@ -30,7 +30,7 @@ export let EditOrder = class {
                 this.addItem();
             }
             window.setTimeout(_.bind(() => {
-                var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker', this.element), $timepicker = $('.timepicker', this.element), $select = $('select', this.element);
+                var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker', this.element), $timepicker = $('.timepicker', this.element), $select = $('select', this.element), $dropdown = $('.dropdown-button', this.element);
                 $collapsible.collapsible({ accordion: false });
                 $eventDate.pickadate({
                     container: 'body',
@@ -53,6 +53,9 @@ export let EditOrder = class {
                 $timepicker.pickatime('picker')
                     .set('select', this._model.Inquiry.EventTime);
                 $select.material_select();
+                $dropdown.dropdown({
+                    belowOrigin: true
+                });
             }, this), 500);
         });
     }

@@ -4,7 +4,17 @@
     <div class="container">
         <div class="row">
             <div class="col s12">
-                <h2>New Order</h2>
+                <button type="button" class="btn dropdown-button" data-activates="reportsDropdown">
+                    <i class="material-icons">printer</i>
+                    Reports
+                </button>
+                <ul id="reportsDropdown" class="dropdown-content">
+                    <li>
+                        <a href="/Reports/KitchenOrder/${_model.Id}?format=pdf" target="_blank">
+                            Kitchen Order
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="row">
@@ -75,7 +85,7 @@
                     <order-item repeat.for="item of _model.Items" item.bind="item"></order-item>
                     <div class="row">
                         <button type="button" class="btn right green" click.trigger="addItem()">
-                            <i class="mdi-content-add"></i>
+                            <i class="material-icons">add</i>
                         </button>
                     </div>
                     <div class="divider"></div>

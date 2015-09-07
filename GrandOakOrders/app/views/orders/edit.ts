@@ -26,7 +26,8 @@ export class EditOrder {
                     var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element),
                         $eventDate = $('.datepicker', this.element),
                         $timepicker = $('.timepicker', this.element),
-                        $select = $('select', this.element);
+                        $select = $('select', this.element),
+                        $dropdown = $('.dropdown-button', this.element);
 
                     $collapsible.collapsible({ accordion: false });
                     $eventDate.pickadate({
@@ -53,6 +54,9 @@ export class EditOrder {
                         .set('select', this._model.Inquiry.EventTime);
 
                     $select.material_select();
+                    $dropdown.dropdown({
+                        belowOrigin: true
+                    });
 
                 }, this), 500);
             });
