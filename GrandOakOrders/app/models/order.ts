@@ -212,6 +212,24 @@ export class OrderViewModel implements OrderPojo {
         return item;
     }
 
+    removeItem(item) {
+        var index = this.Items.indexOf(item);
+        if (index !== -1) {
+            this.Items.splice(index, 1);
+        }
+        if (!this.Items.length) {
+            this.addItem();
+        }
+        this.resort();
+    }
+
+    resort() {
+        let index = 1;
+        for (let item of this.Items) {
+            item.SortOrder = index++;
+        }
+    }
+
     isValid(): boolean {
         if (_.any(this.Items, (item) => !item.isValid())) return false;
         return true;

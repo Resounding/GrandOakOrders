@@ -17,6 +17,10 @@ export default class Home {
         this.httpClient.get('/API/Home')
             .then((response: HttpResponseMessage) => {
                 this.content = response.content
+            })
+            .catch((err) => {
+                console.log(err);
+                debugger;
             });
     }
 }

@@ -1,5 +1,5 @@
 const developmentConfig = {
-	loginRedirect: '/#',
+	loginRedirect: '/',
 	profileUrl: '/api/me',
 	tokenName: 'access_token',
 	providers: {
@@ -12,7 +12,7 @@ const developmentConfig = {
 };
 
 const productionConfig = {
-	loginRedirect: '/#',
+	loginRedirect: '/',
 	profileUrl: '/api/me',
 	tokenName: 'access_token',
 	providers: {

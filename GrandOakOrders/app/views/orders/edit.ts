@@ -1,16 +1,18 @@
 ﻿/// <reference path="../../../typings/jquery/jquery.d.ts" />
+/// <reference path="../../../typings/underscore/underscore.d.ts" />
 
 import {inject} from 'aurelia-framework';
 import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
 import {Router} from 'aurelia-router';
 import {InquiryPojo} from '../../models/inquiry';
-import {OrderViewModel} from '../../models/order';
+import {OrderViewModel, OrderItemPojo} from '../../models/order';
 import _ from 'underscore';
 
 @inject(HttpClient, Router, Element)
 export class EditOrder {
     _model: OrderViewModel;
     _submitted: boolean = false;
+    sortedItems: Array<OrderItemPojo>;
 
     constructor(private httpClient: HttpClient, private router: Router, private element:HTMLElement) { }
 
@@ -21,6 +23,8 @@ export class EditOrder {
                 if (!this._model.Items.length) {
                     this.addItem();
                 }
+
+                this.sortItems();
 
                 window.setTimeout(_.bind(() => {
                     var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element),
@@ -64,6 +68,16 @@ export class EditOrder {
 
     addItem() {
         this._model.addItem();
+        this.sortItems();
+    }
+
+    removeItem(item) {
+        this._model.removeItem(item);
+        this.sortItems();
+    }
+
+    sortItems() {
+        this.sortedItems = _.sortBy(this._model.Items, (item) => item.SortOrder);
     }
 
     save(e) {

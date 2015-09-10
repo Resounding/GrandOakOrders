@@ -1,4 +1,5 @@
 /// <reference path="../../../typings/jquery/jquery.d.ts" />
+/// <reference path="../../../typings/underscore/underscore.d.ts" />
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
     switch (arguments.length) {
@@ -29,6 +30,7 @@ export let EditOrder = class {
             if (!this._model.Items.length) {
                 this.addItem();
             }
+            this.sortItems();
             window.setTimeout(_.bind(() => {
                 var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker', this.element), $timepicker = $('.timepicker', this.element), $select = $('select', this.element), $dropdown = $('.dropdown-button', this.element);
                 $collapsible.collapsible({ accordion: false });
@@ -61,6 +63,14 @@ export let EditOrder = class {
     }
     addItem() {
         this._model.addItem();
+        this.sortItems();
+    }
+    removeItem(item) {
+        this._model.removeItem(item);
+        this.sortItems();
+    }
+    sortItems() {
+        this.sortedItems = _.sortBy(this._model.Items, (item) => item.SortOrder);
     }
     save(e) {
         this._submitted = true;

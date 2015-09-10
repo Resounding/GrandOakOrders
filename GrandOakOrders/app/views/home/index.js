@@ -17,6 +17,10 @@ let Home = class {
         this.httpClient.get('/API/Home')
             .then((response) => {
             this.content = response.content;
+        })
+            .catch((err) => {
+            console.log(err);
+            debugger;
         });
     }
 };

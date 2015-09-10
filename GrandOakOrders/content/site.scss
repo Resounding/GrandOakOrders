@@ -1,5 +1,9 @@
 ﻿@import 'materialize/sass/materialize.scss';
 
+.btn-block {
+    width: 100%;
+}
+
 nav {
   @extend .blue, .lighten-2;
   

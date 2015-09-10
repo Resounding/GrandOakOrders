@@ -1,24 +1,24 @@
 const developmentConfig = {
-    loginRedirect: '/#',
+    loginRedirect: '/',
     profileUrl: '/api/me',
     tokenName: 'access_token',
     providers: {
         google: {
             clientId: '233717436720-9ia97orckf475kgkugc02p04482svl44.apps.googleusercontent.com',
             redirectUri: 'http://localhost:52464/auth/callback',
-            url: '#/login'
+            url: '/login'
         }
     }
 };
 const productionConfig = {
-    loginRedirect: '/#',
+    loginRedirect: '/',
     profileUrl: '/api/me',
     tokenName: 'access_token',
     providers: {
         google: {
             clientId: '233717436720-9ia97orckf475kgkugc02p04482svl44.apps.googleusercontent.com',
             redirectUri: 'https://grandoakorders.azurewebsites.net/auth/callback',
-            url: '#/login'
+            url: '/login'
         }
     }
 };

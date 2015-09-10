@@ -1,19 +1,26 @@
 ﻿<template>
     <div class="row">
+        <h5 class="col s1">
+            <button type="button" class="btn red btn-floating" click.trigger="removeItem()">
+                <i class="material-icons">remove</i>
+            </button>
+        </h5>
         <h5 class="col s1">${item.SortOrder}</h5>
-        <div class="col s7">
-            <label>
-                <input type="text" name="description" placeholder="Description" value.bind="item.Description" class="${_submitted && !item.Description ? 'invalid' : ''}" required>
-            </label>
+        <div class="col s6 input-field">
+            <input id="description_${item.Id}" type="text" name="description" placeholder="Description" value.bind="item.Description" class="${_submitted && !item.Description ? 'invalid' : ''}" required>
+            <label for="description_${item.Id}" class="active">Description</label>
         </div>
-        <div class="col s1">
-            <input type="text" placeholder="$0.00" value.bind="item.Quantity" class="text-right ${_submitted && isNaN(item.Quantity) ? 'invalid' : ''}" required>
+        <div class="col s1 input-field">
+            <input id="qty_${item.Id}" type="text" placeholder="$0.00" value.bind="item.Quantity" class="text-right ${_submitted && isNaN(item.Quantity) ? 'invalid' : ''}" required>
+            <label for="qty_${item.Id}" class="active">Qty</label>
         </div>
-        <div class="col s1">
-            <input type="text" placeholder="$0.00" value.bind="item.UnitPrice" class="text-right ${_submitted && isNaN(item.UnitPrice) ? 'invalid' : ''}" required>
+        <div class="col s1 input-field">            
+            <input id="unit_${item.Id}" type="text" placeholder="$0.00" value.bind="item.UnitPrice" class="text-right ${_submitted && isNaN(item.UnitPrice) ? 'invalid' : ''}" required>
+            <label for="unit_${item.Id}" class="active">Unit $</label>
         </div>
-        <div class="col s2">
-            <input type="text" placeholder="$0.00" ng-currency value.bind="item.TotalPrice" class="text-right ${_submitted && isNaN(item.TotalPrice) ? 'invalid' : ''}" required>
+        <div class="col s2 input-field">
+            <input id="total_${item.Id}" type="text" placeholder="$0.00" ng-currency value.bind="item.TotalPrice" class="text-right ${_submitted && isNaN(item.TotalPrice) ? 'invalid' : ''}" required>
+            <label for="total_${item.Id}" class="active">Tot $</label>
         </div>
         <div class="col s12" goc-notes>
             <ul class="collapsible" data-collapsible="accordion">

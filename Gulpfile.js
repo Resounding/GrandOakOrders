@@ -5,7 +5,9 @@ var gulp = require('gulp'),
     touch = require('touch'),
     open = require('gulp-open'),
     livereload = require('gulp-livereload'),
-    run = require('gulp-run');
+    run = require('gulp-run'),
+    iisexpress = require('gulp-iis-express'),
+    path = require('path');
 
 var paths = {
     index: './GrandOakOrders/index.html',
@@ -63,8 +65,12 @@ gulp.task('watch-ts', ['build-ts'], function() {
 });
 
 gulp.task('serve', function () {
-    run('IISExpress.exe /Site:GrandOakOrders /config:.vs\\config\\applicationhost.config').exec()
-        .pipe(gulp.dest('output'));
+    var configPath = path.join(__dirname, '.\\.vs\\config\\applicationHost.config');
+    console.log(configPath);
+    iisexpress({
+      sitePaths: ['GrandOakOrders'],
+      configFile: configPath
+   });
 });
 
-gulp.task('default', ['watch', 'watch-ts', 'open']);
+gulp.task('default', ['serve', 'watch', 'watch-ts', 'open']);

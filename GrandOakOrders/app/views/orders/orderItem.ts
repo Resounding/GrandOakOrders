@@ -25,6 +25,10 @@ export class OrderItem {
         return isNaN(val);
     }
 
+    removeItem() {
+        this.parent.removeItem(this.item);
+    }
+
     get _submitted(): boolean {
         return this.parent._submitted;
     }

@@ -82,7 +82,7 @@
                 <div class="divider"></div>
                 <div class="section">
                     <h5>Order Details</h5>
-                    <order-item repeat.for="item of _model.Items" item.bind="item"></order-item>
+                    <order-item repeat.for="item of sortedItems" item.bind="item"></order-item>
                     <div class="row">
                         <button type="button" class="btn right green" click.trigger="addItem()">
                             <i class="material-icons">add</i>
