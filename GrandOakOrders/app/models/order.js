@@ -2,12 +2,15 @@
 /// <reference path="../../typings/moment/moment.d.ts" />
 /// <reference path="../../typings/underscore/underscore.d.ts" />
 import { InquiryViewModel } from './inquiry';
+import { EventAggregator } from 'aurelia-event-aggregator';
+import { Container } from 'aurelia-dependency-injection';
 import _ from 'underscore';
 import moment from 'moment';
 const DATE_FORMAT = 'dddd MMMM D, YYYY';
 const TIME_FORMAT = 'h:mm A';
 export class OrderItemViewModel {
-    constructor(model) {
+    constructor(model, events) {
+        this.events = events;
         this.Description = '';
         this.KitchenNotes = '';
         this.OrderingNotes = '';
@@ -33,22 +36,30 @@ export class OrderItemViewModel {
         return this._unitPrice;
     }
     set UnitPrice(val) {
-        this._unitPrice = val;
-        var numVal = parseFloat((val || '').toString());
-        if (!isNaN(numVal)) {
+        const currency = parseFloat((val || '0').toString().replace(/[$,\(\)]/g, ''));
+        if (!isNaN(currency)) {
+            this._unitPrice = currency;
             this._totalPrice = this._quantity * this._unitPrice;
+            this.events.publish('currency:changed');
+        }
+        else {
+            this._unitPrice = val;
         }
     }
     get TotalPrice() {
         return this._totalPrice;
     }
     set TotalPrice(val) {
-        this._totalPrice = val;
-        var numVal = parseFloat((val || '').toString());
-        if (!isNaN(numVal)) {
+        const currency = parseFloat((val || '').toString().replace(/[$,\(\)]/g, ''));
+        if (!isNaN(currency)) {
+            this._totalPrice = currency;
             if (val) {
                 this._unitPrice = this._totalPrice / this._quantity;
             }
+            this.events.publish('currency:changed');
+        }
+        else {
+            this._totalPrice = val;
         }
     }
     isValid() {
@@ -81,8 +92,17 @@ export class OrderViewModel {
         this.DateAndTime = '';
         this.CreatedDateAndTime = '';
         this.UpdatedDateAndTime = '';
+        this.events = Container.instance.get(EventAggregator);
+        var deposit = model.Deposit;
+        var gratuity = model.Gratuity;
+        delete model.Deposit;
+        delete model.Gratuity;
         _.extend(this, model);
+        this._deposit = deposit;
+        this._gratuity = gratuity;
         this.Inquiry = new InquiryViewModel(model.Inquiry);
+        const items = model.Items;
+        this.Items = _.map(items, (item) => new OrderItemViewModel(item, this.events));
         this.HeaderText = this.Inquiry.Organization;
         if (this.Inquiry.ContactPerson) {
             this.HeaderText += ` (${this.Inquiry.ContactPerson})`;
@@ -100,6 +120,43 @@ export class OrderViewModel {
         this.CreatedDateAndTime = `${createdDate} @ ${createdTime}`;
         this.UpdatedDateAndTime = `${updatedDate} @ ${updatedTime}`;
     }
+    get SubTotal() {
+        return _.reduce(this.Items, (memo, item) => {
+            return memo + (parseFloat(item.TotalPrice) || 0);
+        }, 0);
+    }
+    get TotalTax() {
+        return parseFloat((this.SubTotal * this.TaxRate).toFixed(2));
+    }
+    get Gratuity() {
+        return this._gratuity;
+    }
+    set Gratuity(val) {
+        const currency = parseFloat((val || '0').toString().replace(/[$,\(\)]/g, ''));
+        if (!isNaN(currency)) {
+            this._gratuity = currency;
+            this.events.publish('currency:changed');
+        }
+        else {
+            this._gratuity = val;
+        }
+    }
+    get Deposit() {
+        return this._deposit;
+    }
+    set Deposit(val) {
+        const currency = parseFloat((val || '0').toString().replace(/[$,\(\)]/g, ''));
+        if (!isNaN(currency)) {
+            this._deposit = currency;
+            this.events.publish('currency:changed');
+        }
+        else {
+            this._deposit = val;
+        }
+    }
+    get GrandTotal() {
+        return this.SubTotal + this.TotalTax + this.Gratuity - this.Deposit;
+    }
     addItem() {
         var orders = _.pluck(this.Items, 'SortOrder'), order = 1;
         if (orders.length) {
@@ -110,7 +167,7 @@ export class OrderViewModel {
             OrderId: this.Id,
             SortOrder: order,
             Quantity: this.Inquiry.People,
-        });
+        }, this.events);
         this.Items.push(item);
         return item;
     }

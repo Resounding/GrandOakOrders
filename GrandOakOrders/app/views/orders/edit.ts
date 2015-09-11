@@ -33,6 +33,12 @@ export class EditOrder {
                         $select = $('select', this.element),
                         $dropdown = $('.dropdown-button', this.element);
 
+                    $select.material_select();
+
+                    $dropdown.dropdown({
+                        belowOrigin: true
+                    });
+
                     $collapsible.collapsible({ accordion: false });
                     $eventDate.pickadate({
                         container: 'body',
@@ -56,11 +62,6 @@ export class EditOrder {
 
                     $timepicker.pickatime('picker')
                         .set('select', this._model.Inquiry.EventTime);
-
-                    $select.material_select();
-                    $dropdown.dropdown({
-                        belowOrigin: true
-                    });
 
                 }, this), 500);
             });
@@ -90,7 +91,7 @@ export class EditOrder {
             this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
                 .then((response) => {
                     console.log(response);
-                    this.router.navigateTo('orders');
+                    this.router.navigateToRoute('orders');
                 })
                 .catch((err) => console.log(err));
         }

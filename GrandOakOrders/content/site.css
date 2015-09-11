@@ -8140,3 +8140,21 @@ img.header-image {
     margin-right: auto;
     margin-bottom: 25px; }
 
+/* utility */
+.text-right {
+  text-align: right !important; }
+
+.text-left {
+  text-align: left !important; }
+
+.text-center {
+  text-align: center !important; }
+
+.h5, input[type=text].h5, input[type=password].h5, input[type=email].h5, input[type=url].h5,
+input[type=time].h5, input[type=date].h5, input[type=datetime-local].h5, input[type=tel].h5,
+input[type=number].h5, input[type=search].h5, textarea.materialize-textarea.h5 {
+  font-size: 1.64rem;
+  line-height: 1.804rem; }
+
+/* end utility*/
+

@@ -13,10 +13,12 @@ import { inject } from 'aurelia-framework';
 import { customElement } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { AuthService } from 'paulvanbladel/aurelia-auth';
+import { Router } from 'aurelia-router';
 export let UserProfile = class {
-    constructor(auth, events) {
+    constructor(auth, events, router) {
         this.auth = auth;
         this.events = events;
+        this.router = router;
         this.profile = '';
         if (this.auth.isAuthenticated()) {
             this.getMe();
@@ -26,12 +28,24 @@ export let UserProfile = class {
     getMe() {
         this.auth.getMe()
             .then((me) => this.profile = me.DisplayName)
-            .catch(() => this.profile = '');
+            .catch(() => {
+            // problem - try to authenticate again
+            this.auth.authenticate('google', false, null)
+                .then(() => {
+                this.auth.getMe()
+                    .then((me) => this.profile = me.DisplayName)
+                    .catch(() => this.router.navigateToRoute('login'));
+            })
+                .catch(() => {
+                // need to log in.
+                this.router.navigateToRoute('login');
+            });
+        });
     }
 };
 UserProfile = __decorate([
-    inject(AuthService, EventAggregator),
+    inject(AuthService, EventAggregator, Router),
     customElement('user-profile'), 
-    __metadata('design:paramtypes', [(typeof (_a = typeof AuthService !== 'undefined' && AuthService) === 'function' && _a) || Object, (typeof (_b = typeof EventAggregator !== 'undefined' && EventAggregator) === 'function' && _b) || Object])
+    __metadata('design:paramtypes', [(typeof (_a = typeof AuthService !== 'undefined' && AuthService) === 'function' && _a) || Object, (typeof (_b = typeof EventAggregator !== 'undefined' && EventAggregator) === 'function' && _b) || Object, (typeof (_c = typeof Router !== 'undefined' && Router) === 'function' && _c) || Object])
 ], UserProfile);
-var _a, _b;
+var _a, _b, _c;

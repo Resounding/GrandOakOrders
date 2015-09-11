@@ -3,6 +3,8 @@
 /// <reference path="../../typings/underscore/underscore.d.ts" />
 
 import {InquiryPojo, InquiryViewModel} from './inquiry';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {Container} from 'aurelia-dependency-injection';
 import _ from 'underscore';
 import moment from 'moment';
 
@@ -69,7 +71,7 @@ export class OrderItemViewModel {
     private _unitPrice: number = 0;
     private _totalPrice: number = 0;
 
-    constructor(model?) {
+    constructor(model:any, private events:EventAggregator) {
         if (model) {
             _.extend(this, model);
         }
@@ -90,24 +92,32 @@ export class OrderItemViewModel {
         return this._unitPrice;
     }
     set UnitPrice(val) {
-        this._unitPrice = val;
-        var numVal = parseFloat((val || '').toString());
-        if(!isNaN(numVal)) {            
+        const currency = parseFloat((val || '0').toString().replace(/[$,\(\)]/g, ''));
+
+        if (!isNaN(currency)) {
+            this._unitPrice = currency;
             this._totalPrice = this._quantity * this._unitPrice;
-        }
+            this.events.publish('currency:changed');
+        } else {
+            this._unitPrice = val;
+        }        
     }
 
     get TotalPrice(): number {
         return this._totalPrice;
     }
     set TotalPrice(val) {
-        this._totalPrice = val;
-        var numVal = parseFloat((val || '').toString());
-        if(!isNaN(numVal)) {            
+        const currency = parseFloat((val || '').toString().replace(/[$,\(\)]/g, ''));
+
+        if (!isNaN(currency)) {
+            this._totalPrice = currency;
             if (val) {
                 this._unitPrice = this._totalPrice / this._quantity;
             }
-        }
+            this.events.publish('currency:changed');
+        } else {
+            this._totalPrice = val;
+        }        
     }
 
     isValid(): boolean {
@@ -150,10 +160,6 @@ export class OrderViewModel implements OrderPojo {
 
     Items: Array<OrderItemPojo>;
 
-    SubTotal: number;
-    Gratuity: number;
-    Deposit: number;
-    GrandTotal: number;
     TaxCode: string;
     TaxRate: number;
 
@@ -166,10 +172,29 @@ export class OrderViewModel implements OrderPojo {
     DateAndTime: string = '';
     CreatedDateAndTime: string = '';
     UpdatedDateAndTime: string = '';
+    _gratuity: number;
+    _deposit: number;
+
+    events: EventAggregator;
 
     constructor(model: OrderPojo) {
+
+        this.events = Container.instance.get(EventAggregator);
+
+        var deposit = model.Deposit;
+        var gratuity = model.Gratuity;
+
+        delete model.Deposit;
+        delete model.Gratuity;
+
         _.extend(this, model);
+
+        this._deposit = deposit;
+        this._gratuity = gratuity;
+
         this.Inquiry = new InquiryViewModel(model.Inquiry);
+        const items = model.Items;
+        this.Items = _.map(items, (item) => new OrderItemViewModel(item, this.events));
 
         this.HeaderText = this.Inquiry.Organization;
         if (this.Inquiry.ContactPerson) {
@@ -196,6 +221,50 @@ export class OrderViewModel implements OrderPojo {
         this.UpdatedDateAndTime = `${updatedDate} @ ${updatedTime}`;
     }
 
+    get SubTotal(): number {
+        return _.reduce(this.Items, (memo, item) => {
+            return memo + (parseFloat(item.TotalPrice) || 0);
+        }, 0);
+    }
+
+    get TotalTax(): number {
+        return parseFloat((this.SubTotal * this.TaxRate).toFixed(2));
+    }
+
+    get Gratuity(): number {
+        return this._gratuity;
+    }
+
+    set Gratuity(val) {
+        const currency = parseFloat((val || '0').toString().replace(/[$,\(\)]/g, ''));
+
+        if (!isNaN(currency)) {
+            this._gratuity = currency;
+            this.events.publish('currency:changed');
+        } else {
+            this._gratuity = val;
+        }
+    }
+
+    get Deposit(): number {
+        return this._deposit;
+    }
+
+    set Deposit(val) {
+        const currency = parseFloat((val || '0').toString().replace(/[$,\(\)]/g, ''));
+
+        if (!isNaN(currency)) {
+            this._deposit = currency;
+            this.events.publish('currency:changed');
+        } else {
+            this._deposit = val;
+        }
+    }
+
+    get GrandTotal():number {
+        return this.SubTotal + this.TotalTax + this.Gratuity - this.Deposit;
+    }
+
     addItem(): OrderItemPojo {
         var orders = _.pluck(this.Items, 'SortOrder'),
             order = 1;
@@ -207,7 +276,7 @@ export class OrderViewModel implements OrderPojo {
             OrderId: this.Id,
             SortOrder: order,
             Quantity: this.Inquiry.People,
-        });
+        }, this.events);
         this.Items.push(item);
         return item;
     }

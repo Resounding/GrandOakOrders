@@ -1,4 +1,5 @@
 ﻿<template>
+    <require from="../../controls/currencyTextbox"></require>
     <require from="./orderItem"></require>
 
     <div class="container">
@@ -37,7 +38,7 @@
                                     <label for="organization" class="active">Organization:</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="caller" type="text"  value.bind="_model.Inquiry.ContactPerson">
+                                    <input id="caller" type="text" value.bind="_model.Inquiry.ContactPerson">
                                     <label for="caller" class="active">Person Calling:</label>
                                 </div>
                             </div>
@@ -90,12 +91,78 @@
                     </div>
                     <div class="divider"></div>
                     <div class="row">
-                        <h5 class="col s1">Total</h5>
-                        <h5 class="col s2 offset-s9" style="text-align: right;">
-                            ${ _model.TotalPrice }
-                        </h5>
+                        <h5 class="col s10">Sub-Total</h5>
+                        <h5 class="col s2" style="text-align: right;" innerHTML.bind="'$' + _model.SubTotal.toFixed(2)"></h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col s10">${_model.TaxCode} (${_model.TaxRate * 100}%)</h5>
+                        <h5 class="col s2" style="text-align: right;" innerHTML.bind="'$' + _model.TotalTax.toFixed(2)"></h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col s10">Gratuity</h5>
+                        <div class="col s2">
+                            <input id="gratuity" type="text" class="text-right h5" value.bind="_model.Gratuity" currency>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h5 class="col s10">Less Deposit</h5>
+                        <div class="col s2">
+                            <input id="deposit" type="text" class="text-right h5" value.bind="_model.Deposit" currency="negative">
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="row">
+                        <h5 class="col s10">Total</h5>
+                        <h5 class="col s2" style="text-align: right;" innerHTML.bind="'$' + _model.GrandTotal.toFixed(2)"></h5>
                     </div>
                 </div>
+                <div class="divider"></div>
+                <ul class="collapsible popout" data-collapsible="expandable">
+                    <li>
+                        <div class="collapsible-header">
+                            <div>
+                                <strong>Notes &amp; Comments:</strong>
+                                ${_model.Notes}
+                            </div>
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="notes" class="materialize-textarea" value.bind="_model.Notes"></textarea>
+                                    <label for="notes" class="active">Notes</label>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">
+                            <strong>Pickup Notes:</strong>
+                            ${_model.PickupNotes}
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="pickupNotes" class="materialize-textarea" value.bind="_model.PickupNotes"></textarea>
+                                    <label for="pickupNotes" class="active">Pickup Notes:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">
+                            <strong>Allergy Notes:</strong>
+                            ${_model.AllergyNotes}
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="pickupNotes" class="materialize-textarea" value.bind="_model.AllergyNotes"></textarea>
+                                    <label for="pickupNotes" class="active">Allergy Notes:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
                 <div class="divider"></div>
                 <div class="row">
                     <div class="right">

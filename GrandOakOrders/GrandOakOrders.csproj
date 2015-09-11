@@ -244,6 +244,7 @@
     </None>
     <Content Include="app\components\auth\auth-config.js" />
     <Content Include="app\components\main.js" />
+    <Content Include="app\controls\currencyTextbox.js" />
     <Content Include="app\models\inquiry.js" />
     <Content Include="app\models\order.js" />
     <Content Include="app\views\app.html" />
@@ -3273,6 +3274,7 @@
     <Content Include="app\views\orders\edit.ts" />
     <Content Include="app\views\orders\list.ts" />
     <Content Include="app\views\orders\orderItem.ts" />
+    <Content Include="app\controls\currencyTextbox.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\animator-css%400.16.0\aurelia-animator-css.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\binding%400.8.6\aurelia-binding.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\binding%400.9.0\aurelia-binding.d.ts" />
