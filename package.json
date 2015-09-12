@@ -67,7 +67,7 @@
       "fetch": "github:github/fetch@^0.9.0",
       "jquery": "github:components/jquery@^2.1.4",
       "moment": "github:moment/moment@^2.10.6",
-      "paulvanbladel/aurelia-auth": "github:paulvanbladel/aurelia-auth@^0.9.10",
+      "paulvanbladel/aurelia-auth": "github:paulvanbladel/aurelia-auth@^0.9.14",
       "text": "github:systemjs/plugin-text@^0.0.2",
       "typescript": "npm:typescript@^1.6.0-beta",
       "underscore": "npm:underscore@^1.8.3"

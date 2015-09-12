@@ -8,8 +8,10 @@ using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using GrandOakOrders.Auth;
+using GrandOakOrders.Controllers;
 using GrandOakOrders.Data.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -22,6 +24,7 @@ namespace GrandOakOrders
         {
             filters.Add(new ErrorFilter());
             filters.Add(new AuthenticationFilter());
+            filters.Add(new AuthorizationFilter());
         }
     }
 
@@ -42,6 +45,31 @@ namespace GrandOakOrders
         }
     }
 
+    public class AuthorizationFilter : ActionFilterAttribute, IAuthorizationFilter
+    {
+        public Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(HttpActionContext context, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
+        {
+            var request = context.Request;
+            var authorization = request.Headers.Authorization;
+
+            if (authorization == null) {
+                return Task.FromResult(request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Authorization header not supplied"));
+            }
+
+            if (authorization.Scheme != "Bearer") {
+                return Task.FromResult(request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Invalid Authorization scheme"));
+            }
+
+            var token = authorization.Parameter;
+
+            if (string.IsNullOrEmpty(token)) {
+                return Task.FromResult(request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Missing credentials"));
+            }
+
+            return continuation();
+        }
+    }
+
     public class AuthenticationFilter : ActionFilterAttribute, IAuthenticationFilter
     {
         private static IDictionary<string, User> _session = new Dictionary<string, User>();
@@ -51,10 +79,12 @@ namespace GrandOakOrders
             var authorization = request.Headers.Authorization;
 
             if(authorization == null) {
+                //context.ErrorResult = new AuthenticationFailureResult("Invalid bearer token", request);
                 return;
             }
 
             if(authorization.Scheme != "Bearer") {
+                //context.ErrorResult = new AuthenticationFailureResult("Invalid bearer token", request);
                 return;
             }
 

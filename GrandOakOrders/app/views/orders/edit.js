@@ -1,5 +1,6 @@
 /// <reference path="../../../typings/jquery/jquery.d.ts" />
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
+/// <reference path="../../../typings/es6-promise/es6-promise.d.ts" />
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
     switch (arguments.length) {
@@ -27,12 +28,14 @@ export let EditOrder = class {
         this.httpClient.get(`/api/orders/${params.id}`)
             .then((response) => {
             this._model = new OrderViewModel(response.content);
+            console.log(this._model);
             if (!this._model.Items.length) {
                 this.addItem();
             }
             this.sortItems();
             window.setTimeout(_.bind(() => {
-                var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker', this.element), $timepicker = $('.timepicker', this.element), $select = $('select', this.element), $dropdown = $('.dropdown-button', this.element);
+                var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker', this.element), $timepicker = $('.timepicker', this.element), $select = $('select', this.element), $dropdown = $('.dropdown-button', this.element), $kitchenReport = $('#kitchenReport', this.element);
+                $kitchenReport.on('click', this.showKitchenReport.bind(this));
                 $select.material_select();
                 $dropdown.dropdown({
                     belowOrigin: true
@@ -45,8 +48,6 @@ export let EditOrder = class {
                     .on('change', (e) => {
                     this._model.Inquiry.EventDate = e.target.value;
                 });
-                $eventDate.pickadate('picker')
-                    .set('select', this._model.Inquiry.EventDate);
                 $timepicker
                     .pickatime({
                     container: 'body',
@@ -56,9 +57,17 @@ export let EditOrder = class {
                     .on('change', (e) => {
                     this._model.Inquiry.EventTime = e.target.value;
                 });
-                $timepicker.pickatime('picker')
-                    .set('select', this._model.Inquiry.EventTime);
-            }, this), 500);
+                try {
+                    $eventDate.pickadate('picker')
+                        .set('select', this._model.Inquiry.EventDate);
+                }
+                catch (e) { }
+                try {
+                    $timepicker.pickatime('picker')
+                        .set('select', this._model.Inquiry.EventTime);
+                }
+                catch (e) { }
+            }, this), 1000);
         });
     }
     addItem() {
@@ -72,18 +81,29 @@ export let EditOrder = class {
     sortItems() {
         this.sortedItems = _.sortBy(this._model.Items, (item) => item.SortOrder);
     }
+    showKitchenReport(e) {
+        e.preventDefault();
+        var $el = $(e.target), url = $el.attr('href');
+        this.submit()
+            .then(() => window.open(url, '_blank')
+            .catch(() => console.log('Form was invalid')));
+    }
     save(e) {
+        e.preventDefault();
         this._submitted = true;
+        this.submit()
+            .then((response) => {
+            console.log(response);
+            this.router.navigateToRoute('orders');
+        });
+    }
+    submit() {
         if (!this._model.isValid()) {
-            e.preventDefault();
+            return Promise.reject(null);
         }
         else {
             var order = this._model.toJSON();
-            this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
-                .then((response) => {
-                console.log(response);
-                this.router.navigateToRoute('orders');
-            })
+            return this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
                 .catch((err) => console.log(err));
         }
     }

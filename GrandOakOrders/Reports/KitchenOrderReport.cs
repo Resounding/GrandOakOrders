@@ -20,6 +20,7 @@ namespace GrandOakOrders.Reports
 
             var serializer = new XmlSerializer(typeof(Order));
             var sw = new StringWriter();
+            
             serializer.Serialize(sw, order);
             var xml = sw.ToString();
             var dataSource = new XMLDataSource();
@@ -29,7 +30,6 @@ namespace GrandOakOrders.Reports
             DataSource = dataSource;
 
             _order = order;
-            //DataSource = _order.Items;
         }
 
         private void OnReportHeaderFormat(object sender, System.EventArgs e)
@@ -46,6 +46,26 @@ namespace GrandOakOrders.Reports
             txtSummary.Text = _order.Inquiry.Summary;
             txtDescription.Text = _order.Inquiry.Description;
             txtAllergyNotes.Text = _order.AllergyNotes;
-        }        
+
+            if(string.IsNullOrWhiteSpace(_order.Inquiry.Summary)) {
+                lblSummary.Height = txtSummary.Height = 0;
+            }
+            if(string.IsNullOrWhiteSpace(_order.Inquiry.Description)) {
+                lblDescription.Height = txtDescription.Height = 0;
+            }
+            if (string.IsNullOrWhiteSpace(_order.AllergyNotes)) {
+                lblAllergies.Height = txtAllergyNotes.Height = 0;
+            }
+        }
+
+        private void OnDetailFormat(object sender, EventArgs e)
+        {
+            var item = _order.Items[index];
+            if(string.IsNullOrWhiteSpace(item.KitchenNotes)) {
+                detail.Controls["lblKitchenNotes"].Visible = false;
+                detail.Controls["txtKitchenNotes"].Visible = false;
+            }
+            index++;
+        }
     }
 }

@@ -11,7 +11,7 @@
                 </button>
                 <ul id="reportsDropdown" class="dropdown-content">
                     <li>
-                        <a href="/Reports/KitchenOrder/${_model.Id}?format=pdf" target="_blank">
+                        <a id="kitchenReport" href="/Reports/KitchenOrder/${_model.Id}?format=pdf" target="_blank">
                             Kitchen Order
                         </a>
                     </li>
@@ -91,29 +91,29 @@
                     </div>
                     <div class="divider"></div>
                     <div class="row">
-                        <h5 class="col s10">Sub-Total</h5>
-                        <h5 class="col s2" style="text-align: right;" innerHTML.bind="'$' + _model.SubTotal.toFixed(2)"></h5>
+                        <h5 class="col s9">Sub-Total</h5>
+                        <h5 class="col s3" style="text-align: right;" innerHTML.bind="'$' + (_model.SubTotal || 0).toFixed(2)"></h5>
                     </div>
                     <div class="row">
-                        <h5 class="col s10">${_model.TaxCode} (${_model.TaxRate * 100}%)</h5>
-                        <h5 class="col s2" style="text-align: right;" innerHTML.bind="'$' + _model.TotalTax.toFixed(2)"></h5>
+                        <h5 class="col s9">${_model.TaxCode} (${_model.TaxRate * 100}%)</h5>
+                        <h5 class="col s3" style="text-align: right;" innerHTML.bind="'$' + (_model.TotalTax || 0).toFixed(2)"></h5>
                     </div>
                     <div class="row">
-                        <h5 class="col s10">Gratuity</h5>
-                        <div class="col s2">
+                        <h5 class="col s9">Gratuity</h5>
+                        <div class="col s3">
                             <input id="gratuity" type="text" class="text-right h5" value.bind="_model.Gratuity" currency>
                         </div>
                     </div>
                     <div class="row">
-                        <h5 class="col s10">Less Deposit</h5>
-                        <div class="col s2">
+                        <h5 class="col s9">Less Deposit</h5>
+                        <div class="col s3">
                             <input id="deposit" type="text" class="text-right h5" value.bind="_model.Deposit" currency="negative">
                         </div>
                     </div>
                     <div class="divider"></div>
                     <div class="row">
-                        <h5 class="col s10">Total</h5>
-                        <h5 class="col s2" style="text-align: right;" innerHTML.bind="'$' + _model.GrandTotal.toFixed(2)"></h5>
+                        <h5 class="col s9">Total</h5>
+                        <h5 class="col s3" style="text-align: right;" innerHTML.bind="'$' + (_model.GrandTotal || 0).toFixed(2)"></h5>
                     </div>
                 </div>
                 <div class="divider"></div>

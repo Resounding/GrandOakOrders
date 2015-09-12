@@ -8,6 +8,8 @@ using GrapeCity.ActiveReports;
 namespace GrandOakOrders.Controllers
 {
     [RoutePrefix("Reports")]
+    [OverrideAuthorization]
+    [AllowAnonymous]
     public class ReportsController : ApiController
     {
         [Route("KitchenOrder/{id:int}")]

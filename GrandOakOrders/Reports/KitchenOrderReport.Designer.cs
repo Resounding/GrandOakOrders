@@ -31,6 +31,11 @@
             this.detail = new GrapeCity.ActiveReports.SectionReportModel.Detail();
             this.txtItemDescription = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.txtKitchenNotes = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
+            this.lblItemDescription = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            this.txtQuantity = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
+            this.lblQuantity = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            this.lblKitchenNotes = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            this.line1 = new GrapeCity.ActiveReports.SectionReportModel.Line();
             this.pageFooter = new GrapeCity.ActiveReports.SectionReportModel.PageFooter();
             this.infoPageNumber = new GrapeCity.ActiveReports.SectionReportModel.ReportInfo();
             this.infoPrintedDateTime = new GrapeCity.ActiveReports.SectionReportModel.ReportInfo();
@@ -47,18 +52,17 @@
             this.lblDescription = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.txtDescription = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.picLogo = new GrapeCity.ActiveReports.SectionReportModel.Picture();
-            this.reportFooter = new GrapeCity.ActiveReports.SectionReportModel.ReportFooter();
-            this.lblItemDescription = new GrapeCity.ActiveReports.SectionReportModel.Label();
-            this.txtQuantity = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
-            this.lblQuantity = new GrapeCity.ActiveReports.SectionReportModel.Label();
-            this.lblNotes = new GrapeCity.ActiveReports.SectionReportModel.Label();
-            this.line1 = new GrapeCity.ActiveReports.SectionReportModel.Line();
             this.line2 = new GrapeCity.ActiveReports.SectionReportModel.Line();
             this.lblTitle = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.lblAllergies = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.txtAllergyNotes = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
+            this.reportFooter = new GrapeCity.ActiveReports.SectionReportModel.ReportFooter();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKitchenNotes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblItemDescription)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblKitchenNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.infoPageNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.infoPrintedDateTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblOrganization)).BeginInit();
@@ -73,10 +77,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblItemDescription)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblQuantity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblAllergies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAllergyNotes)).BeginInit();
@@ -94,10 +94,11 @@
             this.lblItemDescription,
             this.txtQuantity,
             this.lblQuantity,
-            this.lblNotes,
+            this.lblKitchenNotes,
             this.line1});
             this.detail.Height = 0.8770834F;
             this.detail.Name = "detail";
+            this.detail.Format += new System.EventHandler(this.OnDetailFormat);
             // 
             // txtItemDescription
             // 
@@ -105,7 +106,7 @@
             this.txtItemDescription.Height = 0.25F;
             this.txtItemDescription.Left = 1F;
             this.txtItemDescription.Name = "txtItemDescription";
-            this.txtItemDescription.Style = "font-size: 14pt; text-align: left";
+            this.txtItemDescription.Style = "font-family: Segoe UI; font-size: 14pt; text-align: left";
             this.txtItemDescription.Text = "Description";
             this.txtItemDescription.Top = 0.1F;
             this.txtItemDescription.Width = 3F;
@@ -116,10 +117,68 @@
             this.txtKitchenNotes.Height = 0.25F;
             this.txtKitchenNotes.Left = 0F;
             this.txtKitchenNotes.Name = "txtKitchenNotes";
-            this.txtKitchenNotes.Style = "font-size: 14pt; text-align: left";
+            this.txtKitchenNotes.Style = "font-family: Segoe UI; font-size: 14pt; text-align: left";
             this.txtKitchenNotes.Text = "Kitchen Notes";
             this.txtKitchenNotes.Top = 0.55F;
             this.txtKitchenNotes.Width = 6.5F;
+            // 
+            // lblItemDescription
+            // 
+            this.lblItemDescription.Height = 0.25F;
+            this.lblItemDescription.HyperLink = null;
+            this.lblItemDescription.Left = 0F;
+            this.lblItemDescription.Name = "lblItemDescription";
+            this.lblItemDescription.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
+            this.lblItemDescription.Text = "Item:";
+            this.lblItemDescription.Top = 0.1F;
+            this.lblItemDescription.Width = 1F;
+            // 
+            // txtQuantity
+            // 
+            this.txtQuantity.DataField = "Quantity";
+            this.txtQuantity.Height = 0.25F;
+            this.txtQuantity.Left = 5.5F;
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.OutputFormat = resources.GetString("txtQuantity.OutputFormat");
+            this.txtQuantity.Style = "font-family: Segoe UI; font-size: 14pt; text-align: right";
+            this.txtQuantity.Text = "Quantity";
+            this.txtQuantity.Top = 0.09999999F;
+            this.txtQuantity.Width = 1F;
+            // 
+            // lblQuantity
+            // 
+            this.lblQuantity.Height = 0.25F;
+            this.lblQuantity.HyperLink = null;
+            this.lblQuantity.Left = 4.5F;
+            this.lblQuantity.Name = "lblQuantity";
+            this.lblQuantity.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
+            this.lblQuantity.Text = "Quantity:";
+            this.lblQuantity.Top = 0.09999999F;
+            this.lblQuantity.Width = 1F;
+            // 
+            // lblKitchenNotes
+            // 
+            this.lblKitchenNotes.Height = 0.25F;
+            this.lblKitchenNotes.HyperLink = null;
+            this.lblKitchenNotes.Left = 0F;
+            this.lblKitchenNotes.Name = "lblKitchenNotes";
+            this.lblKitchenNotes.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
+            this.lblKitchenNotes.Text = "Notes:";
+            this.lblKitchenNotes.Top = 0.35F;
+            this.lblKitchenNotes.Width = 1F;
+            // 
+            // line1
+            // 
+            this.line1.Height = 0F;
+            this.line1.Left = 0F;
+            this.line1.LineWeight = 1F;
+            this.line1.Name = "line1";
+            this.line1.Top = 0.9F;
+            this.line1.Width = 6.5F;
+            this.line1.X1 = 0F;
+            this.line1.X2 = 6.5F;
+            this.line1.Y1 = 0.9F;
+            this.line1.Y2 = 0.9F;
             // 
             // pageFooter
             // 
@@ -134,7 +193,7 @@
             this.infoPageNumber.Height = 0.2F;
             this.infoPageNumber.Left = 5F;
             this.infoPageNumber.Name = "infoPageNumber";
-            this.infoPageNumber.Style = "text-align: right";
+            this.infoPageNumber.Style = "font-family: Segoe UI; text-align: right";
             this.infoPageNumber.Top = 0F;
             this.infoPageNumber.Width = 1.5F;
             // 
@@ -144,7 +203,7 @@
             this.infoPrintedDateTime.Height = 0.2F;
             this.infoPrintedDateTime.Left = 0F;
             this.infoPrintedDateTime.Name = "infoPrintedDateTime";
-            this.infoPrintedDateTime.Style = "";
+            this.infoPrintedDateTime.Style = "font-family: Segoe UI";
             this.infoPrintedDateTime.Top = 0F;
             this.infoPrintedDateTime.Width = 4.01F;
             // 
@@ -177,7 +236,7 @@
             this.lblOrganization.HyperLink = null;
             this.lblOrganization.Left = 0.25F;
             this.lblOrganization.Name = "lblOrganization";
-            this.lblOrganization.Style = "font-size: 14pt; font-weight: bold";
+            this.lblOrganization.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblOrganization.Text = "Organization:";
             this.lblOrganization.Top = 0.55F;
             this.lblOrganization.Width = 1.75F;
@@ -188,7 +247,7 @@
             this.lblContactPerson.HyperLink = null;
             this.lblContactPerson.Left = 0.25F;
             this.lblContactPerson.Name = "lblContactPerson";
-            this.lblContactPerson.Style = "font-size: 14pt; font-weight: bold";
+            this.lblContactPerson.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblContactPerson.Text = "Contact Person:";
             this.lblContactPerson.Top = 0.9F;
             this.lblContactPerson.Width = 1.75F;
@@ -199,7 +258,7 @@
             this.lblEventDateTime.HyperLink = null;
             this.lblEventDateTime.Left = 0.25F;
             this.lblEventDateTime.Name = "lblEventDateTime";
-            this.lblEventDateTime.Style = "font-size: 14pt; font-weight: bold";
+            this.lblEventDateTime.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblEventDateTime.Text = "Event Date / Time:";
             this.lblEventDateTime.Top = 1.25F;
             this.lblEventDateTime.Width = 1.75F;
@@ -210,7 +269,7 @@
             this.lblSummary.HyperLink = null;
             this.lblSummary.Left = 0.25F;
             this.lblSummary.Name = "lblSummary";
-            this.lblSummary.Style = "font-size: 14pt; font-weight: bold";
+            this.lblSummary.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblSummary.Text = "Summary:";
             this.lblSummary.Top = 1.75F;
             this.lblSummary.Width = 1.75F;
@@ -221,7 +280,7 @@
             this.txtOrganization.Height = 0.25F;
             this.txtOrganization.Left = 2F;
             this.txtOrganization.Name = "txtOrganization";
-            this.txtOrganization.Style = "font-size: 14pt";
+            this.txtOrganization.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtOrganization.Text = "Organization";
             this.txtOrganization.Top = 0.55F;
             this.txtOrganization.Width = 3F;
@@ -232,7 +291,7 @@
             this.txtContactPerson.Height = 0.25F;
             this.txtContactPerson.Left = 2F;
             this.txtContactPerson.Name = "txtContactPerson";
-            this.txtContactPerson.Style = "font-size: 14pt";
+            this.txtContactPerson.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtContactPerson.Text = "Contact Person";
             this.txtContactPerson.Top = 0.9F;
             this.txtContactPerson.Width = 3F;
@@ -244,7 +303,7 @@
             this.txtEventDate.Left = 2F;
             this.txtEventDate.Name = "txtEventDate";
             this.txtEventDate.OutputFormat = resources.GetString("txtEventDate.OutputFormat");
-            this.txtEventDate.Style = "font-size: 14pt";
+            this.txtEventDate.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtEventDate.Text = "Monday, 15 September, 2015";
             this.txtEventDate.Top = 1.25F;
             this.txtEventDate.Width = 3F;
@@ -256,7 +315,7 @@
             this.txtEventTime.Left = 2F;
             this.txtEventTime.Name = "txtEventTime";
             this.txtEventTime.OutputFormat = resources.GetString("txtEventTime.OutputFormat");
-            this.txtEventTime.Style = "font-size: 14pt";
+            this.txtEventTime.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtEventTime.Text = "10:00 AM";
             this.txtEventTime.Top = 1.5F;
             this.txtEventTime.Width = 3F;
@@ -268,7 +327,7 @@
             this.txtSummary.Left = 2F;
             this.txtSummary.Name = "txtSummary";
             this.txtSummary.OutputFormat = resources.GetString("txtSummary.OutputFormat");
-            this.txtSummary.Style = "font-size: 14pt";
+            this.txtSummary.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtSummary.Text = "Summary";
             this.txtSummary.Top = 1.75F;
             this.txtSummary.Width = 4.5F;
@@ -279,7 +338,7 @@
             this.lblDescription.HyperLink = null;
             this.lblDescription.Left = 0.25F;
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Style = "font-size: 14pt; font-weight: bold";
+            this.lblDescription.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblDescription.Text = "Description:";
             this.lblDescription.Top = 2.1F;
             this.lblDescription.Width = 1.75F;
@@ -291,7 +350,7 @@
             this.txtDescription.Left = 2F;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.OutputFormat = resources.GetString("txtDescription.OutputFormat");
-            this.txtDescription.Style = "font-size: 14pt";
+            this.txtDescription.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtDescription.Text = "Description";
             this.txtDescription.Top = 2.1F;
             this.txtDescription.Width = 4.5F;
@@ -306,69 +365,6 @@
             this.picLogo.SizeMode = GrapeCity.ActiveReports.SectionReportModel.SizeModes.Zoom;
             this.picLogo.Top = 0F;
             this.picLogo.Width = 0.722F;
-            // 
-            // reportFooter
-            // 
-            this.reportFooter.Height = 0F;
-            this.reportFooter.Name = "reportFooter";
-            // 
-            // lblItemDescription
-            // 
-            this.lblItemDescription.Height = 0.25F;
-            this.lblItemDescription.HyperLink = null;
-            this.lblItemDescription.Left = 0F;
-            this.lblItemDescription.Name = "lblItemDescription";
-            this.lblItemDescription.Style = "font-size: 14pt; font-weight: bold";
-            this.lblItemDescription.Text = "Item:";
-            this.lblItemDescription.Top = 0.1F;
-            this.lblItemDescription.Width = 1F;
-            // 
-            // txtQuantity
-            // 
-            this.txtQuantity.DataField = "Quantity";
-            this.txtQuantity.Height = 0.25F;
-            this.txtQuantity.Left = 5.5F;
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.OutputFormat = resources.GetString("txtQuantity.OutputFormat");
-            this.txtQuantity.Style = "font-size: 14pt; text-align: right";
-            this.txtQuantity.Text = "Quantity";
-            this.txtQuantity.Top = 0.09999999F;
-            this.txtQuantity.Width = 1F;
-            // 
-            // lblQuantity
-            // 
-            this.lblQuantity.Height = 0.25F;
-            this.lblQuantity.HyperLink = null;
-            this.lblQuantity.Left = 4.5F;
-            this.lblQuantity.Name = "lblQuantity";
-            this.lblQuantity.Style = "font-size: 14pt; font-weight: bold";
-            this.lblQuantity.Text = "Quantity:";
-            this.lblQuantity.Top = 0.09999999F;
-            this.lblQuantity.Width = 1F;
-            // 
-            // lblNotes
-            // 
-            this.lblNotes.Height = 0.25F;
-            this.lblNotes.HyperLink = null;
-            this.lblNotes.Left = 0F;
-            this.lblNotes.Name = "lblNotes";
-            this.lblNotes.Style = "font-size: 14pt; font-weight: bold";
-            this.lblNotes.Text = "Notes:";
-            this.lblNotes.Top = 0.35F;
-            this.lblNotes.Width = 1F;
-            // 
-            // line1
-            // 
-            this.line1.Height = 0F;
-            this.line1.Left = 0F;
-            this.line1.LineWeight = 1F;
-            this.line1.Name = "line1";
-            this.line1.Top = 0.9F;
-            this.line1.Width = 6.5F;
-            this.line1.X1 = 0F;
-            this.line1.X2 = 6.5F;
-            this.line1.Y1 = 0.9F;
-            this.line1.Y2 = 0.9F;
             // 
             // line2
             // 
@@ -385,11 +381,11 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.Height = 0.25F;
+            this.lblTitle.Height = 0.344F;
             this.lblTitle.HyperLink = null;
             this.lblTitle.Left = 0F;
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Style = "font-size: 16pt; font-weight: bold; text-align: center";
+            this.lblTitle.Style = "font-family: Segoe UI; font-size: 16pt; font-weight: bold; text-align: center";
             this.lblTitle.Text = "Grand Oak Culinary Order Sheet";
             this.lblTitle.Top = 0F;
             this.lblTitle.Width = 5.778F;
@@ -400,7 +396,7 @@
             this.lblAllergies.HyperLink = null;
             this.lblAllergies.Left = 0.25F;
             this.lblAllergies.Name = "lblAllergies";
-            this.lblAllergies.Style = "font-size: 14pt; font-weight: bold";
+            this.lblAllergies.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblAllergies.Text = "Allergy Notes:";
             this.lblAllergies.Top = 2.45F;
             this.lblAllergies.Width = 1.75F;
@@ -411,10 +407,15 @@
             this.txtAllergyNotes.Left = 1.875F;
             this.txtAllergyNotes.Name = "txtAllergyNotes";
             this.txtAllergyNotes.OutputFormat = resources.GetString("txtAllergyNotes.OutputFormat");
-            this.txtAllergyNotes.Style = "font-size: 14pt";
+            this.txtAllergyNotes.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtAllergyNotes.Text = "Allergy Notes";
             this.txtAllergyNotes.Top = 2.45F;
             this.txtAllergyNotes.Width = 4.5F;
+            // 
+            // reportFooter
+            // 
+            this.reportFooter.Height = 0F;
+            this.reportFooter.Name = "reportFooter";
             // 
             // KitchenOrderReport
             // 
@@ -425,7 +426,6 @@
             this.PageSettings.Margins.Top = 0.5F;
             this.PageSettings.PaperHeight = 11F;
             this.PageSettings.PaperWidth = 8.5F;
-            this.PrintWidth = 6.5F;
             this.Sections.Add(this.reportHeader);
             this.Sections.Add(this.pageHeader);
             this.Sections.Add(this.detail);
@@ -439,6 +439,10 @@
             this.StyleSheet.Add(new DDCssLib.StyleSheetRule("font-size: 13pt; font-weight: bold", "Heading3", "Normal"));
             ((System.ComponentModel.ISupportInitialize)(this.txtItemDescription)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKitchenNotes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblItemDescription)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblKitchenNotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.infoPageNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.infoPrintedDateTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblOrganization)).EndInit();
@@ -453,10 +457,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblDescription)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblItemDescription)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblQuantity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblNotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblAllergies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAllergyNotes)).EndInit();
@@ -485,7 +485,7 @@
         private GrapeCity.ActiveReports.SectionReportModel.Label lblItemDescription;
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtQuantity;
         private GrapeCity.ActiveReports.SectionReportModel.Label lblQuantity;
-        private GrapeCity.ActiveReports.SectionReportModel.Label lblNotes;
+        private GrapeCity.ActiveReports.SectionReportModel.Label lblKitchenNotes;
         private GrapeCity.ActiveReports.SectionReportModel.Line line1;
         private GrapeCity.ActiveReports.SectionReportModel.Line line2;
         private GrapeCity.ActiveReports.SectionReportModel.Label lblTitle;

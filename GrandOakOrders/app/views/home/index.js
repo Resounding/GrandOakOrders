@@ -11,22 +11,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { inject } from 'aurelia-framework';
 import { HttpClient } from 'aurelia-http-client';
+import { Router } from 'aurelia-router';
+import { AuthService } from 'paulvanbladel/aurelia-auth';
 let Home = class {
-    constructor(httpClient) {
+    constructor(httpClient, auth, router) {
         this.httpClient = httpClient;
+        this.auth = auth;
+        this.router = router;
+        this.load();
+    }
+    load() {
         this.httpClient.get('/API/Home')
             .then((response) => {
             this.content = response.content;
         })
             .catch((err) => {
-            console.log(err);
-            debugger;
+            if (err.statusCode === 401) {
+                this.auth.authenticate('google', false, null)
+                    .then(this.load)
+                    .catch(() => this.router.navigateToRoute('login'));
+            }
+            else {
+                console.log(err);
+            }
         });
     }
 };
 Home = __decorate([
-    inject(HttpClient), 
-    __metadata('design:paramtypes', [(typeof (_a = typeof HttpClient !== 'undefined' && HttpClient) === 'function' && _a) || Object])
+    inject(HttpClient, AuthService), 
+    __metadata('design:paramtypes', [(typeof (_a = typeof HttpClient !== 'undefined' && HttpClient) === 'function' && _a) || Object, (typeof (_b = typeof AuthService !== 'undefined' && AuthService) === 'function' && _b) || Object, (typeof (_c = typeof Router !== 'undefined' && Router) === 'function' && _c) || Object])
 ], Home);
 export default Home;
-var _a;
+var _a, _b, _c;

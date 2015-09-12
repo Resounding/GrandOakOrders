@@ -28,7 +28,6 @@ export let CurrencyCustomAttribute = class {
         this.negative = (val === 'negative');
     }
     setVal(e) {
-        console.log(e);
         window.setTimeout((() => {
             if (this.element !== document.activeElement) {
                 var val = this.element.value.replace(/[$,\(\)]/g, ''), currency = parseFloat(val) || 0, value = `$${currency.toFixed(2)}`;

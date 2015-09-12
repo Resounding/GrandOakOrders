@@ -16,6 +16,9 @@
     },
     "underscore/underscore.d.ts": {
       "commit": "04cf218909016059c09061d0b1b34f6ea63a9f48"
+    },
+    "es6-promise/es6-promise.d.ts": {
+      "commit": "7a3ca1f0b8a0960af9fc1838f3234cc9d6ce0645"
     }
   }
 }

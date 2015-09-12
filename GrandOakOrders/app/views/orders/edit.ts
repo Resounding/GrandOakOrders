@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../../typings/jquery/jquery.d.ts" />
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
+/// <reference path="../../../typings/es6-promise/es6-promise.d.ts" />
 
 import {inject} from 'aurelia-framework';
 import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
@@ -20,6 +21,7 @@ export class EditOrder {
         this.httpClient.get(`/api/orders/${params.id}`)
             .then((response: HttpResponseMessage) => {
                 this._model = new OrderViewModel(response.content);
+                console.log(this._model);
                 if (!this._model.Items.length) {
                     this.addItem();
                 }
@@ -31,7 +33,10 @@ export class EditOrder {
                         $eventDate = $('.datepicker', this.element),
                         $timepicker = $('.timepicker', this.element),
                         $select = $('select', this.element),
-                        $dropdown = $('.dropdown-button', this.element);
+                        $dropdown = $('.dropdown-button', this.element),
+                        $kitchenReport = $('#kitchenReport', this.element);
+
+                    $kitchenReport.on('click', this.showKitchenReport.bind(this));
 
                     $select.material_select();
 
@@ -47,8 +52,6 @@ export class EditOrder {
                     .on('change', (e) => {
                         this._model.Inquiry.EventDate = e.target.value;
                     });
-                    $eventDate.pickadate('picker')
-                        .set('select', this._model.Inquiry.EventDate);
 
                     $timepicker
                         .pickatime({
@@ -60,10 +63,17 @@ export class EditOrder {
                             this._model.Inquiry.EventTime = e.target.value;
                         })
 
-                    $timepicker.pickatime('picker')
-                        .set('select', this._model.Inquiry.EventTime);
+                    try {
+                        $eventDate.pickadate('picker')
+                            .set('select', this._model.Inquiry.EventDate);
+                    } catch(e) { }
 
-                }, this), 500);
+                    try {
+                        $timepicker.pickatime('picker')
+                            .set('select', this._model.Inquiry.EventTime);
+                    } catch(e) { }
+
+                }, this), 1000);
             });
     }
 
@@ -81,18 +91,34 @@ export class EditOrder {
         this.sortedItems = _.sortBy(this._model.Items, (item) => item.SortOrder);
     }
 
-    save(e) {
-        this._submitted = true;
+    showKitchenReport(e) {
+        e.preventDefault();
 
+        var $el = $(e.target),
+            url = $el.attr('href');
+
+        this.submit()
+            .then(() => window.open(url, '_blank')
+            .catch(() => console.log('Form was invalid'));
+    }
+
+    save(e) {
+        e.preventDefault();
+
+        this._submitted = true;
+        this.submit()
+            .then((response) => {
+                console.log(response);
+                this.router.navigateToRoute('orders');
+            });
+    }
+
+    submit():Promise<any> {
         if (!this._model.isValid()) {
-            e.preventDefault();
+            return Promise.reject(null);
         } else {
             var order = this._model.toJSON();
-            this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
-                .then((response) => {
-                    console.log(response);
-                    this.router.navigateToRoute('orders');
-                })
+            return this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
                 .catch((err) => console.log(err));
         }
     }
