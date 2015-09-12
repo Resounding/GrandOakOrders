@@ -1,4 +1,3 @@
-/// <binding AfterBuild='touch' ProjectOpened='watch' />
 var gulp = require('gulp'),
     typescript = require('typescript')
     ts = require('gulp-typescript'),
