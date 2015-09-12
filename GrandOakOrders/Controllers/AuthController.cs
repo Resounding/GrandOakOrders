@@ -20,6 +20,7 @@ namespace GrandOakOrders.Controllers
         [Route("Login")]
         [HttpPost]
         [OverrideAuthentication]
+        [OverrideAuthorization]
         [AllowAnonymous]
         public async Task<IHttpActionResult> Login(LoginRequest request)
         {
@@ -48,6 +49,7 @@ namespace GrandOakOrders.Controllers
         [Route("Auth/Callback")]
         [HttpGet]
         [OverrideAuthentication]
+        [OverrideAuthorization]
         [AllowAnonymous]
         public Task<IHttpActionResult> AuthCallback()
         {
