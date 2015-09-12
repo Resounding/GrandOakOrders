@@ -65,11 +65,11 @@ export class OrderItemViewModel {
     isValid() {
         if (!this.Description)
             return false;
-        if (isNaN(parseFloat((this.Quantity || '').toString())))
+        if (isNaN(parseFloat((this.Quantity || '0').toString())))
             return false;
-        if (isNaN(parseFloat((this.UnitPrice || '').toString())))
+        if (isNaN(parseFloat((this.UnitPrice || '0').toString())))
             return false;
-        if (isNaN(parseFloat((this.TotalPrice || '').toString())))
+        if (isNaN(parseFloat((this.TotalPrice || '0').toString())))
             return false;
         return true;
     }
