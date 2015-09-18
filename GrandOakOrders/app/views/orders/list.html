@@ -11,14 +11,21 @@
 
         <div class="container">
             <ul class="collection">
-                <li class="collection-item avatar" repeat.for="order of orders">
+                <li class="collection-item avatar auto-height" repeat.for="order of orders">
                     <img src="/img/meal.png" class="circle" alt="Order">
-                    <span class="title">${order.HeaderText}</span>
-                    <p>
-                        <strong>${order.Inquiry.Summary}</strong>
-                        <br if.bind="order.DateAndTime">
-                        <span if.bind="order.DateAndTime">${order.DateAndTime}</span>
-                    </p>
+                    <div class="row">
+                        <span class="title">${order.HeaderText}</span>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <strong>${order.Inquiry.Summary}</strong>
+                            <br if.bind="order.DateAndTime">
+                            <span if.bind="order.DateAndTime">${order.DateAndTime}</span>
+                        </div>
+                        <ul class="col s5 bordered ${order.hasOrderingNotes ? '' : 'invisible'}">
+                            <li repeat.for="item of order.Items" show.bind="item.OrderingNotes">${item.OrderingNotes}</li>
+                        </ul>
+                    </div>
                     <a href="#/orders/${order.Id}" class="secondary-content">
                         <img src="/img/go.png" width="30px" height="30px" alt="Go">
                     </a>

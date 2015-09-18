@@ -1,6 +1,7 @@
 /// <reference path="../../../typings/jquery/jquery.d.ts" />
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
 /// <reference path="../../../typings/es6-promise/es6-promise.d.ts" />
+/// <reference path="../../../typings/toastr/toastr.d.ts" />
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
     switch (arguments.length) {
@@ -85,8 +86,8 @@ export let EditOrder = class {
         e.preventDefault();
         var $el = $(e.target), url = $el.attr('href');
         this.submit()
-            .then(() => window.open(url, '_blank')
-            .catch(() => console.log('Form was invalid')));
+            .then(() => window.open(url, '_blank'))
+            .catch(() => toastr.error('There are errors on the Order.'));
     }
     save(e) {
         e.preventDefault();
@@ -104,7 +105,10 @@ export let EditOrder = class {
         else {
             var order = this._model.toJSON();
             return this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                console.log(err);
+                toastr.error('There was a problem saving the order: ' + err);
+            });
         }
     }
 };

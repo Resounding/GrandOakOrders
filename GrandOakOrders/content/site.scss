@@ -1,4 +1,5 @@
 ﻿@import 'materialize/sass/materialize.scss';
+@import 'toastr.scss';
 
 .btn-block {
     width: 100%;
@@ -42,6 +43,19 @@ nav {
     bottom: 45px;
     right: 24px;
   }
+
+/* Lists */
+.collection .collection-item {
+
+    &.auto-height {
+        height: auto;
+    }
+
+    .row {
+        margin-bottom: 0;
+    }
+}
+/* end Lists */
 
 /* Collapsibles, with popout */
 .collapsible-header.double-header {
@@ -99,5 +113,11 @@ input[type=time].h5, input[type=date].h5, input[type=datetime-local].h5, input[t
 input[type=number].h5, input[type=search].h5, textarea.materialize-textarea.h5 {
     font-size: $h5-fontsize;
     line-height: 1.1*$h5-fontsize;
+}
+.invisible {
+    visibility: hidden;
+}
+.bordered {
+    border: solid 1px #808080
 }
 /* end utility*/

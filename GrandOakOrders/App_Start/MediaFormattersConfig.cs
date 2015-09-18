@@ -8,6 +8,7 @@ namespace GrandOakOrders
         public static void RegisterFormatters(MediaTypeFormatterCollection formatters)
         {
             formatters.Add(new PdfReportMediaFormatter());
+            formatters.Add(new WordDocumentReportMediaFormatter());
         }
     }
 }

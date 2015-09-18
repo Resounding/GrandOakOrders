@@ -105,6 +105,9 @@ namespace GrandOakOrders.Data.Repositories
                     i.TotalPrice = edit.TotalPrice;
                     i.KitchenNotes = edit.KitchenNotes;
                     i.OrderingNotes = edit.OrderingNotes;
+                    i.InvoiceNotes = edit.InvoiceNotes;
+                    i.ShowToKitchen = edit.ShowToKitchen;
+                    i.ShowOnInvoice = edit.ShowOnInvoice;
                 });
 
             var added = order.Items

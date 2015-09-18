@@ -18,6 +18,7 @@ export let App = class {
     }
     activate() {
         this.httpClientConfig.configure();
+        toastr.options.positionClass = 'toast-bottom-left';
     }
     configureRouter(config, router) {
         this.router = router;
@@ -27,8 +28,8 @@ export let App = class {
             { route: 'login', name: 'login', moduleId: './auth/login' },
             { route: ['/', 'home'], name: 'home', moduleId: './home/index', nav: true, auth: true },
             { route: 'inquiries', name: 'inquiries', moduleId: './inquiries/list', nav: true, auth: true },
-            { route: 'inquiries/new', name: 'new inquiry', moduleId: './inquiries/new', nav: false, auth: true },
-            { route: 'inquiries/:id', name: 'edit inquiry', moduleId: './inquiries/edit', nav: false, auth: true },
+            { route: 'inquiries/new', name: 'new inquiry', moduleId: './inquiries/detail', nav: false, auth: true },
+            { route: 'inquiries/:id', name: 'edit inquiry', moduleId: './inquiries/detail', nav: false, auth: true },
             { route: 'orders', name: 'orders', moduleId: './orders/list', nav: true, auth: true },
             { route: 'orders/:id', name: 'edit order', moduleId: './orders/edit', nav: false, auth: true }
         ]);

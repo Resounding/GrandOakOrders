@@ -47,15 +47,14 @@
             this.txtOrganization = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.txtContactPerson = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.txtEventDate = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
-            this.txtEventTime = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.txtSummary = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
-            this.lblDescription = new GrapeCity.ActiveReports.SectionReportModel.Label();
-            this.txtDescription = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.picLogo = new GrapeCity.ActiveReports.SectionReportModel.Picture();
-            this.line2 = new GrapeCity.ActiveReports.SectionReportModel.Line();
             this.lblTitle = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.lblAllergies = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.txtAllergyNotes = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
+            this.lblLocation = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            this.txtLocation = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
+            this.line2 = new GrapeCity.ActiveReports.SectionReportModel.Line();
             this.reportFooter = new GrapeCity.ActiveReports.SectionReportModel.ReportFooter();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKitchenNotes)).BeginInit();
@@ -72,14 +71,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtOrganization)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactPerson)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEventDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEventTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSummary)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblDescription)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblAllergies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAllergyNotes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblLocation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLocation)).BeginInit();
             // 
             // pageHeader
             // 
@@ -96,14 +94,14 @@
             this.lblQuantity,
             this.lblKitchenNotes,
             this.line1});
-            this.detail.Height = 0.8770834F;
+            this.detail.Height = 1F;
             this.detail.Name = "detail";
             this.detail.Format += new System.EventHandler(this.OnDetailFormat);
             // 
             // txtItemDescription
             // 
             this.txtItemDescription.DataField = "Description";
-            this.txtItemDescription.Height = 0.25F;
+            this.txtItemDescription.Height = 0.3F;
             this.txtItemDescription.Left = 1F;
             this.txtItemDescription.Name = "txtItemDescription";
             this.txtItemDescription.Style = "font-family: Segoe UI; font-size: 14pt; text-align: left";
@@ -114,17 +112,17 @@
             // txtKitchenNotes
             // 
             this.txtKitchenNotes.DataField = "KitchenNotes";
-            this.txtKitchenNotes.Height = 0.25F;
+            this.txtKitchenNotes.Height = 0.3F;
             this.txtKitchenNotes.Left = 0F;
             this.txtKitchenNotes.Name = "txtKitchenNotes";
             this.txtKitchenNotes.Style = "font-family: Segoe UI; font-size: 14pt; text-align: left";
             this.txtKitchenNotes.Text = "Kitchen Notes";
-            this.txtKitchenNotes.Top = 0.55F;
+            this.txtKitchenNotes.Top = 0.6F;
             this.txtKitchenNotes.Width = 6.5F;
             // 
             // lblItemDescription
             // 
-            this.lblItemDescription.Height = 0.25F;
+            this.lblItemDescription.Height = 0.3F;
             this.lblItemDescription.HyperLink = null;
             this.lblItemDescription.Left = 0F;
             this.lblItemDescription.Name = "lblItemDescription";
@@ -136,7 +134,7 @@
             // txtQuantity
             // 
             this.txtQuantity.DataField = "Quantity";
-            this.txtQuantity.Height = 0.25F;
+            this.txtQuantity.Height = 0.3F;
             this.txtQuantity.Left = 5.5F;
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.OutputFormat = resources.GetString("txtQuantity.OutputFormat");
@@ -147,7 +145,7 @@
             // 
             // lblQuantity
             // 
-            this.lblQuantity.Height = 0.25F;
+            this.lblQuantity.Height = 0.3F;
             this.lblQuantity.HyperLink = null;
             this.lblQuantity.Left = 4.5F;
             this.lblQuantity.Name = "lblQuantity";
@@ -158,7 +156,7 @@
             // 
             // lblKitchenNotes
             // 
-            this.lblKitchenNotes.Height = 0.25F;
+            this.lblKitchenNotes.Height = 0.3F;
             this.lblKitchenNotes.HyperLink = null;
             this.lblKitchenNotes.Left = 0F;
             this.lblKitchenNotes.Name = "lblKitchenNotes";
@@ -173,12 +171,12 @@
             this.line1.Left = 0F;
             this.line1.LineWeight = 1F;
             this.line1.Name = "line1";
-            this.line1.Top = 0.9F;
+            this.line1.Top = 0.95F;
             this.line1.Width = 6.5F;
             this.line1.X1 = 0F;
             this.line1.X2 = 6.5F;
-            this.line1.Y1 = 0.9F;
-            this.line1.Y2 = 0.9F;
+            this.line1.Y1 = 0.95F;
+            this.line1.Y2 = 0.95F;
             // 
             // pageFooter
             // 
@@ -217,143 +215,106 @@
             this.txtOrganization,
             this.txtContactPerson,
             this.txtEventDate,
-            this.txtEventTime,
             this.txtSummary,
-            this.lblDescription,
-            this.txtDescription,
             this.picLogo,
-            this.line2,
             this.lblTitle,
             this.lblAllergies,
-            this.txtAllergyNotes});
-            this.reportHeader.Height = 2.913195F;
+            this.txtAllergyNotes,
+            this.lblLocation,
+            this.txtLocation,
+            this.line2});
+            this.reportHeader.Height = 3.1F;
             this.reportHeader.Name = "reportHeader";
             this.reportHeader.Format += new System.EventHandler(this.OnReportHeaderFormat);
             // 
             // lblOrganization
             // 
-            this.lblOrganization.Height = 0.25F;
+            this.lblOrganization.Height = 0.3F;
             this.lblOrganization.HyperLink = null;
-            this.lblOrganization.Left = 0.25F;
+            this.lblOrganization.Left = 0.1F;
             this.lblOrganization.Name = "lblOrganization";
             this.lblOrganization.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblOrganization.Text = "Organization:";
-            this.lblOrganization.Top = 0.55F;
+            this.lblOrganization.Top = 0.648F;
             this.lblOrganization.Width = 1.75F;
             // 
             // lblContactPerson
             // 
-            this.lblContactPerson.Height = 0.25F;
+            this.lblContactPerson.Height = 0.3F;
             this.lblContactPerson.HyperLink = null;
-            this.lblContactPerson.Left = 0.25F;
+            this.lblContactPerson.Left = 0.1F;
             this.lblContactPerson.Name = "lblContactPerson";
             this.lblContactPerson.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblContactPerson.Text = "Contact Person:";
-            this.lblContactPerson.Top = 0.9F;
+            this.lblContactPerson.Top = 0.998F;
             this.lblContactPerson.Width = 1.75F;
             // 
             // lblEventDateTime
             // 
-            this.lblEventDateTime.Height = 0.25F;
+            this.lblEventDateTime.Height = 0.3F;
             this.lblEventDateTime.HyperLink = null;
-            this.lblEventDateTime.Left = 0.25F;
+            this.lblEventDateTime.Left = 0.1F;
             this.lblEventDateTime.Name = "lblEventDateTime";
             this.lblEventDateTime.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblEventDateTime.Text = "Event Date / Time:";
-            this.lblEventDateTime.Top = 1.25F;
+            this.lblEventDateTime.Top = 1.398F;
             this.lblEventDateTime.Width = 1.75F;
             // 
             // lblSummary
             // 
-            this.lblSummary.Height = 0.25F;
+            this.lblSummary.Height = 0.3F;
             this.lblSummary.HyperLink = null;
-            this.lblSummary.Left = 0.25F;
+            this.lblSummary.Left = 0.1F;
             this.lblSummary.Name = "lblSummary";
             this.lblSummary.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblSummary.Text = "Summary:";
-            this.lblSummary.Top = 1.75F;
+            this.lblSummary.Top = 2.198F;
             this.lblSummary.Width = 1.75F;
             // 
             // txtOrganization
             // 
             this.txtOrganization.DataField = "Inquiry.Organization";
-            this.txtOrganization.Height = 0.25F;
+            this.txtOrganization.Height = 0.3F;
             this.txtOrganization.Left = 2F;
             this.txtOrganization.Name = "txtOrganization";
             this.txtOrganization.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtOrganization.Text = "Organization";
-            this.txtOrganization.Top = 0.55F;
-            this.txtOrganization.Width = 3F;
+            this.txtOrganization.Top = 0.648F;
+            this.txtOrganization.Width = 4.5F;
             // 
             // txtContactPerson
             // 
             this.txtContactPerson.DataField = "Inquiry.ContactPerson";
-            this.txtContactPerson.Height = 0.25F;
+            this.txtContactPerson.Height = 0.3F;
             this.txtContactPerson.Left = 2F;
             this.txtContactPerson.Name = "txtContactPerson";
             this.txtContactPerson.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtContactPerson.Text = "Contact Person";
-            this.txtContactPerson.Top = 0.9F;
-            this.txtContactPerson.Width = 3F;
+            this.txtContactPerson.Top = 0.998F;
+            this.txtContactPerson.Width = 4.5F;
             // 
             // txtEventDate
             // 
-            this.txtEventDate.DataField = "Inquiry.EventDate";
-            this.txtEventDate.Height = 0.25F;
+            this.txtEventDate.Height = 0.3F;
             this.txtEventDate.Left = 2F;
             this.txtEventDate.Name = "txtEventDate";
             this.txtEventDate.OutputFormat = resources.GetString("txtEventDate.OutputFormat");
-            this.txtEventDate.Style = "font-family: Segoe UI; font-size: 14pt";
-            this.txtEventDate.Text = "Monday, 15 September, 2015";
-            this.txtEventDate.Top = 1.25F;
-            this.txtEventDate.Width = 3F;
-            // 
-            // txtEventTime
-            // 
-            this.txtEventTime.DataField = "Inquiry.EventTime";
-            this.txtEventTime.Height = 0.25F;
-            this.txtEventTime.Left = 2F;
-            this.txtEventTime.Name = "txtEventTime";
-            this.txtEventTime.OutputFormat = resources.GetString("txtEventTime.OutputFormat");
-            this.txtEventTime.Style = "font-family: Segoe UI; font-size: 14pt";
-            this.txtEventTime.Text = "10:00 AM";
-            this.txtEventTime.Top = 1.5F;
-            this.txtEventTime.Width = 3F;
+            this.txtEventDate.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
+            this.txtEventDate.Text = "Monday, 15 September, 2015 10:00 AM";
+            this.txtEventDate.Top = 1.398F;
+            this.txtEventDate.Width = 4.5F;
             // 
             // txtSummary
             // 
             this.txtSummary.DataField = "Inquiry.Summary";
-            this.txtSummary.Height = 0.25F;
+            this.txtSummary.Height = 0.3F;
             this.txtSummary.Left = 2F;
             this.txtSummary.Name = "txtSummary";
             this.txtSummary.OutputFormat = resources.GetString("txtSummary.OutputFormat");
             this.txtSummary.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtSummary.Text = "Summary";
-            this.txtSummary.Top = 1.75F;
+            this.txtSummary.Top = 2.198F;
             this.txtSummary.Width = 4.5F;
-            // 
-            // lblDescription
-            // 
-            this.lblDescription.Height = 0.25F;
-            this.lblDescription.HyperLink = null;
-            this.lblDescription.Left = 0.25F;
-            this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
-            this.lblDescription.Text = "Description:";
-            this.lblDescription.Top = 2.1F;
-            this.lblDescription.Width = 1.75F;
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.DataField = "Inquiry.Description";
-            this.txtDescription.Height = 0.25F;
-            this.txtDescription.Left = 2F;
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.OutputFormat = resources.GetString("txtDescription.OutputFormat");
-            this.txtDescription.Style = "font-family: Segoe UI; font-size: 14pt";
-            this.txtDescription.Text = "Description";
-            this.txtDescription.Top = 2.1F;
-            this.txtDescription.Width = 4.5F;
             // 
             // picLogo
             // 
@@ -366,51 +327,73 @@
             this.picLogo.Top = 0F;
             this.picLogo.Width = 0.722F;
             // 
+            // lblTitle
+            // 
+            this.lblTitle.Height = 0.49F;
+            this.lblTitle.HyperLink = null;
+            this.lblTitle.Left = 0F;
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Style = "font-family: Segoe UI; font-size: 24pt; font-weight: bold; text-align: center";
+            this.lblTitle.Text = "Event Information Sheet";
+            this.lblTitle.Top = 0F;
+            this.lblTitle.Width = 5.778F;
+            // 
+            // lblAllergies
+            // 
+            this.lblAllergies.Height = 0.3F;
+            this.lblAllergies.HyperLink = null;
+            this.lblAllergies.Left = 0.1F;
+            this.lblAllergies.Name = "lblAllergies";
+            this.lblAllergies.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
+            this.lblAllergies.Text = "Allergy Notes:";
+            this.lblAllergies.Top = 2.598F;
+            this.lblAllergies.Width = 1.75F;
+            // 
+            // txtAllergyNotes
+            // 
+            this.txtAllergyNotes.Height = 0.3F;
+            this.txtAllergyNotes.Left = 2F;
+            this.txtAllergyNotes.Name = "txtAllergyNotes";
+            this.txtAllergyNotes.OutputFormat = resources.GetString("txtAllergyNotes.OutputFormat");
+            this.txtAllergyNotes.Style = "font-family: Segoe UI; font-size: 14pt";
+            this.txtAllergyNotes.Text = "Allergy Notes";
+            this.txtAllergyNotes.Top = 2.598F;
+            this.txtAllergyNotes.Width = 4.5F;
+            // 
+            // lblLocation
+            // 
+            this.lblLocation.Height = 0.3F;
+            this.lblLocation.HyperLink = null;
+            this.lblLocation.Left = 0.1F;
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
+            this.lblLocation.Text = "Location:";
+            this.lblLocation.Top = 1.798F;
+            this.lblLocation.Width = 1.75F;
+            // 
+            // txtLocation
+            // 
+            this.txtLocation.Height = 0.3F;
+            this.txtLocation.Left = 2F;
+            this.txtLocation.Name = "txtLocation";
+            this.txtLocation.OutputFormat = resources.GetString("txtLocation.OutputFormat");
+            this.txtLocation.Style = "font-family: Segoe UI; font-size: 14pt";
+            this.txtLocation.Text = "Location";
+            this.txtLocation.Top = 1.798F;
+            this.txtLocation.Width = 4.5F;
+            // 
             // line2
             // 
             this.line2.Height = 0F;
             this.line2.Left = 0F;
             this.line2.LineWeight = 1F;
             this.line2.Name = "line2";
-            this.line2.Top = 2.8F;
+            this.line2.Top = 3F;
             this.line2.Width = 6.5F;
             this.line2.X1 = 0F;
             this.line2.X2 = 6.5F;
-            this.line2.Y1 = 2.8F;
-            this.line2.Y2 = 2.8F;
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.Height = 0.344F;
-            this.lblTitle.HyperLink = null;
-            this.lblTitle.Left = 0F;
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Style = "font-family: Segoe UI; font-size: 16pt; font-weight: bold; text-align: center";
-            this.lblTitle.Text = "Grand Oak Culinary Order Sheet";
-            this.lblTitle.Top = 0F;
-            this.lblTitle.Width = 5.778F;
-            // 
-            // lblAllergies
-            // 
-            this.lblAllergies.Height = 0.25F;
-            this.lblAllergies.HyperLink = null;
-            this.lblAllergies.Left = 0.25F;
-            this.lblAllergies.Name = "lblAllergies";
-            this.lblAllergies.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
-            this.lblAllergies.Text = "Allergy Notes:";
-            this.lblAllergies.Top = 2.45F;
-            this.lblAllergies.Width = 1.75F;
-            // 
-            // txtAllergyNotes
-            // 
-            this.txtAllergyNotes.Height = 0.25F;
-            this.txtAllergyNotes.Left = 1.875F;
-            this.txtAllergyNotes.Name = "txtAllergyNotes";
-            this.txtAllergyNotes.OutputFormat = resources.GetString("txtAllergyNotes.OutputFormat");
-            this.txtAllergyNotes.Style = "font-family: Segoe UI; font-size: 14pt";
-            this.txtAllergyNotes.Text = "Allergy Notes";
-            this.txtAllergyNotes.Top = 2.45F;
-            this.txtAllergyNotes.Width = 4.5F;
+            this.line2.Y1 = 3F;
+            this.line2.Y2 = 3F;
             // 
             // reportFooter
             // 
@@ -426,6 +409,7 @@
             this.PageSettings.Margins.Top = 0.5F;
             this.PageSettings.PaperHeight = 11F;
             this.PageSettings.PaperWidth = 8.5F;
+            this.PrintWidth = 6.802F;
             this.Sections.Add(this.reportHeader);
             this.Sections.Add(this.pageHeader);
             this.Sections.Add(this.detail);
@@ -452,14 +436,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtOrganization)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactPerson)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEventDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEventTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSummary)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblDescription)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDescription)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblAllergies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAllergyNotes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblLocation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLocation)).EndInit();
 
         }
         #endregion
@@ -473,10 +456,7 @@
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtOrganization;
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtContactPerson;
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtEventDate;
-        private GrapeCity.ActiveReports.SectionReportModel.TextBox txtEventTime;
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtSummary;
-        private GrapeCity.ActiveReports.SectionReportModel.Label lblDescription;
-        private GrapeCity.ActiveReports.SectionReportModel.TextBox txtDescription;
         private GrapeCity.ActiveReports.SectionReportModel.ReportFooter reportFooter;
         private GrapeCity.ActiveReports.SectionReportModel.ReportInfo infoPageNumber;
         private GrapeCity.ActiveReports.SectionReportModel.ReportInfo infoPrintedDateTime;
@@ -487,9 +467,11 @@
         private GrapeCity.ActiveReports.SectionReportModel.Label lblQuantity;
         private GrapeCity.ActiveReports.SectionReportModel.Label lblKitchenNotes;
         private GrapeCity.ActiveReports.SectionReportModel.Line line1;
-        private GrapeCity.ActiveReports.SectionReportModel.Line line2;
         private GrapeCity.ActiveReports.SectionReportModel.Label lblTitle;
         private GrapeCity.ActiveReports.SectionReportModel.Label lblAllergies;
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtAllergyNotes;
+        private GrapeCity.ActiveReports.SectionReportModel.Label lblLocation;
+        private GrapeCity.ActiveReports.SectionReportModel.TextBox txtLocation;
+        private GrapeCity.ActiveReports.SectionReportModel.Line line2;
     }
 }

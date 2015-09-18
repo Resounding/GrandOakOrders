@@ -58,6 +58,9 @@ namespace GrandOakOrders.Data.Repositories
             dbinquiry.Description = inquiry.Description;
             dbinquiry.OutcomeId = inquiry.OutcomeId;
             dbinquiry.ClosureComments = inquiry.ClosureComments;
+            dbinquiry.IsPickup = inquiry.IsPickup;
+            dbinquiry.Location = inquiry.Location;
+            dbinquiry.LocationAddress = inquiry.LocationAddress;
             dbinquiry.UpdatedAt = DateTime.Now;
             dbinquiry.UpdatedBy = who;
             await _context.SaveChangesAsync();

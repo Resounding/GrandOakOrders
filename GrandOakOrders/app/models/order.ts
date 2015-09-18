@@ -8,7 +8,7 @@ import {Container} from 'aurelia-dependency-injection';
 import _ from 'underscore';
 import moment from 'moment';
 
-const DATE_FORMAT: string = 'dddd MMMM D, YYYY';
+const DATE_FORMAT: string = 'dddd MMM D, YYYY';
 const TIME_FORMAT: string = 'h:mm A';
 
 export interface OrderPojo {
@@ -49,6 +49,9 @@ export interface OrderItemPojo {
     TotalPrice: number;
     KitchenNotes: string;
     OrderingNotes: string;
+    InvoiceNotes: string;
+    ShowToKitchen: boolean;
+    ShowOnInvoice: boolean;
     SortOrder: number;
     CreatedBy?: string;
     CreatedAt?: Date;
@@ -62,6 +65,9 @@ export class OrderItemViewModel {
     Description: string = '';        
     KitchenNotes: string = '';
     OrderingNotes: string = '';
+    InvoiceNotes: string = '';
+    ShowToKitchen: boolean = true;
+    ShowOnInvoice: boolean = true;
     SortOrder: number = 1;
     CreatedBy: string;
     CreatedAt: Date;
@@ -122,9 +128,9 @@ export class OrderItemViewModel {
 
     isValid(): boolean {
         if (!this.Description) return false;
-        if (isNaN(parseFloat((this.Quantity || '').toString()))) return false;
-        if (isNaN(parseFloat((this.UnitPrice || '').toString()))) return false;
-        if (isNaN(parseFloat((this.TotalPrice || '').toString()))) return false;
+        if (isNaN(parseFloat((this.Quantity || '0').toString()))) return false;
+        if (isNaN(parseFloat((this.UnitPrice || '0').toString()))) return false;
+        if (isNaN(parseFloat((this.TotalPrice || '0').toString()))) return false;
 
         return true;
     }
@@ -137,6 +143,9 @@ export class OrderItemViewModel {
             Description: this.Description,
             KitchenNotes: this.KitchenNotes,
             OrderingNotes: this.OrderingNotes,
+            InvoiceNotes: this.InvoiceNotes,
+            ShowToKitchen: this.ShowToKitchen,
+            ShowOnInvoice: this.ShowOnInvoice,
             Quantity: this._quantity,
             UnitPrice: this._unitPrice,
             TotalPrice: this._totalPrice
@@ -169,6 +178,7 @@ export class OrderViewModel implements OrderPojo {
     UpdatedAt: Date;
 
     HeaderText: string;
+    EventDate: Date = null;
     DateAndTime: string = '';
     CreatedDateAndTime: string = '';
     UpdatedDateAndTime: string = '';
@@ -211,7 +221,9 @@ export class OrderViewModel implements OrderPojo {
             this.DateAndTime += ` @ ${this.Inquiry.EventTime}`;
         }
 
-        var createdAt = moment(model.CreatedAt),
+        var eventDate = model.Inquiry.EventDate ? moment(model.Inquiry.EventDate) : null,
+            eventTime = model.Inquiry.EventTime ? moment(model.Inquiry.EventTime, TIME_FORMAT) : null,
+            createdAt = moment(model.CreatedAt),
             createdDate = createdAt.format(DATE_FORMAT),
             createdTime = createdAt.format(TIME_FORMAT),
             updatedAt = moment(model.UpdatedAt),
@@ -219,6 +231,12 @@ export class OrderViewModel implements OrderPojo {
             updatedTime = updatedAt.format(TIME_FORMAT);
         this.CreatedDateAndTime = `${createdDate} @ ${createdTime}`;
         this.UpdatedDateAndTime = `${updatedDate} @ ${updatedTime}`;
+        if (eventDate) {            
+            if (eventTime) {
+                eventDate.add(eventTime.hours(), 'hours').add(eventTime.minutes(), 'minutes');
+            }
+            this.EventDate = eventDate.toDate();
+        }
     }
 
     get SubTotal(): number {

@@ -11,16 +11,29 @@
 
         <div class="container">
             <ul class="collection">
-                <li class="collection-item avatar" repeat.for="request of requests">
+                <li class="collection-item avatar auto-height" repeat.for="request of requests">
                     <img src="/img/phone.png" class="circle" alt="Phone">
-                    <span class="title">${request.title}</span>
-                    <p>
-                        <strong>${request.summary}</strong>
-                        <br if.bind="request.date">
-                        <span if.bind="request.date">${request.date}</span>
-                        <br>
+                    <div class="row">
+                        <span class="title">${request.title}</span>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <strong>
+                                ${request.summary}
+                                <span show.bind="request.people">(${request.people} people)</span>
+                            </strong>
+                            <br if.bind="request.date">
+                            <span if.bind="request.date">${request.date}</span>
+                        </div>
+                        <div class="col s6">
+                            <span if.bind="request.location">${request.location}</span>
+                            <br if.bind="request.location && request.address">
+                            <span if.bind="request.address">${request.address}</span>
+                        </div>
+                    </div>
+                    <div class="row">
                         <em>Entered by ${request.createdBy} on ${request.createdDate} @ ${request.createdTime}</em>
-                    </p>
+                    </div>
                     <a href="#/inquiries/${request.id}" class="secondary-content">
                         <img src="/img/go.png" width="30px" height="30px" alt="Go">
                     </a>

@@ -15,6 +15,9 @@ namespace GrandOakOrders.Data.Entities
         public bool IsQuoteRequired { get; set; }
         public string ClosureComments { get; set; }
         public string OutcomeId { get; set; }
+        public string Location { get; set; }
+        public string LocationAddress { get; set; }
+        public bool IsPickup { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
         public string UpdatedBy { get; set; }

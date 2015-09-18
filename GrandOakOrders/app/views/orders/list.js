@@ -19,9 +19,19 @@ export let OrdersList = class {
     constructor(httpClient) {
         this.httpClient = httpClient;
         this.orders = [];
+        this.hasOrderingNotes = false;
         this.httpClient.get('/api/orders')
             .then((res) => {
-            this.orders = _.map(res.content, (order) => new OrderViewModel(order));
+            this.orders = _.chain(res.content)
+                .map((order) => new OrderViewModel(order))
+                .sortBy((order) => {
+                console.log(order.EventDate);
+                return order.EventDate;
+            })
+                .value();
+            _.each(this.orders, (order) => {
+                order.hasOrderingNotes = _.any(order.Items, (item) => item.OrderingNotes);
+            });
         }, (err) => {
             console.log(err);
         });

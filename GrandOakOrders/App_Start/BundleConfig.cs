@@ -22,6 +22,7 @@ namespace GrandOakOrders
             jsBundle.Include("~/jspm_packages/github/amsul/pickadate.js@3.5.6/lib/picker.date.js");
             jsBundle.Include("~/jspm_packages/github/amsul/pickadate.js@3.5.6/lib/picker.time.js");
             jsBundle.Include("~/Scripts/materialize/materialize.js");
+            jsBundle.Include("~/Scripts/toastr.js");
             jsBundle.Include("~/jspm_packages/system.js");
             bundles.Add(jsBundle);
         }

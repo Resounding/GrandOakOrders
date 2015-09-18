@@ -4,7 +4,7 @@
 import moment from 'moment';
 import _ from 'underscore';
 
-const DATE_FORMAT: string = 'dddd MMMM D, YYYY';
+const DATE_FORMAT: string = 'dddd MMM D, YYYY';
 const TIME_FORMAT: string = 'h:mm A';
 
 export interface InquiryPojo {
@@ -19,6 +19,9 @@ export interface InquiryPojo {
     IsQuoteRequired: boolean;
     ClosureComments?: string;
     OutcomeId: string;
+    IsPickup: boolean;
+    Location: string;
+    LocationAddress: string;
     CreatedBy?: string;
     CreatedAt?: Date;
     UpdatedBy?: string;
@@ -51,6 +54,9 @@ export class InquiryViewModel implements InquiryPojo {
     ClosureComments: string = '';
     ContactPerson: string = '';
     People: number = null;
+    IsPickup: boolean = false;
+    Location: string = '';
+    LocationAddress: string = '';
     // Properties with validation
     get EventDate(): string {
         return this._event_date;
@@ -115,7 +121,10 @@ export class InquiryViewModel implements InquiryPojo {
             Description: this.Description,
             IsQuoteRequired: this.IsQuoteRequired,
             ClosureComments: this.ClosureComments,
-            OutcomeId: this.OutcomeId || null
+            OutcomeId: this.OutcomeId || null,
+            IsPickup: this.IsPickup,
+            Location: this.Location,
+            LocationAddress: this.LocationAddress
         };
         return json;
     }

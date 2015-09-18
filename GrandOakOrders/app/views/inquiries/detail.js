@@ -1,4 +1,5 @@
 /// <reference path="../../../typings/jquery/jquery.d.ts" />
+/// <reference path="../../../typings/underscore/underscore.d.ts" />
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
     switch (arguments.length) {
@@ -15,22 +16,32 @@ import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
 import { InquiryViewModel } from '../../models/inquiry';
 export let NewInquiry = class {
-    constructor(httpClient, router) {
+    constructor(httpClient, router, element) {
         this.httpClient = httpClient;
         this.router = router;
+        this.element = element;
         this._model = new InquiryViewModel();
         this._submitted = false;
     }
-    activate() {
+    activate(params) {
+        if (params.id) {
+            this.httpClient.get(`/api/inquiries/${params.id}`)
+                .then((res) => {
+                var inquiry = res.content;
+                this._model = new InquiryViewModel(inquiry);
+                var isNew = this._model.Id;
+            });
+        }
         window.setTimeout(() => {
-            $('.datepicker')
+            var $datepicker = $('#date', this.element), $timepicker = $('.timepicker', this.element), $select = $('select', this.element);
+            $datepicker
                 .pickadate({
                 format: 'dddd mmmm d, yyyy'
             })
                 .on('change', (e) => {
                 this._model.EventDate = e.target.value;
             });
-            $('.timepicker')
+            $timepicker
                 .pickatime({
                 format: 'h:i A',
                 formatLabel: 'h:i A'
@@ -38,6 +49,7 @@ export let NewInquiry = class {
                 .on('change', (e) => {
                 this._model.EventTime = e.target.value;
             });
+            $select.material_select();
             $('[autofocus]').focus();
         }, 500);
     }
@@ -48,16 +60,32 @@ export let NewInquiry = class {
         }
         else {
             var inquiry = this._model.toJSON();
-            this.httpClient.post('/api/inquiries', inquiry)
-                .then((response) => {
-                console.log(response);
-                this.router.navigateToRoute('inquiries');
-            });
+            if (inquiry.Id) {
+                // edit
+                this.httpClient.put(`/api/inquiries/${inquiry.Id}`, inquiry)
+                    .then((response) => {
+                    console.log(response);
+                    if (response.statusCode == 201) {
+                        this.router.navigateToRoute('edit order', { id: response.content.Id });
+                    }
+                    else {
+                        this.router.navigateToRoute('inquiries');
+                    }
+                });
+            }
+            else {
+                // create
+                this.httpClient.post('/api/inquiries', inquiry)
+                    .then((response) => {
+                    console.log(response);
+                    this.router.navigateToRoute('inquiries');
+                });
+            }
         }
     }
 };
 NewInquiry = __decorate([
-    inject(HttpClient, Router), 
-    __metadata('design:paramtypes', [(typeof (_a = typeof HttpClient !== 'undefined' && HttpClient) === 'function' && _a) || Object, (typeof (_b = typeof Router !== 'undefined' && Router) === 'function' && _b) || Object])
+    inject(HttpClient, Router, Element), 
+    __metadata('design:paramtypes', [(typeof (_a = typeof HttpClient !== 'undefined' && HttpClient) === 'function' && _a) || Object, (typeof (_b = typeof Router !== 'undefined' && Router) === 'function' && _b) || Object, Element])
 ], NewInquiry);
 var _a, _b;

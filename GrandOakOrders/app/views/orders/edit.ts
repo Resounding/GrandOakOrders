@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../../typings/jquery/jquery.d.ts" />
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
 /// <reference path="../../../typings/es6-promise/es6-promise.d.ts" />
+/// <reference path="../../../typings/toastr/toastr.d.ts" />
 
 import {inject} from 'aurelia-framework';
 import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
@@ -98,8 +99,8 @@ export class EditOrder {
             url = $el.attr('href');
 
         this.submit()
-            .then(() => window.open(url, '_blank')
-            .catch(() => console.log('Form was invalid'));
+            .then(() => window.open(url, '_blank'))
+            .catch(() => toastr.error('There are errors on the Order.'));
     }
 
     save(e) {
@@ -119,7 +120,10 @@ export class EditOrder {
         } else {
             var order = this._model.toJSON();
             return this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                    console.log(err);
+                    toastr.error('There was a problem saving the order: ' + err);
+                });
         }
     }
 }

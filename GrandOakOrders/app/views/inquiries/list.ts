@@ -20,9 +20,12 @@ export class InquiriesList {
                             id: request.Id,
                             title: request.Organization,
                             summary: request.Summary,
+                            people: request.People,
                             date: '',
                             createdDate: createdAt.format(DATE_FORMAT),
                             createdTime: createdAt.format(TIME_FORMAT),
+                            location: request.Location,
+                            address: request.LocationAddress,
                             createdBy: request.CreatedBy
                         };
 

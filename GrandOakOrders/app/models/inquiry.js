@@ -2,7 +2,7 @@
 ///<reference path="../../typings/underscore/underscore.d.ts" />
 import moment from 'moment';
 import _ from 'underscore';
-const DATE_FORMAT = 'dddd MMMM D, YYYY';
+const DATE_FORMAT = 'dddd MMM D, YYYY';
 const TIME_FORMAT = 'h:mm A';
 export class InquiryViewModel {
     constructor(model = null) {
@@ -18,6 +18,9 @@ export class InquiryViewModel {
         this.ClosureComments = '';
         this.ContactPerson = '';
         this.People = null;
+        this.IsPickup = false;
+        this.Location = '';
+        this.LocationAddress = '';
         if (model) {
             _.extend(this, model);
             if (model.EventDate) {
@@ -86,7 +89,10 @@ export class InquiryViewModel {
             Description: this.Description,
             IsQuoteRequired: this.IsQuoteRequired,
             ClosureComments: this.ClosureComments,
-            OutcomeId: this.OutcomeId || null
+            OutcomeId: this.OutcomeId || null,
+            IsPickup: this.IsPickup,
+            Location: this.Location,
+            LocationAddress: this.LocationAddress
         };
         return json;
     }

@@ -1,0 +1,98 @@
+<template>
+	<form class="container" name="newInquiryForm" ref="newInquiryForm">
+        <div class="row">
+            <div class="col s12">
+                <h2 show.bind="!_model.Id">New Inquiry</h2>
+                <h2 show.bind="_model.Id">Edit Inquiry #${_model.Id}</h2>
+            </div>
+        </div>
+		<div class="row">
+			<div class="col s12">
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="organization" type="text" class="validate ${(_submitted && !_model.Organization) ? 'invalid' : ''}" value.bind="_model.Organization" required autofocus>
+						<label for="organization" class="active" data-error="Organization is required" data-success="">Organization:</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="caller" type="text" value.bind="_model.ContactPerson">
+						<label for="caller" class="active">Person Calling:</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="date" ref="datepicker" type="text" class="datepicker"
+                               value.bind="_model.EventDate">
+						<label for="date" class="active">Event Date:</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="time" type="text" class="timepicker"
+                               value.bind="_model.EventTime">
+						<label for="time" class="active">Event Time:</label>
+					</div>
+				</div>
+                <div class="row">                    
+                    <div class="input-field col s12">
+                        <select id="pickup" class="browser-default" value.bind="_model.IsPickup">
+                            <option value="false">Delivery</option>
+                            <option value="true">Pickup</option>
+                        </select>
+                        <label for="pickup" class="active">Pickup / Delivery:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="location" type="text" value.bind="_model.Location" disabled.bind="_model.IsPickup=='true'">
+                        <label for="location" class="active">Location:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="time" type="text" value.bind="_model.LocationAddress" disabled.bind="_model.IsPickup=='true'">
+                        <label for="time" class="active">Address:</label>
+                    </div>
+                </div>
+				<div class="row">
+					<div class="input-field col s2">
+						<input id="people" type="number" class="validate" min="0" value.bind="_model.People">
+						<label for="people" class="active"># People:</label>
+					</div>
+					<div class="input-field col s10">
+						<input id="summary" type="text" value.bind="_model.Summary" class="validate ${_submitted && !_model.Summary ? 'invalid' : ''}" required>
+						<label for="summary" class="active" data-error="Summary is required">Summary:</label>
+					</div>
+				</div>
+				<div class="row">
+					<p class="col s12">
+						<input type="checkbox" id="quote" checked.bind="_model.IsQuoteRequired">
+						<label for="quote">Quote Required?</label>
+					</p>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea id="description" class="materialize-textarea" value.bind="_model.Description"></textarea>
+						<label for="caller" class="active">Description:</label>
+					</div>
+				</div>
+				<div class="row">
+                    <div class="input-field col s6">
+                        <select id="outcome" class="browser-default" value.bind="_model.OutcomeId">
+                            <option value>Choose Outcome</option>
+                            <option repeat.for="option of _model.outcomeOptions" value.bind="option.value">${option.text}</option>
+                        </select>
+                        <label for="outcome" class="active">Outcome:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <div show.bind="_model.isCloseOutcome">
+                            <input id="closurecomments" type="text" value.bind="_model.ClosureComments">
+                            <label for="closurecomments" class="active">Reason for Closing:</label>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <div class="right">
+                            <a class="btn waves-effect waves-light white blue-text" href="#/inquiries">Cancel</a>
+                            <a class="btn waves-effect waves-light blue" show.bind="_model.outcomeCanCreateOrder" click.trigger="save($event)">Create Order</a>
+                            <a class="btn waves-effect waves-light green" show.bind="_model.outcomeCanSave" click.trigger="save($event)">Save</a>
+                            <a class="btn waves-effect waves-light red" show.bind="_model.isCloseOutcome" click.trigger="save($event)">Close Inquiry</a>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</form>
+</template>

@@ -17,18 +17,28 @@
                 <input id="qty_${item.Id}" type="text" placeholder="$0.00" value.bind="item.Quantity" class="text-right ${_submitted && isNaN(item.Quantity) ? 'invalid' : ''}" required>
                 <label for="qty_${item.Id}" class="active">Qty</label>
             </div>
-            <div class="col s4 input-field">
+            <div class="col s4 input-field ${item.ShowOnInvoice ? '' : 'invisible'}">
                 <input id="unit_${item.Id}" type="text" placeholder="$0.00" value.bind="item.UnitPrice" class="text-right ${_submitted && isNaN(item.UnitPrice) ? 'invalid' : ''}" currency required>
                 <label for="unit_${item.Id}" class="active">Unit $</label>
             </div>
-            <div class="col s4 input-field">
+            <div class="col s4 input-field ${item.ShowOnInvoice ? '' : 'invisible'}">
                 <input id="total_${item.Id}" type="text" placeholder="$0.00" value.bind="item.TotalPrice" class="text-right ${_submitted && isNaN(item.TotalPrice) ? 'invalid' : ''}" currency required>
                 <label for="total_${item.Id}" class="active">Tot $</label>
             </div>
         </div>
+        <div class="col s10 offset-s2">
+            <div class="col s6 input-field">
+                <input id="show_to_kitchen_${item.Id}" type="checkbox" checked.bind="item.ShowToKitchen">
+                <label for="show_to_kitchen_${item.Id}" class="active">Show to Kitchen</label>
+            </div>
+            <div class="col s6 input-field">
+                <input id="show_on_invoice_${item.Id}" type="checkbox" checked.bind="item.ShowOnInvoice">
+                <label for="show_on_invoice_${item.Id}" class="active">Show on Invoice</label>
+            </div>
+        </div>
         <div class="col s12" goc-notes>
             <ul class="collapsible" data-collapsible="accordion">
-                <li>
+                <li show.bind="item.ShowToKitchen">
                     <div class="collapsible-header">Kitchen Notes: ${item.KitchenNotes}</div>
                     <div class="collapsible-body">
                         <textarea class="materialize-textarea" value.bind="item.KitchenNotes" style="margin-left: 20px; margin-right: 20px; width: calc(100% - 40px);"></textarea>
@@ -38,6 +48,12 @@
                     <div class="collapsible-header">Ordering Notes: ${item.OrderingNotes}</div>
                     <div class="collapsible-body">
                         <textarea class="materialize-textarea" value.bind="item.OrderingNotes" style="margin-left: 20px; margin-right: 20px; width: calc(100% - 40px);"></textarea>
+                    </div>
+                </li>
+                <li show.bind="item.ShowOnInvoice">
+                    <div class="collapsible-header">Invoice Notes: ${item.InvoiceNotes}</div>
+                    <div class="collapsible-body">
+                        <textarea class="materialize-textarea" value.bind="item.InvoiceNotes" style="margin-left: 20px; margin-right: 20px; width: calc(100% - 40px);"></textarea>
                     </div>
                 </li>
             </ul>

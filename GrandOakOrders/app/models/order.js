@@ -6,7 +6,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { Container } from 'aurelia-dependency-injection';
 import _ from 'underscore';
 import moment from 'moment';
-const DATE_FORMAT = 'dddd MMMM D, YYYY';
+const DATE_FORMAT = 'dddd MMM D, YYYY';
 const TIME_FORMAT = 'h:mm A';
 export class OrderItemViewModel {
     constructor(model, events) {
@@ -14,6 +14,9 @@ export class OrderItemViewModel {
         this.Description = '';
         this.KitchenNotes = '';
         this.OrderingNotes = '';
+        this.InvoiceNotes = '';
+        this.ShowToKitchen = true;
+        this.ShowOnInvoice = true;
         this.SortOrder = 1;
         this._quantity = 1;
         this._unitPrice = 0;
@@ -81,6 +84,9 @@ export class OrderItemViewModel {
             Description: this.Description,
             KitchenNotes: this.KitchenNotes,
             OrderingNotes: this.OrderingNotes,
+            InvoiceNotes: this.InvoiceNotes,
+            ShowToKitchen: this.ShowToKitchen,
+            ShowOnInvoice: this.ShowOnInvoice,
             Quantity: this._quantity,
             UnitPrice: this._unitPrice,
             TotalPrice: this._totalPrice
@@ -89,6 +95,7 @@ export class OrderItemViewModel {
 }
 export class OrderViewModel {
     constructor(model) {
+        this.EventDate = null;
         this.DateAndTime = '';
         this.CreatedDateAndTime = '';
         this.UpdatedDateAndTime = '';
@@ -116,9 +123,15 @@ export class OrderViewModel {
         if (this.Inquiry.EventTime) {
             this.DateAndTime += ` @ ${this.Inquiry.EventTime}`;
         }
-        var createdAt = moment(model.CreatedAt), createdDate = createdAt.format(DATE_FORMAT), createdTime = createdAt.format(TIME_FORMAT), updatedAt = moment(model.UpdatedAt), updatedDate = updatedAt.format(DATE_FORMAT), updatedTime = updatedAt.format(TIME_FORMAT);
+        var eventDate = model.Inquiry.EventDate ? moment(model.Inquiry.EventDate) : null, eventTime = model.Inquiry.EventTime ? moment(model.Inquiry.EventTime, TIME_FORMAT) : null, createdAt = moment(model.CreatedAt), createdDate = createdAt.format(DATE_FORMAT), createdTime = createdAt.format(TIME_FORMAT), updatedAt = moment(model.UpdatedAt), updatedDate = updatedAt.format(DATE_FORMAT), updatedTime = updatedAt.format(TIME_FORMAT);
         this.CreatedDateAndTime = `${createdDate} @ ${createdTime}`;
         this.UpdatedDateAndTime = `${updatedDate} @ ${updatedTime}`;
+        if (eventDate) {
+            if (eventTime) {
+                eventDate.add(eventTime.hours(), 'hours').add(eventTime.minutes(), 'minutes');
+            }
+            this.EventDate = eventDate.toDate();
+        }
     }
     get SubTotal() {
         return _.reduce(this.Items, (memo, item) => {

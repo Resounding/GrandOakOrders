@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -92,6 +92,10 @@
     <Reference Include="GrapeCity.ActiveReports.Export.Pdf.v9, Version=9.4.4600.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\GrapeCity.ActiveReports.Export.Pdf.v9.dll</HintPath>
+    </Reference>
+    <Reference Include="GrapeCity.ActiveReports.Export.Word.v9, Version=9.4.4600.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\GrapeCity.ActiveReports.Export.Word.v9.dll</HintPath>
     </Reference>
     <Reference Include="GrapeCity.ActiveReports.Extensibility.v9, Version=9.4.4600.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -257,12 +261,10 @@
     <Content Include="app\views\auth\user-profile.js" />
     <Content Include="app\views\home\index.html" />
     <Content Include="app\views\home\index.js" />
-    <Content Include="app\views\inquiries\edit.html" />
-    <Content Include="app\views\inquiries\edit.js" />
     <Content Include="app\views\inquiries\list.html" />
     <Content Include="app\views\inquiries\list.js" />
-    <Content Include="app\views\inquiries\new.html" />
-    <Content Include="app\views\inquiries\new.js" />
+    <Content Include="app\views\inquiries\detail.html" />
+    <Content Include="app\views\inquiries\detail.js" />
     <Content Include="app\views\nav\nav-bar.html" />
     <Content Include="app\views\nav\nav-bar.js" />
     <Content Include="app\views\orders\edit.js" />
@@ -274,6 +276,8 @@
     <Content Include="config.js" />
     <Content Include="content\materialize\css\materialize.css" />
     <Content Include="content\materialize\css\materialize.min.css" />
+    <Content Include="content\toastr.css" />
+    <Content Include="content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="font\material-design-icons\LICENSE.txt" />
     <Content Include="font\material-design-icons\Material-Design-Icons.svg" />
@@ -1533,6 +1537,8 @@
     <Content Include="jspm_packages\github\aurelia\templating%400.15.3\.jspm.json" />
     <Content Include="jspm_packages\github\paulvanbladel\aurelia-auth%400.9.14\.jspm-hash" />
     <Content Include="jspm_packages\github\paulvanbladel\aurelia-auth%400.9.14\.jspm.json" />
+    <Content Include="content\toastr.scss" />
+    <Content Include="content\toastr.less" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="jspm_packages\github\amsul\pickadate.js%403.5.6.js" />
     <Content Include="jspm_packages\github\amsul\pickadate.js%403.5.6\Gruntfile.js" />
@@ -3064,6 +3070,8 @@
     <Content Include="Scripts\materialize\materialize.js" />
     <Content Include="Scripts\materialize\materialize.min.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -3077,6 +3085,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InquiriesController.cs" />
+    <Compile Include="Controllers\MediaFormatters\WordDocumentReportMediaFormatter.cs" />
     <Compile Include="Controllers\MediaFormatters\PdfReportMediaFormatter.cs" />
     <Compile Include="Controllers\MediaFormatters\ReportMediaFormatter.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -3105,6 +3114,14 @@
     <Compile Include="Migrations\201509041556579_Orders.cs" />
     <Compile Include="Migrations\201509041556579_Orders.Designer.cs">
       <DependentUpon>201509041556579_Orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509170147456_InquiryEnhancements.cs" />
+    <Compile Include="Migrations\201509170147456_InquiryEnhancements.Designer.cs">
+      <DependentUpon>201509170147456_InquiryEnhancements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509181222337_OrderItemDetails.cs" />
+    <Compile Include="Migrations\201509181222337_OrderItemDetails.Designer.cs">
+      <DependentUpon>201509181222337_OrderItemDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\GoogleProfileResponse.cs" />
@@ -3167,7 +3184,6 @@
     <Content Include="app\views\auth\user-profile.ts" />
     <Content Include="app\views\home\index.ts" />
     <Content Include="app\views\inquiries\list.ts" />
-    <Content Include="app\views\inquiries\new.ts" />
     <Content Include="app\views\nav\nav-bar.ts" />
     <Content Include="typings\moment\moment-node.d.ts" />
     <Content Include="typings\moment\moment.d.ts" />
@@ -3186,6 +3202,12 @@
     <EmbeddedResource Include="Migrations\201509041556579_Orders.resx">
       <DependentUpon>201509041556579_Orders.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509170147456_InquiryEnhancements.resx">
+      <DependentUpon>201509170147456_InquiryEnhancements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509181222337_OrderItemDetails.resx">
+      <DependentUpon>201509181222337_OrderItemDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reports\KitchenOrderReport.resx">
       <DependentUpon>KitchenOrderReport.cs</DependentUpon>
@@ -3193,12 +3215,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\models\inquiry.ts" />
-    <Content Include="app\views\inquiries\edit.ts" />
     <Content Include="app\models\order.ts" />
     <Content Include="app\views\orders\edit.ts" />
     <Content Include="app\views\orders\list.ts" />
     <Content Include="app\views\orders\orderItem.ts" />
     <Content Include="app\controls\currencyTextbox.ts" />
+    <Content Include="app\views\inquiries\detail.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\animator-css%400.16.0\aurelia-animator-css.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\binding%400.9.1\aurelia-binding.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\bootstrapper%400.17.0\aurelia-bootstrapper.d.ts" />
@@ -3221,6 +3243,7 @@
     <TypeScriptCompile Include="jspm_packages\github\aurelia\templating-binding%400.15.0\aurelia-templating-binding.d.ts" />
     <TypeScriptCompile Include="typings\es6-promise\es6-promise.d.ts" />
     <TypeScriptCompile Include="typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="typings\toastr\toastr.d.ts" />
     <TypeScriptCompile Include="typings\underscore\underscore.d.ts" />
   </ItemGroup>
   <PropertyGroup>

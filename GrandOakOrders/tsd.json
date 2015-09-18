@@ -19,6 +19,9 @@
     },
     "es6-promise/es6-promise.d.ts": {
       "commit": "7a3ca1f0b8a0960af9fc1838f3234cc9d6ce0645"
+    },
+    "toastr/toastr.d.ts": {
+      "commit": "6f6e5c7dd9effe21fee14eb65fe340ecbbc8580a"
     }
   }
 }

@@ -13,6 +13,9 @@ namespace GrandOakOrders.Data.Entities
         public decimal TotalPrice { get; set; }
         public string KitchenNotes { get; set; }
         public string OrderingNotes { get; set; }
+        public string InvoiceNotes { get; set; }
+        public bool ShowToKitchen { get; set; }
+        public bool ShowOnInvoice { get; set; }
 
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }

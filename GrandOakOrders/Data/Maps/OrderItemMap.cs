@@ -10,6 +10,7 @@ namespace GrandOakOrders.Data.Maps
             Property(i => i.Description).IsMaxLength();
             Property(i => i.KitchenNotes).IsMaxLength();
             Property(i => i.OrderingNotes).IsMaxLength();
+            Property(i => i.InvoiceNotes).IsMaxLength();
         }
     }
 }
