@@ -366,7 +366,9 @@
     <Content Include="content\materialize\sass\font\roboto\Roboto-Thin.ttf" />
     <Content Include="content\materialize\sass\font\roboto\Roboto-Thin.woff" />
     <Content Include="content\materialize\sass\font\roboto\Roboto-Thin.woff2" />
-    <Content Include="connectionStrings.config" />
+    <Content Include="connectionStrings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="jspm_packages\.loaderversions" />
     <Content Include="jspm_packages\github\amsul\pickadate.js%403.5.6\.gitignore" />
     <Content Include="jspm_packages\github\amsul\pickadate.js%403.5.6\.jshintrc" />

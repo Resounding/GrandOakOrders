@@ -60,6 +60,7 @@ namespace GrandOakOrders.Data.Repositories
         {
             var now = DateTime.Now;
             var dborder = await _context.Orders
+                .Include(o => o.Inquiry)
                 .Include(o => o.Items)
                 .FirstAsync(o => o.Id == order.Id);
 
@@ -80,6 +81,16 @@ namespace GrandOakOrders.Data.Repositories
             dborder.GrandTotal = order.GrandTotal;
             dborder.TaxCode = order.TaxCode;
             dborder.TaxRate = order.TaxRate;
+
+            dborder.Inquiry.Organization = order.Inquiry.Organization;
+            dborder.Inquiry.ContactPerson = order.Inquiry.ContactPerson;
+            dborder.Inquiry.EventDate = order.Inquiry.EventDate;
+            dborder.Inquiry.EventTime = order.Inquiry.EventTime;
+            dborder.Inquiry.People = order.Inquiry.People;
+            dborder.Inquiry.Summary = order.Inquiry.Summary;
+            dborder.Inquiry.Description = order.Inquiry.Description;
+            dborder.Inquiry.Location = order.Inquiry.Location;
+            dborder.Inquiry.LocationAddress = order.Inquiry.LocationAddress;
 
             var submittedIds = dborder.Items.Select(i => i.Id).ToList();
             var deleted = dborder.Items

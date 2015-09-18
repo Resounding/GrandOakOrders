@@ -8362,4 +8362,12 @@ input[type=number].h5, input[type=search].h5, textarea.materialize-textarea.h5 {
   border: solid 1px #808080; }
 
 /* end utility*/
+/* toastr fixes */
+#toast-container {
+  top: auto;
+  right: auto; }
+  #toast-container .toast {
+    height: auto; }
+
+/* end toastr fixes */
 

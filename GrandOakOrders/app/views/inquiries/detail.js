@@ -1,5 +1,6 @@
 /// <reference path="../../../typings/jquery/jquery.d.ts" />
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
+/// <reference path="../../../typings/toastr/toastr.d.ts" />
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
     switch (arguments.length) {
@@ -15,7 +16,7 @@ import { inject } from 'aurelia-framework';
 import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
 import { InquiryViewModel } from '../../models/inquiry';
-export let NewInquiry = class {
+export let InquiryDetail = class {
     constructor(httpClient, router, element) {
         this.httpClient = httpClient;
         this.router = router;
@@ -63,29 +64,33 @@ export let NewInquiry = class {
             if (inquiry.Id) {
                 // edit
                 this.httpClient.put(`/api/inquiries/${inquiry.Id}`, inquiry)
-                    .then((response) => {
-                    console.log(response);
-                    if (response.statusCode == 201) {
-                        this.router.navigateToRoute('edit order', { id: response.content.Id });
-                    }
-                    else {
-                        this.router.navigateToRoute('inquiries');
-                    }
-                });
+                    .then(this.onSaved.bind(this))
+                    .catch(this.onError);
             }
             else {
                 // create
                 this.httpClient.post('/api/inquiries', inquiry)
-                    .then((response) => {
-                    console.log(response);
-                    this.router.navigateToRoute('inquiries');
-                });
+                    .then(this.onSaved.bind(this))
+                    .catch(this.onError);
             }
         }
     }
+    onSaved(response) {
+        console.log(response);
+        if (response.statusCode == 201) {
+            this.router.navigateToRoute('edit order', { id: response.content.Id });
+        }
+        else {
+            this.router.navigateToRoute('inquiries');
+        }
+    }
+    onError(err) {
+        console.log(err);
+        toastr.error('There was a problem saving the inquiry: ' + err);
+    }
 };
-NewInquiry = __decorate([
+InquiryDetail = __decorate([
     inject(HttpClient, Router, Element), 
     __metadata('design:paramtypes', [(typeof (_a = typeof HttpClient !== 'undefined' && HttpClient) === 'function' && _a) || Object, (typeof (_b = typeof Router !== 'undefined' && Router) === 'function' && _b) || Object, Element])
-], NewInquiry);
+], InquiryDetail);
 var _a, _b;

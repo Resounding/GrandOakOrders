@@ -1,3 +1,4 @@
+/// <reference path="../../typings/toastr/toastr.d.ts" />
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
     switch (arguments.length) {
@@ -19,6 +20,7 @@ export let App = class {
     activate() {
         this.httpClientConfig.configure();
         toastr.options.positionClass = 'toast-bottom-left';
+        toastr.options.timeOut = 0;
     }
     configureRouter(config, router) {
         this.router = router;

@@ -105,25 +105,33 @@ export class EditOrder {
 
     save(e) {
         e.preventDefault();
-
-        this._submitted = true;
+        
         this.submit()
             .then((response) => {
                 console.log(response);
                 this.router.navigateToRoute('orders');
-            });
+            })
+            .catch(this.onError);
     }
 
-    submit():Promise<any> {
+    submit(): Promise<any> {
+        this._submitted = true;
+
         if (!this._model.isValid()) {
             return Promise.reject(null);
         } else {
             var order = this._model.toJSON();
             return this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
-                .catch((err) => {
-                    console.log(err);
-                    toastr.error('There was a problem saving the order: ' + err);
-                });
+                .catch(this.onError);
         }
+    }
+
+    onError(err) {
+        console.log(err);
+        var msg = 'There was a problem saving the order';
+        if (err) {
+            msg += ': ' + err;
+        }
+        toastr.error(msg);
     }
 }

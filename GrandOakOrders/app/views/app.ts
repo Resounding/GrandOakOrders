@@ -1,3 +1,5 @@
+/// <reference path="../../typings/toastr/toastr.d.ts" />
+
 import {RouterConfiguration, AppRouter} from 'aurelia-router';
 import {inject} from 'aurelia-framework';
 import HttpClientConfig from 'paulvanbladel/aurelia-auth/app.httpClient.config';
@@ -12,6 +14,7 @@ export class App {
 	activate() {
         this.httpClientConfig.configure();
         toastr.options.positionClass = 'toast-bottom-left';
+        toastr.options.timeOut = 0;
 	}
 	
 	configureRouter(config:RouterConfiguration, router:AppRouter) {

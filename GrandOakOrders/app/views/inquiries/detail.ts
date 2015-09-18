@@ -1,5 +1,6 @@
 /// <reference path="../../../typings/jquery/jquery.d.ts" />
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
+/// <reference path="../../../typings/toastr/toastr.d.ts" />
 
 import {inject} from 'aurelia-framework';
 import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
@@ -8,7 +9,7 @@ import {InquiryViewModel, InquiryPojo} from '../../models/inquiry';
 import * as _ from 'underscore'
 
 @inject(HttpClient, Router, Element)
-export class NewInquiry {
+export class InquiryDetail {
 	
     _model = new InquiryViewModel();
 	_submitted = false;
@@ -65,22 +66,28 @@ export class NewInquiry {
             if (inquiry.Id) {
                 // edit
                 this.httpClient.put(`/api/inquiries/${inquiry.Id}`, inquiry)
-                    .then((response) => {
-                        console.log(response);
-                        if (response.statusCode == 201) {
-                            this.router.navigateToRoute('edit order', { id: response.content.Id });
-                        } else {
-                            this.router.navigateToRoute('inquiries');
-                        }
-                    });
+                    .then(this.onSaved.bind(this))
+                    .catch(this.onError);
             } else {
                 // create
                 this.httpClient.post('/api/inquiries', inquiry)
-                    .then((response: HttpResponseMessage) => {
-                        console.log(response);
-                        this.router.navigateToRoute('inquiries');
-                    });
+                    .then(this.onSaved.bind(this))
+                    .catch(this.onError);
             }
 		}
-	}	
+    }
+
+    onSaved(response: HttpResponseMessage) {
+        console.log(response);
+        if (response.statusCode == 201) {
+            this.router.navigateToRoute('edit order', { id: response.content.Id });
+        } else {
+            this.router.navigateToRoute('inquiries');
+        }
+    }
+
+    onError(err) {
+        console.log(err);
+        toastr.error('There was a problem saving the inquiry: ' + err);
+    }
 }
