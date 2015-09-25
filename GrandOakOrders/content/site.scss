@@ -1,4 +1,5 @@
-﻿@import 'materialize/sass/materialize.scss';
+﻿@import 'fullcalendar/fullcalendar.css';
+@import 'materialize/sass/materialize.scss';
 @import 'toastr.scss';
 
 .btn-block {
@@ -7,6 +8,15 @@
 
 nav {
   @extend .blue, .lighten-2;
+
+    a {
+        height: $navbar-height-mobile;
+        cursor: pointer;
+
+        img {
+            max-height: $navbar-height-mobile;
+        }
+    }
   
   .brand-logo,
   .brand-logo.center {
@@ -139,3 +149,35 @@ input[type=number].h5, input[type=search].h5, textarea.materialize-textarea.h5 {
     }
 }
 /* end toastr fixes */
+
+/* calendar modal */
+#calendarModal.modal {
+    width: 90%;
+    max-height: none;
+    top: 0;
+
+    .legend  {
+        h5 {
+            display: inline-block;
+        }
+        & > div {
+            display: inline-block;
+            text-align: center;
+            padding: 10px;
+        }
+    }
+
+    .fc-event {
+        &.unconfirmed {
+            @extend .amber, .lighten-2;
+            color: $off-black;
+            border-color: $off-black;
+        }
+        &.confirmed {
+            @extend .green;
+            color: $off-black;
+            border-color: $off-black;
+        }
+    }
+}
+/* end calendar modal */

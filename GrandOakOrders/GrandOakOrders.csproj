@@ -274,6 +274,9 @@
     <Content Include="app\views\orders\orderItem.html" />
     <Content Include="app\views\orders\orderItem.js" />
     <Content Include="config.js" />
+    <Content Include="content\fullcalendar\fullcalendar.css" />
+    <Content Include="content\fullcalendar\fullcalendar.min.css" />
+    <Content Include="content\fullcalendar\fullcalendar.print.css" />
     <Content Include="content\materialize\css\materialize.css" />
     <Content Include="content\materialize\css\materialize.min.css" />
     <Content Include="content\toastr.css" />
@@ -289,6 +292,7 @@
     <Content Include="content\site.min.css">
       <DependentUpon>site.css</DependentUpon>
     </Content>
+    <Content Include="img\calendar.png" />
     <Content Include="img\go.png" />
     <Content Include="img\goc-full.jpg" />
     <Content Include="img\icon.jpg" />
@@ -1541,7 +1545,6 @@
     <Content Include="jspm_packages\github\paulvanbladel\aurelia-auth%400.9.14\.jspm.json" />
     <Content Include="content\toastr.scss" />
     <Content Include="content\toastr.less" />
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="jspm_packages\github\amsul\pickadate.js%403.5.6.js" />
     <Content Include="jspm_packages\github\amsul\pickadate.js%403.5.6\Gruntfile.js" />
     <Content Include="jspm_packages\github\amsul\pickadate.js%403.5.6\lib\compressed\legacy.js" />
@@ -3067,8 +3070,8 @@
     <Content Include="jspm_packages\system-polyfills.src.js" />
     <Content Include="jspm_packages\system.js" />
     <Content Include="jspm_packages\system.src.js" />
-    <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\materialize\materialize.js" />
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\toastr.js" />
@@ -3084,6 +3087,7 @@
     <Compile Include="Auth\GrandOakOAuthProvider.cs" />
     <Compile Include="Auth\GrandOakUserManager.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InquiriesController.cs" />
     <Compile Include="Controllers\MediaFormatters\WordDocumentReportMediaFormatter.cs" />
@@ -3101,6 +3105,7 @@
     <Compile Include="Data\Maps\OrderItemMap.cs" />
     <Compile Include="Data\Maps\OrderMap.cs" />
     <Compile Include="Data\Maps\InquiryMap.cs" />
+    <Compile Include="Data\Repositories\CalendarRepository.cs" />
     <Compile Include="Data\Repositories\InquiryRepository.cs" />
     <Compile Include="Data\Repositories\OrderRepository.cs" />
     <Compile Include="Data\Repositories\UserRepository.cs" />
@@ -3129,6 +3134,7 @@
       <DependentUpon>201509250241571_NewFields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CalendarEvent.cs" />
     <Compile Include="Models\GoogleProfileResponse.cs" />
     <Compile Include="Models\GoogleTokenRequest.cs" />
     <Compile Include="Models\GoogleTokenResponse.cs" />
@@ -3147,7 +3153,6 @@
     <Content Include="packages.config" />
     <None Include="content\site.scss" />
     <None Include="Properties\PublishProfiles\gocm.pubxml" />
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="tsd.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

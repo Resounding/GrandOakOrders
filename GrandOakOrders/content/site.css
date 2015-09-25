@@ -1,4 +1,5 @@
 ﻿@charset "UTF-8";
+@import url(fullcalendar/fullcalendar.css);
 .materialize-red.lighten-5 {
   background-color: #fdeaeb !important; }
 
@@ -17,7 +18,7 @@
 .materialize-red-text.text-lighten-3 {
   color: #f3989b !important; }
 
-.materialize-red.lighten-2, nav.materialize-red {
+.materialize-red.lighten-2, nav.materialize-red, #calendarModal.modal .materialize-red.fc-event.unconfirmed {
   background-color: #ee6e73 !important; }
 
 .materialize-red-text.text-lighten-2 {
@@ -77,7 +78,7 @@
 .red-text.text-lighten-3 {
   color: #EF9A9A !important; }
 
-.red.lighten-2, nav.red {
+.red.lighten-2, nav.red, #calendarModal.modal .red.fc-event.unconfirmed {
   background-color: #E57373 !important; }
 
 .red-text.text-lighten-2 {
@@ -161,7 +162,7 @@
 .pink-text.text-lighten-3 {
   color: #f48fb1 !important; }
 
-.pink.lighten-2, nav.pink {
+.pink.lighten-2, nav.pink, #calendarModal.modal .pink.fc-event.unconfirmed {
   background-color: #f06292 !important; }
 
 .pink-text.text-lighten-2 {
@@ -245,7 +246,7 @@
 .purple-text.text-lighten-3 {
   color: #ce93d8 !important; }
 
-.purple.lighten-2, nav.purple {
+.purple.lighten-2, nav.purple, #calendarModal.modal .purple.fc-event.unconfirmed {
   background-color: #ba68c8 !important; }
 
 .purple-text.text-lighten-2 {
@@ -329,7 +330,7 @@
 .deep-purple-text.text-lighten-3 {
   color: #b39ddb !important; }
 
-.deep-purple.lighten-2, nav.deep-purple {
+.deep-purple.lighten-2, nav.deep-purple, #calendarModal.modal .deep-purple.fc-event.unconfirmed {
   background-color: #9575cd !important; }
 
 .deep-purple-text.text-lighten-2 {
@@ -413,7 +414,7 @@
 .indigo-text.text-lighten-3 {
   color: #9fa8da !important; }
 
-.indigo.lighten-2, nav.indigo {
+.indigo.lighten-2, nav.indigo, #calendarModal.modal .indigo.fc-event.unconfirmed {
   background-color: #7986cb !important; }
 
 .indigo-text.text-lighten-2 {
@@ -497,7 +498,7 @@
 .blue-text.text-lighten-3 {
   color: #90CAF9 !important; }
 
-.blue.lighten-2, nav {
+.blue.lighten-2, nav, #calendarModal.modal .blue.fc-event.unconfirmed, #calendarModal.modal nav.fc-event.unconfirmed {
   background-color: #64B5F6 !important; }
 
 .blue-text.text-lighten-2 {
@@ -581,7 +582,7 @@
 .light-blue-text.text-lighten-3 {
   color: #81d4fa !important; }
 
-.light-blue.lighten-2, nav.light-blue {
+.light-blue.lighten-2, nav.light-blue, #calendarModal.modal .light-blue.fc-event.unconfirmed {
   background-color: #4fc3f7 !important; }
 
 .light-blue-text.text-lighten-2 {
@@ -665,7 +666,7 @@
 .cyan-text.text-lighten-3 {
   color: #80deea !important; }
 
-.cyan.lighten-2, nav.cyan {
+.cyan.lighten-2, nav.cyan, #calendarModal.modal .cyan.fc-event.unconfirmed {
   background-color: #4dd0e1 !important; }
 
 .cyan-text.text-lighten-2 {
@@ -749,7 +750,7 @@
 .teal-text.text-lighten-3 {
   color: #80cbc4 !important; }
 
-.teal.lighten-2, nav.teal {
+.teal.lighten-2, nav.teal, #calendarModal.modal .teal.fc-event.unconfirmed {
   background-color: #4db6ac !important; }
 
 .teal-text.text-lighten-2 {
@@ -815,85 +816,85 @@
 .teal-text.text-accent-4 {
   color: #00bfa5 !important; }
 
-.green.lighten-5 {
+.green.lighten-5, #calendarModal.modal .lighten-5.fc-event.confirmed {
   background-color: #E8F5E9 !important; }
 
 .green-text.text-lighten-5 {
   color: #E8F5E9 !important; }
 
-.green.lighten-4 {
+.green.lighten-4, #calendarModal.modal .lighten-4.fc-event.confirmed {
   background-color: #C8E6C9 !important; }
 
 .green-text.text-lighten-4 {
   color: #C8E6C9 !important; }
 
-.green.lighten-3 {
+.green.lighten-3, #calendarModal.modal .lighten-3.fc-event.confirmed {
   background-color: #A5D6A7 !important; }
 
 .green-text.text-lighten-3 {
   color: #A5D6A7 !important; }
 
-.green.lighten-2, nav.green {
+.green.lighten-2, nav.green, #calendarModal.modal nav.fc-event.confirmed, #calendarModal.modal .green.fc-event.unconfirmed, #calendarModal.modal .fc-event.unconfirmed.confirmed, #calendarModal.modal .lighten-2.fc-event.confirmed {
   background-color: #81C784 !important; }
 
 .green-text.text-lighten-2 {
   color: #81C784 !important; }
 
-.green.lighten-1 {
+.green.lighten-1, #calendarModal.modal .lighten-1.fc-event.confirmed {
   background-color: #66BB6A !important; }
 
 .green-text.text-lighten-1 {
   color: #66BB6A !important; }
 
-.green {
+.green, #calendarModal.modal .fc-event.confirmed {
   background-color: #4CAF50 !important; }
 
 .green-text {
   color: #4CAF50 !important; }
 
-.green.darken-1 {
+.green.darken-1, #calendarModal.modal .darken-1.fc-event.confirmed {
   background-color: #43A047 !important; }
 
 .green-text.text-darken-1 {
   color: #43A047 !important; }
 
-.green.darken-2 {
+.green.darken-2, #calendarModal.modal .darken-2.fc-event.confirmed {
   background-color: #388E3C !important; }
 
 .green-text.text-darken-2 {
   color: #388E3C !important; }
 
-.green.darken-3 {
+.green.darken-3, #calendarModal.modal .darken-3.fc-event.confirmed {
   background-color: #2E7D32 !important; }
 
 .green-text.text-darken-3 {
   color: #2E7D32 !important; }
 
-.green.darken-4 {
+.green.darken-4, #calendarModal.modal .darken-4.fc-event.confirmed {
   background-color: #1B5E20 !important; }
 
 .green-text.text-darken-4 {
   color: #1B5E20 !important; }
 
-.green.accent-1 {
+.green.accent-1, #calendarModal.modal .accent-1.fc-event.confirmed {
   background-color: #B9F6CA !important; }
 
 .green-text.text-accent-1 {
   color: #B9F6CA !important; }
 
-.green.accent-2 {
+.green.accent-2, #calendarModal.modal .accent-2.fc-event.confirmed {
   background-color: #69F0AE !important; }
 
 .green-text.text-accent-2 {
   color: #69F0AE !important; }
 
-.green.accent-3 {
+.green.accent-3, #calendarModal.modal .accent-3.fc-event.confirmed {
   background-color: #00E676 !important; }
 
 .green-text.text-accent-3 {
   color: #00E676 !important; }
 
-.green.accent-4 {
+.green.accent-4, #calendarModal.modal .accent-4.fc-event.confirmed {
   background-color: #00C853 !important; }
 
 .green-text.text-accent-4 {
@@ -917,7 +918,7 @@
 .light-green-text.text-lighten-3 {
   color: #c5e1a5 !important; }
 
-.light-green.lighten-2, nav.light-green {
+.light-green.lighten-2, nav.light-green, #calendarModal.modal .light-green.fc-event.unconfirmed {
   background-color: #aed581 !important; }
 
 .light-green-text.text-lighten-2 {
@@ -1001,7 +1002,7 @@
 .lime-text.text-lighten-3 {
   color: #e6ee9c !important; }
 
-.lime.lighten-2, nav.lime {
+.lime.lighten-2, nav.lime, #calendarModal.modal .lime.fc-event.unconfirmed {
   background-color: #dce775 !important; }
 
 .lime-text.text-lighten-2 {
@@ -1085,7 +1086,7 @@
 .yellow-text.text-lighten-3 {
   color: #fff59d !important; }
 
-.yellow.lighten-2, nav.yellow {
+.yellow.lighten-2, nav.yellow, #calendarModal.modal .yellow.fc-event.unconfirmed {
   background-color: #fff176 !important; }
 
 .yellow-text.text-lighten-2 {
@@ -1151,85 +1152,85 @@
 .yellow-text.text-accent-4 {
   color: #ffd600 !important; }
 
-.amber.lighten-5 {
+.amber.lighten-5, #calendarModal.modal .lighten-5.fc-event.unconfirmed {
   background-color: #fff8e1 !important; }
 
 .amber-text.text-lighten-5 {
   color: #fff8e1 !important; }
 
-.amber.lighten-4 {
+.amber.lighten-4, #calendarModal.modal .lighten-4.fc-event.unconfirmed {
   background-color: #ffecb3 !important; }
 
 .amber-text.text-lighten-4 {
   color: #ffecb3 !important; }
 
-.amber.lighten-3 {
+.amber.lighten-3, #calendarModal.modal .lighten-3.fc-event.unconfirmed {
   background-color: #ffe082 !important; }
 
 .amber-text.text-lighten-3 {
   color: #ffe082 !important; }
 
-.amber.lighten-2, nav.amber {
+.amber.lighten-2, nav.amber, #calendarModal.modal .fc-event.unconfirmed {
   background-color: #ffd54f !important; }
 
 .amber-text.text-lighten-2 {
   color: #ffd54f !important; }
 
-.amber.lighten-1 {
+.amber.lighten-1, #calendarModal.modal .lighten-1.fc-event.unconfirmed {
   background-color: #ffca28 !important; }
 
 .amber-text.text-lighten-1 {
   color: #ffca28 !important; }
 
-.amber {
+.amber, #calendarModal.modal .fc-event.unconfirmed {
   background-color: #ffc107 !important; }
 
 .amber-text {
   color: #ffc107 !important; }
 
-.amber.darken-1 {
+.amber.darken-1, #calendarModal.modal .darken-1.fc-event.unconfirmed {
   background-color: #ffb300 !important; }
 
 .amber-text.text-darken-1 {
   color: #ffb300 !important; }
 
-.amber.darken-2 {
+.amber.darken-2, #calendarModal.modal .darken-2.fc-event.unconfirmed {
   background-color: #ffa000 !important; }
 
 .amber-text.text-darken-2 {
   color: #ffa000 !important; }
 
-.amber.darken-3 {
+.amber.darken-3, #calendarModal.modal .darken-3.fc-event.unconfirmed {
   background-color: #ff8f00 !important; }
 
 .amber-text.text-darken-3 {
   color: #ff8f00 !important; }
 
-.amber.darken-4 {
+.amber.darken-4, #calendarModal.modal .darken-4.fc-event.unconfirmed {
   background-color: #ff6f00 !important; }
 
 .amber-text.text-darken-4 {
   color: #ff6f00 !important; }
 
-.amber.accent-1 {
+.amber.accent-1, #calendarModal.modal .accent-1.fc-event.unconfirmed {
   background-color: #ffe57f !important; }
 
 .amber-text.text-accent-1 {
   color: #ffe57f !important; }
 
-.amber.accent-2 {
+.amber.accent-2, #calendarModal.modal .accent-2.fc-event.unconfirmed {
   background-color: #ffd740 !important; }
 
 .amber-text.text-accent-2 {
   color: #ffd740 !important; }
 
-.amber.accent-3 {
+.amber.accent-3, #calendarModal.modal .accent-3.fc-event.unconfirmed {
   background-color: #ffc400 !important; }
 
 .amber-text.text-accent-3 {
   color: #ffc400 !important; }
 
-.amber.accent-4 {
+.amber.accent-4, #calendarModal.modal .accent-4.fc-event.unconfirmed {
   background-color: #ffab00 !important; }
 
 .amber-text.text-accent-4 {
@@ -1253,7 +1254,7 @@
 .orange-text.text-lighten-3 {
   color: #ffcc80 !important; }
 
-.orange.lighten-2, nav.orange {
+.orange.lighten-2, nav.orange, #calendarModal.modal .orange.fc-event.unconfirmed {
   background-color: #ffb74d !important; }
 
 .orange-text.text-lighten-2 {
@@ -1337,7 +1338,7 @@
 .deep-orange-text.text-lighten-3 {
   color: #ffab91 !important; }
 
-.deep-orange.lighten-2, nav.deep-orange {
+.deep-orange.lighten-2, nav.deep-orange, #calendarModal.modal .deep-orange.fc-event.unconfirmed {
   background-color: #ff8a65 !important; }
 
 .deep-orange-text.text-lighten-2 {
@@ -1421,7 +1422,7 @@
 .brown-text.text-lighten-3 {
   color: #bcaaa4 !important; }
 
-.brown.lighten-2, nav.brown {
+.brown.lighten-2, nav.brown, #calendarModal.modal .brown.fc-event.unconfirmed {
   background-color: #a1887f !important; }
 
 .brown-text.text-lighten-2 {
@@ -1481,7 +1482,7 @@
 .blue-grey-text.text-lighten-3 {
   color: #b0bec5 !important; }
 
-.blue-grey.lighten-2, nav.blue-grey {
+.blue-grey.lighten-2, nav.blue-grey, #calendarModal.modal .blue-grey.fc-event.unconfirmed {
   background-color: #90a4ae !important; }
 
 .blue-grey-text.text-lighten-2 {
@@ -1541,7 +1542,7 @@
 .grey-text.text-lighten-3 {
   color: #eeeeee !important; }
 
-.grey.lighten-2, nav.grey {
+.grey.lighten-2, nav.grey, #calendarModal.modal .grey.fc-event.unconfirmed {
   background-color: #e0e0e0 !important; }
 
 .grey-text.text-lighten-2 {
@@ -8267,6 +8268,12 @@ button.toast-close-button {
 .btn-block {
   width: 100%; }
 
+nav a {
+  height: 56px;
+  cursor: pointer; }
+  nav a img {
+    max-height: 56px; }
+
 @media only screen and (max-width: 992px) {
   nav .brand-logo,
   nav .brand-logo.center {
@@ -8377,4 +8384,23 @@ input[type=number].h5, input[type=search].h5, textarea.materialize-textarea.h5 {
     height: auto; }
 
 /* end toastr fixes */
+/* calendar modal */
+#calendarModal.modal {
+  width: 90%;
+  max-height: none;
+  top: 0; }
+  #calendarModal.modal .legend h5 {
+    display: inline-block; }
+  #calendarModal.modal .legend > div {
+    display: inline-block;
+    text-align: center;
+    padding: 10px; }
+  #calendarModal.modal .fc-event.unconfirmed {
+    color: rgba(0, 0, 0, 0.87);
+    border-color: rgba(0, 0, 0, 0.87); }
+  #calendarModal.modal .fc-event.confirmed {
+    color: rgba(0, 0, 0, 0.87);
+    border-color: rgba(0, 0, 0, 0.87); }
+
+/* end calendar modal */
 

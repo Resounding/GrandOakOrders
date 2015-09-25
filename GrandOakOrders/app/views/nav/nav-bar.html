@@ -12,6 +12,11 @@
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
+                    <a click.trigger="showCalendar()">
+                        <img src="/img/calendar.png" alt="Calendar">
+                    </a>
+                </li>
+                <li>
                     <user-profile></user-profile>
                 </li>
                 <li>
@@ -20,4 +25,19 @@
             </ul>
         </div>
     </nav>
+
+    <div id="calendarModal" class="modal">
+        <div class="modal-content">
+            <div id="calendar"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="left legend">
+                <h5>Legend:</h5>
+                <div class="fc-event">Inquiry</div>
+                <div class="fc-event unconfirmed">Unconfirmed</div>
+                <div class="fc-event confirmed">Confirmed</div>
+            </div>
+            <button type="button" class="modal-action modal-close waves-effect btn-flat">Close</button>
+        </div>
+    </div>
 </template>
