@@ -11,6 +11,8 @@ export interface InquiryPojo {
     Id?:number;
     Organization: string;
     ContactPerson: string;
+    Phone: string;
+    Email: string;
     EventDate: string;
     EventTime: any;
     People: number;
@@ -19,7 +21,7 @@ export interface InquiryPojo {
     IsQuoteRequired: boolean;
     ClosureComments?: string;
     OutcomeId: string;
-    IsPickup: boolean;
+    DeliveryType: string;
     Location: string;
     LocationAddress: string;
     CreatedBy?: string;
@@ -53,8 +55,10 @@ export class InquiryViewModel implements InquiryPojo {
     OutcomeId: string = null;
     ClosureComments: string = '';
     ContactPerson: string = '';
+    Email: string = '';
+    Phone: string = '';
     People: number = null;
-    IsPickup: boolean = false;
+    DeliveryType: string = 'Pickup';
     Location: string = '';
     LocationAddress: string = '';
     // Properties with validation
@@ -102,18 +106,13 @@ export class InquiryViewModel implements InquiryPojo {
         return this.OutcomeId === 'CLOSE';
     }
     
-    get outcomeOptions() {
-        return [
-            { value: 'ORDER', text: 'Create Order' },
-            { value: 'CLOSE', text: 'Close Inquiry' }
-        ];
-    }
-
     toJSON(): InquiryPojo {
         var json = {
             Id: this.Id,
             Organization: this.Organization,
             ContactPerson: this.ContactPerson,
+            Phone: this.Phone,
+            Email: this.Email,
             EventDate: this.EventDate ? moment(this.EventDate, DATE_FORMAT).format('YYYY-MM-DD') : null,
             EventTime: this.EventTime ? moment(this.EventTime, TIME_FORMAT).format('HH:mm:SS') : null,
             People: this.People || 0,
@@ -122,7 +121,7 @@ export class InquiryViewModel implements InquiryPojo {
             IsQuoteRequired: this.IsQuoteRequired,
             ClosureComments: this.ClosureComments,
             OutcomeId: this.OutcomeId || null,
-            IsPickup: this.IsPickup,
+            DeliveryType: this.DeliveryType,
             Location: this.Location,
             LocationAddress: this.LocationAddress
         };

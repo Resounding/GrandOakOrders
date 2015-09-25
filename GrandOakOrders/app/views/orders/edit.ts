@@ -39,16 +39,23 @@ export class EditOrder {
 
                     $kitchenReport.on('click', this.showKitchenReport.bind(this));
 
-                    $select.material_select();
-
                     $dropdown.dropdown({
                         belowOrigin: true
                     });
 
-                    $collapsible.collapsible({ accordion: false });
+                    $collapsible
+                        .collapsible({ accordion: false })
+                        .on('materialize:opened', (e) => {
+                            var $el = $(e.target).parent();
+                            window.setTimeout(() => {
+                                $el.find('textarea').trigger('autoresize');
+                                $el.find('textarea,input').first().focus();
+                            }, 50);
+                        });                    
+                    
                     $eventDate.pickadate({
                         container: 'body',
-                        format: 'dddd mmmm d, yyyy'
+                        format: 'dddd mmm d, yyyy'
                     })
                     .on('change', (e) => {
                         this._model.Inquiry.EventDate = e.target.value;

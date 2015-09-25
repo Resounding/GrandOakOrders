@@ -7,6 +7,8 @@ namespace GrandOakOrders.Data.Entities
         public int Id { get; set; }
         public string Organization { get; set; }
         public string ContactPerson { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
         public DateTime? EventDate { get; set; }
         public TimeSpan? EventTime { get; set; }
         public int? People { get; set; }
@@ -17,7 +19,7 @@ namespace GrandOakOrders.Data.Entities
         public string OutcomeId { get; set; }
         public string Location { get; set; }
         public string LocationAddress { get; set; }
-        public bool IsPickup { get; set; }
+        public string DeliveryType { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
         public string UpdatedBy { get; set; }

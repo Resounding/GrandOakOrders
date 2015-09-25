@@ -33,7 +33,7 @@ export class InquiryDetail {
 
             $datepicker
                 .pickadate({
-                    format: 'dddd mmmm d, yyyy'
+                    format: 'dddd mmm d, yyyy'
                 })
                 .on('change', (e) => {
                     this._model.EventDate = e.target.value;
@@ -49,6 +49,8 @@ export class InquiryDetail {
             });
 
             $select.material_select();
+
+            $('textarea', this.element).trigger('autoresize');
 
             $('[autofocus]').focus();
 		}, 500);

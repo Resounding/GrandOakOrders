@@ -50,6 +50,8 @@ namespace GrandOakOrders.Data.Repositories
 
             dbinquiry.Organization = inquiry.Organization;
             dbinquiry.ContactPerson = inquiry.ContactPerson;
+            dbinquiry.Phone = inquiry.Phone;
+            dbinquiry.Email = inquiry.Email;
             dbinquiry.EventDate = inquiry.EventDate;
             dbinquiry.EventTime = inquiry.EventTime;
             dbinquiry.People = inquiry.People;
@@ -58,7 +60,7 @@ namespace GrandOakOrders.Data.Repositories
             dbinquiry.Description = inquiry.Description;
             dbinquiry.OutcomeId = inquiry.OutcomeId;
             dbinquiry.ClosureComments = inquiry.ClosureComments;
-            dbinquiry.IsPickup = inquiry.IsPickup;
+            dbinquiry.DeliveryType = inquiry.DeliveryType;
             dbinquiry.Location = inquiry.Location;
             dbinquiry.LocationAddress = inquiry.LocationAddress;
             dbinquiry.UpdatedAt = DateTime.Now;

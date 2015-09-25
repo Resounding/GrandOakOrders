@@ -11,7 +11,8 @@ namespace GrandOakOrders.Data.Entities
         public string PickupNotes { get; set; }
         public string AllergyNotes { get; set; }
         public bool RequireDeposit { get; set; }
-        public bool RequireConfirmation { get; set; }
+        public bool IsConfirmed { get; set; }
+        public bool IsCancelled { get; set; }
         public DateTime? ConfirmationDate { get; set; }
         public DateTime? CompletedDate { get; set; }
         public DateTime? InvoiceDate { get; set; }

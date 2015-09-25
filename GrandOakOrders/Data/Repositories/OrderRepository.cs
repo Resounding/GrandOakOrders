@@ -70,7 +70,8 @@ namespace GrandOakOrders.Data.Repositories
             dborder.PickupNotes = order.PickupNotes;
             dborder.AllergyNotes = order.AllergyNotes;
             dborder.RequireDeposit = order.RequireDeposit;
-            dborder.RequireConfirmation = order.RequireConfirmation;
+            dborder.IsConfirmed = order.IsConfirmed;
+            dborder.IsCancelled = order.IsCancelled;
             dborder.ConfirmationDate = order.ConfirmationDate;
             dborder.CompletedDate = order.CompletedDate;
             dborder.InvoiceDate = order.InvoiceDate;

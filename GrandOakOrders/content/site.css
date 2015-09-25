@@ -8306,6 +8306,13 @@ nav .brand-logo.center img {
 
 /* end Lists */
 /* Collapsibles, with popout */
+.collapsible-header {
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis; }
+
 .collapsible-header.double-header {
   height: 6rem; }
 

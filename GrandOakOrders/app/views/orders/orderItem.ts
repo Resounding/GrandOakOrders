@@ -13,7 +13,17 @@ export class OrderItem {
 
     created() {
         window.setTimeout(_.bind(() => {
-            $('.collapsible[data-collapsible=accordion]', this.element).collapsible();
+            $('.collapsible[data-collapsible=accordion]', this.element)
+                .collapsible()
+                .on('materialize:opened', (e) => {
+                    var $el = $(e.target).parent();
+                    window.setTimeout(() => {
+                        $el.find('textarea').trigger('autoresize');
+                        $el.find('textarea,input').first().focus();
+                    }, 50);
+                });;
+
+                
 		}, this), 500);
     }
 

@@ -37,7 +37,7 @@ export let InquiryDetail = class {
             var $datepicker = $('#date', this.element), $timepicker = $('.timepicker', this.element), $select = $('select', this.element);
             $datepicker
                 .pickadate({
-                format: 'dddd mmmm d, yyyy'
+                format: 'dddd mmm d, yyyy'
             })
                 .on('change', (e) => {
                 this._model.EventDate = e.target.value;
@@ -51,6 +51,7 @@ export let InquiryDetail = class {
                 this._model.EventTime = e.target.value;
             });
             $select.material_select();
+            $('textarea', this.element).trigger('autoresize');
             $('[autofocus]').focus();
         }, 500);
     }

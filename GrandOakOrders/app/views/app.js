@@ -20,7 +20,6 @@ export let App = class {
     activate() {
         this.httpClientConfig.configure();
         toastr.options.positionClass = 'toast-bottom-left';
-        toastr.options.timeOut = 0;
     }
     configureRouter(config, router) {
         this.router = router;

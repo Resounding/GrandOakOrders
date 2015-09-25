@@ -46,6 +46,14 @@
                                     <input id="caller" type="text" value.bind="_model.Inquiry.ContactPerson">
                                     <label for="caller" class="active">Person Calling:</label>
                                 </div>
+                                <div class="input-field col s6">
+                                    <input id="phone" type="tel" value.bind="_model.Inquiry.Phone">
+                                    <label for="phone" class="active">Phone Number:</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="email" type="email" value.bind="_model.Inquiry.Email">
+                                    <label for="email" class="active">Email:</label>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
@@ -72,7 +80,7 @@
                         <div class="collapsible-body">
                             <div class="row">
                                 <div class="input-field col s10">
-                                    <input id="summary" type="text" value.bind="_model.Inquiry.Summary">
+                                    <textarea id="summary" class="materialize-textarea" value.bind="_model.Inquiry.Summary"></textarea>
                                     <label for="summary" class="active">Summary:</label>
                                 </div>
                             </div>
@@ -86,11 +94,23 @@
                     </li>
                     <li>
                         <div class="collapsible-header ${_model.Inquiry.Location && _model.Inquiry.LocationAddress ? 'double-header' : ''}">
-                            <div show.bind="_model.Inquiry.Location">${_model.Inquiry.Location}</div>
+                            <div>
+                                ${ _model.Inquiry.DeliveryType }
+                                <span show.bind="_model.Inquiry.Location">${_model.Inquiry.Location}</span>
+                            </div>
                             <div show.bind="_model.Inquiry.LocationAddress">${_model.Inquiry.LocationAddress}</div>
-                            <div  show.bind="!_model.Inquiry.Location && !_model.Inquiry.LocationAddress">Location (not set)</div>
                         </div>
                         <div class="collapsible-body">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <select id="deliveryType" class="browser-default" value.bind="_model.Inquiry.DeliveryType">
+                                        <option value="Delivered">Delivery</option>
+                                        <option value="Pickup">Pickup</option>
+                                        <option value="In-House">In-House</option>
+                                    </select>
+                                    <label for="deliveryType" class="active">Pickup / Delivery:</label>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="input-field col s6">
                                     <input id="location" type="text" value.bind="_model.Inquiry.Location">

@@ -17,6 +17,14 @@
 						<input id="caller" type="text" value.bind="_model.ContactPerson">
 						<label for="caller" class="active">Person Calling:</label>
 					</div>
+                    <div class="input-field col s6">
+                        <input id="phone" type="tel" value.bind="_model.Phone">
+                        <label for="phone" class="active">Phone Number:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="email" type="email" value.bind="_model.Email">
+                        <label for="email" class="active">Email:</label>
+                    </div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
@@ -32,18 +40,19 @@
 				</div>
                 <div class="row">                    
                     <div class="input-field col s12">
-                        <select id="pickup" class="browser-default" value.bind="_model.IsPickup">
-                            <option value="false">Delivery</option>
-                            <option value="true">Pickup</option>
+                        <select id="deliveryType" class="browser-default" value.bind="_model.DeliveryType">
+                            <option value="Delivered">Delivery</option>
+                            <option value="Pickup">Pickup</option>
+                            <option value="In-House">In-House</option>
                         </select>
-                        <label for="pickup" class="active">Pickup / Delivery:</label>
+                        <label for="deliveryType" class="active">Pickup / Delivery:</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="location" type="text" value.bind="_model.Location" disabled.bind="_model.IsPickup=='true'">
+                        <input id="location" type="text" value.bind="_model.Location" disabled.bind="_model.DeliveryType!='Delivered'">
                         <label for="location" class="active">Location:</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="time" type="text" value.bind="_model.LocationAddress" disabled.bind="_model.IsPickup=='true'">
+                        <input id="time" type="text" value.bind="_model.LocationAddress" disabled.bind="_model.DeliveryType!='Delivered'">
                         <label for="time" class="active">Address:</label>
                     </div>
                 </div>
@@ -72,8 +81,9 @@
 				<div class="row">
                     <div class="input-field col s6">
                         <select id="outcome" class="browser-default" value.bind="_model.OutcomeId">
-                            <option value>Choose Outcome</option>
-                            <option repeat.for="option of _model.outcomeOptions" value.bind="option.value">${option.text}</option>
+                            <option value="">Choose Outcome</option>
+                            <option value="ORDER">Create Order</option>
+                            <option value="CLOSE">Close Inquiry</option>
                         </select>
                         <label for="outcome" class="active">Outcome:</label>
                     </div>

@@ -37,7 +37,9 @@ namespace GrandOakOrders.Reports
                 var dateTime = DateTime.Today.Add(_order.Inquiry.EventTime.Value);
                 txtEventDate.Text += (" " + dateTime.ToString("h:mm tt"));
 
-                txtEventDate.Text += (_order.Inquiry.IsPickup ? " pickup" : " delivered");
+                if (!string.IsNullOrEmpty(_order.Inquiry.DeliveryType)) {
+                    txtEventDate.Text += _order.Inquiry.DeliveryType;
+                }
             }
             txtSummary.Text = _order.Inquiry.Summary;
             txtAllergyNotes.Text = _order.AllergyNotes;

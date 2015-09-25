@@ -14,7 +14,6 @@ export class App {
 	activate() {
         this.httpClientConfig.configure();
         toastr.options.positionClass = 'toast-bottom-left';
-        toastr.options.timeOut = 0;
 	}
 	
 	configureRouter(config:RouterConfiguration, router:AppRouter) {
