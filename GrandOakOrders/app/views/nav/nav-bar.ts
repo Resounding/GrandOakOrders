@@ -1,8 +1,11 @@
-import {customElement} from 'aurelia-framework';
-
+import {customElement, inject} from 'aurelia-framework';
+import {Router} from 'aurelia-router';
 
 @customElement('nav-bar')
+@inject(Router)
 export class NavBar {
+    constructor(private router:Router) { }
+
     showCalendar() {
         var $modal = $('#calendarModal'),
             $calendar = $('#calendar');
@@ -30,6 +33,10 @@ export class NavBar {
                         var tooltip = `${$time.text()}${title.replace(/<br>/g, '\n')}`;
 
                         element.attr('title', tooltip).find('.fc-title').html(title);
+                    },
+                    dayClick: (date) => {
+                        this.router.navigateToRoute('new inquiry', { date: window.moment(date).format('YYYY-MM-DD') });
+                        $modal.closeModal()
                     }
                 });
             }   

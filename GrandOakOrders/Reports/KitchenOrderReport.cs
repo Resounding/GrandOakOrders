@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Linq;
-using System.Xml.Serialization;
 using GrandOakOrders.Data.Entities;
 using GrapeCity.ActiveReports;
-using GrapeCity.ActiveReports.Data;
 using GrapeCity.ActiveReports.SectionReportModel;
 
 namespace GrandOakOrders.Reports
 {
     public partial class KitchenOrderReport : SectionReport
     {
-        private Order _order;
-        private int index = 0;
+        private readonly Order _order;
+        private int _index;
 
         public KitchenOrderReport(Order order)
         {
@@ -38,12 +36,13 @@ namespace GrandOakOrders.Reports
                 txtEventDate.Text += (" " + dateTime.ToString("h:mm tt"));
 
                 if (!string.IsNullOrEmpty(_order.Inquiry.DeliveryType)) {
-                    txtEventDate.Text += _order.Inquiry.DeliveryType;
+                    txtEventDate.Text += (" " + _order.Inquiry.DeliveryType);
                 }
             }
             txtSummary.Text = _order.Inquiry.Summary;
             txtAllergyNotes.Text = _order.AllergyNotes;
             txtLocation.Text = _order.Inquiry.Location;
+            txtPickupNotes.Text = _order.PickupNotes;
 
             if(!string.IsNullOrEmpty(_order.Inquiry.LocationAddress)) {
                 if(!string.IsNullOrEmpty(_order.Inquiry.Location)) {
@@ -58,36 +57,48 @@ namespace GrandOakOrders.Reports
                 MoveUp(lblSummary);
                 MoveUp(lblAllergies);
                 MoveUp(txtAllergyNotes);
+                MoveUp(lblPickupNotes);
+                MoveUp(txtPickupNotes);
                 ShortenHeader();
             }
             if (string.IsNullOrWhiteSpace(_order.Inquiry.Summary)) {
                 lblSummary.Height = txtSummary.Height = 0;
                 MoveUp(lblAllergies);
                 MoveUp(txtAllergyNotes);
+                MoveUp(lblPickupNotes);
+                MoveUp(txtPickupNotes);
                 ShortenHeader();
             }
             if (string.IsNullOrWhiteSpace(_order.AllergyNotes)) {
                 lblAllergies.Height = txtAllergyNotes.Height = 0;
+                MoveUp(lblPickupNotes);
+                MoveUp(txtPickupNotes);
+                ShortenHeader();
+            }
+            if (string.IsNullOrWhiteSpace(_order.PickupNotes)) {
+                lblPickupNotes.Height = txtPickupNotes.Height = 0;
                 ShortenHeader();
             }
         }
 
         private void OnDetailFormat(object sender, EventArgs e)
         {
-            if (index < _order.Items.Count) {
-                var item = _order.Items[index];
+            if (_index < _order.Items.Count) {
+                var item = _order.Items[_index];
                 if (string.IsNullOrWhiteSpace(item.KitchenNotes)) {
                     var height = detail.Controls["lblKitchenNotes"].Height;
 
                     detail.Controls["lblKitchenNotes"].Height = detail.Controls["txtKitchenNotes"].Height = 0;
                     detail.Height -= height;
 
-                    var line1 = detail.Controls["line1"] as Line;
-                    line1.Y1 -= height;
-                    line1.Y2 -= height;
+                    var line = detail.Controls["line1"] as Line;
+                    if (line != null) {
+                        line.Y1 -= height;
+                        line.Y2 -= height;
+                    }
                 }
             }
-            index++;
+            _index++;
         }
 
         private void ShortenHeader()

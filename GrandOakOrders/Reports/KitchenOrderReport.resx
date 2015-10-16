@@ -120,9 +120,6 @@
   <data name="txtQuantity.OutputFormat" xml:space="preserve">
     <value>#,##0.##</value>
   </data>
-  <data name="txtQuantity.OutputFormat" xml:space="preserve">
-    <value>#,##0.##</value>
-  </data>
   <data name="txtEventDate.OutputFormat" xml:space="preserve">
     <value />
   </data>
@@ -1272,6 +1269,9 @@
     <value />
   </data>
   <data name="txtLocation.OutputFormat" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPickupNotes.OutputFormat" xml:space="preserve">
     <value />
   </data>
   <metadata name="$this.ScriptEditorPositionForUndo" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

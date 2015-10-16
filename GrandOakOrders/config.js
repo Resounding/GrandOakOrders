@@ -48,6 +48,7 @@ System.config({
     "text": "github:systemjs/plugin-text@0.0.2",
     "typescript": "npm:typescript@1.6.0-dev.20150825",
     "underscore": "npm:underscore@1.8.3",
+    "uri.js": "npm:uri.js@0.1.3",
     "github:aurelia/animator-css@0.16.0": {
       "aurelia-metadata": "github:aurelia/metadata@0.8.0",
       "aurelia-templating": "github:aurelia/templating@0.15.3"

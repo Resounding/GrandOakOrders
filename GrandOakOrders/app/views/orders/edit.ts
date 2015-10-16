@@ -85,6 +85,10 @@ export class EditOrder {
             });
     }
 
+    get isOnsite() {
+        return this._model.Inquiry.DeliveryType !== 'Off-Site' && this._model.Inquiry.DeliveryType !== 'Delivered';
+    }
+
     addItem() {
         this._model.addItem();
         this.sortItems();

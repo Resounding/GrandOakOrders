@@ -7,6 +7,7 @@ import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
 import {Router} from 'aurelia-router';
 import {InquiryViewModel, InquiryPojo} from '../../models/inquiry';
 import * as _ from 'underscore'
+import * as uri from 'uri.js'
 
 @inject(HttpClient, Router, Element)
 export class InquiryDetail {
@@ -19,11 +20,20 @@ export class InquiryDetail {
     activate(params) {
         if (params.id) {
             this.httpClient.get(`/api/inquiries/${params.id}`)
-            .then((res:HttpResponseMessage) => {
-                var inquiry:InquiryPojo = res.content;
-                this._model = new InquiryViewModel(inquiry);
-                var isNew = this._model.Id;
-            });
+                .then((res: HttpResponseMessage) => {
+                    var inquiry: InquiryPojo = res.content;
+                    this._model = new InquiryViewModel(inquiry);
+                    var isNew = this._model.Id;
+                });
+        } else {
+            // check to see if there was a date passed in.
+            var query = uri.query(location.hash);
+            if (query && query.date) {
+                var date = moment(query.date, 'YYYY-MM-DD');
+                if (date.isValid()) {
+                    this._model.EventDate = query.date;
+                };
+            }
         }
 
         window.setTimeout(() => {
@@ -54,7 +64,11 @@ export class InquiryDetail {
 
             $('[autofocus]').focus();
 		}, 500);
-	}
+    }
+
+    get isOnsite() {
+        return this._model.DeliveryType !== 'Off-Site' && this._model.DeliveryType !== 'Delivered';
+    }
 	
 	save(e) {
 		this._submitted = true;

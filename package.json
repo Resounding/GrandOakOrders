@@ -70,7 +70,8 @@
       "paulvanbladel/aurelia-auth": "github:paulvanbladel/aurelia-auth@^0.9.14",
       "text": "github:systemjs/plugin-text@^0.0.2",
       "typescript": "npm:typescript@^1.6.0-beta",
-      "underscore": "npm:underscore@^1.8.3"
+      "underscore": "npm:underscore@^1.8.3",
+      "uri.js": "npm:uri.js@^0.1.3"
     },
     "devDependencies": {},
     "overrides": {

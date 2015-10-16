@@ -1,0 +1,65 @@
+{
+  "name": "uri.js",
+  "description": "URI Parser (and soon to be URI encoder) in Javascript.",
+  "version": "0.1.3",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nathggns/uri.js.git"
+  },
+  "devDependencies": {
+    "mocha": "1.11.0",
+    "should": "1.2.2",
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-jshint": "~0.4.0",
+    "grunt-contrib-watch": "~0.3.1",
+    "grunt-contrib-concat": "~0.1.3",
+    "grunt-mocha-cli": "~1.0.6",
+    "grunt-cli": "~0.1.7"
+  },
+  "author": {
+    "name": "Nathaniel Higgins",
+    "email": "nat@nath.is",
+    "url": "http://nath.is"
+  },
+  "bugs": {
+    "url": "https://github.com/nathggns/uri.js/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/nathggns/uri.js/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "readme": "uri.js\n======\n\nURI Parser (and soon to be URI encoder) in Javascript. \n\n**[Changelog](Changelog.md)**\n\n## Features\n\n - Parses query strings in Javascript `URI.query` - URL decodes too. \n - Creates `window.location.query` if included directly as a script and configured to do so.\n - Includes function to extend objects (similar to `jQuery.extend`) `URI.extend`\n\nSupports use as in many module situations (CommonJS, PhantomJS, RequireJS, NodeJS), or simply including as a script in the browser.\n\n## Node Installation\n\n`npm install uri.js`\n\n## Usage\n\n```js\nvar query = URI.query('?key=val&key2=val2');\n// { key: 'val', key2: 'val2' }\n\n// As a RequireJS Module\nrequire(['require', 'uri.js'], function(require, URI) {\n    // ..\n});\n\n// As a node module\nvar URI = require('uri.js');\n\n// You can also just pass a full url into URI.query\nURI.query('https://user:pw@example.com:80/a/b?c=d#e');\n// { c: 'd' }\n\n// You can also just call URI to get a Location-like object. Currently, only supports parsing the query.\nURI('https://user:pw@example.com:80/a/b?c=d#e')\n// { query: {\n//    c: 'd'\n// }, search: '?c=d' };\n```\n\n### In the browser\n\n`uri.js` can be setup to automatically parse the current page's query string, and assign it to `window.location.query`. This is done using an object assigned to `window.location.query_opts` *(Please let me know if you can think of a better way)*. To set it up to do so, do the following, the `window.location.query_opts` object should look like so.\n\n```js\n{\n    auto: {\n        query: true\n    }\n}\n```\n\nYou can also change which key on the `location` object that the parsed query string is assigned to, using the `window.location.query_opts` object. For example, to change the key to `query_string`, you would use the following object.\n\n```js\n{\n    keys: {\n        query: 'query_string'\n    }   \n}\n```\n\n### Last Resort\n\nIf for some reason, you're not using `uri.js` in the browser, and you can't use RequireJS or CommonJS, there are two more ways to use `uri.js`. \n\nThe first way, which isn't advised, is to *fake* being in the browser, by setting the `window` variable to an object before including `uri.js` in your script. `uri.js` will then set the `uri` property on this fake `window` variable. You should also set the `location` property on the fake `window` variable to an object, in order to prevent errors with the query string detection.\n\nThe recommended way, however, is to set a callback function that will be passed the `URI` object, before including `uri.js`. There can only be one callback, however, and it has to be named `uriCallback`. You would use it like so.\n\n```js\nvar URI;\nvar uriCallback = function(uri) {\n    URI = uri;\n};\n\n// Include uri.js\n```\n## Contributing\n\nIf you would like to contribute to `uri.js`, make sure you follow the standard styleguide in place across `uri.js`, and that every feature you write has been tested for. Do NOT increment `version` in `package.json`, or touch the `dist` folder. Any pull requests on the `master` branch will be rejected, please pull request on the `dev` branch.\n\n**[View Contributing.md for full information](Contributing.md)**\n\n## Tests\n\n`uri.js` uses mocha for its tests. However, we run this via Grunt, which also does some linting for us. `uri.js` is setup so that you can do either of the following to start the test suite - they'll have the same effect.\n\n```\ngrunt test\n// ...\n\nnpm test\n// ...\n```\n\n## Todo\n\n - Add query string encoding\n - Protocol Parsing\n - Host parsing\n - Port parsing\n - Hash parsing\n - Path parsing\n",
+  "readmeFilename": "README.md",
+  "_id": "uri.js@0.1.3",
+  "dist": {
+    "shasum": "b93eee9905b3c81b9c38bbbcdfff5ef6d0c8de5f",
+    "tarball": "http://registry.npmjs.org/uri.js/-/uri.js-0.1.3.tgz"
+  },
+  "_from": ".",
+  "_npmVersion": "1.2.10",
+  "_npmUser": {
+    "name": "nathggns",
+    "email": "nat@nath.is"
+  },
+  "maintainers": [
+    {
+      "name": "nathggns",
+      "email": "nat@nath.is"
+    }
+  ],
+  "format": "cjs",
+  "ignore": [
+    "node_modules"
+  ],
+  "registry": "npm",
+  "dependencies": {}
+}

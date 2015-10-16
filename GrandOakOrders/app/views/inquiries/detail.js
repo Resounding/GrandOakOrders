@@ -1,7 +1,7 @@
 /// <reference path="../../../typings/jquery/jquery.d.ts" />
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
 /// <reference path="../../../typings/toastr/toastr.d.ts" />
-System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '../../models/inquiry'], function(exports_1) {
+System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '../../models/inquiry', 'uri.js'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
         switch (arguments.length) {
@@ -10,7 +10,7 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
             case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
         }
     };
-    var aurelia_framework_1, aurelia_http_client_1, aurelia_router_1, inquiry_1;
+    var aurelia_framework_1, aurelia_http_client_1, aurelia_router_1, inquiry_1, uri;
     var InquiryDetail;
     return {
         setters:[
@@ -25,6 +25,9 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
             },
             function (inquiry_1_1) {
                 inquiry_1 = inquiry_1_1;
+            },
+            function (uri_1) {
+                uri = uri_1;
             }],
         execute: function() {
             InquiryDetail = (function () {
@@ -44,6 +47,17 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                             _this._model = new inquiry_1.InquiryViewModel(inquiry);
                             var isNew = _this._model.Id;
                         });
+                    }
+                    else {
+                        // check to see if there was a date passed in.
+                        var query = uri.query(location.hash);
+                        if (query && query.date) {
+                            var date = moment(query.date, 'YYYY-MM-DD');
+                            if (date.isValid()) {
+                                this._model.EventDate = query.date;
+                            }
+                            ;
+                        }
                     }
                     window.setTimeout(function () {
                         var $datepicker = $('#date', _this.element), $timepicker = $('.timepicker', _this.element), $select = $('select', _this.element);
@@ -67,6 +81,13 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                         $('[autofocus]').focus();
                     }, 500);
                 };
+                Object.defineProperty(InquiryDetail.prototype, "isOnsite", {
+                    get: function () {
+                        return this._model.DeliveryType !== 'Off-Site' && this._model.DeliveryType !== 'Delivered';
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
                 InquiryDetail.prototype.save = function (e) {
                     this._submitted = true;
                     if (!this._model.isValid()) {

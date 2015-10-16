@@ -56,6 +56,8 @@
             this.txtLocation = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.line2 = new GrapeCity.ActiveReports.SectionReportModel.Line();
             this.reportFooter = new GrapeCity.ActiveReports.SectionReportModel.ReportFooter();
+            this.lblPickupNotes = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            this.txtPickupNotes = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKitchenNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblItemDescription)).BeginInit();
@@ -78,6 +80,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAllergyNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblLocation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblPickupNotes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPickupNotes)).BeginInit();
             // 
             // pageHeader
             // 
@@ -171,12 +175,12 @@
             this.line1.Left = 0F;
             this.line1.LineWeight = 1F;
             this.line1.Name = "line1";
-            this.line1.Top = 0.95F;
+            this.line1.Top = 0.9F;
             this.line1.Width = 6.5F;
             this.line1.X1 = 0F;
             this.line1.X2 = 6.5F;
-            this.line1.Y1 = 0.95F;
-            this.line1.Y2 = 0.95F;
+            this.line1.Y1 = 0.9F;
+            this.line1.Y2 = 0.9F;
             // 
             // pageFooter
             // 
@@ -222,8 +226,10 @@
             this.txtAllergyNotes,
             this.lblLocation,
             this.txtLocation,
-            this.line2});
-            this.reportHeader.Height = 3.1F;
+            this.line2,
+            this.lblPickupNotes,
+            this.txtPickupNotes});
+            this.reportHeader.Height = 3.5F;
             this.reportHeader.Name = "reportHeader";
             this.reportHeader.Format += new System.EventHandler(this.OnReportHeaderFormat);
             // 
@@ -268,7 +274,7 @@
             this.lblSummary.Name = "lblSummary";
             this.lblSummary.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblSummary.Text = "Summary:";
-            this.lblSummary.Top = 2.198F;
+            this.lblSummary.Top = 2.2F;
             this.lblSummary.Width = 1.75F;
             // 
             // txtOrganization
@@ -346,7 +352,7 @@
             this.lblAllergies.Name = "lblAllergies";
             this.lblAllergies.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblAllergies.Text = "Allergy Notes:";
-            this.lblAllergies.Top = 2.598F;
+            this.lblAllergies.Top = 2.6F;
             this.lblAllergies.Width = 1.75F;
             // 
             // txtAllergyNotes
@@ -357,7 +363,7 @@
             this.txtAllergyNotes.OutputFormat = resources.GetString("txtAllergyNotes.OutputFormat");
             this.txtAllergyNotes.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtAllergyNotes.Text = "Allergy Notes";
-            this.txtAllergyNotes.Top = 2.598F;
+            this.txtAllergyNotes.Top = 2.6F;
             this.txtAllergyNotes.Width = 4.5F;
             // 
             // lblLocation
@@ -388,17 +394,39 @@
             this.line2.Left = 0F;
             this.line2.LineWeight = 1F;
             this.line2.Name = "line2";
-            this.line2.Top = 3F;
+            this.line2.Top = 3.4F;
             this.line2.Width = 6.5F;
             this.line2.X1 = 0F;
             this.line2.X2 = 6.5F;
-            this.line2.Y1 = 3F;
-            this.line2.Y2 = 3F;
+            this.line2.Y1 = 3.4F;
+            this.line2.Y2 = 3.4F;
             // 
             // reportFooter
             // 
             this.reportFooter.Height = 0F;
             this.reportFooter.Name = "reportFooter";
+            // 
+            // lblPickupNotes
+            // 
+            this.lblPickupNotes.Height = 0.3F;
+            this.lblPickupNotes.HyperLink = null;
+            this.lblPickupNotes.Left = 0.1F;
+            this.lblPickupNotes.Name = "lblPickupNotes";
+            this.lblPickupNotes.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
+            this.lblPickupNotes.Text = "Pickup Notes:";
+            this.lblPickupNotes.Top = 3F;
+            this.lblPickupNotes.Width = 1.75F;
+            // 
+            // txtPickupNotes
+            // 
+            this.txtPickupNotes.Height = 0.3F;
+            this.txtPickupNotes.Left = 2F;
+            this.txtPickupNotes.Name = "txtPickupNotes";
+            this.txtPickupNotes.OutputFormat = resources.GetString("txtPickupNotes.OutputFormat");
+            this.txtPickupNotes.Style = "font-family: Segoe UI; font-size: 14pt";
+            this.txtPickupNotes.Text = "Pickup Notes";
+            this.txtPickupNotes.Top = 3F;
+            this.txtPickupNotes.Width = 4.5F;
             // 
             // KitchenOrderReport
             // 
@@ -443,6 +471,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAllergyNotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblLocation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblPickupNotes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPickupNotes)).EndInit();
 
         }
         #endregion
@@ -473,5 +503,7 @@
         private GrapeCity.ActiveReports.SectionReportModel.Label lblLocation;
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtLocation;
         private GrapeCity.ActiveReports.SectionReportModel.Line line2;
+        private GrapeCity.ActiveReports.SectionReportModel.Label lblPickupNotes;
+        private GrapeCity.ActiveReports.SectionReportModel.TextBox txtPickupNotes;
     }
 }

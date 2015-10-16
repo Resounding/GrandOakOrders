@@ -1,4 +1,4 @@
-System.register(['aurelia-framework'], function(exports_1) {
+System.register(['aurelia-framework', 'aurelia-router'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
         switch (arguments.length) {
@@ -7,18 +7,23 @@ System.register(['aurelia-framework'], function(exports_1) {
             case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
         }
     };
-    var aurelia_framework_1;
+    var aurelia_framework_1, aurelia_router_1;
     var NavBar;
     return {
         setters:[
             function (aurelia_framework_1_1) {
                 aurelia_framework_1 = aurelia_framework_1_1;
+            },
+            function (aurelia_router_1_1) {
+                aurelia_router_1 = aurelia_router_1_1;
             }],
         execute: function() {
             NavBar = (function () {
-                function NavBar() {
+                function NavBar(router) {
+                    this.router = router;
                 }
                 NavBar.prototype.showCalendar = function () {
+                    var _this = this;
                     var $modal = $('#calendarModal'), $calendar = $('#calendar');
                     $modal.openModal({
                         ready: function () {
@@ -37,13 +42,18 @@ System.register(['aurelia-framework'], function(exports_1) {
                                     }
                                     var tooltip = "" + $time.text() + title.replace(/<br>/g, '\n');
                                     element.attr('title', tooltip).find('.fc-title').html(title);
+                                },
+                                dayClick: function (date) {
+                                    _this.router.navigateToRoute('new inquiry', { date: window.moment(date).format('YYYY-MM-DD') });
+                                    $modal.closeModal();
                                 }
                             });
                         }
                     });
                 };
                 NavBar = __decorate([
-                    aurelia_framework_1.customElement('nav-bar')
+                    aurelia_framework_1.customElement('nav-bar'),
+                    aurelia_framework_1.inject(aurelia_router_1.Router)
                 ], NavBar);
                 return NavBar;
             })();

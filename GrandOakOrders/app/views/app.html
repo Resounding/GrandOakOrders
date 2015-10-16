@@ -1,7 +1,23 @@
 <template>
-	<require from="./nav/nav-bar"></require>
-	<nav-bar></nav-bar>
-	<div class="">
-		<router-view></router-view>
-	</div>
+    <require from="./nav/nav-bar"></require>
+    <div class="navbar-fixed">
+        <nav-bar></nav-bar>
+    </div>
+    <div class="">
+        <router-view></router-view>
+    </div>
+    <div id="calendarModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <div id="calendar"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="left legend">
+                <h5>Legend:</h5>
+                <div class="fc-event">Inquiry</div>
+                <div class="fc-event unconfirmed">Unconfirmed</div>
+                <div class="fc-event confirmed">Confirmed</div>
+            </div>
+            <button type="button" class="modal-action modal-close waves-effect btn-flat">Close</button>
+        </div>
+    </div>
 </template>

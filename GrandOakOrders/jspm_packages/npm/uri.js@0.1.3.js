@@ -1,0 +1,1 @@
+module.exports = require("npm:uri.js@0.1.3/index");
