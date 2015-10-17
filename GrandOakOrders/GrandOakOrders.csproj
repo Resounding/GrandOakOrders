@@ -3159,6 +3159,12 @@
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\LoginResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\InvoiceReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\InvoiceReport.Designer.cs">
+      <DependentUpon>InvoiceReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\KitchenOrderReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -3240,6 +3246,9 @@
       <DependentUpon>201509250241571_NewFields.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reports\InvoiceReport.resx">
+      <DependentUpon>InvoiceReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\KitchenOrderReport.resx">
       <DependentUpon>KitchenOrderReport.cs</DependentUpon>
     </EmbeddedResource>

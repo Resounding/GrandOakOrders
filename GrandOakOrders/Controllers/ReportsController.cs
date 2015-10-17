@@ -12,21 +12,41 @@ namespace GrandOakOrders.Controllers
     [AllowAnonymous]
     public class ReportsController : ApiController
     {
+        private readonly OrderRepository _repo = new OrderRepository();
+
         [Route("KitchenOrder/{id:int}")]
         [HttpGet]
         public async Task<IHttpActionResult> KitchenOrder(int id)
         {
             try {
-                var repo = new OrderRepository();
-                var order = await repo.Get(id);
+                var order = await _repo.Get(id);
                 if (order == null) {
                     return NotFound();
                 }
 
-                SectionReport report = new KitchenOrderReport(order) as SectionReport;
+                var report = new KitchenOrderReport(order) as SectionReport;
                 report.Run();
                 return Ok(report);
             } catch (Exception ex) {
+                return Ok(ex);
+            }
+        }
+
+        [Route("Invoices/{id:int}")]
+        [HttpGet]
+        public async Task<IHttpActionResult> Invoice(int id)
+        {
+            try {
+                var order = await _repo.Get(id);
+                if (order == null) {
+                    return NotFound();
+                }
+
+                var report = new InvoiceReport(order) as SectionReport;
+                report.Run();
+                return Ok(report);
+            }
+            catch (Exception ex) {
                 return Ok(ex);
             }
         }
