@@ -2106,6 +2106,7 @@
 /// <reference path="../jspm_packages/npm/underscore@1.8.3.js" />
 /// <reference path="../jspm_packages/npm/underscore@1.8.3/underscore.js" />
 /// <reference path="../jspm_packages/npm/underscore@1.8.3/underscore-min.js" />
+/// <reference path="../jspm_packages/npm/uri.js@0.1.3.js" />
 /// <reference path="../jspm_packages/npm/uri.js@0.1.3/dist/uri.js.js" />
 /// <reference path="../jspm_packages/npm/uri.js@0.1.3/gruntfile.js" />
 /// <reference path="../jspm_packages/npm/uri.js@0.1.3/index.js" />
