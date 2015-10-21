@@ -9,14 +9,14 @@ namespace GrandOakOrders.Data.Repositories
 {
     public class OrderRepository
     {
-        private GrandOakDbContext _context = new GrandOakDbContext();
+        private readonly GrandOakDbContext _context = new GrandOakDbContext();
 
         public async Task<List<Order>> OpenOrders()
         {
             var orders = await _context.Orders
                 .Include(o => o.Items)
                 .Include(o => o.Inquiry)
-                .Where(o => !o.CompletedDate.HasValue)
+                .Where(o => !o.CompletedDate.HasValue && !o.InvoiceDate.HasValue)
                 .ToListAsync();
 
             return orders;

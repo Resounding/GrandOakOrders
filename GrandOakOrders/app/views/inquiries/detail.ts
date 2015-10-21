@@ -52,7 +52,10 @@ export class InquiryDetail {
         $timepicker
             .pickatime({
                 format: 'h:i A',
-                formatLabel: 'h:i A'
+                formatLabel: 'h:i A',
+                interval: 15,
+                min: [7, 0],
+                max: [21, 0]
             })
             .on('change', (e) => {
                 this._model.EventTime = e.target.value;

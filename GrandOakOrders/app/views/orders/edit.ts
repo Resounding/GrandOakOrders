@@ -65,7 +65,10 @@ export class EditOrder {
                         .pickatime({
                             container: 'body',
                             format: 'h:i A',
-                            formatLabel: 'h:i A'
+                            formatLabel: 'h:i A',
+                            interval: 15,
+                            min: [7, 0],
+                            max: [21, 0]
                         })
                         .on('change', (e) => {
                             this._model.Inquiry.EventTime = e.target.value;

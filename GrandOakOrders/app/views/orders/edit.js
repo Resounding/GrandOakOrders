@@ -74,7 +74,10 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                                 .pickatime({
                                 container: 'body',
                                 format: 'h:i A',
-                                formatLabel: 'h:i A'
+                                formatLabel: 'h:i A',
+                                interval: 15,
+                                min: [7, 0],
+                                max: [21, 0]
                             })
                                 .on('change', function (e) {
                                 _this._model.Inquiry.EventTime = e.target.value;
