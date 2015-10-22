@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using GrandOakOrders.Data.Entities;
@@ -9,16 +10,18 @@ namespace GrandOakOrders.Reports
     public partial class InvoiceReport : SectionReport
     {
         private readonly Order _order;
+        private readonly List<OrderItem> _items;
         private int _index;
 
         public InvoiceReport(Order order)
         {
             InitializeComponent();
 
-            DataSource = order.Items
+            _items = order.Items
                 .Where(i => i.ShowOnInvoice)
                 .OrderBy(i => i.SortOrder)
                 .ToList();
+            DataSource = _items;
             _order = order;
         }
 
@@ -39,8 +42,8 @@ namespace GrandOakOrders.Reports
 
         private void OnDetailFormat(object sender, EventArgs e)
         {
-            if (_index >= 0 && _index < _order.Items.Count) {
-                var item = _order.Items[_index];
+            if (_index >= 0 && _index < _items.Count) {
+                var item = _items[_index];
 
                 txtQty.Text = item.Quantity.ToString("#,##0.##", CultureInfo.InvariantCulture);
                 txtDescription.Text = item.Description;

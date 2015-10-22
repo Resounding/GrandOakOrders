@@ -27,6 +27,7 @@ export class App {
 			{ route: 'inquiries/new', name: 'new inquiry', moduleId: './inquiries/detail', nav: false, auth: true },
             { route: 'inquiries/:id', name: 'edit inquiry', moduleId: './inquiries/detail', nav: false, auth: true },
             { route: 'orders', name: 'orders', moduleId: './orders/list', nav: true, auth: true },
+            { route: 'orders/all', name: 'all orders', moduleId: './orders/list', nav: true, auth: true },
             { route: 'orders/:id', name: 'edit order', moduleId: './orders/edit', nav: false, auth: true }
 		]);
 	}

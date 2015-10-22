@@ -9,13 +9,13 @@ namespace GrandOakOrders.Controllers
     [RoutePrefix("API/Orders")]
     public class OrdersController : ApiController
     {
-        private OrderRepository _repo = new OrderRepository();
+        private readonly OrderRepository _repo = new OrderRepository();
 
         [Route("")]
         [HttpGet]
-        public async Task<IHttpActionResult> Orders()
+        public async Task<IHttpActionResult> Orders(bool all = false)
         {
-            var orders = await _repo.OpenOrders();
+            var orders = await _repo.GetOrders(all);
             return Ok(orders);
         }
 
@@ -36,7 +36,7 @@ namespace GrandOakOrders.Controllers
         public async Task<IHttpActionResult> Update(Order order)
         {
             var user = Request.GetOwinContext().Request.User;
-            var updated = await _repo.Edit(order, user.Identity.Name);
+            await _repo.Edit(order, user.Identity.Name);
 
             return Ok();
         }

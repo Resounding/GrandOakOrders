@@ -1,26 +1,33 @@
 ﻿import {inject} from 'aurelia-framework';
 import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
+import {Router} from 'aurelia-router';
 import {OrderPojo, OrderViewModel, OrderItemViewModel} from '../../models/order';
 import moment from 'moment';
 import _ from 'underscore';
 
-const DATE_FORMAT: string = 'ddd MMM D';
-const TIME_FORMAT: string = 'h:mm A';
-
-@inject(HttpClient)
+@inject(HttpClient, Router)
 export class OrdersList {
     orders = [];
-    hasOrderingNotes: boolean = false;
+    hasOrderingNotes = false;
+    showAll:boolean;
 
-    constructor(private httpClient: HttpClient) {        
-		
-		this.httpClient.get('/api/orders')
+    constructor(private httpClient: HttpClient, private router: Router) { }
+
+    activate(params, routeConfig) {
+        this.showAll = routeConfig.name === 'all orders';
+        this.load();
+    }
+
+    load() {
+        const queryString = this.showAll ? '?all=true' : '';
+
+        this.httpClient.get(`/api/orders${queryString}`)
 			.then((res: HttpResponseMessage) => {
                 this.orders = _.chain(res.content)
                     .map((order: OrderPojo) => new OrderViewModel(order))
                     .sortBy((order: OrderViewModel) => {
                         console.log(order.EventDate);
-                        return order.EventDate
+                        return order.EventDate;
                     })
                     .value();
 
@@ -30,5 +37,12 @@ export class OrdersList {
 			}, (err) => {
 				console.log(err);	
 			});
-	}
+    }
+
+    showAllOrders() {
+        this.router.navigateToRoute('all orders');
+        // for some reason it doesn't navigate
+        this.showAll = true;
+        this.load();
+    }
 }

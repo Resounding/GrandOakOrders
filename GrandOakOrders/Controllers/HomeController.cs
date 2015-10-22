@@ -15,7 +15,7 @@ namespace GrandOakOrders.Controllers
             var inquiries = await inquiryRepo.OpenInquiries();
 
             var orderRepo = new OrderRepository();
-            var orders = await orderRepo.OpenOrders();
+            var orders = await orderRepo.GetOrders(all: false);
 
             return Ok(new { Inquiries = inquiries, Orders = orders });
         }

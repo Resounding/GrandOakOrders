@@ -49,8 +49,9 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                         }
                         _this.sortItems();
                         window.setTimeout(underscore_1.default.bind(function () {
-                            var $collapsible = $('.collapsible[data-collapsible=expandable]', _this.element), $eventDate = $('.datepicker', _this.element), $timepicker = $('.timepicker', _this.element), $select = $('select', _this.element), $dropdown = $('.dropdown-button', _this.element), $kitchenReport = $('#kitchenReport', _this.element);
+                            var $collapsible = $('.collapsible[data-collapsible=expandable]', _this.element), $eventDate = $('.datepicker', _this.element), $timepicker = $('.timepicker', _this.element), $select = $('select', _this.element), $dropdown = $('.dropdown-button', _this.element), $kitchenReport = $('.kitchen-report', _this.element), $invoiceReport = $('.invoice-report', _this.element);
                             $kitchenReport.on('click', _this.showKitchenReport.bind(_this));
+                            $invoiceReport.on('click', _this.showInvoiceReport.bind(_this));
                             $dropdown.dropdown({
                                 belowOrigin: true
                             });
@@ -116,6 +117,16 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                 EditOrder.prototype.showKitchenReport = function (e) {
                     e.preventDefault();
                     var $el = $(e.target), url = $el.attr('href');
+                    this.submit()
+                        .then(function () { return window.open(url, '_blank'); })
+                        .catch(function () { return toastr.error('There are errors on the Order.'); });
+                };
+                EditOrder.prototype.showInvoiceReport = function (e) {
+                    e.preventDefault();
+                    var $el = $(e.target), url = $el.attr('href');
+                    if (!this._model.InvoiceDate) {
+                        this._model.InvoiceDate = new Date();
+                    }
                     this.submit()
                         .then(function () { return window.open(url, '_blank'); })
                         .catch(function () { return toastr.error('There are errors on the Order.'); });

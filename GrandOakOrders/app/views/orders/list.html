@@ -10,7 +10,12 @@
         </header>
 
         <div class="container">
+            <p class="flow-text" show.bind="showAll">Showing all orders</p>
             <ul class="collection">
+                <li class="collection-header" show.bind="!showAll && !orders.length">
+                    <h4>No open orders found</h4>
+                    <a href="#/orders/all" click.trigger="showAllOrders()">Show all</a>
+                </li>
                 <li class="collection-item avatar auto-height" repeat.for="order of orders">
                     <img src="/img/meal.png" class="circle" alt="Order">
                     <div class="row">
