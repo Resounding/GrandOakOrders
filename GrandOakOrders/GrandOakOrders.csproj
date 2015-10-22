@@ -249,6 +249,7 @@
     <Content Include="app\components\auth\auth-config.js" />
     <Content Include="app\components\main.js" />
     <Content Include="app\controls\currencyTextbox.js" />
+    <Content Include="app\models\customer.js" />
     <Content Include="app\models\inquiry.js" />
     <Content Include="app\models\order.js" />
     <Content Include="app\views\app.html" />
@@ -3107,6 +3108,7 @@
     <Compile Include="Auth\GrandOakUserManager.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InquiriesController.cs" />
     <Compile Include="Controllers\MediaFormatters\WordDocumentReportMediaFormatter.cs" />
@@ -3114,6 +3116,7 @@
     <Compile Include="Controllers\MediaFormatters\ReportMediaFormatter.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Data\Entities\Customer.cs" />
     <Compile Include="Data\Entities\Inquiry.cs" />
     <Compile Include="Data\Entities\InquiryOutcome.cs" />
     <Compile Include="Data\Entities\Order.cs" />
@@ -3125,6 +3128,7 @@
     <Compile Include="Data\Maps\OrderMap.cs" />
     <Compile Include="Data\Maps\InquiryMap.cs" />
     <Compile Include="Data\Repositories\CalendarRepository.cs" />
+    <Compile Include="Data\Repositories\CustomerRepository.cs" />
     <Compile Include="Data\Repositories\InquiryRepository.cs" />
     <Compile Include="Data\Repositories\OrderRepository.cs" />
     <Compile Include="Data\Repositories\UserRepository.cs" />
@@ -3151,6 +3155,10 @@
     <Compile Include="Migrations\201509250241571_NewFields.cs" />
     <Compile Include="Migrations\201509250241571_NewFields.Designer.cs">
       <DependentUpon>201509250241571_NewFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510221031276_Customers.cs" />
+    <Compile Include="Migrations\201510221031276_Customers.Designer.cs">
+      <DependentUpon>201510221031276_Customers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
@@ -3246,6 +3254,9 @@
     <EmbeddedResource Include="Migrations\201509250241571_NewFields.resx">
       <DependentUpon>201509250241571_NewFields.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510221031276_Customers.resx">
+      <DependentUpon>201510221031276_Customers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reports\InvoiceReport.resx">
       <DependentUpon>InvoiceReport.cs</DependentUpon>
@@ -3262,6 +3273,7 @@
     <Content Include="app\views\orders\orderItem.ts" />
     <Content Include="app\controls\currencyTextbox.ts" />
     <Content Include="app\views\inquiries\detail.ts" />
+    <Content Include="app\models\customer.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\animator-css%400.16.0\aurelia-animator-css.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\binding%400.9.1\aurelia-binding.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\bootstrapper%400.17.0\aurelia-bootstrapper.d.ts" />

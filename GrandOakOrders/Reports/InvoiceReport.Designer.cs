@@ -28,13 +28,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceReport));
             this.pageHeader = new GrapeCity.ActiveReports.SectionReportModel.PageHeader();
+            this.lblQty = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            this.lblDescription = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            this.lblUnitPrice = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            this.lblLinePrice = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.detail = new GrapeCity.ActiveReports.SectionReportModel.Detail();
+            this.txtQty = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
+            this.txtDescription = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
+            this.txtUnitPrice = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
+            this.txtLinePrice = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.pageFooter = new GrapeCity.ActiveReports.SectionReportModel.PageFooter();
             this.reportHeader = new GrapeCity.ActiveReports.SectionReportModel.ReportHeader();
+            this.txtPersonTakingOrder = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.txtNumberGuests = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.txtPaymentTerms = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.txtPickupDate = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
-            this.txtPersonTakingOrder = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.picLogo = new GrapeCity.ActiveReports.SectionReportModel.Picture();
             this.lblTitle = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.txtDate = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
@@ -55,18 +63,10 @@
             this.line4 = new GrapeCity.ActiveReports.SectionReportModel.Line();
             this.line5 = new GrapeCity.ActiveReports.SectionReportModel.Line();
             this.line6 = new GrapeCity.ActiveReports.SectionReportModel.Line();
-            this.reportFooter = new GrapeCity.ActiveReports.SectionReportModel.ReportFooter();
             this.line7 = new GrapeCity.ActiveReports.SectionReportModel.Line();
-            this.lblQty = new GrapeCity.ActiveReports.SectionReportModel.Label();
-            this.lblDescription = new GrapeCity.ActiveReports.SectionReportModel.Label();
-            this.lblUnitPrice = new GrapeCity.ActiveReports.SectionReportModel.Label();
-            this.lblLinePrice = new GrapeCity.ActiveReports.SectionReportModel.Label();
-            this.txtQty = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
-            this.txtDescription = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
-            this.txtUnitPrice = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
-            this.txtLinePrice = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
-            this.txtSubtotal = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
+            this.reportFooter = new GrapeCity.ActiveReports.SectionReportModel.ReportFooter();
             this.lblSubtotal = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            this.txtSubtotal = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.lblGratuity = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.txtGratuity = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.lblDeposit = new GrapeCity.ActiveReports.SectionReportModel.Label();
@@ -80,10 +80,18 @@
             this.txtAllergies = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.lblComment = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.lblHST = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.lblQty)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDescription)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblUnitPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblLinePrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQty)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDescription)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUnitPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLinePrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPersonTakingOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumberGuests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPaymentTerms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPickupDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPersonTakingOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate)).BeginInit();
@@ -98,16 +106,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblPickupDateTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblPaymentTerms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNumberGuests)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblQty)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblDescription)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblUnitPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblLinePrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQty)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDescription)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUnitPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtLinePrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSubtotal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSubtotal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubtotal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblGratuity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtGratuity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDeposit)).BeginInit();
@@ -131,6 +131,54 @@
             this.lblLinePrice});
             this.pageHeader.Name = "pageHeader";
             // 
+            // lblQty
+            // 
+            this.lblQty.Height = 0.25F;
+            this.lblQty.HyperLink = null;
+            this.lblQty.Left = 0F;
+            this.lblQty.Name = "lblQty";
+            this.lblQty.Style = "font-family: Century Gothic; font-size: 8pt; text-align: center; vertical-align: " +
+    "middle";
+            this.lblQty.Text = "Qty";
+            this.lblQty.Top = 0F;
+            this.lblQty.Width = 0.75F;
+            // 
+            // lblDescription
+            // 
+            this.lblDescription.Height = 0.25F;
+            this.lblDescription.HyperLink = null;
+            this.lblDescription.Left = 0.75F;
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Style = "font-family: Century Gothic; font-size: 8pt; text-align: left; vertical-align: mi" +
+    "ddle";
+            this.lblDescription.Text = "Description";
+            this.lblDescription.Top = 0F;
+            this.lblDescription.Width = 3.25F;
+            // 
+            // lblUnitPrice
+            // 
+            this.lblUnitPrice.Height = 0.25F;
+            this.lblUnitPrice.HyperLink = null;
+            this.lblUnitPrice.Left = 4F;
+            this.lblUnitPrice.Name = "lblUnitPrice";
+            this.lblUnitPrice.Style = "font-family: Century Gothic; font-size: 8pt; text-align: center; vertical-align: " +
+    "middle";
+            this.lblUnitPrice.Text = "Unit Price";
+            this.lblUnitPrice.Top = 0F;
+            this.lblUnitPrice.Width = 1F;
+            // 
+            // lblLinePrice
+            // 
+            this.lblLinePrice.Height = 0.25F;
+            this.lblLinePrice.HyperLink = null;
+            this.lblLinePrice.Left = 5F;
+            this.lblLinePrice.Name = "lblLinePrice";
+            this.lblLinePrice.Style = "font-family: Century Gothic; font-size: 8pt; text-align: center; vertical-align: " +
+    "middle";
+            this.lblLinePrice.Text = "Line Price";
+            this.lblLinePrice.Top = 0F;
+            this.lblLinePrice.Width = 1F;
+            // 
             // detail
             // 
             this.detail.Controls.AddRange(new GrapeCity.ActiveReports.SectionReportModel.ARControl[] {
@@ -141,6 +189,72 @@
             this.detail.Height = 0.25F;
             this.detail.Name = "detail";
             this.detail.Format += new System.EventHandler(this.OnDetailFormat);
+            // 
+            // txtQty
+            // 
+            this.txtQty.Border.BottomStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtQty.Border.LeftStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtQty.Border.RightStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtQty.Border.TopStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtQty.Height = 0.25F;
+            this.txtQty.Left = 0F;
+            this.txtQty.Name = "txtQty";
+            this.txtQty.Padding = new GrapeCity.ActiveReports.PaddingEx(5, 0, 5, 0);
+            this.txtQty.Style = "font-family: Century Gothic; font-size: 8pt; text-align: right; vertical-align: m" +
+    "iddle";
+            this.txtQty.Text = "Qty";
+            this.txtQty.Top = 0F;
+            this.txtQty.Width = 0.75F;
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.Border.BottomStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtDescription.Border.LeftStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtDescription.Border.RightStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtDescription.Border.TopStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtDescription.Height = 0.25F;
+            this.txtDescription.Left = 0.75F;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Padding = new GrapeCity.ActiveReports.PaddingEx(5, 0, 5, 0);
+            this.txtDescription.Style = "font-family: Century Gothic; font-size: 8pt; text-align: left; vertical-align: mi" +
+    "ddle";
+            this.txtDescription.Text = "Description";
+            this.txtDescription.Top = 0F;
+            this.txtDescription.Width = 3.25F;
+            // 
+            // txtUnitPrice
+            // 
+            this.txtUnitPrice.Border.BottomStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtUnitPrice.Border.LeftStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtUnitPrice.Border.RightStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtUnitPrice.Border.TopStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtUnitPrice.Height = 0.25F;
+            this.txtUnitPrice.Left = 4F;
+            this.txtUnitPrice.Name = "txtUnitPrice";
+            this.txtUnitPrice.OutputFormat = resources.GetString("txtUnitPrice.OutputFormat");
+            this.txtUnitPrice.Padding = new GrapeCity.ActiveReports.PaddingEx(5, 0, 5, 0);
+            this.txtUnitPrice.Style = "font-family: Century Gothic; font-size: 8pt; text-align: right; vertical-align: m" +
+    "iddle";
+            this.txtUnitPrice.Text = "Unit Price";
+            this.txtUnitPrice.Top = 0F;
+            this.txtUnitPrice.Width = 1F;
+            // 
+            // txtLinePrice
+            // 
+            this.txtLinePrice.Border.BottomStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtLinePrice.Border.LeftStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtLinePrice.Border.RightStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtLinePrice.Border.TopStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
+            this.txtLinePrice.Height = 0.25F;
+            this.txtLinePrice.Left = 5F;
+            this.txtLinePrice.Name = "txtLinePrice";
+            this.txtLinePrice.OutputFormat = resources.GetString("txtLinePrice.OutputFormat");
+            this.txtLinePrice.Padding = new GrapeCity.ActiveReports.PaddingEx(5, 0, 5, 0);
+            this.txtLinePrice.Style = "font-family: Century Gothic; font-size: 8pt; text-align: right; vertical-align: m" +
+    "iddle";
+            this.txtLinePrice.Text = "Line Price";
+            this.txtLinePrice.Top = 0F;
+            this.txtLinePrice.Width = 1F;
             // 
             // pageFooter
             // 
@@ -179,6 +293,17 @@
             this.reportHeader.Name = "reportHeader";
             this.reportHeader.Format += new System.EventHandler(this.OnReportHeaderFormat);
             // 
+            // txtPersonTakingOrder
+            // 
+            this.txtPersonTakingOrder.Height = 0.25F;
+            this.txtPersonTakingOrder.Left = 0F;
+            this.txtPersonTakingOrder.Name = "txtPersonTakingOrder";
+            this.txtPersonTakingOrder.Padding = new GrapeCity.ActiveReports.PaddingEx(5, 0, 5, 0);
+            this.txtPersonTakingOrder.Style = "font-family: Century Gothic; font-size: 8pt; vertical-align: middle";
+            this.txtPersonTakingOrder.Text = "Person";
+            this.txtPersonTakingOrder.Top = 3F;
+            this.txtPersonTakingOrder.Width = 1.5F;
+            // 
             // txtNumberGuests
             // 
             this.txtNumberGuests.Height = 0.25F;
@@ -212,17 +337,6 @@
             this.txtPickupDate.Text = "Date / Time";
             this.txtPickupDate.Top = 3F;
             this.txtPickupDate.Width = 1.3F;
-            // 
-            // txtPersonTakingOrder
-            // 
-            this.txtPersonTakingOrder.Height = 0.25F;
-            this.txtPersonTakingOrder.Left = 0F;
-            this.txtPersonTakingOrder.Name = "txtPersonTakingOrder";
-            this.txtPersonTakingOrder.Padding = new GrapeCity.ActiveReports.PaddingEx(5, 0, 5, 0);
-            this.txtPersonTakingOrder.Style = "font-family: Century Gothic; font-size: 8pt; vertical-align: middle";
-            this.txtPersonTakingOrder.Text = "Person";
-            this.txtPersonTakingOrder.Top = 3F;
-            this.txtPersonTakingOrder.Width = 1.5F;
             // 
             // picLogo
             // 
@@ -460,6 +574,19 @@
             this.line6.Y1 = 3F;
             this.line6.Y2 = 3.25F;
             // 
+            // line7
+            // 
+            this.line7.Height = 0.25F;
+            this.line7.Left = 0F;
+            this.line7.LineWeight = 1F;
+            this.line7.Name = "line7";
+            this.line7.Top = 3F;
+            this.line7.Width = 0F;
+            this.line7.X1 = 0F;
+            this.line7.X2 = 0F;
+            this.line7.Y1 = 3F;
+            this.line7.Y2 = 3.25F;
+            // 
             // reportFooter
             // 
             this.reportFooter.Controls.AddRange(new GrapeCity.ActiveReports.SectionReportModel.ARControl[] {
@@ -483,132 +610,18 @@
             this.reportFooter.Format += new System.EventHandler(this.OnReportFooterFormat);
             this.reportFooter.BeforePrint += new System.EventHandler(this.OnReportFooterBeforePrint);
             // 
-            // line7
+            // lblSubtotal
             // 
-            this.line7.Height = 0.25F;
-            this.line7.Left = 0F;
-            this.line7.LineWeight = 1F;
-            this.line7.Name = "line7";
-            this.line7.Top = 3F;
-            this.line7.Width = 0F;
-            this.line7.X1 = 0F;
-            this.line7.X2 = 0F;
-            this.line7.Y1 = 3F;
-            this.line7.Y2 = 3.25F;
-            // 
-            // lblQty
-            // 
-            this.lblQty.Height = 0.25F;
-            this.lblQty.HyperLink = null;
-            this.lblQty.Left = 0F;
-            this.lblQty.Name = "lblQty";
-            this.lblQty.Style = "font-family: Century Gothic; font-size: 8pt; text-align: center; vertical-align: " +
-    "middle";
-            this.lblQty.Text = "Qty";
-            this.lblQty.Top = 0F;
-            this.lblQty.Width = 0.75F;
-            // 
-            // lblDescription
-            // 
-            this.lblDescription.Height = 0.25F;
-            this.lblDescription.HyperLink = null;
-            this.lblDescription.Left = 0.75F;
-            this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Style = "font-family: Century Gothic; font-size: 8pt; text-align: left; vertical-align: mi" +
-    "ddle";
-            this.lblDescription.Text = "Description";
-            this.lblDescription.Top = 0F;
-            this.lblDescription.Width = 3.25F;
-            // 
-            // lblUnitPrice
-            // 
-            this.lblUnitPrice.Height = 0.25F;
-            this.lblUnitPrice.HyperLink = null;
-            this.lblUnitPrice.Left = 4F;
-            this.lblUnitPrice.Name = "lblUnitPrice";
-            this.lblUnitPrice.Style = "font-family: Century Gothic; font-size: 8pt; text-align: center; vertical-align: " +
-    "middle";
-            this.lblUnitPrice.Text = "Unit Price";
-            this.lblUnitPrice.Top = 0F;
-            this.lblUnitPrice.Width = 1F;
-            // 
-            // lblLinePrice
-            // 
-            this.lblLinePrice.Height = 0.25F;
-            this.lblLinePrice.HyperLink = null;
-            this.lblLinePrice.Left = 5F;
-            this.lblLinePrice.Name = "lblLinePrice";
-            this.lblLinePrice.Style = "font-family: Century Gothic; font-size: 8pt; text-align: center; vertical-align: " +
-    "middle";
-            this.lblLinePrice.Text = "Line Price";
-            this.lblLinePrice.Top = 0F;
-            this.lblLinePrice.Width = 1F;
-            // 
-            // txtQty
-            // 
-            this.txtQty.Border.BottomStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtQty.Border.LeftStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtQty.Border.RightStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtQty.Border.TopStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtQty.Height = 0.25F;
-            this.txtQty.Left = 0F;
-            this.txtQty.Name = "txtQty";
-            this.txtQty.Padding = new GrapeCity.ActiveReports.PaddingEx(5, 0, 5, 0);
-            this.txtQty.Style = "font-family: Century Gothic; font-size: 8pt; text-align: right; vertical-align: m" +
+            this.lblSubtotal.Height = 0.25F;
+            this.lblSubtotal.HyperLink = null;
+            this.lblSubtotal.Left = 4F;
+            this.lblSubtotal.Name = "lblSubtotal";
+            this.lblSubtotal.Padding = new GrapeCity.ActiveReports.PaddingEx(0, 0, 5, 0);
+            this.lblSubtotal.Style = "font-family: Century Gothic; font-size: 8pt; text-align: right; vertical-align: m" +
     "iddle";
-            this.txtQty.Text = "Qty";
-            this.txtQty.Top = 0F;
-            this.txtQty.Width = 0.75F;
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.Border.BottomStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtDescription.Border.LeftStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtDescription.Border.RightStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtDescription.Border.TopStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtDescription.Height = 0.25F;
-            this.txtDescription.Left = 0.75F;
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Padding = new GrapeCity.ActiveReports.PaddingEx(5, 0, 5, 0);
-            this.txtDescription.Style = "font-family: Century Gothic; font-size: 8pt; text-align: left; vertical-align: mi" +
-    "ddle";
-            this.txtDescription.Text = "Description";
-            this.txtDescription.Top = 0F;
-            this.txtDescription.Width = 3.25F;
-            // 
-            // txtUnitPrice
-            // 
-            this.txtUnitPrice.Border.BottomStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtUnitPrice.Border.LeftStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtUnitPrice.Border.RightStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtUnitPrice.Border.TopStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtUnitPrice.Height = 0.25F;
-            this.txtUnitPrice.Left = 4F;
-            this.txtUnitPrice.Name = "txtUnitPrice";
-            this.txtUnitPrice.OutputFormat = resources.GetString("txtUnitPrice.OutputFormat");
-            this.txtUnitPrice.Padding = new GrapeCity.ActiveReports.PaddingEx(5, 0, 5, 0);
-            this.txtUnitPrice.Style = "font-family: Century Gothic; font-size: 8pt; text-align: right; vertical-align: m" +
-    "iddle";
-            this.txtUnitPrice.Text = "Unit Price";
-            this.txtUnitPrice.Top = 0F;
-            this.txtUnitPrice.Width = 1F;
-            // 
-            // txtLinePrice
-            // 
-            this.txtLinePrice.Border.BottomStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtLinePrice.Border.LeftStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtLinePrice.Border.RightStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtLinePrice.Border.TopStyle = GrapeCity.ActiveReports.BorderLineStyle.Solid;
-            this.txtLinePrice.Height = 0.25F;
-            this.txtLinePrice.Left = 5F;
-            this.txtLinePrice.Name = "txtLinePrice";
-            this.txtLinePrice.OutputFormat = resources.GetString("txtLinePrice.OutputFormat");
-            this.txtLinePrice.Padding = new GrapeCity.ActiveReports.PaddingEx(5, 0, 5, 0);
-            this.txtLinePrice.Style = "font-family: Century Gothic; font-size: 8pt; text-align: right; vertical-align: m" +
-    "iddle";
-            this.txtLinePrice.Text = "Line Price";
-            this.txtLinePrice.Top = 0F;
-            this.txtLinePrice.Width = 1F;
+            this.lblSubtotal.Text = "Subtotal";
+            this.lblSubtotal.Top = 0F;
+            this.lblSubtotal.Width = 1F;
             // 
             // txtSubtotal
             // 
@@ -627,19 +640,6 @@
             this.txtSubtotal.Text = "Subtotal";
             this.txtSubtotal.Top = 0F;
             this.txtSubtotal.Width = 1F;
-            // 
-            // lblSubtotal
-            // 
-            this.lblSubtotal.Height = 0.25F;
-            this.lblSubtotal.HyperLink = null;
-            this.lblSubtotal.Left = 4F;
-            this.lblSubtotal.Name = "lblSubtotal";
-            this.lblSubtotal.Padding = new GrapeCity.ActiveReports.PaddingEx(0, 0, 5, 0);
-            this.lblSubtotal.Style = "font-family: Century Gothic; font-size: 8pt; text-align: right; vertical-align: m" +
-    "iddle";
-            this.lblSubtotal.Text = "Subtotal";
-            this.lblSubtotal.Top = 0F;
-            this.lblSubtotal.Width = 1F;
             // 
             // lblGratuity
             // 
@@ -680,7 +680,7 @@
             this.lblDeposit.Padding = new GrapeCity.ActiveReports.PaddingEx(0, 0, 5, 0);
             this.lblDeposit.Style = "font-family: Century Gothic; font-size: 8pt; text-align: right; vertical-align: m" +
     "iddle";
-            this.lblDeposit.Text = "(-Desposit)";
+            this.lblDeposit.Text = "(-Deposit)";
             this.lblDeposit.Top = 0.5F;
             this.lblDeposit.Width = 1F;
             // 
@@ -854,10 +854,18 @@
             this.StyleSheet.Add(new DDCssLib.StyleSheetRule("font-family: Times New Roman; font-size: 14pt; font-weight: bold; font-style: ita" +
             "lic", "Heading2", "Normal"));
             this.StyleSheet.Add(new DDCssLib.StyleSheetRule("font-size: 13pt; font-weight: bold", "Heading3", "Normal"));
+            ((System.ComponentModel.ISupportInitialize)(this.lblQty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDescription)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblUnitPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblLinePrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDescription)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUnitPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLinePrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPersonTakingOrder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumberGuests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPaymentTerms)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPickupDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPersonTakingOrder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate)).EndInit();
@@ -872,16 +880,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblPickupDateTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblPaymentTerms)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNumberGuests)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblQty)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblDescription)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblUnitPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblLinePrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQty)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDescription)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUnitPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtLinePrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSubtotal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSubtotal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubtotal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblGratuity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtGratuity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDeposit)).EndInit();

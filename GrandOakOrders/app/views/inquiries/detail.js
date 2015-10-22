@@ -32,11 +32,17 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
         execute: function() {
             InquiryDetail = (function () {
                 function InquiryDetail(httpClient, router, element) {
+                    var _this = this;
                     this.httpClient = httpClient;
                     this.router = router;
                     this.element = element;
                     this._model = new inquiry_1.InquiryViewModel();
                     this._submitted = false;
+                    httpClient.get('/API/Customers')
+                        .then(function (results) {
+                        _this._customers = results.content;
+                    })
+                        .catch(this.onError);
                 }
                 InquiryDetail.prototype.activate = function (params) {
                     var _this = this;
@@ -45,7 +51,6 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                             .then(function (res) {
                             var inquiry = res.content;
                             _this._model = new inquiry_1.InquiryViewModel(inquiry);
-                            var isNew = _this._model.Id;
                         });
                     }
                     else {

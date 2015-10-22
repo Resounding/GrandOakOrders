@@ -8,14 +8,22 @@ import {Router} from 'aurelia-router';
 import {InquiryViewModel, InquiryPojo} from '../../models/inquiry';
 import * as _ from 'underscore'
 import * as uri from 'uri.js'
+import {Customer} from '../../models/customer';
 
 @inject(HttpClient, Router, Element)
 export class InquiryDetail {
 	
-    _model = new InquiryViewModel();
-	_submitted = false;
+    private _model = new InquiryViewModel();
+    private _submitted = false;
+    private _customers:Array<Customer>;
 	
-	constructor(private httpClient:HttpClient, private router:Router, private element: Element) { }
+	constructor(private httpClient: HttpClient, private router: Router, private element: Element) {
+	    httpClient.get('/API/Customers')
+	        .then((results: HttpResponseMessage) => {
+	            this._customers = results.content;
+	        })
+            .catch(this.onError);
+	}
 	
     activate(params) {
         if (params.id) {
@@ -23,11 +31,10 @@ export class InquiryDetail {
                 .then((res: HttpResponseMessage) => {
                     var inquiry: InquiryPojo = res.content;
                     this._model = new InquiryViewModel(inquiry);
-                    var isNew = this._model.Id;
                 });
         } else {
             // check to see if there was a date passed in.
-            var query = uri.query(location.hash);
+            const query = uri.query(location.hash);
             if (query && query.date) {
                 var date = moment(query.date, 'YYYY-MM-DD');
                 if (date.isValid()) {

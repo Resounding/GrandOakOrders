@@ -22,6 +22,7 @@ namespace GrandOakOrders.Data
             Configuration.ProxyCreationEnabled = false;
         }
 
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Inquiry> Inquiries { get; set; }
         public virtual DbSet<InquiryOutcome> InquiryOutcomes { get; set; }
         public virtual DbSet<Order> Orders { get; set; }

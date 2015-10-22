@@ -9,7 +9,7 @@ namespace GrandOakOrders.Data.Repositories
 {
     public class InquiryRepository
     {
-        private GrandOakDbContext _context = new GrandOakDbContext();
+        private readonly GrandOakDbContext _context = new GrandOakDbContext();
 
         public async Task<List<Inquiry>> OpenInquiries()
         {
@@ -36,6 +36,18 @@ namespace GrandOakOrders.Data.Repositories
             inquiry.CreatedAt = inquiry.UpdatedAt = DateTime.Now;
             inquiry.CreatedBy = inquiry.UpdatedBy = who;
             _context.Inquiries.Add(inquiry);
+
+            var existingCustomer = await _context.Customers.AnyAsync(c => c.CompanyName == inquiry.Organization || c.ContactPerson == inquiry.ContactPerson);
+            if (!existingCustomer) {
+                var customer = new Customer {
+                    CompanyName =  inquiry.Organization,
+                    ContactPerson = inquiry.ContactPerson,
+                    Email = inquiry.Email,
+                    Phone = inquiry.Phone
+                };
+                _context.Customers.Add(customer);
+            }
+
             await _context.SaveChangesAsync();
 
             return inquiry;
