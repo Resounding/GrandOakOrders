@@ -36,9 +36,9 @@ namespace GrandOakOrders.Controllers
         public async Task<IHttpActionResult> Update(Order order)
         {
             var user = Request.GetOwinContext().Request.User;
-            await _repo.Edit(order, user.Identity.Name);
+            var edited = await _repo.Edit(order, user.Identity.Name);
 
-            return Ok();
+            return Ok(edited);
         }
     }
 }

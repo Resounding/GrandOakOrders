@@ -151,8 +151,17 @@ export class EditOrder {
         if (!this._model.isValid()) {
             return Promise.reject(null);
         } else {
-            var order = this._model.toJSON();
+            const order = this._model.toJSON();
             return this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
+                .then((result) => {
+                    const edited = result.content;
+
+                    this._model.Items.forEach((item, index) => {
+                        if (item.Id < 0) {
+                            item.Id = edited.Items[index].Id;
+                        }
+                    });
+                })
                 .catch(this.onError);
         }
     }
@@ -161,7 +170,7 @@ export class EditOrder {
         console.log(err);
         var msg = 'There was a problem saving the order';
         if (err) {
-            msg += ': ' + err;
+            msg += `: ${err}`;
         }
         toastr.error(msg);
     }

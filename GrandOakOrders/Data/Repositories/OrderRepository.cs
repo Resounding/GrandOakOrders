@@ -13,11 +13,15 @@ namespace GrandOakOrders.Data.Repositories
 
         public async Task<List<Order>> GetOrders(bool all)
         {
-            var orders = await _context.Orders
+            var orderQuery = _context.Orders
                 .Include(o => o.Items)
-                .Include(o => o.Inquiry)
-                .Where(o => all && (!o.CompletedDate.HasValue && !o.InvoiceDate.HasValue))
-                .ToListAsync();
+                .Include(o => o.Inquiry);
+
+            if (!all) {
+                orderQuery = orderQuery.Where(o => o.CompletedDate == null && o.InvoiceDate == null);
+            }
+
+            var orders = await orderQuery.ToListAsync();
 
             return orders;
         }
@@ -93,7 +97,7 @@ namespace GrandOakOrders.Data.Repositories
             dborder.Inquiry.Location = order.Inquiry.Location;
             dborder.Inquiry.LocationAddress = order.Inquiry.LocationAddress;
 
-            var submittedIds = dborder.Items.Select(i => i.Id).ToList();
+            var submittedIds = order.Items.Select(i => i.Id).ToList();
             var deleted = dborder.Items
                 .Where(i => !submittedIds.Contains(i.Id))
                 .ToList();
@@ -103,9 +107,10 @@ namespace GrandOakOrders.Data.Repositories
             var edited = order.Items
                 .Where(i => i.Id > 0)
                 .ToDictionary(i => i.Id);
+            var editedIds = edited.Keys.ToList();
 
             dborder.Items
-                .Where(i => submittedIds.Contains(i.Id))
+                .Where(i => editedIds.Contains(i.Id))
                 .ToList()
                 .ForEach(i => {
                     var edit = edited[i.Id];

@@ -142,6 +142,7 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                         .catch(this.onError);
                 };
                 EditOrder.prototype.submit = function () {
+                    var _this = this;
                     this._submitted = true;
                     if (!this._model.isValid()) {
                         return Promise.reject(null);
@@ -149,6 +150,14 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                     else {
                         var order = this._model.toJSON();
                         return this.httpClient.patch("/API/Orders/" + this._model.Id, order)
+                            .then(function (result) {
+                            var edited = result.content;
+                            _this._model.Items.forEach(function (item, index) {
+                                if (item.Id < 0) {
+                                    item.Id = edited.Items[index].Id;
+                                }
+                            });
+                        })
                             .catch(this.onError);
                     }
                 };
@@ -156,7 +165,7 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                     console.log(err);
                     var msg = 'There was a problem saving the order';
                     if (err) {
-                        msg += ': ' + err;
+                        msg += ": " + err;
                     }
                     toastr.error(msg);
                 };
