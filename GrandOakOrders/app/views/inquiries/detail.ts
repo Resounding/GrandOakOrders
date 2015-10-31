@@ -36,9 +36,9 @@ export class InquiryDetail {
             // check to see if there was a date passed in.
             const query = uri.query(location.hash);
             if (query && query.date) {
-                var date = moment(query.date, 'YYYY-MM-DD');
+                const date = moment(query.date, 'YYYY-MM-DD');
                 if (date.isValid()) {
-                    this._model.EventDate = query.date;
+                    this._model.EventDate = date.format(InquiryViewModel.DATE_FORMAT);
                 };
             }
         }

@@ -59,7 +59,7 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                         if (query && query.date) {
                             var date = moment(query.date, 'YYYY-MM-DD');
                             if (date.isValid()) {
-                                this._model.EventDate = query.date;
+                                this._model.EventDate = date.format(inquiry_1.InquiryViewModel.DATE_FORMAT);
                             }
                             ;
                         }
