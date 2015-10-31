@@ -15,6 +15,7 @@ namespace GrandOakOrders
             MediaFormattersConfig.RegisterFormatters(httpConfig.Formatters);
             WebApiConfig.Configure(app, httpConfig);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            CorsConfig.Configure(httpConfig);
         }
     }
 }
