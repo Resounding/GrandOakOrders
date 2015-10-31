@@ -2,7 +2,7 @@
 ///<reference path="../../typings/underscore/underscore.d.ts" />
 System.register(['moment', 'underscore'], function(exports_1) {
     var moment_1, underscore_1;
-    var DATE_FORMAT, TIME_FORMAT, InquiryViewModel;
+    var InquiryViewModel;
     return {
         setters:[
             function (moment_1_1) {
@@ -12,8 +12,6 @@ System.register(['moment', 'underscore'], function(exports_1) {
                 underscore_1 = underscore_1_1;
             }],
         execute: function() {
-            DATE_FORMAT = 'dddd MMM D, YYYY';
-            TIME_FORMAT = 'h:mm A';
             InquiryViewModel = (function () {
                 function InquiryViewModel(model) {
                     if (model === void 0) { model = null; }
@@ -37,10 +35,10 @@ System.register(['moment', 'underscore'], function(exports_1) {
                     if (model) {
                         underscore_1.default.extend(this, model);
                         if (model.EventDate) {
-                            this.EventDate = moment_1.default(model.EventDate).format(DATE_FORMAT);
+                            this.EventDate = moment_1.default(model.EventDate).format(InquiryViewModel.DATE_FORMAT);
                         }
                         if (model.EventTime) {
-                            this.EventTime = moment_1.default(model.EventTime, 'HH:mm:SS').format(TIME_FORMAT);
+                            this.EventTime = moment_1.default(model.EventTime, 'HH:mm:SS').format(InquiryViewModel.TIME_FORMAT);
                         }
                     }
                 }
@@ -50,7 +48,7 @@ System.register(['moment', 'underscore'], function(exports_1) {
                         return this._event_date;
                     },
                     set: function (val) {
-                        var date = moment_1.default(val, DATE_FORMAT);
+                        var date = moment_1.default(val, InquiryViewModel.DATE_FORMAT);
                         if (date.isValid()) {
                             this._event_date = val;
                         }
@@ -63,7 +61,7 @@ System.register(['moment', 'underscore'], function(exports_1) {
                         return this._event_time;
                     },
                     set: function (val) {
-                        var time = moment_1.default(val, TIME_FORMAT);
+                        var time = moment_1.default(val, InquiryViewModel.TIME_FORMAT);
                         if (time.isValid()) {
                             this._event_time = val;
                         }
@@ -76,7 +74,7 @@ System.register(['moment', 'underscore'], function(exports_1) {
                         return false;
                     if (!this.Summary)
                         return false;
-                    var date = moment_1.default(this.EventDate, DATE_FORMAT), time = moment_1.default(this.EventTime, TIME_FORMAT);
+                    var date = moment_1.default(this.EventDate, InquiryViewModel.DATE_FORMAT), time = moment_1.default(this.EventTime, InquiryViewModel.TIME_FORMAT);
                     if (this.EventDate && !date.isValid())
                         return false;
                     if (this.EventTime && !time.isValid())
@@ -111,8 +109,8 @@ System.register(['moment', 'underscore'], function(exports_1) {
                         ContactPerson: this.ContactPerson,
                         Phone: this.Phone,
                         Email: this.Email,
-                        EventDate: this.EventDate ? moment_1.default(this.EventDate, DATE_FORMAT).format('YYYY-MM-DD') : null,
-                        EventTime: this.EventTime ? moment_1.default(this.EventTime, TIME_FORMAT).format('HH:mm:SS') : null,
+                        EventDate: this.EventDate ? moment_1.default(this.EventDate, InquiryViewModel.DATE_FORMAT).format('YYYY-MM-DD') : null,
+                        EventTime: this.EventTime ? moment_1.default(this.EventTime, InquiryViewModel.TIME_FORMAT).format('HH:mm:SS') : null,
                         People: this.People || 0,
                         Summary: this.Summary,
                         Description: this.Description,
@@ -125,6 +123,8 @@ System.register(['moment', 'underscore'], function(exports_1) {
                     };
                     return json;
                 };
+                InquiryViewModel.DATE_FORMAT = 'dddd MMM D, YYYY';
+                InquiryViewModel.TIME_FORMAT = 'h:mm A';
                 return InquiryViewModel;
             })();
             exports_1("InquiryViewModel", InquiryViewModel);

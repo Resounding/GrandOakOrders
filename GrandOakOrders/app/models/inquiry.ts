@@ -4,9 +4,6 @@
 import moment from 'moment';
 import _ from 'underscore';
 
-const DATE_FORMAT: string = 'dddd MMM D, YYYY';
-const TIME_FORMAT: string = 'h:mm A';
-
 export interface InquiryPojo {
     Id?:number;
     Organization: string;
@@ -34,14 +31,17 @@ export class InquiryViewModel implements InquiryPojo {
     _event_date: string = null;
     _event_time: string = null;
 
+    static DATE_FORMAT = 'dddd MMM D, YYYY';
+    static TIME_FORMAT = 'h:mm A';
+
     constructor(model: InquiryPojo = null) {
         if (model) {
             _.extend(this, model);
             if (model.EventDate) {
-                this.EventDate = moment(model.EventDate).format(DATE_FORMAT);
+                this.EventDate = moment(model.EventDate).format(InquiryViewModel.DATE_FORMAT);
             }
             if (model.EventTime) {
-                this.EventTime = moment(model.EventTime, 'HH:mm:SS').format(TIME_FORMAT);
+                this.EventTime = moment(model.EventTime, 'HH:mm:SS').format(InquiryViewModel.TIME_FORMAT);
             }
         }
     }
@@ -66,7 +66,7 @@ export class InquiryViewModel implements InquiryPojo {
         return this._event_date;
     }
     set EventDate(val) {
-        var date = moment(val, DATE_FORMAT);
+        var date = moment(val, InquiryViewModel.DATE_FORMAT);
         if (date.isValid()) {
             this._event_date = val;
         }
@@ -76,7 +76,7 @@ export class InquiryViewModel implements InquiryPojo {
         return this._event_time;
     }
     set EventTime(val) {
-        var time = moment(val, TIME_FORMAT);
+        var time = moment(val, InquiryViewModel.TIME_FORMAT);
         if (time.isValid()) {
             this._event_time = val;
         }
@@ -85,8 +85,8 @@ export class InquiryViewModel implements InquiryPojo {
     isValid() {
         if (!this.Organization) return false;
         if (!this.Summary) return false;
-        var date = moment(this.EventDate, DATE_FORMAT),
-            time = moment(this.EventTime, TIME_FORMAT);
+        var date = moment(this.EventDate, InquiryViewModel.DATE_FORMAT),
+            time = moment(this.EventTime, InquiryViewModel.TIME_FORMAT);
 
         if (this.EventDate && !date.isValid()) return false;
         if (this.EventTime && !time.isValid()) return false;
@@ -113,8 +113,8 @@ export class InquiryViewModel implements InquiryPojo {
             ContactPerson: this.ContactPerson,
             Phone: this.Phone,
             Email: this.Email,
-            EventDate: this.EventDate ? moment(this.EventDate, DATE_FORMAT).format('YYYY-MM-DD') : null,
-            EventTime: this.EventTime ? moment(this.EventTime, TIME_FORMAT).format('HH:mm:SS') : null,
+            EventDate: this.EventDate ? moment(this.EventDate, InquiryViewModel.DATE_FORMAT).format('YYYY-MM-DD') : null,
+            EventTime: this.EventTime ? moment(this.EventTime, InquiryViewModel.TIME_FORMAT).format('HH:mm:SS') : null,
             People: this.People || 0,
             Summary: this.Summary,
             Description: this.Description,
