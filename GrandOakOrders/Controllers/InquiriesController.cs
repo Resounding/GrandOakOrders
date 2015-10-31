@@ -1,24 +1,20 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Owin;
 using GrandOakOrders.Data.Entities;
 using GrandOakOrders.Data.Repositories;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace GrandOakOrders.Controllers
 {
     [RoutePrefix("API/Inquiries")]
     public class InquiriesController : ApiController
     {
-        private InquiryRepository _repo = new InquiryRepository();
+        private readonly InquiryRepository _repo = new InquiryRepository();
 
         [Route("")]
         [HttpGet]
         public async Task<IHttpActionResult> Inquiries()
         {
-            var user = Request.GetOwinContext().Request.User;
             var inquiries = await _repo.OpenInquiries();
             return Ok(inquiries);
         }
@@ -27,7 +23,6 @@ namespace GrandOakOrders.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> Get(int id)
         {
-            var user = Request.GetOwinContext().Request.User;
             var inquiry = await _repo.GetOne(id);
             if(inquiry == null) {
                 return NotFound();
