@@ -1,0 +1,1 @@
+module.exports = require("npm:typeahead.js@0.11.1/dist/typeahead.bundle");

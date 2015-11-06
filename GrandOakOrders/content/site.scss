@@ -210,3 +210,21 @@ input[type=number].h5, input[type=search].h5, textarea.materialize-textarea.h5 {
     }
 }
 /* end calendar modal */
+
+/* Typeahead */
+.twitter-typeahead {
+  width: 100%;
+}
+.tt-menu {
+  background-color: #fff;
+}
+.tt-menu .tt-suggestion {
+  padding: 10px;
+  border-bottom: solid 2px #ddd;
+  cursor: pointer;
+}
+.tt-menu .tt-suggestion:hover {
+  background-color: #64B5F6;
+  color: #fff;
+}
+/* end Typeahead */

@@ -65,10 +65,12 @@
       "core-js": "npm:core-js@^0.9.4",
       "css": "github:systemjs/plugin-css@^0.1.11",
       "fetch": "github:github/fetch@^0.9.0",
+      "handlebars": "npm:handlebars@^4.0.4",
       "jquery": "github:components/jquery@^2.1.4",
       "moment": "github:moment/moment@^2.10.6",
       "paulvanbladel/aurelia-auth": "github:paulvanbladel/aurelia-auth@^0.9.14",
       "text": "github:systemjs/plugin-text@^0.0.2",
+      "typeahead.js": "npm:typeahead.js@^0.11.1",
       "typescript": "npm:typescript@^1.6.0-beta",
       "underscore": "npm:underscore@^1.8.3",
       "uri.js": "npm:uri.js@^0.1.3"

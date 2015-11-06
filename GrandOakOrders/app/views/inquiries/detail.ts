@@ -46,7 +46,8 @@ export class InquiryDetail {
         window.setTimeout(() => {
             var $datepicker = $('#date', this.element),
                 $timepicker = $('.timepicker', this.element),
-                $select = $('select', this.element);
+                $select = $('select', this.element),
+                $txtOrganization = $('input[name=organization]', this.element);
 
             $datepicker
                 .pickadate({
@@ -71,6 +72,30 @@ export class InquiryDetail {
             $select.material_select();
 
             $('textarea', this.element).trigger('autoresize');
+
+            $txtOrganization.typeahead({
+                        hint: true,
+                        highlight: true,
+                        minLength: 1
+                    }, {
+                        name: 'items',
+                        source: substringMatcher(this._customers),
+                        display: 'CompanyName',
+                        templates: {
+                            suggestion: Handlebars.compile('<div>{{CompanyName}} ({{ContactPerson}})</div>')
+                        }
+                    }
+                )
+                .on('typeahead:select', (e, item:Customer) => {
+                    this._model.Organization = item.CompanyName;
+                    this._model.ContactPerson = item.ContactPerson;
+                    this._model.Email = item.Email;
+                    this._model.Phone = item.Phone;
+                    $('label[for=organization]').addClass('active');
+                }).on('typeahead:active', () => {
+                        $('label[for=organization]').addClass('active');
+                    }
+                );
 
             $('[autofocus]').focus();
 		}, 500);
@@ -116,4 +141,22 @@ export class InquiryDetail {
         console.log(err);
         toastr.error('There was a problem saving the inquiry: ' + err);
     }
+}
+
+function substringMatcher(strs) {
+    return (q:string, cb) => {
+
+        var substrRegex = new RegExp(q, 'i');
+
+        // iterate through the pool of strings and for any string that
+        // contains the substring `q`, add it to the `matches` array
+        var matches = _.reduce(strs, (memo:Array<Customer>, str:Customer) => {
+            if (substrRegex.test(str.CompanyName) || substrRegex.test(str.ContactPerson)) {
+                memo.push(str);
+            }
+            return memo;
+        }, []);
+
+        cb(matches);
+    };
 }

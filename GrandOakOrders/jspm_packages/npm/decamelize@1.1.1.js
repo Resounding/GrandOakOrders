@@ -1,0 +1,1 @@
+module.exports = require("npm:decamelize@1.1.1/index");

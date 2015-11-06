@@ -16,7 +16,7 @@
             <div class="col s12">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="organization" type="text" class="validate ${(_submitted && !_model.Organization) ? 'invalid' : ''}" value.bind="_model.Organization" required autofocus>
+                        <input id="organization" name="organization" type="text" class="validate ${(_submitted && !_model.Organization) ? 'invalid' : ''}" value.bind="_model.Organization" required autofocus>
                         <label for="organization" class="active" data-error="Organization is required" data-success="">Organization:</label>
                     </div>
                     <div class="input-field col s6">
