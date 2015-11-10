@@ -3,6 +3,7 @@
 /// <reference path="../app/components/main.js" />
 /// <reference path="../app/controls/currencytextbox.js" />
 /// <reference path="../app/models/customer.js" />
+/// <reference path="../app/models/email.js" />
 /// <reference path="../app/models/inquiry.js" />
 /// <reference path="../app/models/order.js" />
 /// <reference path="../app/views/app.js" />
