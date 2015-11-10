@@ -1,8 +1,19 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Http;
 using GrandOakOrders.Data.Entities;
 using GrandOakOrders.Data.Repositories;
+using GrandOakOrders.Models;
+using GrandOakOrders.Reports;
+using GrapeCity.ActiveReports;
+using GrapeCity.ActiveReports.Export.Pdf.Section;
+using SendGrid;
 
 namespace GrandOakOrders.Controllers
 {
@@ -39,6 +50,50 @@ namespace GrandOakOrders.Controllers
             var edited = await _repo.Edit(order, user.Identity.Name);
 
             return Ok(edited);
+        }
+
+        [Route("{id:int}/EmailInvoice")]
+        [HttpPost]
+        public async Task<IHttpActionResult> EmailInvoice(EmailInputModel model)
+        {
+            var fromAddress = ConfigurationManager.AppSettings["EmailFromAddress"];
+            var user = Request.GetOwinContext().Request.User;
+
+            var order = await _repo.Get(model.OrderId);
+            var report = new InvoiceReport(order) as SectionReport;
+            report.Run();
+            var memStream = new MemoryStream();
+            var pdfExport = new PdfExport();
+            pdfExport.Export(report.Document, memStream);
+            memStream.Position = 0;
+            var attachments = new Dictionary<string, MemoryStream> {
+                { string.Format("Invoice {0}.pdf", order.Id.ToString("0000")), memStream  }
+            };
+
+            var mailMessage = new SendGridMessage {
+                Subject = model.Subject,
+                From = new MailAddress(fromAddress, user.Identity.Name),
+                Text = model.Body,
+                Html = model.Body,
+                StreamedAttachments = attachments
+            };
+            var to = new List<string> {string.Format("{0} <{1}>", order.Inquiry.ContactPerson, model.Address)};
+            mailMessage.AddTo(to);
+
+            var username = ConfigurationManager.AppSettings["SendGridUserName"];
+            var password = ConfigurationManager.AppSettings["SendGridPassword"];
+            var credentials = new NetworkCredential(username, password);
+
+            var transportWeb = new Web(credentials);
+            await transportWeb.DeliverAsync(mailMessage);
+
+            order.Inquiry.Email = model.Address;
+            if (order.InvoiceDate == null) {
+                order.InvoiceDate = DateTime.Now;
+            }
+            await _repo.Edit(order, user.Identity.Name);
+
+            return Ok();
         }
     }
 }

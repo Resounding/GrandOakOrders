@@ -8,11 +8,13 @@ import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
 import {Router} from 'aurelia-router';
 import {InquiryPojo} from '../../models/inquiry';
 import {OrderViewModel, OrderItemPojo} from '../../models/order';
+import {Email} from '../../models/email';
 import _ from 'underscore';
 
 @inject(HttpClient, Router, Element)
 export class EditOrder {
     _model: OrderViewModel;
+    _email: Email;
     _submitted: boolean = false;
     sortedItems: Array<OrderItemPojo>;
 
@@ -22,6 +24,7 @@ export class EditOrder {
         this.httpClient.get(`/api/orders/${params.id}`)
             .then((response: HttpResponseMessage) => {
                 this._model = new OrderViewModel(response.content);
+                this._email = new Email(this._model, this.httpClient);
                 console.log(this._model);
                 if (!this._model.Items.length) {
                     this.addItem();
@@ -33,7 +36,6 @@ export class EditOrder {
                     var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element),
                         $eventDate = $('.datepicker', this.element),
                         $timepicker = $('.timepicker', this.element),
-                        $select = $('select', this.element),
                         $dropdown = $('.dropdown-button', this.element),
                         $kitchenReport = $('.kitchen-report', this.element),
                         $invoiceReport = $('.invoice-report', this.element);
@@ -164,6 +166,21 @@ export class EditOrder {
                 })
                 .catch(this.onError);
         }
+    }
+
+    emailInvoice() {
+        var $modal = $('#emailModal');
+        
+        $modal.openModal({
+            ready: () => {
+                $modal.on('click', 'button.cancel', () => $modal.closeModal());
+                $modal.on('click', 'button.blue', () => {
+                    this._email.send()
+                        .then($modal.closeModal());
+                });
+                $modal.find('iframe').attr('src', this._email.reportUrl);
+            }
+        });
     }
 
     onError(err) {

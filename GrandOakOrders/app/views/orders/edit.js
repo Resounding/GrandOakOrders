@@ -17,6 +17,7 @@ import { inject } from 'aurelia-framework';
 import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
 import { OrderViewModel } from '../../models/order';
+import { Email } from '../../models/email';
 import _ from 'underscore';
 export let EditOrder = class {
     constructor(httpClient, router, element) {
@@ -29,13 +30,14 @@ export let EditOrder = class {
         this.httpClient.get(`/api/orders/${params.id}`)
             .then((response) => {
             this._model = new OrderViewModel(response.content);
+            this._email = new Email(this._model, this.httpClient);
             console.log(this._model);
             if (!this._model.Items.length) {
                 this.addItem();
             }
             this.sortItems();
             window.setTimeout(_.bind(() => {
-                var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker', this.element), $timepicker = $('.timepicker', this.element), $select = $('select', this.element), $dropdown = $('.dropdown-button', this.element), $kitchenReport = $('.kitchen-report', this.element), $invoiceReport = $('.invoice-report', this.element);
+                var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker', this.element), $timepicker = $('.timepicker', this.element), $dropdown = $('.dropdown-button', this.element), $kitchenReport = $('.kitchen-report', this.element), $invoiceReport = $('.invoice-report', this.element);
                 $kitchenReport.on('click', this.showKitchenReport.bind(this));
                 $invoiceReport.on('click', this.showInvoiceReport.bind(this));
                 $dropdown.dropdown({
@@ -140,6 +142,19 @@ export let EditOrder = class {
             })
                 .catch(this.onError);
         }
+    }
+    emailInvoice() {
+        var $modal = $('#emailModal');
+        $modal.openModal({
+            ready: () => {
+                $modal.on('click', 'button.cancel', () => $modal.closeModal());
+                $modal.on('click', 'button.blue', () => {
+                    this._email.send()
+                        .then($modal.closeModal());
+                });
+                $modal.find('iframe').attr('src', this._email.reportUrl);
+            }
+        });
     }
     onError(err) {
         console.log(err);

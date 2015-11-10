@@ -21,7 +21,12 @@
                 </li>
                 <li>
                     <a href="/Reports/Invoices/${_model.Id}?format=pdf" class="invoice-report">
-                        Invoice
+                        View Invoice
+                    </a>
+                </li>
+                <li>
+                    <a href="#" click.trigger="emailInvoice()">
+                        Email Invoice
                     </a>
                 </li>
             </ul>
@@ -30,7 +35,7 @@
         </div>
         <div class="row">
             <div class="col s12">
-                
+
             </div>
         </div>
         <div class="row">
@@ -105,7 +110,7 @@
                     <li>
                         <div class="collapsible-header ${_model.Inquiry.Location && _model.Inquiry.LocationAddress ? 'double-header' : ''}">
                             <div>
-                                ${ _model.Inquiry.DeliveryType }
+                                <span class="duplicate">${ _model.Inquiry.DeliveryType }</span>
                                 <span class="duplicate" show.bind="_model.Inquiry.Location">${_model.Inquiry.Location}</span>
                             </div>
                             <div class="duplicate" show.bind="_model.Inquiry.LocationAddress">${_model.Inquiry.LocationAddress}</div>
@@ -219,6 +224,39 @@
                     </li>
                 </ul>
             </form>
+        </div>
+    </div>
+    <div id="emailModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email_address" type="email" value.bind="_email.email"/>
+                        <label for="email_address" class="active">Email Address</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email_subject" type="text" value.bind="_email.subject"/>
+                        <label for="email_subject" class="active">Subject</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="email_body" value.bind="_email.body" rows="6" style="height: auto;"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <iframe style="width: 100%;"></iframe>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="modal-action modal-close waves-effect btn-flat blue white-text">
+                <i class="material-icons right">send</i>
+                Send
+            </button>
+            <button type="button" class="modal-action modal-close waves-effect btn-flat cancel">Cancel</button>
         </div>
     </div>
 </template>
