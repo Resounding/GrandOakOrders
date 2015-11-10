@@ -542,9 +542,6 @@
     <Content Include="jspm_packages\github\jspm\nodelibs-path%400.1.0\.jspm-hash" />
     <Content Include="jspm_packages\github\jspm\nodelibs-path%400.1.0\.jspm.json" />
     <Content Include="jspm_packages\github\jspm\nodelibs-path%400.1.0\package.json" />
-    <Content Include="jspm_packages\github\jspm\nodelibs-process%400.1.1\.jspm-hash" />
-    <Content Include="jspm_packages\github\jspm\nodelibs-process%400.1.1\.jspm.json" />
-    <Content Include="jspm_packages\github\jspm\nodelibs-process%400.1.1\package.json" />
     <Content Include="jspm_packages\github\jspm\nodelibs-readline%400.1.0\.jspm-hash" />
     <Content Include="jspm_packages\github\jspm\nodelibs-readline%400.1.0\.jspm.json" />
     <Content Include="jspm_packages\github\jspm\nodelibs-readline%400.1.0\package.json" />
@@ -1777,8 +1774,6 @@
     <Content Include="jspm_packages\github\jspm\nodelibs-os%400.1.0\index.js" />
     <Content Include="jspm_packages\github\jspm\nodelibs-path%400.1.0.js" />
     <Content Include="jspm_packages\github\jspm\nodelibs-path%400.1.0\index.js" />
-    <Content Include="jspm_packages\github\jspm\nodelibs-process%400.1.1.js" />
-    <Content Include="jspm_packages\github\jspm\nodelibs-process%400.1.1\index.js" />
     <Content Include="jspm_packages\github\jspm\nodelibs-readline%400.1.0.js" />
     <Content Include="jspm_packages\github\jspm\nodelibs-readline%400.1.0\index.js" />
     <Content Include="jspm_packages\github\jspm\nodelibs-stream%400.1.0.js" />
@@ -3290,6 +3285,7 @@
   <ItemGroup>
     <Folder Include="content\materialize\js\" />
     <Folder Include="jspm_packages\github\jspm\nodelibs-http%401.7.1\test\" />
+    <Folder Include="jspm_packages\github\jspm\nodelibs-process%400.1.1\" />
     <Folder Include="jspm_packages\github\moment\moment%402.10.6\benchmarks\" />
     <Folder Include="jspm_packages\github\moment\moment%402.10.6\meteor\" />
     <Folder Include="jspm_packages\github\moment\moment%402.10.6\min\" />
