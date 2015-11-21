@@ -207,6 +207,14 @@ export class EditOrder {
                             var delivery = new EmailDelivery(result.content);
                             this._model.EmailDeliveries.push(delivery);
                             $modal.closeModal();
+                        })
+                        .catch((err: HttpResponseMessage) => {
+                            console.log(err);
+                            var msg = 'There was a problem sending the email';
+                            if (err) {
+                                msg += `: ${err}`;
+                            }
+                            toastr.error(msg);
                         });
                 }, this));
                 $modal.find('iframe').attr('src', this._email.reportUrl);
