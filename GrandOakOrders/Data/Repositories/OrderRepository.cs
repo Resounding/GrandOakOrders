@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using GrandOakOrders.Data.Entities;
+using SendGrid;
 
 namespace GrandOakOrders.Data.Repositories
 {
@@ -31,6 +32,7 @@ namespace GrandOakOrders.Data.Repositories
             var order = await _context.Orders
                 .Include(o => o.Items)
                 .Include(o => o.Inquiry)
+                .Include(o => o.EmailDeliveries)
                 .FirstOrDefaultAsync(o => o.Id == id);
 
             return order;
@@ -144,6 +146,24 @@ namespace GrandOakOrders.Data.Repositories
             }
 
             return order;
+        }
+
+        public async Task<EmailDelivery> RecordInvoiceEmail(SendGridMessage message, int orderId, string who)
+        {
+            var delivery = new EmailDelivery {
+                From = message.From.Address,
+                To = string.Join(";", message.To.Select(t => t.Address)),
+                Bcc = string.Join(";", message.Bcc.Select(b => b.Address)),
+                Subject = message.Subject,
+                Message = message.Text,
+                OrderId = orderId,
+                Sent = DateTime.Now,
+                SentBy = who
+            };
+            _context.EmailDeliveries.Add(delivery);
+            await _context.SaveChangesAsync();
+
+            return delivery;
         }
     }
 }

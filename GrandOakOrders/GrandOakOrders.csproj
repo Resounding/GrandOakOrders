@@ -249,7 +249,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="appSettings.config" />
+    <Content Include="appSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="ClearScript.V8\ClearScriptV8-32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -267,6 +269,7 @@
     <Content Include="app\controls\currencyTextbox.js" />
     <Content Include="app\models\customer.js" />
     <Content Include="app\models\email.js" />
+    <Content Include="app\models\emailDelivery.js" />
     <Content Include="app\models\inquiry.js" />
     <Content Include="app\models\order.js" />
     <Content Include="app\views\app.html" />
@@ -3260,7 +3263,9 @@
     <Compile Include="Controllers\MediaFormatters\ReportMediaFormatter.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Data\Entities\Customer.cs" />
+    <Compile Include="Data\Entities\EmailDelivery.cs" />
     <Compile Include="Data\Entities\Inquiry.cs" />
     <Compile Include="Data\Entities\InquiryOutcome.cs" />
     <Compile Include="Data\Entities\Order.cs" />
@@ -3268,6 +3273,7 @@
     <Compile Include="Data\Entities\Tax.cs" />
     <Compile Include="Data\Entities\User.cs" />
     <Compile Include="Data\GrandOakDbContext.cs" />
+    <Compile Include="Data\Maps\EmailDeliveryMap.cs" />
     <Compile Include="Data\Maps\OrderItemMap.cs" />
     <Compile Include="Data\Maps\OrderMap.cs" />
     <Compile Include="Data\Maps\InquiryMap.cs" />
@@ -3303,6 +3309,10 @@
     <Compile Include="Migrations\201510221031276_Customers.cs" />
     <Compile Include="Migrations\201510221031276_Customers.Designer.cs">
       <DependentUpon>201510221031276_Customers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511211109287_EmailDeliveries.cs" />
+    <Compile Include="Migrations\201511211109287_EmailDeliveries.Designer.cs">
+      <DependentUpon>201511211109287_EmailDeliveries.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
@@ -3402,6 +3412,9 @@
     <EmbeddedResource Include="Migrations\201510221031276_Customers.resx">
       <DependentUpon>201510221031276_Customers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511211109287_EmailDeliveries.resx">
+      <DependentUpon>201511211109287_EmailDeliveries.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reports\InvoiceReport.resx">
       <DependentUpon>InvoiceReport.cs</DependentUpon>
@@ -3420,6 +3433,7 @@
     <Content Include="app\views\inquiries\detail.ts" />
     <Content Include="app\models\customer.ts" />
     <Content Include="app\models\email.ts" />
+    <Content Include="app\models\emailDelivery.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\animator-css%400.16.0\aurelia-animator-css.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\binding%400.9.1\aurelia-binding.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\bootstrapper%400.17.0\aurelia-bootstrapper.d.ts" />

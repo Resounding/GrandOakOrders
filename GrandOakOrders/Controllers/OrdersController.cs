@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
@@ -67,18 +68,24 @@ namespace GrandOakOrders.Controllers
             pdfExport.Export(report.Document, memStream);
             memStream.Position = 0;
             var attachments = new Dictionary<string, MemoryStream> {
-                { string.Format("Invoice {0}.pdf", order.Id.ToString("0000")), memStream  }
+                {$"Invoice {order.Id.ToString("0000")}.pdf", memStream  }
             };
 
             var mailMessage = new SendGridMessage {
                 Subject = model.Subject,
                 From = new MailAddress(fromAddress, user.Identity.Name),
                 Text = model.Body,
-                Html = model.Body,
+                Html = model.Body.Replace("\n", "<br>"),
                 StreamedAttachments = attachments
             };
-            var to = new List<string> {string.Format("{0} <{1}>", order.Inquiry.ContactPerson, model.Address)};
+            var to = model.Address.Where(a => !string.IsNullOrWhiteSpace(a)).ToList();
             mailMessage.AddTo(to);
+
+            model.Bcc.ToList().ForEach(bcc => {
+                if (!string.IsNullOrWhiteSpace(bcc)) {
+                    mailMessage.AddBcc(bcc);
+                }
+            });
 
             var username = ConfigurationManager.AppSettings["SendGridUserName"];
             var password = ConfigurationManager.AppSettings["SendGridPassword"];
@@ -86,14 +93,15 @@ namespace GrandOakOrders.Controllers
 
             var transportWeb = new Web(credentials);
             await transportWeb.DeliverAsync(mailMessage);
+            var delivery = await _repo.RecordInvoiceEmail(mailMessage, order.Id, user.Identity.Name);
 
-            order.Inquiry.Email = model.Address;
+            order.Inquiry.Email = string.Join(";", model.Address);
             if (order.InvoiceDate == null) {
                 order.InvoiceDate = DateTime.Now;
             }
             await _repo.Edit(order, user.Identity.Name);
 
-            return Ok();
+            return Ok(delivery);
         }
     }
 }

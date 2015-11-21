@@ -33,5 +33,7 @@ namespace GrandOakOrders.Data.Entities
         public Inquiry Inquiry { get; set; }
         public List<OrderItem> Items { get; set; }
         public Tax Tax { get; set; }
+
+        public ICollection<EmailDelivery> EmailDeliveries { get; set; }
     }
 }

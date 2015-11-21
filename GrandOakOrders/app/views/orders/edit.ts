@@ -7,6 +7,7 @@ import {inject} from 'aurelia-framework';
 import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
 import {Router} from 'aurelia-router';
 import {InquiryPojo} from '../../models/inquiry';
+import {EmailDelivery} from '../../models/emailDelivery';
 import {OrderViewModel, OrderItemPojo} from '../../models/order';
 import {Email} from '../../models/email';
 import _ from 'underscore';
@@ -17,6 +18,8 @@ export class EditOrder {
     _email: Email;
     _submitted: boolean = false;
     sortedItems: Array<OrderItemPojo>;
+    _toAddresses: Array<string>;
+    _bccAddresses: Array<string>;
 
     constructor(private httpClient: HttpClient, private router: Router, private element:HTMLElement) { }
 
@@ -25,12 +28,19 @@ export class EditOrder {
             .then((response: HttpResponseMessage) => {
                 this._model = new OrderViewModel(response.content);
                 this._email = new Email(this._model, this.httpClient);
+                
                 console.log(this._model);
                 if (!this._model.Items.length) {
                     this.addItem();
                 }
 
                 this.sortItems();
+                this._toAddresses = (this._model.Inquiry.Email || '').split(';');
+
+                this.httpClient.get('/API/Settings/DefaultInvoiceBccAddress')
+                    .then((settingsResponse: HttpResponseMessage) => {
+                        this._bccAddresses = (settingsResponse.content || '').toString().split(';');
+                    });
 
                 window.setTimeout(_.bind(() => {
                     var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element),
@@ -110,6 +120,17 @@ export class EditOrder {
         this.sortedItems = _.sortBy(this._model.Items, (item) => item.SortOrder);
     }
 
+    addAddress(list) {
+        list.push('');
+    }
+
+    removeAddress(address, list) {
+        var index = list.indexOf(address);
+        if (index !== -1) {
+            list.splice(index, 1);
+        }
+    }
+
     showKitchenReport(e) {
         e.preventDefault();
 
@@ -154,6 +175,8 @@ export class EditOrder {
             return Promise.reject(null);
         } else {
             const order = this._model.toJSON();
+            order.Inquiry.Email = this._toAddresses.join(';');
+
             return this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
                 .then((result) => {
                     const edited = result.content;
@@ -173,11 +196,19 @@ export class EditOrder {
         
         $modal.openModal({
             ready: () => {
-                $modal.on('click', 'button.cancel', () => $modal.closeModal());
-                $modal.on('click', 'button.blue', () => {
-                    this._email.send()
-                        .then($modal.closeModal());
+                $modal.off().on('click', 'button.cancel', (e) => {
+                    e.preventDefault();
+                    $modal.closeModal();
                 });
+                $modal.off().on('click', 'button.blue', _.bind((e) => {
+                    e.preventDefault();
+                    this._email.send(this._toAddresses, this._bccAddresses)
+                        .then((result: HttpResponseMessage) => {
+                            var delivery = new EmailDelivery(result.content);
+                            this._model.EmailDeliveries.push(delivery);
+                            $modal.closeModal();
+                        });
+                }, this));
                 $modal.find('iframe').attr('src', this._email.reportUrl);
             }
         });

@@ -3,6 +3,7 @@
 /// <reference path="../../typings/underscore/underscore.d.ts" />
 
 import {InquiryPojo, InquiryViewModel} from './inquiry';
+import {EmailDelivery} from './emailDelivery';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Container} from 'aurelia-dependency-injection';
 import _ from 'underscore';
@@ -26,6 +27,7 @@ export interface OrderPojo {
     PaymentDate: Date;
 
     Items: Array<OrderItemPojo>;
+    EmailDeliveries: Array<EmailDelivery>;
 
     SubTotal: number;
     Gratuity: number;
@@ -168,6 +170,7 @@ export class OrderViewModel implements OrderPojo {
     PaymentDate: Date;
 
     Items: Array<OrderItemPojo>;
+    EmailDeliveries: Array<EmailDelivery>;
 
     TaxCode: string;
     TaxRate: number;
@@ -219,6 +222,10 @@ export class OrderViewModel implements OrderPojo {
         }
         if (this.Inquiry.EventTime) {
             this.DateAndTime += ` @ ${this.Inquiry.EventTime}`;
+        }
+
+        if (model.EmailDeliveries) {
+            this.EmailDeliveries = model.EmailDeliveries.map(d => new EmailDelivery(d));
         }
 
         var eventDate = model.Inquiry.EventDate ? moment(model.Inquiry.EventDate) : null,

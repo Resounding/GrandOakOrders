@@ -16,6 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { inject } from 'aurelia-framework';
 import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
+import { EmailDelivery } from '../../models/emailDelivery';
 import { OrderViewModel } from '../../models/order';
 import { Email } from '../../models/email';
 import _ from 'underscore';
@@ -36,6 +37,11 @@ export let EditOrder = class {
                 this.addItem();
             }
             this.sortItems();
+            this._toAddresses = (this._model.Inquiry.Email || '').split(';');
+            this.httpClient.get('/API/Settings/DefaultInvoiceBccAddress')
+                .then((settingsResponse) => {
+                this._bccAddresses = (settingsResponse.content || '').toString().split(';');
+            });
             window.setTimeout(_.bind(() => {
                 var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker', this.element), $timepicker = $('.timepicker', this.element), $dropdown = $('.dropdown-button', this.element), $kitchenReport = $('.kitchen-report', this.element), $invoiceReport = $('.invoice-report', this.element);
                 $kitchenReport.on('click', this.showKitchenReport.bind(this));
@@ -98,6 +104,15 @@ export let EditOrder = class {
     sortItems() {
         this.sortedItems = _.sortBy(this._model.Items, (item) => item.SortOrder);
     }
+    addAddress(list) {
+        list.push('');
+    }
+    removeAddress(address, list) {
+        var index = list.indexOf(address);
+        if (index !== -1) {
+            list.splice(index, 1);
+        }
+    }
     showKitchenReport(e) {
         e.preventDefault();
         const $el = $(e.target), url = $el.attr('href');
@@ -131,6 +146,7 @@ export let EditOrder = class {
         }
         else {
             const order = this._model.toJSON();
+            order.Inquiry.Email = this._toAddresses.join(';');
             return this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
                 .then((result) => {
                 const edited = result.content;
@@ -147,11 +163,19 @@ export let EditOrder = class {
         var $modal = $('#emailModal');
         $modal.openModal({
             ready: () => {
-                $modal.on('click', 'button.cancel', () => $modal.closeModal());
-                $modal.on('click', 'button.blue', () => {
-                    this._email.send()
-                        .then($modal.closeModal());
+                $modal.off().on('click', 'button.cancel', (e) => {
+                    e.preventDefault();
+                    $modal.closeModal();
                 });
+                $modal.off().on('click', 'button.blue', _.bind((e) => {
+                    e.preventDefault();
+                    this._email.send(this._toAddresses, this._bccAddresses)
+                        .then((result) => {
+                        var delivery = new EmailDelivery(result.content);
+                        this._model.EmailDeliveries.push(delivery);
+                        $modal.closeModal();
+                    });
+                }, this));
                 $modal.find('iframe').attr('src', this._email.reportUrl);
             }
         });

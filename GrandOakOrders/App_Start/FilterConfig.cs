@@ -27,9 +27,9 @@ namespace GrandOakOrders
         }
     }
 
-    public class ErrorFilter : IFilter, IExceptionFilter
+    public class ErrorFilter : IExceptionFilter
     {
-        public bool AllowMultiple { get { return false; } }
+        public bool AllowMultiple => false;
 
         public Task ExecuteExceptionFilterAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
         {
@@ -71,7 +71,7 @@ namespace GrandOakOrders
 
     public class AuthenticationFilter : ActionFilterAttribute, IAuthenticationFilter
     {
-        private static IDictionary<string, User> _session = new Dictionary<string, User>();
+        private static readonly IDictionary<string, User> _session = new Dictionary<string, User>();
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             var request = context.Request;
@@ -94,7 +94,7 @@ namespace GrandOakOrders
                 return;
             }
 
-            var user = default(User);
+            User user;
             if (_session.ContainsKey(token)) {
                 user = _session[token];
             } else {
@@ -129,7 +129,7 @@ namespace GrandOakOrders
             Identity = new GrandOakIdentity(user);
         }
 
-        public IIdentity Identity { get; private set; }
+        public IIdentity Identity { get; }
 
         public bool IsInRole(string role)
         {
@@ -144,17 +144,11 @@ namespace GrandOakOrders
             Name = user.DisplayName;
         }
 
-        public string AuthenticationType
-        {
-            get { return "External"; }
-        }
+        public string AuthenticationType => "External";
 
-        public bool IsAuthenticated
-        {
-            get { return true; }
-        }
+        public bool IsAuthenticated => true;
 
-        public string Name { get; private set; }
+        public string Name { get; }
     }
 
     // http://www.asp.net/web-api/overview/security/authentication-filters
@@ -166,9 +160,9 @@ namespace GrandOakOrders
             InnerResult = innerResult;
         }
 
-        public AuthenticationHeaderValue Challenge { get; private set; }
+        public AuthenticationHeaderValue Challenge { get; }
 
-        public IHttpActionResult InnerResult { get; private set; }
+        public IHttpActionResult InnerResult { get; }
 
         public async Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
@@ -176,7 +170,7 @@ namespace GrandOakOrders
 
             if (response.StatusCode == HttpStatusCode.Unauthorized) {
                 // Only add one challenge per authentication scheme.
-                if (!response.Headers.WwwAuthenticate.Any((h) => h.Scheme == Challenge.Scheme)) {
+                if (response.Headers.WwwAuthenticate.All(h => h.Scheme != Challenge.Scheme)) {
                     response.Headers.WwwAuthenticate.Add(Challenge);
                 }
             }

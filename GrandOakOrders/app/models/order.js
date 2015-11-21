@@ -2,6 +2,7 @@
 /// <reference path="../../typings/moment/moment.d.ts" />
 /// <reference path="../../typings/underscore/underscore.d.ts" />
 import { InquiryViewModel } from './inquiry';
+import { EmailDelivery } from './emailDelivery';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { Container } from 'aurelia-dependency-injection';
 import _ from 'underscore';
@@ -122,6 +123,9 @@ export class OrderViewModel {
         }
         if (this.Inquiry.EventTime) {
             this.DateAndTime += ` @ ${this.Inquiry.EventTime}`;
+        }
+        if (model.EmailDeliveries) {
+            this.EmailDeliveries = model.EmailDeliveries.map(d => new EmailDelivery(d));
         }
         var eventDate = model.Inquiry.EventDate ? moment(model.Inquiry.EventDate) : null, eventTime = model.Inquiry.EventTime ? moment(model.Inquiry.EventTime, TIME_FORMAT) : null, createdAt = moment(model.CreatedAt), createdDate = createdAt.format(DATE_FORMAT), createdTime = createdAt.format(TIME_FORMAT), updatedAt = moment(model.UpdatedAt), updatedDate = updatedAt.format(DATE_FORMAT), updatedTime = updatedAt.format(TIME_FORMAT);
         this.CreatedDateAndTime = `${createdDate} @ ${createdTime}`;

@@ -8425,6 +8425,10 @@ input[type=number].h5, input[type=search].h5, textarea.materialize-textarea.h5 {
     border-color: rgba(0, 0, 0, 0.87); }
 
 /* end calendar modal */
+#emailModal.modal.modal-fixed-footer {
+  height: 80vh;
+  max-height: 80vh; }
+
 /* Typeahead */
 .twitter-typeahead {
   width: 100%; }
