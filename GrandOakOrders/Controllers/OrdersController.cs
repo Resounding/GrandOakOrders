@@ -95,7 +95,10 @@ namespace GrandOakOrders.Controllers
             await transportWeb.DeliverAsync(mailMessage);
             var delivery = await _repo.RecordInvoiceEmail(mailMessage, order.Id, user.Identity.Name);
 
-            order.Inquiry.Email = string.Join(";", model.Address);
+            var email = string.Join(";", model.Address);
+            if (!string.IsNullOrWhiteSpace(email)) {
+                order.Inquiry.Email = email;
+            }
             if (order.InvoiceDate == null) {
                 order.InvoiceDate = DateTime.Now;
             }
