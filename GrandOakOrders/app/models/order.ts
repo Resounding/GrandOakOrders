@@ -181,6 +181,7 @@ export class OrderViewModel implements OrderPojo {
     UpdatedAt: Date;
 
     HeaderText: string;
+    IdText: string;
     EventDate: Date = null;
     DateAndTime: string = '';
     CreatedDateAndTime: string = '';
@@ -208,6 +209,11 @@ export class OrderViewModel implements OrderPojo {
         this.Inquiry = new InquiryViewModel(model.Inquiry);
         const items = model.Items;
         this.Items = _.map(items, (item) => new OrderItemViewModel(item, this.events));
+
+        this.IdText = '';
+        if (this.Id > 0) {
+            this.IdText = (`0000${this.Id}`).substring(this.Id.toString().length);
+        }
 
         this.HeaderText = this.Inquiry.Organization;
         if (this.Inquiry.ContactPerson) {
@@ -325,12 +331,12 @@ export class OrderViewModel implements OrderPojo {
     }
 
     isValid(): boolean {
-        if (_.any(this.Items, (item) => !item.isValid())) return false;
+        if (_.any(this.Items, (item:OrderItemPojo) => !item.isValid())) return false;
         return true;
     }
 
     toJSON(): OrderPojo {
-        var items: Array<OrderItemPojo> = _.map(this.Items, (item) => item.toJSON());
+        const items: OrderItemPojo[] = _.map(this.Items, (item) => item.toJSON());
 
         return {
             Id: this.Id,
@@ -351,7 +357,8 @@ export class OrderViewModel implements OrderPojo {
             Deposit: this.Deposit,
             GrandTotal: this.GrandTotal,
             TaxCode: this.TaxCode,
-            TaxRate: this.TaxRate
+            TaxRate: this.TaxRate,
+            EmailDeliveries: []
         };
     }
 }

@@ -111,6 +111,10 @@ export class OrderViewModel {
         this.Inquiry = new InquiryViewModel(model.Inquiry);
         const items = model.Items;
         this.Items = _.map(items, (item) => new OrderItemViewModel(item, this.events));
+        this.IdText = '';
+        if (this.Id > 0) {
+            this.IdText = (`0000${this.Id}`).substring(this.Id.toString().length);
+        }
         this.HeaderText = this.Inquiry.Organization;
         if (this.Inquiry.ContactPerson) {
             this.HeaderText += ` (${this.Inquiry.ContactPerson})`;
@@ -210,7 +214,7 @@ export class OrderViewModel {
         return true;
     }
     toJSON() {
-        var items = _.map(this.Items, (item) => item.toJSON());
+        const items = _.map(this.Items, (item) => item.toJSON());
         return {
             Id: this.Id,
             InquiryId: this.InquiryId,
@@ -230,7 +234,8 @@ export class OrderViewModel {
             Deposit: this.Deposit,
             GrandTotal: this.GrandTotal,
             TaxCode: this.TaxCode,
-            TaxRate: this.TaxRate
+            TaxRate: this.TaxRate,
+            EmailDeliveries: []
         };
     }
 }

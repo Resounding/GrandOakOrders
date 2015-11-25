@@ -1,4 +1,5 @@
 ﻿<template>
+    <require from="../../components/orderFilter"></require>
     <div class="list">
         <a href="#">
             <i class="material-icons">chevron_left</i>
@@ -9,17 +10,29 @@
             <img src="/img/order.jpg" alt="Orders">
         </header>
 
-        <div class="container">
+        <div class="container row">
             <p class="flow-text" show.bind="showAll">Showing all orders</p>
+            <div class="col s12">
+                <div class="col s1">
+                    <label for="search">Search:</label>
+                </div>
+                <div class="col s11">
+                    <input type="search" id="search" value.bind="filterText">
+                </div>
+            </div>
+
             <ul class="collection">
                 <li class="collection-header" show.bind="!showAll && !orders.length">
                     <h4>No open orders found</h4>
                     <a href="#/orders/all" click.trigger="showAllOrders()">Show all</a>
                 </li>
-                <li class="collection-item avatar auto-height" repeat.for="order of orders">
+                <li class="collection-item avatar auto-height" repeat.for="order of orders | orderFilter: filterText">
                     <img src="/img/meal.png" class="circle" alt="Order">
                     <div class="row">
                         <span class="title">${order.HeaderText}</span>
+                        <strong class="right" style="margin-right: 75px;">
+                            #${order.IdText}
+                        </strong>
                     </div>
                     <div class="row">
                         <div class="col s6">

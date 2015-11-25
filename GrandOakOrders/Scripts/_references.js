@@ -1,6 +1,7 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="../app/components/auth/auth-config.js" />
 /// <reference path="../app/components/main.js" />
+/// <reference path="../app/components/orderfilter.js" />
 /// <reference path="../app/controls/currencytextbox.js" />
 /// <reference path="../app/models/customer.js" />
 /// <reference path="../app/models/email.js" />

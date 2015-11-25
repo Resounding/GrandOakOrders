@@ -266,6 +266,7 @@
     </None>
     <Content Include="app\components\auth\auth-config.js" />
     <Content Include="app\components\main.js" />
+    <Content Include="app\components\orderFilter.js" />
     <Content Include="app\controls\currencyTextbox.js" />
     <Content Include="app\models\customer.js" />
     <Content Include="app\models\email.js" />
@@ -3434,6 +3435,7 @@
     <Content Include="app\models\customer.ts" />
     <Content Include="app\models\email.ts" />
     <Content Include="app\models\emailDelivery.ts" />
+    <Content Include="app\components\orderFilter.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\animator-css%400.16.0\aurelia-animator-css.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\binding%400.9.1\aurelia-binding.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\bootstrapper%400.17.0\aurelia-bootstrapper.d.ts" />

@@ -3,10 +3,10 @@ export class Email {
         this.order = order;
         this.httpClient = httpClient;
         //http://stackoverflow.com/a/5366862
-        const invoiceId = ('0000' + this.order.Id).substring(this.order.Id.toString().length);
+        const invoiceId = (`0000${this.order.Id}`).substring(this.order.Id.toString().length);
         this.email = (this.order.Inquiry.Email || '').split(';');
-        this.subject = `Grand Oak Culinary Markets: invoice #${invoiceId}`;
-        this.body = `Thank you for doing business with Grand Oak Culinary Markets.
+        this.subject = `Grand Oak Culinary Market: invoice #${invoiceId}`;
+        this.body = `Thank you for doing business with Grand Oak Culinary Market.
 
 Attached is your invoice.
 
