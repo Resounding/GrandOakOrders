@@ -296,6 +296,10 @@ export class OrderViewModel implements OrderPojo {
         return this.SubTotal + this.TotalTax + this.Gratuity - this.Deposit;
     }
 
+    get InvoiceDateDisplay(): string {
+        return this.InvoiceDate ? moment(this.InvoiceDate).format(DATE_FORMAT) : 'Not invoiced';
+    }
+
     addItem(): OrderItemPojo {
         var orders = _.pluck(this.Items, 'SortOrder'),
             order = 1;

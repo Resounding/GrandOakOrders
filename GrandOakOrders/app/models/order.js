@@ -178,6 +178,9 @@ export class OrderViewModel {
     get GrandTotal() {
         return this.SubTotal + this.TotalTax + this.Gratuity - this.Deposit;
     }
+    get InvoiceDateDisplay() {
+        return this.InvoiceDate ? moment(this.InvoiceDate).format(DATE_FORMAT) : 'Not invoiced';
+    }
     addItem() {
         var orders = _.pluck(this.Items, 'SortOrder'), order = 1;
         if (orders.length) {

@@ -44,7 +44,8 @@ export class EditOrder {
 
                 window.setTimeout(_.bind(() => {
                     var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element),
-                        $eventDate = $('.datepicker', this.element),
+                        $eventDate = $('.datepicker.event', this.element),
+                        $invoiceDate = $('.datepicker.invoice', this.element),
                         $timepicker = $('.timepicker', this.element),
                         $dropdown = $('.dropdown-button', this.element),
                         $kitchenReport = $('.kitchen-report', this.element),
@@ -75,6 +76,16 @@ export class EditOrder {
                         this._model.Inquiry.EventDate = e.target.value;
                     });
 
+                    $invoiceDate
+                        .val(this._model.InvoiceDateDisplay)
+                        .pickadate({
+                            container: 'body',
+                            format: 'dddd mmm d, yyyy'
+                        })
+                        .on('change', (e) => {
+                            this._model.InvoiceDate = e.target.value;
+                        });
+
                     $timepicker
                         .pickatime({
                             container: 'body',
@@ -86,7 +97,7 @@ export class EditOrder {
                         })
                         .on('change', (e) => {
                             this._model.Inquiry.EventTime = e.target.value;
-                        })
+                        });
 
                     try {
                         $eventDate.pickadate('picker')

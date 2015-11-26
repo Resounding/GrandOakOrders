@@ -72,7 +72,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <input id="date" type="text" class="datepicker" value.bind="_model.Inquiry.EventDate">
+                                    <input id="date" type="text" class="datepicker event" value.bind="_model.Inquiry.EventDate">
                                     <label for="date" class="active">Event Date:</label>
                                 </div>
                                 <div class="input-field col s6">
@@ -218,6 +218,25 @@
                                 <div class="input-field col s12">
                                     <textarea id="allergyNotes" class="materialize-textarea" value.bind="_model.AllergyNotes"></textarea>
                                     <label for="allergyNotes" class="active">Allergy Notes:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="divider"></div>
+                <ul class="collapsible popout" data-collapsible="expandable">
+                    <li>
+                        <div class="collapsible-header">
+                            <div>
+                                Invoice Date
+                                <span show.bind="_model.InvoiceDate">(${_model.InvoiceDateDisplay})</span>
+                            </div>
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="invoiceDate" type="text" class="datepicker invoice" value.bind="_model.InvoiceDate">
+                                    <label for="invoiceDate" class="active">Invoice Date:</label>
                                 </div>
                             </div>
                         </div>

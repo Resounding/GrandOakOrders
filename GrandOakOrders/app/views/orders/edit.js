@@ -43,7 +43,7 @@ export let EditOrder = class {
                 this._bccAddresses = (settingsResponse.content || '').toString().split(';');
             });
             window.setTimeout(_.bind(() => {
-                var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker', this.element), $timepicker = $('.timepicker', this.element), $dropdown = $('.dropdown-button', this.element), $kitchenReport = $('.kitchen-report', this.element), $invoiceReport = $('.invoice-report', this.element);
+                var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker.event', this.element), $invoiceDate = $('.datepicker.invoice', this.element), $timepicker = $('.timepicker', this.element), $dropdown = $('.dropdown-button', this.element), $kitchenReport = $('.kitchen-report', this.element), $invoiceReport = $('.invoice-report', this.element);
                 $kitchenReport.on('click', this.showKitchenReport.bind(this));
                 $invoiceReport.on('click', this.showInvoiceReport.bind(this));
                 $dropdown.dropdown({
@@ -64,6 +64,15 @@ export let EditOrder = class {
                 })
                     .on('change', (e) => {
                     this._model.Inquiry.EventDate = e.target.value;
+                });
+                $invoiceDate
+                    .val(this._model.InvoiceDateDisplay)
+                    .pickadate({
+                    container: 'body',
+                    format: 'dddd mmm d, yyyy'
+                })
+                    .on('change', (e) => {
+                    this._model.InvoiceDate = e.target.value;
                 });
                 $timepicker
                     .pickatime({
