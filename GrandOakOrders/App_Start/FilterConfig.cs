@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using Elmah;
 using GrandOakOrders.Auth;
 using GrandOakOrders.Data.Entities;
 using Microsoft.AspNet.Identity;
@@ -33,7 +34,9 @@ namespace GrandOakOrders
 
         public Task ExecuteExceptionFilterAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
         {
-            //TODO: Email error reports
+            // Log to Elmah
+            ErrorSignal.FromCurrentContext().Raise(actionExecutedContext.Exception);
+
             var ex = actionExecutedContext.Exception;
             while (ex != null) {
                 Console.WriteLine(ex.Message);
