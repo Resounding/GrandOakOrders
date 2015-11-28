@@ -87,6 +87,10 @@ namespace GrandOakOrders.Controllers
                 }
             });
 
+            mailMessage.AddUniqueArgs(new Dictionary<string, string> {
+                ["order_id"] = order.Id.ToString()
+            });
+
             var username = ConfigurationManager.AppSettings["SendGridUserName"];
             var password = ConfigurationManager.AppSettings["SendGridPassword"];
             var credentials = new NetworkCredential(username, password);
