@@ -3268,6 +3268,7 @@
     <Compile Include="Controllers\MediaFormatters\ReportMediaFormatter.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\WebhooksController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Data\Entities\Customer.cs" />
     <Compile Include="Data\Entities\EmailDelivery.cs" />
