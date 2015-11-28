@@ -19,6 +19,7 @@ namespace GrandOakOrders.Data.Entities
         public DateTime? PaymentDate { get; set; }
 
         public decimal SubTotal { get; set; }
+        public bool ShowGratuity { get; set; }
         public decimal Gratuity { get; set; }
         public decimal Deposit { get; set; }
         public decimal GrandTotal { get; set; }

@@ -83,11 +83,32 @@ namespace GrandOakOrders.Reports
 
         private void OnReportFooterBeforePrint(object sender, EventArgs e)
         {
-            lblSubtotal.Top = txtSubtotal.Top = 0.0f;
-            lblGratuity.Top = txtGratuity.Top = 0.25f;
-            lblDeposit.Top = txtDeposit.Top = 0.5f;
-            lblTax.Top = txtTax.Top = 0.75f;
-            lblTotal.Top = txtTotal.Top = 1.0f;
+
+            const float height = 0.25f;
+            var subtotalTop = 0.0f;
+            var gratuityTop = 0.25f;
+            var depositTop = 0.5f;
+            var taxTop = 0.75f;
+            var totalTop = 1.0f;
+
+            if (!_order.ShowGratuity) {
+                txtGratuity.Visible = lblGratuity.Visible = false;
+                depositTop -= height;
+                taxTop -= height;
+                totalTop -= height;
+            }
+
+            if (_order.Deposit == 0.0M) {
+                txtDeposit.Visible = lblDeposit.Visible = false;
+                taxTop -= height;
+                totalTop -= height;
+            }
+
+            lblSubtotal.Top = txtSubtotal.Top = subtotalTop;
+            lblGratuity.Top = txtGratuity.Top = gratuityTop;
+            lblDeposit.Top = txtDeposit.Top = depositTop;
+            lblTax.Top = txtTax.Top = taxTop;
+            lblTotal.Top = txtTotal.Top = totalTop;
         }
     }
 }

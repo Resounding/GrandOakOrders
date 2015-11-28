@@ -57,7 +57,7 @@ export class OrderItemViewModel {
         const currency = parseFloat((val || '').toString().replace(/[$,\(\)]/g, ''));
         if (!isNaN(currency)) {
             this._totalPrice = currency;
-            if (val) {
+            if (currency) {
                 this._unitPrice = this._totalPrice / this._quantity;
             }
             this.events.publish('currency:changed');
@@ -97,7 +97,6 @@ export class OrderItemViewModel {
 export class OrderViewModel {
     constructor(model) {
         this.EventDate = null;
-        this.DateAndTime = '';
         this.CreatedDateAndTime = '';
         this.UpdatedDateAndTime = '';
         this.events = Container.instance.get(EventAggregator);
@@ -115,19 +114,6 @@ export class OrderViewModel {
         if (this.Id > 0) {
             this.IdText = (`0000${this.Id}`).substring(this.Id.toString().length);
         }
-        this.HeaderText = this.Inquiry.Organization;
-        if (this.Inquiry.ContactPerson) {
-            this.HeaderText += ` (${this.Inquiry.ContactPerson})`;
-        }
-        if (this.Inquiry.People) {
-            this.HeaderText += ` for ${this.Inquiry.People} people`;
-        }
-        if (this.Inquiry.EventDate) {
-            this.DateAndTime = this.Inquiry.EventDate;
-        }
-        if (this.Inquiry.EventTime) {
-            this.DateAndTime += ` @ ${this.Inquiry.EventTime}`;
-        }
         if (model.EmailDeliveries) {
             this.EmailDeliveries = model.EmailDeliveries.map(d => new EmailDelivery(d));
         }
@@ -140,6 +126,26 @@ export class OrderViewModel {
             }
             this.EventDate = eventDate.toDate();
         }
+    }
+    get HeaderText() {
+        var text = this.Inquiry.Organization;
+        if (this.Inquiry.ContactPerson) {
+            text += ` (${this.Inquiry.ContactPerson})`;
+        }
+        if (this.Inquiry.People) {
+            text += ` for ${this.Inquiry.People} people`;
+        }
+        return text;
+    }
+    get DateAndTime() {
+        var text = '';
+        if (this.Inquiry.EventDate) {
+            text = this.Inquiry.EventDate;
+        }
+        if (this.Inquiry.EventTime) {
+            text += ` @ ${this.Inquiry.EventTime}`;
+        }
+        return text;
     }
     get SubTotal() {
         return _.reduce(this.Items, (memo, item) => {
@@ -229,11 +235,14 @@ export class OrderViewModel {
             RequireConfirmation: this.RequireConfirmation,
             ConfirmationDate: this.ConfirmationDate,
             CompletedDate: this.CompletedDate,
+            IsConfirmed: this.IsConfirmed,
+            IsCancelled: this.IsCancelled,
             InvoiceDate: this.InvoiceDate,
             PaymentDate: this.PaymentDate,
             Items: items,
             SubTotal: this.SubTotal,
             Gratuity: this.Gratuity,
+            ShowGratuity: this.ShowGratuity,
             Deposit: this.Deposit,
             GrandTotal: this.GrandTotal,
             TaxCode: this.TaxCode,

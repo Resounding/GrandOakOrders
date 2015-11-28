@@ -3320,6 +3320,10 @@
     <Compile Include="Migrations\201511211109287_EmailDeliveries.Designer.cs">
       <DependentUpon>201511211109287_EmailDeliveries.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511281433440_ShowGratuity.cs" />
+    <Compile Include="Migrations\201511281433440_ShowGratuity.Designer.cs">
+      <DependentUpon>201511281433440_ShowGratuity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
     <Compile Include="Models\EmailInputModel.cs" />
@@ -3420,6 +3424,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511211109287_EmailDeliveries.resx">
       <DependentUpon>201511211109287_EmailDeliveries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511281433440_ShowGratuity.resx">
+      <DependentUpon>201511281433440_ShowGratuity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reports\InvoiceReport.resx">

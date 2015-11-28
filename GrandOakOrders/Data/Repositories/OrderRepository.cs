@@ -48,6 +48,7 @@ namespace GrandOakOrders.Data.Repositories
                 Notes = string.Empty,
                 PickupNotes = string.Empty,
                 AllergyNotes = string.Empty,
+                ShowGratuity = true,
                 TaxCode = tax.Id,
                 TaxRate = tax.Rate,
                 CreatedBy = who,
@@ -83,6 +84,7 @@ namespace GrandOakOrders.Data.Repositories
             dborder.InvoiceDate = order.InvoiceDate;
             dborder.PaymentDate = order.PaymentDate;
             dborder.SubTotal = order.SubTotal;
+            dborder.ShowGratuity = order.ShowGratuity;
             dborder.Gratuity = order.Gratuity;
             dborder.Deposit = order.Deposit;
             dborder.GrandTotal = order.GrandTotal;

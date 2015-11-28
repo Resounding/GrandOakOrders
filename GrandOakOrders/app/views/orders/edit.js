@@ -38,6 +38,7 @@ export let EditOrder = class {
             }
             this.sortItems();
             this._toAddresses = (this._model.Inquiry.Email || '').split(';');
+            this._originalPeople = this._model.Inquiry.People;
             this.httpClient.get('/API/Settings/DefaultInvoiceBccAddress')
                 .then((settingsResponse) => {
                 this._bccAddresses = (settingsResponse.content || '').toString().split(';');
@@ -120,6 +121,18 @@ export let EditOrder = class {
         var index = list.indexOf(address);
         if (index !== -1) {
             list.splice(index, 1);
+        }
+    }
+    numberPeopleChange() {
+        var people = parseInt(this._model.Inquiry.People.toString());
+        // skip if NaN, don't do it if 0
+        if (people) {
+            this._model.Items.forEach((item) => {
+                if (parseInt(item.Quantity.toString()) === this._originalPeople) {
+                    item.Quantity = people;
+                }
+            });
+            this._originalPeople = people;
         }
     }
     showKitchenReport(e) {

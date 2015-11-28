@@ -21,6 +21,8 @@ export interface OrderPojo {
     AllergyNotes: string;
     RequireDeposit: boolean;
     RequireConfirmation: boolean;
+    IsConfirmed: boolean;
+    IsCancelled: boolean;
     ConfirmationDate: Date;
     CompletedDate: Date;
     InvoiceDate: Date;
@@ -31,6 +33,7 @@ export interface OrderPojo {
 
     SubTotal: number;
     Gratuity: number;
+    ShowGratuity: boolean;
     Deposit: number;
     GrandTotal: number;
     TaxCode: string;
@@ -119,7 +122,7 @@ export class OrderItemViewModel {
 
         if (!isNaN(currency)) {
             this._totalPrice = currency;
-            if (val) {
+            if (currency) {
                 this._unitPrice = this._totalPrice / this._quantity;
             }
             this.events.publish('currency:changed');
@@ -164,6 +167,9 @@ export class OrderViewModel implements OrderPojo {
     AllergyNotes: string;
     RequireDeposit: boolean;
     RequireConfirmation: boolean;
+    ShowGratuity: boolean;
+    IsConfirmed: boolean;
+    IsCancelled: boolean;
     ConfirmationDate: Date;
     CompletedDate: Date;
     InvoiceDate: Date;
@@ -180,10 +186,8 @@ export class OrderViewModel implements OrderPojo {
     UpdatedBy: string;
     UpdatedAt: Date;
 
-    HeaderText: string;
     IdText: string;
     EventDate: Date = null;
-    DateAndTime: string = '';
     CreatedDateAndTime: string = '';
     UpdatedDateAndTime: string = '';
     _gratuity: number;
@@ -215,21 +219,6 @@ export class OrderViewModel implements OrderPojo {
             this.IdText = (`0000${this.Id}`).substring(this.Id.toString().length);
         }
 
-        this.HeaderText = this.Inquiry.Organization;
-        if (this.Inquiry.ContactPerson) {
-            this.HeaderText += ` (${this.Inquiry.ContactPerson})`;
-        }
-        if (this.Inquiry.People) {
-            this.HeaderText += ` for ${this.Inquiry.People} people`;
-        }
-
-        if (this.Inquiry.EventDate) {
-            this.DateAndTime = this.Inquiry.EventDate;
-        }
-        if (this.Inquiry.EventTime) {
-            this.DateAndTime += ` @ ${this.Inquiry.EventTime}`;
-        }
-
         if (model.EmailDeliveries) {
             this.EmailDeliveries = model.EmailDeliveries.map(d => new EmailDelivery(d));
         }
@@ -250,6 +239,29 @@ export class OrderViewModel implements OrderPojo {
             }
             this.EventDate = eventDate.toDate();
         }
+    }
+
+    get HeaderText(): string {
+        var text = this.Inquiry.Organization;
+        if (this.Inquiry.ContactPerson) {
+            text += ` (${this.Inquiry.ContactPerson})`;
+        }
+        if (this.Inquiry.People) {
+            text += ` for ${this.Inquiry.People} people`;
+        }
+
+        return text;
+    }
+
+    get DateAndTime(): string {
+        var text = '';
+        if (this.Inquiry.EventDate) {
+            text = this.Inquiry.EventDate;
+        }
+        if (this.Inquiry.EventTime) {
+            text += ` @ ${this.Inquiry.EventTime}`;
+        }
+        return text;
     }
 
     get SubTotal(): number {
@@ -353,11 +365,14 @@ export class OrderViewModel implements OrderPojo {
             RequireConfirmation: this.RequireConfirmation,
             ConfirmationDate: this.ConfirmationDate,
             CompletedDate: this.CompletedDate,
+            IsConfirmed: this.IsConfirmed,
+            IsCancelled: this.IsCancelled,
             InvoiceDate: this.InvoiceDate,
             PaymentDate: this.PaymentDate,
             Items: items,
             SubTotal: this.SubTotal,
             Gratuity: this.Gratuity,
+            ShowGratuity: this.ShowGratuity,
             Deposit: this.Deposit,
             GrandTotal: this.GrandTotal,
             TaxCode: this.TaxCode,

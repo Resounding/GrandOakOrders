@@ -1,341 +1,358 @@
 ﻿<template>
-    <require from="../../controls/currencyTextbox"></require>
-    <require from="./orderItem"></require>
+<require from="../../controls/currencyTextbox"></require>
+<require from="./orderItem"></require>
 
-    <div class="container">
-        <div class="fixed-tool-bar">
-            <button type="button" class="btn dropdown-button left" data-activates="reportsDropdown">
-                <i class="material-icons">printer</i>
-                Reports
-            </button>
-            <ul id="reportsDropdown" class="dropdown-content">
-                <li>
-                    <a href="/Reports/KitchenOrder/${_model.Id}?format=pdf" class="kitchen-report">
-                        Kitchen Order (pdf)
-                    </a>
-                </li>
-                <li>
-                    <a href="/Reports/KitchenOrder/${_model.Id}?format=rtf" class="kitchen-report">
-                        Kitchen Order (Word)
-                    </a>
-                </li>
-                <li>
-                    <a href="/Reports/Invoices/${_model.Id}?format=pdf" class="invoice-report">
-                        View Invoice
-                    </a>
-                </li>
-                <li>
-                    <a href="#" click.trigger="emailInvoice()">
-                        Email Invoice
-                    </a>
-                </li>
-            </ul>
-            <a class="btn waves-effect waves-light white blue-text" href="#/orders">Cancel</a>
-            <a class="btn waves-effect waves-light blue" click.trigger="save($event)">Save</a>
+<div class="container">
+<div class="fixed-tool-bar">
+    <button type="button" class="btn dropdown-button left" data-activates="reportsDropdown">
+        <i class="material-icons">printer</i>
+        Reports
+    </button>
+    <ul id="reportsDropdown" class="dropdown-content">
+        <li>
+            <a href="/Reports/KitchenOrder/${_model.Id}?format=pdf" class="kitchen-report">
+                Kitchen Order (pdf)
+            </a>
+        </li>
+        <li>
+            <a href="/Reports/KitchenOrder/${_model.Id}?format=rtf" class="kitchen-report">
+                Kitchen Order (Word)
+            </a>
+        </li>
+        <li>
+            <a href="/Reports/Invoices/${_model.Id}?format=pdf" class="invoice-report">
+                View Invoice
+            </a>
+        </li>
+        <li>
+            <a href="#" click.trigger="emailInvoice()">
+                Email Invoice
+            </a>
+        </li>
+    </ul>
+    <a class="btn waves-effect waves-light white blue-text" href="#/orders">Cancel</a>
+    <a class="btn waves-effect waves-light blue" click.trigger="save($event)">Save</a>
+</div>
+<div class="row">
+    <div class="col s12">
+
+    </div>
+</div>
+<div class="row">
+<form class="col s12">
+<div class="row">
+    <div class="input-field col s12">
+        <h4>Order #${_model.Id}</h4>
+    </div>
+</div>
+<ul class="collapsible popout" data-collapsible="expandable">
+    <li>
+        <div class="collapsible-header ${_model.DateAndTime ? 'double-header' : ''}">
+            <div class="duplicate">${_model.HeaderText}</div>
+            <div class="duplicate" show.bind="_model.DateAndTime">${_model.DateAndTime}</div>
         </div>
-        <div class="row">
-            <div class="col s12">
-
+        <div class="collapsible-body">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="organization" type="text" value.bind="_model.Inquiry.Organization">
+                    <label for="organization" class="active">Organization:</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="caller" type="text" value.bind="_model.Inquiry.ContactPerson">
+                    <label for="caller" class="active">Person Calling:</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="phone" type="tel" value.bind="_model.Inquiry.Phone">
+                    <label for="phone" class="active">Phone Number:</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="email" type="email" value.bind="_model.Inquiry.Email">
+                    <label for="email" class="active">Email:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="date" type="text" class="datepicker event" value.bind="_model.Inquiry.EventDate">
+                    <label for="date" class="active">Event Date:</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="time" type="text" class="timepicker" value.bind="_model.Inquiry.EventTime">
+                    <label for="time" class="active">Event Time:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s2">
+                    <input id="people" type="number" min="0" value.bind="_model.Inquiry.People" change.trigger="numberPeopleChange()">
+                    <label for="people" class="active"># People:</label>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <form class="col s12">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <h4>Order #${_model.Id}</h4>
-                    </div>
+    </li>
+    <li>
+        <div class="collapsible-header">
+            <span class="duplicate">${_model.Inquiry.Summary}</span>
+        </div>
+        <div class="collapsible-body">
+            <div class="row">
+                <div class="input-field col s10">
+                    <textarea id="summary" class="materialize-textarea" value.bind="_model.Inquiry.Summary"></textarea>
+                    <label for="summary" class="active">Summary:</label>
                 </div>
-                <ul class="collapsible popout" data-collapsible="expandable">
-                    <li>
-                        <div class="collapsible-header ${_model.DateAndTime ? 'double-header' : ''}">
-                            <div class="duplicate">${_model.HeaderText}</div>
-                            <div class="duplicate" show.bind="_model.DateAndTime">${_model.DateAndTime}</div>
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="organization" type="text" value.bind="_model.Inquiry.Organization">
-                                    <label for="organization" class="active">Organization:</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input id="caller" type="text" value.bind="_model.Inquiry.ContactPerson">
-                                    <label for="caller" class="active">Person Calling:</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input id="phone" type="tel" value.bind="_model.Inquiry.Phone">
-                                    <label for="phone" class="active">Phone Number:</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input id="email" type="email" value.bind="_model.Inquiry.Email">
-                                    <label for="email" class="active">Email:</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="date" type="text" class="datepicker event" value.bind="_model.Inquiry.EventDate">
-                                    <label for="date" class="active">Event Date:</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input id="time" type="text" class="timepicker" value.bind="_model.Inquiry.EventTime">
-                                    <label for="time" class="active">Event Time:</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s2">
-                                    <input id="people" type="number" min="0" value.bind="_model.Inquiry.People">
-                                    <label for="people" class="active"># People:</label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">
-                            <span class="duplicate">${_model.Inquiry.Summary}</span>
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="input-field col s10">
-                                    <textarea id="summary" class="materialize-textarea" value.bind="_model.Inquiry.Summary"></textarea>
-                                    <label for="summary" class="active">Summary:</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea id="description" class="materialize-textarea" value.bind="_model.Inquiry.Description"></textarea>
-                                    <label for="caller" class="active">Fine Details:</label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header ${_model.Inquiry.Location && _model.Inquiry.LocationAddress ? 'double-header' : ''}">
-                            <div>
-                                <span class="duplicate">${ _model.Inquiry.DeliveryType }</span>
-                                <span class="duplicate" show.bind="_model.Inquiry.Location">${_model.Inquiry.Location}</span>
-                            </div>
-                            <div class="duplicate" show.bind="_model.Inquiry.LocationAddress">${_model.Inquiry.LocationAddress}</div>
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <select id="deliveryType" class="browser-default" value.bind="_model.Inquiry.DeliveryType">
-                                        <option value="Delivered">Delivery</option>
-                                        <option value="Pickup">Pickup</option>
-                                        <option value="In-House">In-House</option>
-                                        <option value="Off-Site">Off-Site</option>
-                                    </select>
-                                    <label for="deliveryType" class="active">Pickup / Delivery:</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="location" type="text" value.bind="_model.Inquiry.Location">
-                                    <label for="location" class="active">Location:</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input id="address" type="text" value.bind="_model.Inquiry.LocationAddress">
-                                    <label for="address" class="active">Address:</label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="divider"></div>
-                <div class="section">
-                    <h5>Order Details</h5>
-                    <order-item repeat.for="item of sortedItems" item.bind="item"></order-item>
-                    <div class="row">
-                        <button type="button" class="btn right green" click.trigger="addItem()">
-                            <i class="material-icons">add</i>
-                        </button>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="row">
-                        <h5 class="col s9">Sub-Total</h5>
-                        <h5 class="col s3" style="text-align: right;" innerHTML.bind="'$' + (_model.SubTotal || 0).toFixed(2)"></h5>
-                    </div>
-                    <div class="row">
-                        <h5 class="col s9">${_model.TaxCode} (${_model.TaxRate * 100}%)</h5>
-                        <h5 class="col s3" style="text-align: right;" innerHTML.bind="'$' + (_model.TotalTax || 0).toFixed(2)"></h5>
-                    </div>
-                    <div class="row">
-                        <h5 class="col s9">Gratuity</h5>
-                        <div class="col s3">
-                            <input id="gratuity" type="text" class="text-right h5" value.bind="_model.Gratuity" currency>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <h5 class="col s9">Less Deposit</h5>
-                        <div class="col s3">
-                            <input id="deposit" type="text" class="text-right h5" value.bind="_model.Deposit" currency="negative">
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="row">
-                        <h5 class="col s9">Total</h5>
-                        <h5 class="col s3" style="text-align: right;" innerHTML.bind="'$' + (_model.GrandTotal || 0).toFixed(2)"></h5>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="description" class="materialize-textarea" value.bind="_model.Inquiry.Description"></textarea>
+                    <label for="caller" class="active">Fine Details:</label>
                 </div>
-                <div class="divider"></div>
-                <ul class="collapsible popout" data-collapsible="expandable">
-                    <li>
-                        <div class="collapsible-header">
-                            <div>
-                                <strong>Notes &amp; Comments:</strong>
-                                <span class="duplicate">${_model.Notes}</span>
-                            </div>
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea id="notes" class="materialize-textarea" value.bind="_model.Notes"></textarea>
-                                    <label for="notes" class="active">Notes</label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">
-                            <strong>Pickup Notes:</strong>
-                            <span class="duplicate">${_model.PickupNotes}</span>
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea id="pickupNotes" class="materialize-textarea" value.bind="_model.PickupNotes"></textarea>
-                                    <label for="pickupNotes" class="active">Pickup Notes:</label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">
-                            <strong>Allergy Notes:</strong>
-                            <span class="duplicate">${_model.AllergyNotes}</span>
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea id="allergyNotes" class="materialize-textarea" value.bind="_model.AllergyNotes"></textarea>
-                                    <label for="allergyNotes" class="active">Allergy Notes:</label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="divider"></div>
-                <ul class="collapsible popout" data-collapsible="expandable">
-                    <li>
-                        <div class="collapsible-header">
-                            <div>
-                                Invoice Date
-                                <span show.bind="_model.InvoiceDate">(${_model.InvoiceDateDisplay})</span>
-                            </div>
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="invoiceDate" type="text" class="datepicker invoice" value.bind="_model.InvoiceDate">
-                                    <label for="invoiceDate" class="active">Invoice Date:</label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li show.bind="_model.EmailDeliveries.length">
-                        <div class="collapsible-header">
-                            <div>Invoices emailed (${_model.EmailDeliveries.length})</div>
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row" repeat.for="delivery of _model.EmailDeliveries">
-                                <div class="col 12">Sent to: ${delivery.To} on ${delivery.sentDisplay}</div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </form>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header ${_model.Inquiry.Location && _model.Inquiry.LocationAddress ? 'double-header' : ''}">
+            <div>
+                <span class="duplicate">${ _model.Inquiry.DeliveryType }</span>
+                <span class="duplicate" show.bind="_model.Inquiry.Location">${_model.Inquiry.Location}</span>
+            </div>
+            <div class="duplicate" show.bind="_model.Inquiry.LocationAddress">${_model.Inquiry.LocationAddress}</div>
+        </div>
+        <div class="collapsible-body">
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="deliveryType" class="browser-default" value.bind="_model.Inquiry.DeliveryType">
+                        <option value="Delivered">Delivery</option>
+                        <option value="Pickup">Pickup</option>
+                        <option value="In-House">In-House</option>
+                        <option value="Off-Site">Off-Site</option>
+                    </select>
+                    <label for="deliveryType" class="active">Pickup / Delivery:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="location" type="text" value.bind="_model.Inquiry.Location">
+                    <label for="location" class="active">Location:</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="address" type="text" value.bind="_model.Inquiry.LocationAddress">
+                    <label for="address" class="active">Address:</label>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+<div class="divider"></div>
+<div class="section">
+    <div class="row">
+        <p class="col s6">
+            <input type="checkbox" id="confirmed" checked.bind="_model.IsConfirmed">
+            <label for="confirmed">Order is Confirmed</label>
+        </p>
+        <p class="col s6">
+            <input type="checkbox" id="cancelled" checked.bind="_model.IsCancelled">
+            <label for="cancelled">Order is Cancelled</label>
+        </p>
+    </div>
+</div>
+<div class="divider"></div>
+<div class="section">
+    <h5>Order Details</h5>
+    <order-item repeat.for="item of sortedItems" item.bind="item"></order-item>
+    <div class="row">
+        <button type="button" class="btn right green" click.trigger="addItem()">
+            <i class="material-icons">add</i>
+        </button>
+    </div>
+    <div class="divider"></div>
+    <div class="row">
+        <h5 class="col s9">Sub-Total</h5>
+        <h5 class="col s3" style="text-align: right;" innerHTML.bind="'$' + (_model.SubTotal || 0).toFixed(2)"></h5>
+    </div>
+    <div class="row">
+        <h5 class="col s9">${_model.TaxCode} (${_model.TaxRate * 100}%)</h5>
+        <h5 class="col s3" style="text-align: right;" innerHTML.bind="'$' + (_model.TotalTax || 0).toFixed(2)"></h5>
+    </div>
+    <div class="row">
+        <h5 class="col s3">Gratuity</h5>
+        <p class="col s6 right-align">
+            <input type="checkbox" id="showGratuity" checked.bind="_model.ShowGratuity">
+            <label for="showGratuity">Show Gratuity on Invoice</label>
+        </p>
+        <div class="col s3">
+            <input id="gratuity" type="text" class="text-right h5" value.bind="_model.Gratuity" currency>
         </div>
     </div>
-    <div id="emailModal" class="modal modal-fixed-footer">
-        <div class="modal-content">
-            <form class="col s12">
-                <ul class="collapsible popout" data-collapsible="expandable">
-                    <li>
-                        <div class="collapsible-header active">
-                            <div>Email Addresses</div>
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row" repeat.for="address of _toAddresses">
-                                <div class="input-field col s10">
-                                    <input id="email_address_${$index}" type="email" value.bind="address"/>
-                                    <label for="email_address_${$index}" class="active">To</label>
-                                </div>
-                                <div class="col s1">
-                                    <button type="button" class="btn red btn-floating" click.trigger="$parent.removeAddress(address, $parent._toAddresses)" show.bind="!$first">
-                                        <i class="material-icons">remove</i>
-                                    </button>
-                                </div>
-                                <div class="col s1">
-                                    <button type="button" class="btn green btn-floating" click.trigger="$parent.addAddress($parent._toAddresses)" show.bind="$last">
-                                        <i class="material-icons">add</i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row" repeat.for="address of _bccAddresses">
-                                <div class="input-field col s10">
-                                    <input id="bcc_address_${$index}" type="email" value.bind="address" />
-                                    <label for="bcc_address_${$index}" class="active">BCC</label>
-                                </div>
-                                <div class="col s1">
-                                    <button type="button" class="btn red btn-floating" click.trigger="$parent.removeAddress(address, $parent._bccAddresses)" show.bind="!$first">
-                                        <i class="material-icons">remove</i>
-                                    </button>
-                                </div>
-                                <div class="col s1">
-                                    <button type="button" class="btn green btn-floating" click.trigger="$parent.addAddress($parent._bccAddresses)" show.bind="$last">
-                                        <i class="material-icons">add</i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header active">
-                            <div>Message</div>
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="email_subject" type="text" value.bind="_email.subject"/>
-                                    <label for="email_subject" class="active">Subject</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea id="email_body" value.bind="_email.body" rows="6" style="height: auto;"></textarea>
-                                    <label for="email_body" class="active">Message</label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">
-                            <div>Invoice</div>
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <iframe style="width: 100%; height: 50vh;"></iframe>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="modal-action modal-close waves-effect btn-flat blue white-text">
-                <i class="material-icons right">send</i>
-                Send
-            </button>
-            <button type="button" class="modal-action modal-close waves-effect btn-flat cancel">Cancel</button>
+    <div class="row">
+        <h5 class="col s9">Less Deposit</h5>
+        <div class="col s3">
+            <input id="deposit" type="text" class="text-right h5" value.bind="_model.Deposit" currency="negative">
         </div>
     </div>
+    <div class="divider"></div>
+    <div class="row">
+        <h5 class="col s9">Total</h5>
+        <h5 class="col s3" style="text-align: right;" innerHTML.bind="'$' + (_model.GrandTotal || 0).toFixed(2)"></h5>
+    </div>
+</div>
+<div class="divider"></div>
+<ul class="collapsible popout" data-collapsible="expandable">
+    <li>
+        <div class="collapsible-header">
+            <div>
+                <strong>Notes &amp; Comments:</strong>
+                <span class="duplicate">${_model.Notes}</span>
+            </div>
+        </div>
+        <div class="collapsible-body">
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="notes" class="materialize-textarea" value.bind="_model.Notes"></textarea>
+                    <label for="notes" class="active">Notes</label>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">
+            <strong>Pickup Notes:</strong>
+            <span class="duplicate">${_model.PickupNotes}</span>
+        </div>
+        <div class="collapsible-body">
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="pickupNotes" class="materialize-textarea" value.bind="_model.PickupNotes"></textarea>
+                    <label for="pickupNotes" class="active">Pickup Notes:</label>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">
+            <strong>Allergy Notes:</strong>
+            <span class="duplicate">${_model.AllergyNotes}</span>
+        </div>
+        <div class="collapsible-body">
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="allergyNotes" class="materialize-textarea" value.bind="_model.AllergyNotes"></textarea>
+                    <label for="allergyNotes" class="active">Allergy Notes:</label>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+<div class="divider"></div>
+<ul class="collapsible popout" data-collapsible="expandable">
+    <li>
+        <div class="collapsible-header">
+            <div>
+                Invoice Date
+                <span show.bind="_model.InvoiceDate">(${_model.InvoiceDateDisplay})</span>
+            </div>
+        </div>
+        <div class="collapsible-body">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="invoiceDate" type="text" class="datepicker invoice" value.bind="_model.InvoiceDate">
+                    <label for="invoiceDate" class="active">Invoice Date:</label>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li show.bind="_model.EmailDeliveries.length">
+        <div class="collapsible-header">
+            <div>Invoices emailed (${_model.EmailDeliveries.length})</div>
+        </div>
+        <div class="collapsible-body">
+            <div class="row" repeat.for="delivery of _model.EmailDeliveries">
+                <div class="col 12">Sent to: ${delivery.To} on ${delivery.sentDisplay}</div>
+            </div>
+        </div>
+    </li>
+</ul>
+</form>
+</div>
+</div>
+<div id="emailModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <form class="col s12">
+            <ul class="collapsible popout" data-collapsible="expandable">
+                <li>
+                    <div class="collapsible-header active">
+                        <div>Email Addresses</div>
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="row" repeat.for="address of _toAddresses">
+                            <div class="input-field col s10">
+                                <input id="email_address_${$index}" type="email" value.bind="address"/>
+                                <label for="email_address_${$index}" class="active">To</label>
+                            </div>
+                            <div class="col s1">
+                                <button type="button" class="btn red btn-floating" click.trigger="$parent.removeAddress(address, $parent._toAddresses)" show.bind="!$first">
+                                    <i class="material-icons">remove</i>
+                                </button>
+                            </div>
+                            <div class="col s1">
+                                <button type="button" class="btn green btn-floating" click.trigger="$parent.addAddress($parent._toAddresses)" show.bind="$last">
+                                    <i class="material-icons">add</i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row" repeat.for="address of _bccAddresses">
+                            <div class="input-field col s10">
+                                <input id="bcc_address_${$index}" type="email" value.bind="address"/>
+                                <label for="bcc_address_${$index}" class="active">BCC</label>
+                            </div>
+                            <div class="col s1">
+                                <button type="button" class="btn red btn-floating" click.trigger="$parent.removeAddress(address, $parent._bccAddresses)" show.bind="!$first">
+                                    <i class="material-icons">remove</i>
+                                </button>
+                            </div>
+                            <div class="col s1">
+                                <button type="button" class="btn green btn-floating" click.trigger="$parent.addAddress($parent._bccAddresses)" show.bind="$last">
+                                    <i class="material-icons">add</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header active">
+                        <div>Message</div>
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="email_subject" type="text" value.bind="_email.subject"/>
+                                <label for="email_subject" class="active">Subject</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="email_body" value.bind="_email.body" rows="6" style="height: auto;"></textarea>
+                                <label for="email_body" class="active">Message</label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">
+                        <div>Invoice</div>
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="row">
+                            <iframe style="width: 100%; height: 50vh;"></iframe>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="modal-action modal-close waves-effect btn-flat blue white-text">
+            <i class="material-icons right">send</i>
+            Send
+        </button>
+        <button type="button" class="modal-action modal-close waves-effect btn-flat cancel">Cancel</button>
+    </div>
+</div>
 </template>
