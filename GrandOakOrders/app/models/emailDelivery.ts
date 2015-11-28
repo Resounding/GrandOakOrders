@@ -1,4 +1,6 @@
-﻿export class EmailDelivery {
+﻿import moment from 'moment';
+
+export class EmailDelivery {
     Id: number;
     From: string;
     To: string;
@@ -8,6 +10,11 @@
     OrderId: number;
     Sent: Date;
     SentBy: string;
+    DeliveredDate: Date;
+    BouncedDate: Date;
+
+    DATE_FORMAT = 'MMM D, YYYY';
+    TIME_FORMAT = 'h:mm a';
 
     constructor(delivery: EmailDelivery) {
         this.Id = delivery.Id;
@@ -19,12 +26,23 @@
         this.OrderId = delivery.OrderId;
         this.Sent = delivery.Sent;
         this.SentBy = delivery.SentBy;
+        this.DeliveredDate = delivery.DeliveredDate;
+        this.BouncedDate = delivery.BouncedDate;
     }
 
     get sentDisplay(): string {
         if (this.Sent == null) return 'Unknown';
 
-        return moment(this.Sent).format('MMM D, YYYY') +
-            ' at ' + moment(this.Sent).format('h:mm a');
+        let text = `${moment(this.Sent).format(this.DATE_FORMAT)} at ${moment(this.Sent).format(this.TIME_FORMAT)}.`;
+
+        if (this.BouncedDate) {
+            text += ` Bounced on ${moment(this.BouncedDate).format(this.DATE_FORMAT)} at ${moment(this.BouncedDate).format(this.TIME_FORMAT)}.`;
+        }
+
+        if (this.DeliveredDate) {
+            text += ` Delivered on ${moment(this.DeliveredDate).format(this.DATE_FORMAT)} at ${moment(this.DeliveredDate).format(this.TIME_FORMAT)}.`;
+        }
+
+        return text;
     }
 }

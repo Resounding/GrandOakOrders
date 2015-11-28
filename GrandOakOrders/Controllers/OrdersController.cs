@@ -87,8 +87,11 @@ namespace GrandOakOrders.Controllers
                 }
             });
 
+            var delivery = await _repo.RecordInvoiceEmail(mailMessage, order.Id, user.Identity.Name);
+
             mailMessage.AddUniqueArgs(new Dictionary<string, string> {
-                ["order_id"] = order.Id.ToString()
+                ["order_id"] = order.Id.ToString(),
+                ["delivery_id"] = delivery.Id.ToString()
             });
 
             var username = ConfigurationManager.AppSettings["SendGridUserName"];
@@ -97,7 +100,7 @@ namespace GrandOakOrders.Controllers
 
             var transportWeb = new Web(credentials);
             await transportWeb.DeliverAsync(mailMessage);
-            var delivery = await _repo.RecordInvoiceEmail(mailMessage, order.Id, user.Identity.Name);
+            
 
             var email = string.Join(";", model.Address);
             if (!string.IsNullOrWhiteSpace(email)) {

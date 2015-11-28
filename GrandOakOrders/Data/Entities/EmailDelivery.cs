@@ -13,6 +13,8 @@ namespace GrandOakOrders.Data.Entities
         public int? OrderId { get; set; }
         public DateTime Sent { get; set; }
         public string SentBy { get; set; }
+        public DateTime? DeliveredDate { get; set; }
+        public DateTime? BouncedDate { get; set; }
 
         public virtual Order Order { get; set; }
     }

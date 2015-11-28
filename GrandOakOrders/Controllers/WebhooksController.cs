@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Http;
+using GrandOakOrders.Data.Repositories;
 using Newtonsoft.Json;
 using SendGrid;
 
@@ -18,38 +19,72 @@ namespace GrandOakOrders.Controllers
     [AllowAnonymous]
     [RoutePrefix("API/Incoming")]
     public class WebhooksController : ApiController
-    {        
+    {
+        private readonly Web _transportWeb;
+        private readonly OrderRepository _orderRepository;
+
+        public WebhooksController()
+        {
+            var username = ConfigurationManager.AppSettings["SendGridUserName"];
+            var password = ConfigurationManager.AppSettings["SendGridPassword"];
+            var credentials = new NetworkCredential(username, password);
+
+            _transportWeb = new Web(credentials);
+
+            _orderRepository = new OrderRepository();
+        }
+
         [Route("SendGrid")]
         [HttpPost]
         public async Task<IHttpActionResult> SendGrid()
         {
-            try {
-                var events = await Request.Content.ReadAsAsync<ICollection<SendgridPost>>();
+            try {                
+                var posts = await Request.Content.ReadAsAsync<ICollection<SendgridPost>>();
 
-                var toAddress = ConfigurationManager.AppSettings["DefaultInvoiceBccAddress"];
-                var fromAddress = ConfigurationManager.AppSettings["EmailFromAddress"];
-                var username = ConfigurationManager.AppSettings["SendGridUserName"];
-                var password = ConfigurationManager.AppSettings["SendGridPassword"];
-                var credentials = new NetworkCredential(username, password);
+                if (posts != null) {
 
-                var transportWeb = new Web(credentials);
+                    var events = posts
+                        .Where(
+                            e =>
+                                (e.Event == "delivered" || e.Event == "bounce" || e.Event == "open") &&
+                                e.OrderId.HasValue
+                        )
+                        .ToList();
 
-                foreach (
-                    var email in events.Where(e => (e.Event == "delivered" || e.Event == "bounce" || e.Event == "open") && e.OrderId.HasValue)) {
-                    var id = email.OrderId?.ToString("0000") ?? "Unknown";
-                    var body =
-                        $"A {email.Event} notification was received for the email sent to {email.Email} regarding  Order # {id}.";
+                    if (events.Any()) {
+                        var sendEmail = "true".Equals(ConfigurationManager.AppSettings["SendWebhooksEmail"], StringComparison.InvariantCultureIgnoreCase);
+                        var toAddress = ConfigurationManager.AppSettings["DefaultInvoiceBccAddress"];
+                        var fromAddress = ConfigurationManager.AppSettings["EmailFromAddress"];
 
-                    var mailMessage = new SendGridMessage {
-                        Subject = "Grand Oak Orders email " + email.Event,
-                        From = new MailAddress(fromAddress, "Grand Oak Orders"),
-                        Text = body,
-                        Html = body
-                    };
-                    mailMessage.AddTo(toAddress);
+                        foreach (var email in events) {
+                            if (sendEmail) {
+                                // ReSharper disable once PossibleInvalidOperationException
+                                var id = email.OrderId.Value.ToString("0000");
+                                var body =
+                                    $"A {email.Event} notification was received for the email sent to {email.Email} regarding  Order # {id}.";
 
-                    await transportWeb.DeliverAsync(mailMessage);
+                                var mailMessage = new SendGridMessage {
+                                    Subject = "Grand Oak Orders email " + email.Event,
+                                    From = new MailAddress(fromAddress, "Grand Oak Orders"),
+                                    Text = body,
+                                    Html = body
+                                };
+                                mailMessage.AddTo(toAddress);
+
+                                await _transportWeb.DeliverAsync(mailMessage);
+                            }
+
+                            if (!email.DeliveryId.HasValue) continue;
+
+                            if (email.Event == "delivered") {
+                                await _orderRepository.RecordEmailDelivery(email.DeliveryId.Value);
+                            } else if (email.Event == "bounce") {
+                                await _orderRepository.RecordEmailBounce(email.DeliveryId.Value);
+                            }
+                        }
+                    }
                 }
+
             } catch (Exception) {
                 // ignored
             }
@@ -75,6 +110,8 @@ namespace GrandOakOrders.Controllers
             public string SmtpId { get; set; }
             [JsonProperty("order_id")]
             public int? OrderId { get; set; }
+            [JsonProperty("delivery_id")]
+            public int? DeliveryId { get; set; }
         }
     }
 }

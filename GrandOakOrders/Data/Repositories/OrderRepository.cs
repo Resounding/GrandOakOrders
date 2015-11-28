@@ -167,5 +167,23 @@ namespace GrandOakOrders.Data.Repositories
 
             return delivery;
         }
+
+        public async Task RecordEmailDelivery(int deliveryId)
+        {
+            var delivery = await _context.EmailDeliveries.FirstOrDefaultAsync(d => d.Id == deliveryId);
+            if (delivery != null) {
+                delivery.DeliveredDate = DateTime.Now;
+            }
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task RecordEmailBounce(int deliveryId)
+        {
+            var delivery = await _context.EmailDeliveries.FirstOrDefaultAsync(d => d.Id == deliveryId);
+            if (delivery != null) {
+                delivery.BouncedDate = DateTime.Now;
+            }
+            await _context.SaveChangesAsync();
+        }
     }
 }
