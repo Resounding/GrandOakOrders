@@ -55,9 +55,11 @@
             this.lblLocation = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.txtLocation = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.line2 = new GrapeCity.ActiveReports.SectionReportModel.Line();
-            this.reportFooter = new GrapeCity.ActiveReports.SectionReportModel.ReportFooter();
             this.lblPickupNotes = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.txtPickupNotes = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
+            this.reportFooter = new GrapeCity.ActiveReports.SectionReportModel.ReportFooter();
+            this.lblPeople = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            this.txtPeople = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKitchenNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblItemDescription)).BeginInit();
@@ -82,6 +84,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblPickupNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPickupNotes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblPeople)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPeople)).BeginInit();
             // 
             // pageHeader
             // 
@@ -228,8 +232,10 @@
             this.txtLocation,
             this.line2,
             this.lblPickupNotes,
-            this.txtPickupNotes});
-            this.reportHeader.Height = 3.5F;
+            this.txtPickupNotes,
+            this.lblPeople,
+            this.txtPeople});
+            this.reportHeader.Height = 3.9F;
             this.reportHeader.Name = "reportHeader";
             this.reportHeader.Format += new System.EventHandler(this.OnReportHeaderFormat);
             // 
@@ -263,7 +269,7 @@
             this.lblEventDateTime.Name = "lblEventDateTime";
             this.lblEventDateTime.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblEventDateTime.Text = "Event Date / Time:";
-            this.lblEventDateTime.Top = 1.398F;
+            this.lblEventDateTime.Top = 1.8F;
             this.lblEventDateTime.Width = 1.75F;
             // 
             // lblSummary
@@ -274,7 +280,7 @@
             this.lblSummary.Name = "lblSummary";
             this.lblSummary.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblSummary.Text = "Summary:";
-            this.lblSummary.Top = 2.2F;
+            this.lblSummary.Top = 2.6F;
             this.lblSummary.Width = 1.75F;
             // 
             // txtOrganization
@@ -307,7 +313,7 @@
             this.txtEventDate.OutputFormat = resources.GetString("txtEventDate.OutputFormat");
             this.txtEventDate.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.txtEventDate.Text = "Monday, 15 September, 2015 10:00 AM";
-            this.txtEventDate.Top = 1.398F;
+            this.txtEventDate.Top = 1.8F;
             this.txtEventDate.Width = 4.5F;
             // 
             // txtSummary
@@ -319,7 +325,7 @@
             this.txtSummary.OutputFormat = resources.GetString("txtSummary.OutputFormat");
             this.txtSummary.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtSummary.Text = "Summary";
-            this.txtSummary.Top = 2.198F;
+            this.txtSummary.Top = 2.6F;
             this.txtSummary.Width = 4.5F;
             // 
             // picLogo
@@ -352,7 +358,7 @@
             this.lblAllergies.Name = "lblAllergies";
             this.lblAllergies.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblAllergies.Text = "Allergy Notes:";
-            this.lblAllergies.Top = 2.6F;
+            this.lblAllergies.Top = 3F;
             this.lblAllergies.Width = 1.75F;
             // 
             // txtAllergyNotes
@@ -363,7 +369,7 @@
             this.txtAllergyNotes.OutputFormat = resources.GetString("txtAllergyNotes.OutputFormat");
             this.txtAllergyNotes.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtAllergyNotes.Text = "Allergy Notes";
-            this.txtAllergyNotes.Top = 2.6F;
+            this.txtAllergyNotes.Top = 3F;
             this.txtAllergyNotes.Width = 4.5F;
             // 
             // lblLocation
@@ -374,7 +380,7 @@
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblLocation.Text = "Location:";
-            this.lblLocation.Top = 1.798F;
+            this.lblLocation.Top = 2.2F;
             this.lblLocation.Width = 1.75F;
             // 
             // txtLocation
@@ -385,7 +391,7 @@
             this.txtLocation.OutputFormat = resources.GetString("txtLocation.OutputFormat");
             this.txtLocation.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtLocation.Text = "Location";
-            this.txtLocation.Top = 1.798F;
+            this.txtLocation.Top = 2.2F;
             this.txtLocation.Width = 4.5F;
             // 
             // line2
@@ -394,17 +400,12 @@
             this.line2.Left = 0F;
             this.line2.LineWeight = 1F;
             this.line2.Name = "line2";
-            this.line2.Top = 3.4F;
+            this.line2.Top = 3.8F;
             this.line2.Width = 6.5F;
             this.line2.X1 = 0F;
             this.line2.X2 = 6.5F;
-            this.line2.Y1 = 3.4F;
-            this.line2.Y2 = 3.4F;
-            // 
-            // reportFooter
-            // 
-            this.reportFooter.Height = 0F;
-            this.reportFooter.Name = "reportFooter";
+            this.line2.Y1 = 3.8F;
+            this.line2.Y2 = 3.8F;
             // 
             // lblPickupNotes
             // 
@@ -414,7 +415,7 @@
             this.lblPickupNotes.Name = "lblPickupNotes";
             this.lblPickupNotes.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
             this.lblPickupNotes.Text = "Pickup Notes:";
-            this.lblPickupNotes.Top = 3F;
+            this.lblPickupNotes.Top = 3.4F;
             this.lblPickupNotes.Width = 1.75F;
             // 
             // txtPickupNotes
@@ -425,8 +426,35 @@
             this.txtPickupNotes.OutputFormat = resources.GetString("txtPickupNotes.OutputFormat");
             this.txtPickupNotes.Style = "font-family: Segoe UI; font-size: 14pt";
             this.txtPickupNotes.Text = "Pickup Notes";
-            this.txtPickupNotes.Top = 3F;
+            this.txtPickupNotes.Top = 3.4F;
             this.txtPickupNotes.Width = 4.5F;
+            // 
+            // reportFooter
+            // 
+            this.reportFooter.Height = 0F;
+            this.reportFooter.Name = "reportFooter";
+            // 
+            // lblPeople
+            // 
+            this.lblPeople.Height = 0.3F;
+            this.lblPeople.HyperLink = null;
+            this.lblPeople.Left = 0.1F;
+            this.lblPeople.Name = "lblPeople";
+            this.lblPeople.Style = "font-family: Segoe UI; font-size: 14pt; font-weight: bold";
+            this.lblPeople.Text = "People:";
+            this.lblPeople.Top = 1.4F;
+            this.lblPeople.Width = 1.75F;
+            // 
+            // txtPeople
+            // 
+            this.txtPeople.DataField = "Inquiry.People";
+            this.txtPeople.Height = 0.3F;
+            this.txtPeople.Left = 2F;
+            this.txtPeople.Name = "txtPeople";
+            this.txtPeople.Style = "font-family: Segoe UI; font-size: 14pt";
+            this.txtPeople.Text = "People";
+            this.txtPeople.Top = 1.4F;
+            this.txtPeople.Width = 4.5F;
             // 
             // KitchenOrderReport
             // 
@@ -473,6 +501,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblPickupNotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPickupNotes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblPeople)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPeople)).EndInit();
 
         }
         #endregion
@@ -505,5 +535,7 @@
         private GrapeCity.ActiveReports.SectionReportModel.Line line2;
         private GrapeCity.ActiveReports.SectionReportModel.Label lblPickupNotes;
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtPickupNotes;
+        private GrapeCity.ActiveReports.SectionReportModel.Label lblPeople;
+        private GrapeCity.ActiveReports.SectionReportModel.TextBox txtPeople;
     }
 }
