@@ -79,13 +79,19 @@ namespace GrandOakOrders.Controllers
                 StreamedAttachments = attachments
             };
             var to = model.Address.Where(a => !string.IsNullOrWhiteSpace(a)).ToList();
-            mailMessage.AddTo(to);
 
-            model.Bcc.ToList().ForEach(bcc => {
-                if (!string.IsNullOrWhiteSpace(bcc)) {
-                    mailMessage.AddBcc(bcc);
-                }
-            });
+            if (to.Any()) {
+                mailMessage.AddTo(to);
+
+                model.Bcc.ToList().ForEach(bcc => {
+                    if (!string.IsNullOrWhiteSpace(bcc)) {
+                        mailMessage.AddBcc(bcc);
+                    }
+                });
+            } else {
+                to = model.Bcc.Where(a => !string.IsNullOrWhiteSpace(a)).ToList();
+                mailMessage.AddTo(to);
+            }
 
             var delivery = await _repo.RecordInvoiceEmail(mailMessage, order.Id, user.Identity.Name);
 

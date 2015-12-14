@@ -20,7 +20,7 @@ export class CurrencyCustomAttribute {
     }
 
     valueChanged(val) {
-        this.negative = (val === 'negative')
+        this.negative = (val === 'negative');
     }
     
     setVal(e) {

@@ -26,6 +26,7 @@ namespace GrandOakOrders.Data
         public virtual DbSet<EmailDelivery> EmailDeliveries { get; set; }
         public virtual DbSet<Inquiry> Inquiries { get; set; }
         public virtual DbSet<InquiryOutcome> InquiryOutcomes { get; set; }
+        public virtual DbSet<ItemTemplate> ItemTemplates { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<Tax> Taxes { get; set; }

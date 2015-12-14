@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -276,6 +276,7 @@
     <Content Include="app\models\email.js" />
     <Content Include="app\models\emailDelivery.js" />
     <Content Include="app\models\inquiry.js" />
+    <Content Include="app\models\itemTemplate.js" />
     <Content Include="app\models\order.js" />
     <Content Include="app\views\app.html" />
     <Content Include="app\views\app.js" />
@@ -291,6 +292,8 @@
     <Content Include="app\views\inquiries\list.js" />
     <Content Include="app\views\inquiries\detail.html" />
     <Content Include="app\views\inquiries\detail.js" />
+    <Content Include="app\views\items\list.html" />
+    <Content Include="app\views\items\list.js" />
     <Content Include="app\views\nav\nav-bar.html" />
     <Content Include="app\views\nav\nav-bar.js" />
     <Content Include="app\views\orders\edit.js" />
@@ -3244,6 +3247,8 @@
     <Content Include="jspm_packages\github\jspm\nodelibs-vm%400.1.0\.jspm-hash" />
     <Content Include="jspm_packages\github\jspm\nodelibs-vm%400.1.0\.jspm.json" />
     <Content Include="jspm_packages\github\jspm\nodelibs-vm%400.1.0\package.json" />
+    <None Include="Properties\PublishProfiles\GrandOakOrders - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\GrandOakOrders - Web Deploy.pubxml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
@@ -3263,6 +3268,7 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InquiriesController.cs" />
+    <Compile Include="Controllers\ItemTemplatesController.cs" />
     <Compile Include="Controllers\MediaFormatters\WordDocumentReportMediaFormatter.cs" />
     <Compile Include="Controllers\MediaFormatters\PdfReportMediaFormatter.cs" />
     <Compile Include="Controllers\MediaFormatters\ReportMediaFormatter.cs" />
@@ -3274,6 +3280,7 @@
     <Compile Include="Data\Entities\EmailDelivery.cs" />
     <Compile Include="Data\Entities\Inquiry.cs" />
     <Compile Include="Data\Entities\InquiryOutcome.cs" />
+    <Compile Include="Data\Entities\ItemTemplate.cs" />
     <Compile Include="Data\Entities\Order.cs" />
     <Compile Include="Data\Entities\OrderItem.cs" />
     <Compile Include="Data\Entities\Tax.cs" />
@@ -3286,6 +3293,7 @@
     <Compile Include="Data\Repositories\CalendarRepository.cs" />
     <Compile Include="Data\Repositories\CustomerRepository.cs" />
     <Compile Include="Data\Repositories\InquiryRepository.cs" />
+    <Compile Include="Data\Repositories\ItemTemplateRepository.cs" />
     <Compile Include="Data\Repositories\OrderRepository.cs" />
     <Compile Include="Data\Repositories\UserRepository.cs" />
     <Compile Include="Migrations\201508291348252_Users.cs" />
@@ -3328,6 +3336,10 @@
     <Compile Include="Migrations\201511281518576_EmailDeliveryEvents.Designer.cs">
       <DependentUpon>201511281518576_EmailDeliveryEvents.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511281629591_ItemTemplates.cs" />
+    <Compile Include="Migrations\201511281629591_ItemTemplates.Designer.cs">
+      <DependentUpon>201511281629591_ItemTemplates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
     <Compile Include="Models\EmailInputModel.cs" />
@@ -3354,7 +3366,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="content\site.scss" />
-    <None Include="Properties\PublishProfiles\gocm.pubxml" />
     <Content Include="tsd.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -3435,6 +3446,9 @@
     <EmbeddedResource Include="Migrations\201511281518576_EmailDeliveryEvents.resx">
       <DependentUpon>201511281518576_EmailDeliveryEvents.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511281629591_ItemTemplates.resx">
+      <DependentUpon>201511281629591_ItemTemplates.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reports\InvoiceReport.resx">
       <DependentUpon>InvoiceReport.cs</DependentUpon>
@@ -3455,6 +3469,8 @@
     <Content Include="app\models\email.ts" />
     <Content Include="app\models\emailDelivery.ts" />
     <Content Include="app\components\orderFilter.ts" />
+    <Content Include="app\models\itemTemplate.ts" />
+    <Content Include="app\views\items\list.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\animator-css%400.16.0\aurelia-animator-css.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\binding%400.9.1\aurelia-binding.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\bootstrapper%400.17.0\aurelia-bootstrapper.d.ts" />

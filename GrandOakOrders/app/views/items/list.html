@@ -1,0 +1,50 @@
+﻿<template>
+    <div class="list">
+        <a href="#">
+            <i class="material-icons">chevron_left</i>
+            <i class="material-icons">home</i>
+            Home
+        </a>
+        <header>
+            <img src="/img/order.jpg" alt="Orders">
+        </header>
+
+        <ul class="collection">
+            <li class="collection-item" repeat.for="item of _items">
+                <div class="row">
+                    <div class="col s6">
+                        <span class="title">${item.Description}</span>
+                    </div>
+                    <div class="col s6">
+                        <em>Unit Price:&nbsp;</em>
+                        ${item.unitPriceDisplay}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        ${item.ShowToKitchen ? '&check;' : '&cross;' }
+                        &nbsp;
+                        Show to Kitchen
+                    </div>
+                    <div class="col s6">
+                        ${item.ShowOnInvoice ? '&check;' : '&cross;' }
+                        &nbsp;
+                        Show on Invoice
+                    </div>
+                </div>
+                <div show.bind="item.KitchenNotes" class="truncate">
+                    <em>Kitchen Notes:&nbsp;</em>
+                    ${item.KitchenNotes}
+                </div>
+                <div show.bind="item.OrderingNotes" class="truncate">
+                    <em>Ordering Notes:&nbsp;</em>
+                    ${item.OrderingNotes}
+                </div>
+                <div show.bind="item.InvoiceNotes" class="truncate">
+                    <em>Invoice Notes:&nbsp;</em>
+                    ${item.InvoiceNotes}
+                </div>
+            </li>
+        </ul>
+    </div>
+</template>

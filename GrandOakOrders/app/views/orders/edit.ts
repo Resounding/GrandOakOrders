@@ -10,6 +10,7 @@ import {InquiryPojo} from '../../models/inquiry';
 import {EmailDelivery} from '../../models/emailDelivery';
 import {OrderViewModel, OrderItemPojo} from '../../models/order';
 import {Email} from '../../models/email';
+import {ItemTemplate} from '../../models/itemTemplate';
 import _ from 'underscore';
 
 @inject(HttpClient, Router, Element)
@@ -21,97 +22,106 @@ export class EditOrder {
     _toAddresses: Array<string>;
     _bccAddresses: Array<string>;
     _originalPeople: number;
+    _itemTemplates: Array<ItemTemplate> = [];
 
     constructor(private httpClient: HttpClient, private router: Router, private element:HTMLElement) { }
 
     activate(params) {
-        this.httpClient.get(`/api/orders/${params.id}`)
+        this.httpClient.get('/api/items')
             .then((response: HttpResponseMessage) => {
-                this._model = new OrderViewModel(response.content);
-                this._email = new Email(this._model, this.httpClient);
-                
-                console.log(this._model);
-                if (!this._model.Items.length) {
-                    this.addItem();
-                }
 
-                this.sortItems();
-                this._toAddresses = (this._model.Inquiry.Email || '').split(';');
-                this._originalPeople = this._model.Inquiry.People;
+                response.content.forEach(i => this._itemTemplates.push(new ItemTemplate(i)));
 
-                this.httpClient.get('/API/Settings/DefaultInvoiceBccAddress')
-                    .then((settingsResponse: HttpResponseMessage) => {
-                        this._bccAddresses = (settingsResponse.content || '').toString().split(';');
+                this.httpClient.get(`/api/orders/${params.id}`)
+                    .then((response: HttpResponseMessage) => {
+                        this._model = new OrderViewModel(response.content);
+                        this._email = new Email(this._model, this.httpClient);
+
+                        console.log(this._model);
+                        if (!this._model.Items.length) {
+                            this.addItem();
+                        }
+
+                        this.sortItems();
+                        this._toAddresses = (this._model.Inquiry.Email || '').split(';');
+                        this._originalPeople = this._model.Inquiry.People;
+
+                        this.httpClient.get('/API/Settings/DefaultInvoiceBccAddress')
+                            .then((settingsResponse: HttpResponseMessage) => {
+                                this._bccAddresses = (settingsResponse.content || '').toString().split(';');
+                            });
+
+                        window.setTimeout(_.bind(() => {
+                            var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element),
+                                $eventDate = $('.datepicker.event', this.element),
+                                $invoiceDate = $('.datepicker.invoice', this.element),
+                                $timepicker = $('.timepicker', this.element),
+                                $dropdown = $('.dropdown-button', this.element),
+                                $kitchenReport = $('.kitchen-report', this.element),
+                                $invoiceReport = $('.invoice-report', this.element);
+
+                            $kitchenReport.on('click', this.showKitchenReport.bind(this));
+                            $invoiceReport.on('click', this.showInvoiceReport.bind(this));
+
+                            $dropdown.dropdown({
+                                belowOrigin: true
+                            });
+
+                            $collapsible
+                                .collapsible({ accordion: false })
+                                .on('materialize:opened', (e) => {
+                                    var $el = $(e.target).parent();
+                                    window.setTimeout(() => {
+                                        $el.find('textarea').trigger('autoresize');
+                                        $el.find('textarea,input').first().focus();
+                                    }, 50);
+                                });
+
+                            $eventDate.pickadate({
+                                    container: 'body',
+                                    format: 'dddd mmm d, yyyy'
+                                })
+                                .on('change', (e) => {
+                                    this._model.Inquiry.EventDate = e.target.value;
+                                });
+
+                            $invoiceDate
+                                .val(this._model.InvoiceDateDisplay)
+                                .pickadate({
+                                    container: 'body',
+                                    format: 'dddd mmm d, yyyy'
+                                })
+                                .on('change', (e) => {
+                                    this._model.InvoiceDate = e.target.value;
+                                });
+
+                            $timepicker
+                                .pickatime({
+                                    container: 'body',
+                                    format: 'h:i A',
+                                    formatLabel: 'h:i A',
+                                    interval: 15,
+                                    min: [7, 0],
+                                    max: [21, 0]
+                                })
+                                .on('change', (e) => {
+                                    this._model.Inquiry.EventTime = e.target.value;
+                                });
+
+                            try {
+                                $eventDate.pickadate('picker')
+                                    .set('select', this._model.Inquiry.EventDate);
+                            } catch (e) {
+                            }
+
+                            try {
+                                $timepicker.pickatime('picker')
+                                    .set('select', this._model.Inquiry.EventTime);
+                            } catch (e) {
+                            }
+
+                        }, this), 1000);
                     });
-
-                window.setTimeout(_.bind(() => {
-                    var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element),
-                        $eventDate = $('.datepicker.event', this.element),
-                        $invoiceDate = $('.datepicker.invoice', this.element),
-                        $timepicker = $('.timepicker', this.element),
-                        $dropdown = $('.dropdown-button', this.element),
-                        $kitchenReport = $('.kitchen-report', this.element),
-                        $invoiceReport = $('.invoice-report', this.element);
-
-                    $kitchenReport.on('click', this.showKitchenReport.bind(this));
-                    $invoiceReport.on('click', this.showInvoiceReport.bind(this));
-
-                    $dropdown.dropdown({
-                        belowOrigin: true
-                    });
-
-                    $collapsible
-                        .collapsible({ accordion: false })
-                        .on('materialize:opened', (e) => {
-                            var $el = $(e.target).parent();
-                            window.setTimeout(() => {
-                                $el.find('textarea').trigger('autoresize');
-                                $el.find('textarea,input').first().focus();
-                            }, 50);
-                        });                    
-                    
-                    $eventDate.pickadate({
-                        container: 'body',
-                        format: 'dddd mmm d, yyyy'
-                    })
-                    .on('change', (e) => {
-                        this._model.Inquiry.EventDate = e.target.value;
-                    });
-
-                    $invoiceDate
-                        .val(this._model.InvoiceDateDisplay)
-                        .pickadate({
-                            container: 'body',
-                            format: 'dddd mmm d, yyyy'
-                        })
-                        .on('change', (e) => {
-                            this._model.InvoiceDate = e.target.value;
-                        });
-
-                    $timepicker
-                        .pickatime({
-                            container: 'body',
-                            format: 'h:i A',
-                            formatLabel: 'h:i A',
-                            interval: 15,
-                            min: [7, 0],
-                            max: [21, 0]
-                        })
-                        .on('change', (e) => {
-                            this._model.Inquiry.EventTime = e.target.value;
-                        });
-
-                    try {
-                        $eventDate.pickadate('picker')
-                            .set('select', this._model.Inquiry.EventDate);
-                    } catch(e) { }
-
-                    try {
-                        $timepicker.pickatime('picker')
-                            .set('select', this._model.Inquiry.EventTime);
-                    } catch(e) { }
-
-                }, this), 1000);
             });
     }
 
