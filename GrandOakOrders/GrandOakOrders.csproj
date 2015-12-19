@@ -326,6 +326,7 @@
     <Content Include="img\goc-full.jpg" />
     <Content Include="img\icon.jpg" />
     <Content Include="img\inquiry.jpg" />
+    <Content Include="img\items.jpg" />
     <Content Include="img\logo.png" />
     <Content Include="img\meal.png" />
     <Content Include="img\order.jpg" />
