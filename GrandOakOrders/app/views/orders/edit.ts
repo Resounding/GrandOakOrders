@@ -58,9 +58,11 @@ export class EditOrder {
                                 $timepicker = $('.timepicker', this.element),
                                 $dropdown = $('.dropdown-button', this.element),
                                 $kitchenReport = $('.kitchen-report', this.element),
+                                $quoteReport = $('.quote-report', this.element),
                                 $invoiceReport = $('.invoice-report', this.element);
 
                             $kitchenReport.on('click', this.showKitchenReport.bind(this));
+                            $quoteReport.on('click', this.showQuoteReport.bind(this));
                             $invoiceReport.on('click', this.showInvoiceReport.bind(this));
 
                             $dropdown.dropdown({
@@ -168,6 +170,17 @@ export class EditOrder {
     }
 
     showKitchenReport(e) {
+        e.preventDefault();
+
+        const $el = $(e.target),
+            url = $el.attr('href');
+
+        this.submit()
+            .then(() => window.open(url, '_blank'))
+            .catch(() => toastr.error('There are errors on the Order.'));
+    }
+
+    showQuoteReport(e) {
         e.preventDefault();
 
         const $el = $(e.target),

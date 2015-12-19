@@ -50,5 +50,23 @@ namespace GrandOakOrders.Controllers
                 return Ok(ex);
             }
         }
+
+        [Route("Quotes/{id:int}")]
+        [HttpGet]
+        public async Task<IHttpActionResult> Quote(int id)
+        {
+            try {
+                var order = await _repo.Get(id);
+                if (order == null) {
+                    return NotFound();
+                }
+
+                var report = new QuoteReport(order) as SectionReport;
+                report.Run();
+                return Ok(report);
+            } catch (Exception ex) {
+                return Ok(ex);
+            }
+        }
     }
 }

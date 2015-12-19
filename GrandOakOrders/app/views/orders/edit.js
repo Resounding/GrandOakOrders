@@ -49,8 +49,9 @@ export let EditOrder = class {
                     this._bccAddresses = (settingsResponse.content || '').toString().split(';');
                 });
                 window.setTimeout(_.bind(() => {
-                    var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker.event', this.element), $invoiceDate = $('.datepicker.invoice', this.element), $timepicker = $('.timepicker', this.element), $dropdown = $('.dropdown-button', this.element), $kitchenReport = $('.kitchen-report', this.element), $invoiceReport = $('.invoice-report', this.element);
+                    var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element), $eventDate = $('.datepicker.event', this.element), $invoiceDate = $('.datepicker.invoice', this.element), $timepicker = $('.timepicker', this.element), $dropdown = $('.dropdown-button', this.element), $kitchenReport = $('.kitchen-report', this.element), $quoteReport = $('.quote-report', this.element), $invoiceReport = $('.invoice-report', this.element);
                     $kitchenReport.on('click', this.showKitchenReport.bind(this));
+                    $quoteReport.on('click', this.showQuoteReport.bind(this));
                     $invoiceReport.on('click', this.showInvoiceReport.bind(this));
                     $dropdown.dropdown({
                         belowOrigin: true
@@ -144,6 +145,13 @@ export let EditOrder = class {
         }
     }
     showKitchenReport(e) {
+        e.preventDefault();
+        const $el = $(e.target), url = $el.attr('href');
+        this.submit()
+            .then(() => window.open(url, '_blank'))
+            .catch(() => toastr.error('There are errors on the Order.'));
+    }
+    showQuoteReport(e) {
         e.preventDefault();
         const $el = $(e.target), url = $el.attr('href');
         this.submit()
