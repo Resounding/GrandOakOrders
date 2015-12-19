@@ -38,7 +38,6 @@
             this.line1 = new GrapeCity.ActiveReports.SectionReportModel.Line();
             this.pageFooter = new GrapeCity.ActiveReports.SectionReportModel.PageFooter();
             this.infoPageNumber = new GrapeCity.ActiveReports.SectionReportModel.ReportInfo();
-            this.infoPrintedDateTime = new GrapeCity.ActiveReports.SectionReportModel.ReportInfo();
             this.reportHeader = new GrapeCity.ActiveReports.SectionReportModel.ReportHeader();
             this.lblOrganization = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.lblContactPerson = new GrapeCity.ActiveReports.SectionReportModel.Label();
@@ -57,9 +56,10 @@
             this.line2 = new GrapeCity.ActiveReports.SectionReportModel.Line();
             this.lblPickupNotes = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.txtPickupNotes = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
-            this.reportFooter = new GrapeCity.ActiveReports.SectionReportModel.ReportFooter();
             this.lblPeople = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.txtPeople = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
+            this.reportFooter = new GrapeCity.ActiveReports.SectionReportModel.ReportFooter();
+            this.lblPrintedOn = new GrapeCity.ActiveReports.SectionReportModel.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKitchenNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblItemDescription)).BeginInit();
@@ -67,7 +67,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblKitchenNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.infoPageNumber)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.infoPrintedDateTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblOrganization)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblContactPerson)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEventDateTime)).BeginInit();
@@ -86,6 +85,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPickupNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblPeople)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeople)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblPrintedOn)).BeginInit();
             // 
             // pageHeader
             // 
@@ -190,8 +190,9 @@
             // 
             this.pageFooter.Controls.AddRange(new GrapeCity.ActiveReports.SectionReportModel.ARControl[] {
             this.infoPageNumber,
-            this.infoPrintedDateTime});
+            this.lblPrintedOn});
             this.pageFooter.Name = "pageFooter";
+            this.pageFooter.Format += new System.EventHandler(this.OnPageFooterFormat);
             // 
             // infoPageNumber
             // 
@@ -202,16 +203,6 @@
             this.infoPageNumber.Style = "font-family: Segoe UI; text-align: right";
             this.infoPageNumber.Top = 0F;
             this.infoPageNumber.Width = 1.5F;
-            // 
-            // infoPrintedDateTime
-            // 
-            this.infoPrintedDateTime.FormatString = "Printed on: {RunDateTime:dddd d MMMM, yyyy} at {RunDateTime:h:mm tt}";
-            this.infoPrintedDateTime.Height = 0.2F;
-            this.infoPrintedDateTime.Left = 0F;
-            this.infoPrintedDateTime.Name = "infoPrintedDateTime";
-            this.infoPrintedDateTime.Style = "font-family: Segoe UI";
-            this.infoPrintedDateTime.Top = 0F;
-            this.infoPrintedDateTime.Width = 4.01F;
             // 
             // reportHeader
             // 
@@ -429,11 +420,6 @@
             this.txtPickupNotes.Top = 3.4F;
             this.txtPickupNotes.Width = 4.5F;
             // 
-            // reportFooter
-            // 
-            this.reportFooter.Height = 0F;
-            this.reportFooter.Name = "reportFooter";
-            // 
             // lblPeople
             // 
             this.lblPeople.Height = 0.3F;
@@ -455,6 +441,22 @@
             this.txtPeople.Text = "People";
             this.txtPeople.Top = 1.4F;
             this.txtPeople.Width = 4.5F;
+            // 
+            // reportFooter
+            // 
+            this.reportFooter.Height = 0F;
+            this.reportFooter.Name = "reportFooter";
+            // 
+            // lblPrintedOn
+            // 
+            this.lblPrintedOn.Height = 0.2F;
+            this.lblPrintedOn.HyperLink = null;
+            this.lblPrintedOn.Left = 0F;
+            this.lblPrintedOn.Name = "lblPrintedOn";
+            this.lblPrintedOn.Style = "";
+            this.lblPrintedOn.Text = "Printed On";
+            this.lblPrintedOn.Top = 0F;
+            this.lblPrintedOn.Width = 4F;
             // 
             // KitchenOrderReport
             // 
@@ -484,7 +486,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblKitchenNotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.infoPageNumber)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.infoPrintedDateTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblOrganization)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblContactPerson)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEventDateTime)).EndInit();
@@ -503,6 +504,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPickupNotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblPeople)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeople)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblPrintedOn)).EndInit();
 
         }
         #endregion
@@ -519,7 +521,6 @@
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtSummary;
         private GrapeCity.ActiveReports.SectionReportModel.ReportFooter reportFooter;
         private GrapeCity.ActiveReports.SectionReportModel.ReportInfo infoPageNumber;
-        private GrapeCity.ActiveReports.SectionReportModel.ReportInfo infoPrintedDateTime;
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtItemDescription;
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtKitchenNotes;
         private GrapeCity.ActiveReports.SectionReportModel.Label lblItemDescription;
@@ -537,5 +538,6 @@
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtPickupNotes;
         private GrapeCity.ActiveReports.SectionReportModel.Label lblPeople;
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtPeople;
+        private GrapeCity.ActiveReports.SectionReportModel.Label lblPrintedOn;
     }
 }

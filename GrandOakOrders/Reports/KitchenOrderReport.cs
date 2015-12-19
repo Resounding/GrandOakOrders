@@ -113,5 +113,11 @@ namespace GrandOakOrders.Reports
         {
             control.Location = new System.Drawing.PointF(control.Location.X, control.Location.Y - 0.4f);
         }
+
+        private void OnPageFooterFormat(object sender, EventArgs e)
+        {
+            var time = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"));
+            lblPrintedOn.Text = string.Format("Printed on: {0}, at {1}", time.ToString("dddd d MMMM yyyy"), time.ToString("h:mm tt"));
+        }
     }
 }
