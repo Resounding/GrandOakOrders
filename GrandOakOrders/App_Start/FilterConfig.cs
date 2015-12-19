@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Elmah;
+using Exceptions;
 using GrandOakOrders.Auth;
 using GrandOakOrders.Data.Entities;
 using Microsoft.AspNet.Identity;
@@ -34,10 +35,17 @@ namespace GrandOakOrders
 
         public Task ExecuteExceptionFilterAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
         {
-            // Log to Elmah
-            ErrorSignal.FromCurrentContext().Raise(actionExecutedContext.Exception);
-
             var ex = actionExecutedContext.Exception;
+
+            var apiException = ex as InvalidApiRequestException;
+            if (apiException != null) {
+                var apiErrors = "Sendgrid error: " + string.Join(", ", apiException.Errors);
+                ex = new System.ApplicationException(apiErrors, ex);
+            }
+
+            // Log to Elmah
+            ErrorSignal.FromCurrentContext().Raise(ex);
+            
             while (ex != null) {
                 Console.WriteLine(ex.Message);
                 ex = ex.InnerException;
