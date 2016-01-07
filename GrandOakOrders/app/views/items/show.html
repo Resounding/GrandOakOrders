@@ -1,0 +1,38 @@
+﻿<template>
+    <div class="row">
+        <div class="col s6">
+            <span class="title">${model.Description}</span>
+        </div>
+        <div class="col s6">
+            <em>Unit Price:&nbsp;</em>
+            ${model.unitPriceDisplay}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            ${model.ShowToKitchen ? '&check;' : '&cross;' }
+            &nbsp;
+            Show to Kitchen
+        </div>
+        <div class="col s6">
+            ${model.ShowOnInvoice ? '&check;' : '&cross;' }
+            &nbsp;
+            Show on Invoice
+        </div>
+    </div>
+    <a href="#" class="secondary-content" click.trigger="model.edit()">
+        <img src="/img/go.png" width="30" height="30" alt="Edit">
+    </a>
+    <div show.bind="model.KitchenNotes" class="truncate">
+        <em>Kitchen Notes:&nbsp;</em>
+        ${model.KitchenNotes}
+    </div>
+    <div show.bind="model.OrderingNotes" class="truncate">
+        <em>Ordering Notes:&nbsp;</em>
+        ${model.OrderingNotes}
+    </div>
+    <div show.bind="model.InvoiceNotes" class="truncate">
+        <em>Invoice Notes:&nbsp;</em>
+        ${model.InvoiceNotes}
+    </div>
+</template>

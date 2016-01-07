@@ -11,10 +11,11 @@ import {EmailDelivery} from '../../models/emailDelivery';
 import {OrderViewModel, OrderItemPojo} from '../../models/order';
 import {Email} from '../../models/email';
 import {ItemTemplate} from '../../models/itemTemplate';
+import {IAllInPricingHost, AllInPricing} from './allInPricing';
 import _ from 'underscore';
 
 @inject(HttpClient, Router, Element)
-export class EditOrder {
+export class EditOrder implements IAllInPricingHost {
     _model: OrderViewModel;
     _email: Email;
     _submitted: boolean = false;
@@ -23,6 +24,7 @@ export class EditOrder {
     _bccAddresses: Array<string>;
     _originalPeople: number;
     _itemTemplates: Array<ItemTemplate> = [];
+    _showAllInPricingModal = false;
 
     constructor(private httpClient: HttpClient, private router: Router, private element:HTMLElement) { }
 
@@ -204,6 +206,11 @@ export class EditOrder {
         this.submit()
             .then(() => window.open(url, '_blank'))
             .catch(() => toastr.error('There are errors on the Order.'));
+    }
+
+    allInPricing() {
+        this._showAllInPricingModal = true;
+        window.setTimeout((() => this._showAllInPricingModal = false).bind(this));
     }
 
     save(e) {

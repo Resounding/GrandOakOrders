@@ -1,4 +1,9 @@
-﻿export class ItemTemplate {
+﻿import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {computedFrom} from "aurelia-binding";
+import _ from 'underscore';
+
+export class ItemTemplate {
 
     Id: number;
     Description: string;
@@ -8,8 +13,9 @@
     KitchenNotes: string;
     OrderingNotes: string;
     InvoiceNotes: string;
+    editing: boolean;
 
-    constructor(baseTemplate: ItemTemplate) {
+    constructor(baseTemplate: ItemTemplate, private events:EventAggregator, private httpClient: HttpClient) {
         this.Id = baseTemplate.Id;
         this.Description = baseTemplate.Description;
         this.UnitPrice = baseTemplate.UnitPrice;
@@ -18,11 +24,66 @@
         this.KitchenNotes = baseTemplate.KitchenNotes;
         this.OrderingNotes = baseTemplate.OrderingNotes;
         this.InvoiceNotes = baseTemplate.InvoiceNotes;
+        this.editing = (baseTemplate.editing === true);
     }
 
+    @computedFrom('UnitPrice')
     get unitPriceDisplay() {
         if (!this.UnitPrice) return 'Not Set';
 
         return `$${this.UnitPrice.toFixed(2)}`;
+    }
+
+    edit() {
+        this.editing = true;
+    }
+
+    cancel() {
+        this.events.publish('item:cancelled', this.toJSON());
+    }
+
+    save() {
+        if (this.Id) {
+            this.httpClient.put(`/api/items/${this.Id}`, this)
+                .then(() => this.events.publish('item:updated', this.toJSON()))
+                .catch(this.onError);
+        } else {
+            this.httpClient.post('/api/items', this)
+                .then((result) => {
+                    _.extend(this, result.content);
+                    this.events.publish('item:created', this.toJSON());
+                })
+                .catch(this.onError);
+        }
+        this.editing = false;
+    }
+
+    destroy() {
+        if (this.Id) {
+            this.httpClient.delete(`/api/items/${this.Id}`)
+                .then(() => this.events.publish('item:deleted', this.toJSON()))
+                .catch(this.onError);
+        } else {
+            this.cancel();
+        }
+    }
+
+    toJSON():ItemTemplate {
+        return {
+            Id: this.Id,
+            Description: this.Description,
+            UnitPrice: parseFloat(this.UnitPrice),
+            ShowToKitchen: this.ShowToKitchen,
+            ShowOnInvoice: this.ShowOnInvoice,
+            KitchenNotes: this.KitchenNotes,
+            OrderingNotes: this.OrderingNotes,
+            InvoiceNotes: this.InvoiceNotes,
+            editing: false
+        };
+    }
+
+    onError(err) {
+        console.log(err);
+        toastr.error('There was a problem saving the inquiry: ' + err);
     }
 }

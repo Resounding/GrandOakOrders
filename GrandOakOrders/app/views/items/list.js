@@ -1,34 +1,102 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-        case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
-        case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
-        case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
+System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-event-aggregator', 'aurelia-router', '../../models/itemTemplate', 'underscore'], function(exports_1) {
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var aurelia_framework_1, aurelia_http_client_1, aurelia_event_aggregator_1, aurelia_router_1, itemTemplate_1, underscore_1;
+    var ItemList;
+    return {
+        setters:[
+            function (aurelia_framework_1_1) {
+                aurelia_framework_1 = aurelia_framework_1_1;
+            },
+            function (aurelia_http_client_1_1) {
+                aurelia_http_client_1 = aurelia_http_client_1_1;
+            },
+            function (aurelia_event_aggregator_1_1) {
+                aurelia_event_aggregator_1 = aurelia_event_aggregator_1_1;
+            },
+            function (aurelia_router_1_1) {
+                aurelia_router_1 = aurelia_router_1_1;
+            },
+            function (itemTemplate_1_1) {
+                itemTemplate_1 = itemTemplate_1_1;
+            },
+            function (underscore_1_1) {
+                underscore_1 = underscore_1_1;
+            }],
+        execute: function() {
+            ItemList = (function () {
+                function ItemList(httpClient, router, events, element) {
+                    this.httpClient = httpClient;
+                    this.router = router;
+                    this.events = events;
+                    this.element = element;
+                    this._items = [];
+                }
+                ItemList.prototype.activate = function () {
+                    var _this = this;
+                    this.httpClient.get('/api/items')
+                        .then(function (response) {
+                        response.content.forEach(function (i) { return _this._items.push(new itemTemplate_1.ItemTemplate(i, _this.events, _this.httpClient)); });
+                    });
+                    this.events.subscribe('item:updated', function (item) {
+                        var existing = underscore_1.default.find(_this._items, function (i) { return i.Id === item.Id; });
+                        if (existing) {
+                            underscore_1.default.extend(existing, item);
+                            existing.editing = false;
+                        }
+                    });
+                    this.events.subscribe('item:cancelled', function (item) {
+                        if (item.Id) {
+                            var existing = underscore_1.default.find(_this._items, function (i) { return !i.Id; });
+                            if (existing) {
+                                underscore_1.default.extend(existing, item);
+                                existing.editing = false;
+                            }
+                        }
+                        else {
+                            var index = underscore_1.default.findIndex(_this._items, function (i) { return !i.Id; });
+                            if (index !== -1) {
+                                _this._items.splice(index, 1);
+                            }
+                        }
+                    });
+                    this.events.subscribe('item:created', function (item) {
+                        var existing = underscore_1.default.find(_this._items, function (i) { return i.Id == null || i.Id === item.Id; });
+                        if (existing) {
+                            underscore_1.default.extend(existing, item);
+                            existing.editing = false;
+                        }
+                    });
+                    this.events.subscribe('item:deleted', function (item) {
+                        var index = underscore_1.default.findIndex(_this._items, function (i) { return i.Id === item.Id; });
+                        if (index !== -1) {
+                            _this._items.splice(index, 1);
+                        }
+                    });
+                };
+                ItemList.prototype.add = function () {
+                    this._items.unshift(new itemTemplate_1.ItemTemplate({
+                        Id: null,
+                        Description: '',
+                        UnitPrice: null,
+                        ShowToKitchen: false,
+                        ShowOnInvoice: false,
+                        KitchenNotes: '',
+                        OrderingNotes: '',
+                        InvoiceNotes: '',
+                        editing: true
+                    }, this.events, this.httpClient));
+                };
+                ItemList = __decorate([
+                    aurelia_framework_1.inject(aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_event_aggregator_1.EventAggregator, Element)
+                ], ItemList);
+                return ItemList;
+            })();
+            exports_1("ItemList", ItemList);
+        }
     }
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-import { inject } from 'aurelia-framework';
-import { HttpClient } from 'aurelia-http-client';
-import { Router } from 'aurelia-router';
-import { ItemTemplate } from '../../models/itemTemplate';
-export let ItemList = class {
-    constructor(httpClient, router, element) {
-        this.httpClient = httpClient;
-        this.router = router;
-        this.element = element;
-        this._items = [];
-    }
-    activate() {
-        this.httpClient.get('/api/items')
-            .then((response) => {
-            response.content.forEach(i => this._items.push(new ItemTemplate(i)));
-        });
-    }
-};
-ItemList = __decorate([
-    inject(HttpClient, Router, Element), 
-    __metadata('design:paramtypes', [(typeof (_a = typeof HttpClient !== 'undefined' && HttpClient) === 'function' && _a) || Object, (typeof (_b = typeof Router !== 'undefined' && Router) === 'function' && _b) || Object, HTMLElement])
-], ItemList);
-var _a, _b;
+});

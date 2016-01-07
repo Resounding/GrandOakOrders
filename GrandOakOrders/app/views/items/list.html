@@ -1,4 +1,7 @@
 ﻿<template>
+    <require from="./show"></require>
+    <require from="./edit"></require>
+    
     <div class="list">
         <a href="#">
             <i class="material-icons">chevron_left</i>
@@ -8,43 +11,18 @@
         <header>
             <img src="/img/order.jpg" alt="Orders">
         </header>
-
-        <ul class="collection">
-            <li class="collection-item" repeat.for="item of _items">
-                <div class="row">
-                    <div class="col s6">
-                        <span class="title">${item.Description}</span>
-                    </div>
-                    <div class="col s6">
-                        <em>Unit Price:&nbsp;</em>
-                        ${item.unitPriceDisplay}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s6">
-                        ${item.ShowToKitchen ? '&check;' : '&cross;' }
-                        &nbsp;
-                        Show to Kitchen
-                    </div>
-                    <div class="col s6">
-                        ${item.ShowOnInvoice ? '&check;' : '&cross;' }
-                        &nbsp;
-                        Show on Invoice
-                    </div>
-                </div>
-                <div show.bind="item.KitchenNotes" class="truncate">
-                    <em>Kitchen Notes:&nbsp;</em>
-                    ${item.KitchenNotes}
-                </div>
-                <div show.bind="item.OrderingNotes" class="truncate">
-                    <em>Ordering Notes:&nbsp;</em>
-                    ${item.OrderingNotes}
-                </div>
-                <div show.bind="item.InvoiceNotes" class="truncate">
-                    <em>Invoice Notes:&nbsp;</em>
-                    ${item.InvoiceNotes}
-                </div>
+        <p></p>
+        <ul class="collection container">
+            <li class="collection-item avatar auto-height" repeat.for="item of _items">
+                <show-item model.bind="item" visible.bind="!item.editing"></show-item>
+                <edit-item model.bind="item" collection.bind="_items" visible.bind="item.editing"></edit-item>
             </li>
         </ul>
+    </div>
+    
+    <div class="fixed-action-btn">
+        <button type="button" class="btn-floating btn-large red" click.trigger="add()">
+            <i class="large material-icons">add</i>
+        </button>
     </div>
 </template>

@@ -1,0 +1,43 @@
+﻿<template>
+    <require from="../../controls/currencyTextbox"></require>
+
+    <div class="row">
+        <div class="col s12 row">
+            <div class="col s6 input-field">
+                <input type="text" id="description" value.bind="model.Description">
+                <label class="active" for="description">Description</label>
+            </div>
+            <div class="col s6 input-field">
+                <input type="text" placeholder="$0.00" value.bind="model.UnitPrice" currency required class="text-right" id="unit_${model.Id}">
+                <label class="active" for="unit_${model.Id}">Unit $</label>
+            </div>
+        </div>
+        <div class="col s12 row">
+            <div class="col s6 input-field">
+                <input type="checkbox" checked.bind="model.ShowToKitchen" id="show_to_kitchen_${model.Id}">
+                <label class="active" for="show_to_kitchen_${model.Id}">Show to Kitchen</label>
+            </div>
+            <div class="col s6 input-field">
+                <input type="checkbox" checked.bind="model.ShowOnInvoice" id="show_on_invoice_${model.Id}">
+                <label class="active" for="show_on_invoice_${model.Id}">Show on Invoice</label>
+            </div>
+        </div>
+        <div class="col s12 input-field">
+            <textarea class="materialize-textarea" id="kitchen_notes_${model.Id}" value.bind="model.KitchenNotes"></textarea>
+            <label class="active" for="kitchen_notes_${model.Id}">Kitchen Notes:</label>
+        </div>
+        <div class="col s12 input-field">
+            <textarea class="materialize-textarea" id="ordering_notes_${model.Id}" value.bind="model.OrderingNotes"></textarea>
+            <label class="active" for="ordering_notes_${model.Id}">Ordering Notes:</label>
+        </div>
+        <div class="col s12 input-field">
+            <textarea class="materialize-textarea" id="invoice_notes_${model.Id}" value.bind="model.InvoiceNotes"></textarea>
+            <label class="active" for="invoice_notes_${model.Id}">Invoice Notes:</label>
+        </div>
+        <div class="col s12 text-right">
+            <a class="btn waves-effect waves-light red white-text left" click.trigger="model.destroy()" show.bind="model.Id">Delete</a>
+            <a class="btn waves-effect waves-light white blue-text" click.trigger="model.cancel()">Cancel</a>
+            <a class="btn waves-effect waves-light blue" click.trigger="model.save()">Save</a>
+        </div>
+    </div>
+</template>

@@ -1,6 +1,7 @@
 ﻿<template>
 <require from="../../controls/currencyTextbox"></require>
 <require from="./orderItem"></require>
+<require from="./allInPricing"></require>
 
 <div class="container">
 <div class="fixed-tool-bar">
@@ -194,7 +195,10 @@
     </div>
     <div class="divider"></div>
     <div class="row">
-        <h5 class="col s9">Total</h5>
+        <h5 class="col s7">Total</h5>
+        <p class="col s2 right-align">
+            <button type="button" class="btn" click.trigger="allInPricing()">All In pricing</button>
+        </p>
         <h5 class="col s3" style="text-align: right;" innerHTML.bind="'$' + (_model.GrandTotal || 0).toFixed(2)"></h5>
     </div>
 </div>
@@ -360,4 +364,5 @@
         <button type="button" class="modal-action modal-close waves-effect btn-flat cancel">Cancel</button>
     </div>
 </div>
+<all-in-pricing visible.bind="_showAllInPricingModal" model.bind="_model"></all-in-pricing>
 </template>

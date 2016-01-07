@@ -292,10 +292,16 @@
     <Content Include="app\views\inquiries\list.js" />
     <Content Include="app\views\inquiries\detail.html" />
     <Content Include="app\views\inquiries\detail.js" />
+    <Content Include="app\views\items\edit.html" />
+    <Content Include="app\views\items\edit.js" />
     <Content Include="app\views\items\list.html" />
     <Content Include="app\views\items\list.js" />
+    <Content Include="app\views\items\show.html" />
+    <Content Include="app\views\items\show.js" />
     <Content Include="app\views\nav\nav-bar.html" />
     <Content Include="app\views\nav\nav-bar.js" />
+    <Content Include="app\views\orders\allInPricing.html" />
+    <Content Include="app\views\orders\allInPricing.js" />
     <Content Include="app\views\orders\edit.js" />
     <Content Include="app\views\orders\list.html" />
     <Content Include="app\views\orders\list.js" />
@@ -3481,6 +3487,9 @@
     <Content Include="app\components\orderFilter.ts" />
     <Content Include="app\models\itemTemplate.ts" />
     <Content Include="app\views\items\list.ts" />
+    <Content Include="app\views\orders\allInPricing.ts" />
+    <Content Include="app\views\items\show.ts" />
+    <Content Include="app\views\items\edit.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\animator-css%400.16.0\aurelia-animator-css.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\binding%400.9.1\aurelia-binding.d.ts" />
     <TypeScriptCompile Include="jspm_packages\github\aurelia\bootstrapper%400.17.0\aurelia-bootstrapper.d.ts" />
