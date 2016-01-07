@@ -194,8 +194,14 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                 };
                 EditOrder.prototype.allInPricing = function () {
                     var _this = this;
-                    this._showAllInPricingModal = true;
-                    window.setTimeout((function () { return _this._showAllInPricingModal = false; }).bind(this));
+                    var itemsOnInvoice = underscore_1.default.filter(this._model.Items, function (item) { return item.ShowOnInvoice; });
+                    if (itemsOnInvoice.length !== 1) {
+                        window.toastr.warning('All in pricing can only be done when 0 or 1 items are being displayed on the invoice');
+                    }
+                    else {
+                        this._showAllInPricingModal = true;
+                        window.setTimeout((function () { return _this._showAllInPricingModal = false; }).bind(this));
+                    }
                 };
                 EditOrder.prototype.save = function (e) {
                     var _this = this;

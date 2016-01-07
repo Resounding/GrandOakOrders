@@ -209,8 +209,13 @@ export class EditOrder implements IAllInPricingHost {
     }
 
     allInPricing() {
-        this._showAllInPricingModal = true;
-        window.setTimeout((() => this._showAllInPricingModal = false).bind(this));
+        var itemsOnInvoice = _.filter(this._model.Items, (item) => item.ShowOnInvoice);
+        if (itemsOnInvoice.length !== 1) {
+            window.toastr.warning('All in pricing can only be done when 0 or 1 items are being displayed on the invoice');
+        } else {
+            this._showAllInPricingModal = true;
+            window.setTimeout((() => this._showAllInPricingModal = false).bind(this));
+        }
     }
 
     save(e) {

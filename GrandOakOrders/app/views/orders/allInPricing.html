@@ -1,8 +1,32 @@
 ﻿<template>
+    <require from="../../controls/currencyTextbox"></require>
+
     <div id="allInPricingModal" class="modal modal-fixed-footer">
         <div class="modal-content">
-            <form class="col s12">
-                
+            <form class="section">
+                <div class="row">
+                    <h5 class="col s3">Subtotal:</h5>
+                    <h5 class="col s6 text-right">${pricingModel.unitPriceDisplay}</h5>
+                    <h5 class="col s3 text-right">${pricingModel.subTotalDisplay}</h5>
+                </div>
+                <div class="row">
+                    <h5 class="col s9">${pricingModel.taxCodeDisplay}</h5>
+                    <h5 class="col s3 text-right">${pricingModel.taxDisplay}</h5>
+                </div>
+                <div class="row">
+                    <h5 class="col s7">Gratuity:</h5>
+                    <h5 class="col s2 text-right">${pricingModel.gratuityPercentageDisplay}</h5>
+                    <div class="col s3">
+                        <input type="text" class="text-right h5" value.bind="pricingModel.gratuity" currency>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <h5 class="col s9">Grand Total:</h5>
+                    <div class="col s3">
+                        <input type="text" class="text-right h5" value.bind="pricingModel.grandTotal" currency>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="modal-footer">
