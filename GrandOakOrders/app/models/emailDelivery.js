@@ -22,6 +22,7 @@ System.register(['moment'], function(exports_1) {
                     this.SentBy = delivery.SentBy;
                     this.DeliveredDate = delivery.DeliveredDate;
                     this.BouncedDate = delivery.BouncedDate;
+                    this.OpenedDate = delivery.OpenedDate;
                 }
                 Object.defineProperty(EmailDelivery.prototype, "sentDisplay", {
                     get: function () {
@@ -33,6 +34,9 @@ System.register(['moment'], function(exports_1) {
                         }
                         if (this.DeliveredDate) {
                             text += " Delivered on " + moment_1.default(this.DeliveredDate).format(this.DATE_FORMAT) + " at " + moment_1.default(this.DeliveredDate).format(this.TIME_FORMAT) + ".";
+                        }
+                        if (this.OpenedDate) {
+                            text += " Opened on " + moment_1.default(this.OpenedDate).format(this.DATE_FORMAT) + " at " + moment_1.default(this.OpenedDate).format(this.TIME_FORMAT) + ".";
                         }
                         return text;
                     },

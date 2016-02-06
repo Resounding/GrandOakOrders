@@ -15,6 +15,7 @@ namespace GrandOakOrders.Data.Entities
         public string SentBy { get; set; }
         public DateTime? DeliveredDate { get; set; }
         public DateTime? BouncedDate { get; set; }
+        public DateTime? OpenedDate { get; set; }
 
         public virtual Order Order { get; set; }
     }

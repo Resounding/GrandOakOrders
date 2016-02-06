@@ -146,6 +146,9 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                 EditOrder.prototype.sortItems = function () {
                     this.sortedItems = underscore_1.default.sortBy(this._model.Items, function (item) { return item.SortOrder; });
                 };
+                EditOrder.prototype.changeAddress = function (list, index, address) {
+                    list[index] = address;
+                };
                 EditOrder.prototype.addAddress = function (list) {
                     list.push('');
                 };

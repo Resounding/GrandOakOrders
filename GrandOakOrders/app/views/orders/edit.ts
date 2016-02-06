@@ -147,6 +147,10 @@ export class EditOrder implements IAllInPricingHost {
         this.sortedItems = _.sortBy(this._model.Items, (item) => item.SortOrder);
     }
 
+    changeAddress(list, index, address) {
+        list[index] = address;
+    }
+
     addAddress(list) {
         list.push('');
     }

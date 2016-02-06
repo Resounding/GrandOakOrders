@@ -292,7 +292,7 @@
                     <div class="collapsible-body">
                         <div class="row" repeat.for="address of _toAddresses">
                             <div class="input-field col s10">
-                                <input id="email_address_${$index}" type="email" value.bind="address"/>
+                                <input id="email_address_${$index}" type="email" value.bind="address" blur.bind="$parent.changeAddress($parent._toAddresses, $index, address)">
                                 <label for="email_address_${$index}" class="active">To</label>
                             </div>
                             <div class="col s1">
