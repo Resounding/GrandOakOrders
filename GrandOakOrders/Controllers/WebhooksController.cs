@@ -46,7 +46,7 @@ namespace GrandOakOrders.Controllers
                     var events = posts
                         .Where(
                             e =>
-                                (e.Event == "delivered" || e.Event == "bounce" || e.Event == "open") &&
+                                (e.Event == "delivered" || e.Event == "bounce" || e.Event == "dropped" || e.Event == "open") &&
                                 e.OrderId.HasValue
                         )
                         .ToList();
@@ -57,7 +57,7 @@ namespace GrandOakOrders.Controllers
                         var fromAddress = ConfigurationManager.AppSettings["EmailFromAddress"];
 
                         foreach (var email in events) {
-                            if (sendEmail) {
+                            if (sendEmail && email.Email != toAddress && email.Email != fromAddress) {
                                 // ReSharper disable once PossibleInvalidOperationException
                                 var id = email.OrderId.Value.ToString("0000");
                                 var body =
@@ -74,12 +74,14 @@ namespace GrandOakOrders.Controllers
                                 await _transportWeb.DeliverAsync(mailMessage);
                             }
 
-                            if (!email.DeliveryId.HasValue) continue;
+                            if (!email.DeliveryId.HasValue || email.Email == toAddress && email.Email == fromAddress) continue;
 
                             if (email.Event == "delivered") {
                                 await _orderRepository.RecordEmailDelivery(email.DeliveryId.Value);
-                            } else if (email.Event == "bounce") {
+                            } else if (email.Event == "bounce" || email.Event == "dropped") {
                                 await _orderRepository.RecordEmailBounce(email.DeliveryId.Value);
+                            } else if (email.Event == "open") {
+                                await _orderRepository.RecordEmailOpen(email.DeliveryId.Value);
                             }
                         }
                     }
