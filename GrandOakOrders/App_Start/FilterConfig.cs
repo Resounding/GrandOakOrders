@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Mail;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ using GrandOakOrders.Auth;
 using GrandOakOrders.Data.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using SendGrid;
 
 namespace GrandOakOrders
 {
@@ -26,6 +29,36 @@ namespace GrandOakOrders
             filters.Add(new ErrorFilter());
             filters.Add(new AuthenticationFilter());
             filters.Add(new AuthorizationFilter());
+        }
+    }
+
+    public class GOCModule : ErrorMailModule
+    {
+        private readonly Web _transportWeb;
+
+        public GOCModule()
+        {
+            var username = ConfigurationManager.AppSettings["SendGridUserName"];
+            var password = ConfigurationManager.AppSettings["SendGridPassword"];
+            var credentials = new NetworkCredential(username, password);
+            _transportWeb = new Web(credentials);
+        }
+
+        protected override void SendMail(MailMessage mail)
+        {
+            var mailMessage = new SendGridMessage {
+                To = new [] { new MailAddress("cliffe@resounding.ca", "Cliffe Hodgkinson"), },
+                Subject = "Grand Oak Orders error",
+                From = new MailAddress("elmah@resounding.ca"),
+                Text = mail.Body
+            };
+
+            Task.Factory
+                .StartNew(() => _transportWeb.DeliverAsync(mailMessage),
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning, // guarantees separate thread
+                    TaskScheduler.Default)
+                .Wait();
         }
     }
 
