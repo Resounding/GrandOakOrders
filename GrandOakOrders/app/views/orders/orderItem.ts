@@ -51,7 +51,7 @@ export class OrderItem {
                     this.item.OrderingNotes = item.OrderingNotes;
                     this.item.InvoiceNotes = item.InvoiceNotes;
                     $(`label[for=description_${item.Id}]`).addClass('active');
-                }).on('typeahead:active', () => {
+                }).on('typeahead:active', (e, item:ItemTemplate) => {
                         $(`label[for=description_${item.Id}]`).addClass('active');
                     }
                 );
@@ -60,8 +60,8 @@ export class OrderItem {
         }, this), 500);
     }
 
-    bind(context) {
-        this.parent = context.$parent;
+    bind(bindingContext, overrideContext) {
+        this.parent = overrideContext.parentOverrideContext.bindingContext;
     }
 
     isNaN(val) {
@@ -73,7 +73,7 @@ export class OrderItem {
     }
 
     get _submitted(): boolean {
-        return this.parent._submitted;
+        return this.parent && this.parent._submitted;
     }
 }
 

@@ -1,45 +1,57 @@
 /// <reference path="../../typings/toastr/toastr.d.ts" />
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-        case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
-        case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
-        case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
+System.register(['aurelia-framework', 'aurelia-auth/app.httpClient.config', 'aurelia-auth'], function(exports_1) {
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var aurelia_framework_1, app_httpClient_config_1, aurelia_auth_1;
+    var App;
+    return {
+        setters:[
+            function (aurelia_framework_1_1) {
+                aurelia_framework_1 = aurelia_framework_1_1;
+            },
+            function (app_httpClient_config_1_1) {
+                app_httpClient_config_1 = app_httpClient_config_1_1;
+            },
+            function (aurelia_auth_1_1) {
+                aurelia_auth_1 = aurelia_auth_1_1;
+            }],
+        execute: function() {
+            App = (function () {
+                function App(httpClientConfig, fetchConfig) {
+                    this.httpClientConfig = httpClientConfig;
+                    this.fetchConfig = fetchConfig;
+                }
+                App.prototype.activate = function () {
+                    this.httpClientConfig.configure();
+                    this.fetchConfig.configure();
+                    toastr.options.positionClass = 'toast-bottom-left';
+                };
+                App.prototype.configureRouter = function (config, router) {
+                    this.router = router;
+                    config.title = 'Grand Oak Culinary Market ordering application';
+                    config.addPipelineStep('authorize', aurelia_auth_1.AuthorizeStep);
+                    config.map([
+                        { route: 'login', name: 'login', moduleId: './auth/login' },
+                        { route: ['/', 'home'], name: 'home', moduleId: './home/index', nav: true, auth: true },
+                        { route: 'inquiries', name: 'inquiries', moduleId: './inquiries/list', nav: true, auth: true },
+                        { route: 'inquiries/new', name: 'new inquiry', moduleId: './inquiries/detail', nav: false, auth: true },
+                        { route: 'inquiries/:id', name: 'edit inquiry', moduleId: './inquiries/detail', nav: false, auth: true },
+                        { route: 'orders', name: 'orders', moduleId: './orders/list', nav: true, auth: true },
+                        { route: 'orders/all', name: 'all orders', moduleId: './orders/list', nav: true, auth: true },
+                        { route: 'orders/:id', name: 'edit order', moduleId: './orders/edit', nav: false, auth: true },
+                        { route: 'items', name: 'items', moduleId: './items/list', nav: true, auth: true }
+                    ]);
+                };
+                App = __decorate([
+                    aurelia_framework_1.inject(app_httpClient_config_1.default, aurelia_auth_1.FetchConfig)
+                ], App);
+                return App;
+            })();
+            exports_1("App", App);
+        }
     }
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-import { inject } from 'aurelia-framework';
-import HttpClientConfig from 'paulvanbladel/aurelia-auth/app.httpClient.config';
-import { AuthorizeStep } from 'paulvanbladel/aurelia-auth';
-export let App = class {
-    constructor(httpClientConfig) {
-        this.httpClientConfig = httpClientConfig;
-    }
-    activate() {
-        this.httpClientConfig.configure();
-        toastr.options.positionClass = 'toast-bottom-left';
-    }
-    configureRouter(config, router) {
-        this.router = router;
-        config.title = 'Grand Oak Culinary Market ordering application';
-        config.addPipelineStep('authorize', AuthorizeStep);
-        config.map([
-            { route: 'login', name: 'login', moduleId: './auth/login' },
-            { route: ['/', 'home'], name: 'home', moduleId: './home/index', nav: true, auth: true },
-            { route: 'inquiries', name: 'inquiries', moduleId: './inquiries/list', nav: true, auth: true },
-            { route: 'inquiries/new', name: 'new inquiry', moduleId: './inquiries/detail', nav: false, auth: true },
-            { route: 'inquiries/:id', name: 'edit inquiry', moduleId: './inquiries/detail', nav: false, auth: true },
-            { route: 'orders', name: 'orders', moduleId: './orders/list', nav: true, auth: true },
-            { route: 'orders/all', name: 'all orders', moduleId: './orders/list', nav: true, auth: true },
-            { route: 'orders/:id', name: 'edit order', moduleId: './orders/edit', nav: false, auth: true },
-            { route: 'items', name: 'items', moduleId: './items/list', nav: true, auth: true }
-        ]);
-    }
-};
-App = __decorate([
-    inject(HttpClientConfig), 
-    __metadata('design:paramtypes', [(typeof (_a = typeof HttpClientConfig !== 'undefined' && HttpClientConfig) === 'function' && _a) || Object])
-], App);
-var _a;
+});

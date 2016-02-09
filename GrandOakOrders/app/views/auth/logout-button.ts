@@ -1,7 +1,7 @@
 import {customElement} from 'aurelia-framework';
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {AuthService} from 'paulvanbladel/aurelia-auth';
+import {AuthService} from 'aurelia-auth';
 
 @inject(AuthService, EventAggregator, Element)
 @customElement('logout-button')

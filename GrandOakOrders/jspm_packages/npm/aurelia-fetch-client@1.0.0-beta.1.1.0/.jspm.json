@@ -1,0 +1,89 @@
+{
+  "name": "aurelia-fetch-client",
+  "version": "1.0.0-beta.1.1.0",
+  "description": "A simple client based on the Fetch standard.",
+  "keywords": [
+    "aurelia",
+    "http",
+    "ajax",
+    "fetch"
+  ],
+  "homepage": "http://aurelia.io",
+  "bugs": {
+    "url": "https://github.com/aurelia/fetch-client/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Rob Eisenberg",
+    "email": "rob@bluespire.com",
+    "url": "http://robeisenberg.com/"
+  },
+  "main": "aurelia-fetch-client",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/aurelia/fetch-client"
+  },
+  "scripts": {
+    "test": "gulp test",
+    "ci": "gulp ci"
+  },
+  "jspm": {
+    "registry": "npm",
+    "jspmPackage": true,
+    "main": "aurelia-fetch-client",
+    "format": "amd",
+    "directories": {
+      "dist": "dist/amd"
+    },
+    "dependencies": {
+      "core-js": "^2.0.3"
+    },
+    "devDependencies": {
+      "babel": "^5.1.13",
+      "babel-runtime": "^5.1.13",
+      "core-js": "^2.0.3"
+    }
+  },
+  "devDependencies": {
+    "babel": "^5.1.13",
+    "babel-runtime": "^5.1.13",
+    "core-js": "^2.0.3"
+  },
+  "aurelia": {
+    "documentation": {
+      "articles": []
+    }
+  },
+  "gitHead": "923eda7bbbe4db33f5405551fb9aa83a427244bf",
+  "_id": "aurelia-fetch-client@1.0.0-beta.1.1.0",
+  "_shasum": "b8ca1b9cda203d017d3c4517f9383a713c2cf0be",
+  "_from": ".",
+  "_npmVersion": "3.3.12",
+  "_nodeVersion": "5.2.0",
+  "_npmUser": {
+    "name": "aureliaeffect",
+    "email": "info@durandal.io"
+  },
+  "dist": {
+    "shasum": "b8ca1b9cda203d017d3c4517f9383a713c2cf0be",
+    "tarball": "http://registry.npmjs.org/aurelia-fetch-client/-/aurelia-fetch-client-1.0.0-beta.1.1.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "aureliaeffect",
+      "email": "info@durandal.io"
+    }
+  ],
+  "directories": {
+    "dist": "dist/amd"
+  },
+  "registry": "npm",
+  "jspmPackage": true,
+  "format": "amd",
+  "ignore": [
+    "node_modules"
+  ],
+  "dependencies": {
+    "core-js": "core-js@^2.0.3"
+  }
+}

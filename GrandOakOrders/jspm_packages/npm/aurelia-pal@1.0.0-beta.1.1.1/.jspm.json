@@ -1,0 +1,79 @@
+{
+  "name": "aurelia-pal",
+  "version": "1.0.0-beta.1.1.1",
+  "description": "Aurelia's platform abstraction layer (PAL).",
+  "keywords": [
+    "aurelia",
+    "pal"
+  ],
+  "homepage": "http://aurelia.io",
+  "bugs": {
+    "url": "https://github.com/aurelia/pal/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Rob Eisenberg",
+    "email": "rob@bluespire.com",
+    "url": "http://robeisenberg.com/"
+  },
+  "main": "aurelia-pal",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/aurelia/pal"
+  },
+  "jspm": {
+    "registry": "npm",
+    "jspmPackage": true,
+    "main": "aurelia-pal",
+    "format": "amd",
+    "directories": {
+      "dist": "dist/amd"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.22",
+      "babel-runtime": "npm:babel-runtime@^5.8.20",
+      "core-js": "npm:core-js@^2.0.3"
+    }
+  },
+  "devDependencies": {
+    "babel": "npm:babel-core@^5.8.22",
+    "babel-runtime": "npm:babel-runtime@^5.8.20",
+    "core-js": "npm:core-js@^2.0.3"
+  },
+  "aurelia": {
+    "documentation": {
+      "articles": []
+    }
+  },
+  "gitHead": "0ded4b329cffd077160af26359ed5cbb2df458af",
+  "_id": "aurelia-pal@1.0.0-beta.1.1.1",
+  "scripts": {},
+  "_shasum": "ee9e29c8044152e9c75748453efd21261190c108",
+  "_from": ".",
+  "_npmVersion": "3.3.12",
+  "_nodeVersion": "5.2.0",
+  "_npmUser": {
+    "name": "aureliaeffect",
+    "email": "info@durandal.io"
+  },
+  "dist": {
+    "shasum": "ee9e29c8044152e9c75748453efd21261190c108",
+    "tarball": "http://registry.npmjs.org/aurelia-pal/-/aurelia-pal-1.0.0-beta.1.1.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "aureliaeffect",
+      "email": "info@durandal.io"
+    }
+  ],
+  "directories": {
+    "dist": "dist/amd"
+  },
+  "registry": "npm",
+  "jspmPackage": true,
+  "format": "amd",
+  "ignore": [
+    "node_modules"
+  ],
+  "dependencies": {}
+}

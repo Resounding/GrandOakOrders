@@ -1,7 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Router} from 'aurelia-router';
-import {AuthService} from 'paulvanbladel/aurelia-auth';
+import {AuthService} from 'aurelia-auth';
 
 @inject(AuthService, Router, EventAggregator)
 export class Login {

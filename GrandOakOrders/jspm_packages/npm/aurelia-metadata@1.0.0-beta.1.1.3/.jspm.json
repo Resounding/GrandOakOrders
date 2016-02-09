@@ -1,0 +1,99 @@
+{
+  "name": "aurelia-metadata",
+  "version": "1.0.0-beta.1.1.3",
+  "description": "Utilities for reading and writing the metadata of JavaScript functions.",
+  "keywords": [
+    "aurelia",
+    "metadata",
+    "annotations"
+  ],
+  "homepage": "http://aurelia.io",
+  "bugs": {
+    "url": "https://github.com/aurelia/metadata/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Rob Eisenberg",
+    "email": "rob@bluespire.com",
+    "url": "http://robeisenberg.com/"
+  },
+  "main": "aurelia-metadata",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aurelia/metadata"
+  },
+  "jspm": {
+    "registry": "npm",
+    "jspmPackage": true,
+    "main": "aurelia-metadata",
+    "format": "amd",
+    "directories": {
+      "dist": "dist/amd"
+    },
+    "peerDependencies": {
+      "aurelia-pal": "^1.0.0-beta.1.1.1",
+      "core-js": "^2.0.3"
+    },
+    "devDependencies": {
+      "babel": "babel-core@^5.1.13",
+      "babel-runtime": "^5.1.13",
+      "core-js": "^2.0.3"
+    }
+  },
+  "peerDependencies": {
+    "aurelia-pal": "^1.0.0-beta.1.1.1",
+    "core-js": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel": "babel-core@^5.1.13",
+    "babel-runtime": "^5.1.13",
+    "core-js": "^2.0.3"
+  },
+  "aurelia": {
+    "documentation": {
+      "articles": []
+    }
+  },
+  "gitHead": "66efdd48fcc29ccc7e2845570219124410d2cbfd",
+  "_id": "aurelia-metadata@1.0.0-beta.1.1.3",
+  "scripts": {},
+  "_shasum": "567d1b811e73fa199cdc9e6c2755a136fba4dd83",
+  "_from": ".",
+  "_npmVersion": "3.3.12",
+  "_nodeVersion": "5.2.0",
+  "_npmUser": {
+    "name": "aureliaeffect",
+    "email": "info@durandal.io"
+  },
+  "dist": {
+    "shasum": "567d1b811e73fa199cdc9e6c2755a136fba4dd83",
+    "tarball": "http://registry.npmjs.org/aurelia-metadata/-/aurelia-metadata-1.0.0-beta.1.1.3.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "aureliaeffect",
+      "email": "info@durandal.io"
+    },
+    {
+      "name": "cmichaelgraham",
+      "email": "mgraham@technicalmedia.com"
+    },
+    {
+      "name": "eisenbergeffect",
+      "email": "rob@bluespire.com"
+    }
+  ],
+  "directories": {
+    "dist": "dist/amd"
+  },
+  "registry": "npm",
+  "jspmPackage": true,
+  "format": "amd",
+  "ignore": [
+    "node_modules"
+  ],
+  "dependencies": {
+    "aurelia-pal": "aurelia-pal@^1.0.0-beta.1.1.1",
+    "core-js": "core-js@^2.0.3"
+  }
+}

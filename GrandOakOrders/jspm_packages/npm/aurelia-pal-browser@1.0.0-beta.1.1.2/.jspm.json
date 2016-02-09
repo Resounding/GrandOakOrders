@@ -1,0 +1,90 @@
+{
+  "name": "aurelia-pal-browser",
+  "version": "1.0.0-beta.1.1.2",
+  "description": "The browser-specific implementation of Aurelia's platform abstraction layer.",
+  "keywords": [
+    "aurelia",
+    "pal"
+  ],
+  "homepage": "http://aurelia.io",
+  "bugs": {
+    "url": "https://github.com/aurelia/pal-browser/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Rob Eisenberg",
+    "email": "rob@bluespire.com",
+    "url": "http://robeisenberg.com/"
+  },
+  "main": "aurelia-pal-browser",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/aurelia/pal-browser"
+  },
+  "jspm": {
+    "registry": "npm",
+    "jspmPackage": true,
+    "main": "aurelia-pal-browser",
+    "format": "amd",
+    "directories": {
+      "dist": "dist/amd"
+    },
+    "peerDependencies": {
+      "aurelia-pal": "^1.0.0-beta.1.1.1",
+      "core-js": "^2.0.3"
+    },
+    "devDependencies": {
+      "babel": "babel-core@^5.8.22",
+      "babel-runtime": "^5.8.20",
+      "core-js": "^2.0.3"
+    }
+  },
+  "peerDependencies": {
+    "aurelia-pal": "^1.0.0-beta.1.1.1",
+    "core-js": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel": "babel-core@^5.8.22",
+    "babel-runtime": "^5.8.20",
+    "core-js": "^2.0.3"
+  },
+  "aurelia": {
+    "documentation": {
+      "articles": []
+    }
+  },
+  "gitHead": "be23edff0b4b035a79543a5161010009059c9015",
+  "_id": "aurelia-pal-browser@1.0.0-beta.1.1.2",
+  "scripts": {},
+  "_shasum": "539574fff6b20c142c7a534c9416ac1eb945eaf9",
+  "_from": ".",
+  "_npmVersion": "3.3.12",
+  "_nodeVersion": "5.2.0",
+  "_npmUser": {
+    "name": "aureliaeffect",
+    "email": "info@durandal.io"
+  },
+  "dist": {
+    "shasum": "539574fff6b20c142c7a534c9416ac1eb945eaf9",
+    "tarball": "http://registry.npmjs.org/aurelia-pal-browser/-/aurelia-pal-browser-1.0.0-beta.1.1.2.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "aureliaeffect",
+      "email": "info@durandal.io"
+    }
+  ],
+  "directories": {
+    "dist": "dist/amd"
+  },
+  "registry": "npm",
+  "jspmPackage": true,
+  "format": "amd",
+  "ignore": [
+    "node_modules"
+  ],
+  "dependencies": {
+    "aurelia-pal": "aurelia-pal@^1.0.0-beta.1.1.1",
+    "core-js": "core-js@^2.0.3"
+  }
+}

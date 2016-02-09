@@ -1,7 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
 import {Router} from 'aurelia-router';
-import {AuthService} from 'paulvanbladel/aurelia-auth';
+import {AuthService} from 'aurelia-auth';
 import {InquiryPojo} from '../../models/inquiry';
 import {OrderPojo} from '../../models/order';
 

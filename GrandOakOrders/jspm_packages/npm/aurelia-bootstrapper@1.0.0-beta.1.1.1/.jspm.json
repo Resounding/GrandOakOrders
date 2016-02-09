@@ -1,0 +1,127 @@
+{
+  "name": "aurelia-bootstrapper",
+  "version": "1.0.0-beta.1.1.1",
+  "description": "Sets up the default configuration for the aurelia framework and gets you up and running quick and easy.",
+  "keywords": [
+    "aurelia",
+    "bootstrapper",
+    "spa"
+  ],
+  "homepage": "http://aurelia.io",
+  "bugs": {
+    "url": "https://github.com/aurelia/bootstrapper/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Rob Eisenberg",
+    "email": "rob@bluespire.com",
+    "url": "http://robeisenberg.com/"
+  },
+  "main": "aurelia-bootstrapper",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/aurelia/bootstrapper"
+  },
+  "jspm": {
+    "registry": "npm",
+    "jspmPackage": true,
+    "main": "aurelia-bootstrapper",
+    "format": "amd",
+    "directories": {
+      "dist": "dist/amd"
+    },
+    "peerDependencies": {
+      "aurelia-event-aggregator": "^1.0.0-beta.1.1.0",
+      "aurelia-framework": "^1.0.0-beta.1.1.0",
+      "aurelia-history": "^1.0.0-beta.1.1.1",
+      "aurelia-history-browser": "^1.0.0-beta.1.1.1",
+      "aurelia-loader-default": "^1.0.0-beta.1.1.1",
+      "aurelia-logging-console": "^1.0.0-beta.1.1.3",
+      "aurelia-pal": "^1.0.0-beta.1.1.1",
+      "aurelia-pal-browser": "^1.0.0-beta.1.1.2",
+      "aurelia-router": "^1.0.0-beta.1.1.0",
+      "aurelia-templating": "^1.0.0-beta.1.1.0",
+      "aurelia-templating-binding": "^1.0.0-beta.1.1.0",
+      "aurelia-templating-resources": "^1.0.0-beta.1.1.0",
+      "aurelia-templating-router": "^1.0.0-beta.1.1.0",
+      "core-js": "^2.0.3"
+    },
+    "devDependencies": {
+      "babel": "babel-core@^5.8.24",
+      "babel-runtime": "^5.8.24",
+      "core-js": "^2.0.3"
+    }
+  },
+  "peerDependencies": {
+    "aurelia-event-aggregator": "^1.0.0-beta.1.1.0",
+    "aurelia-framework": "^1.0.0-beta.1.1.0",
+    "aurelia-history": "^1.0.0-beta.1.1.1",
+    "aurelia-history-browser": "^1.0.0-beta.1.1.1",
+    "aurelia-loader-default": "^1.0.0-beta.1.1.1",
+    "aurelia-logging-console": "^1.0.0-beta.1.1.3",
+    "aurelia-pal": "^1.0.0-beta.1.1.1",
+    "aurelia-pal-browser": "^1.0.0-beta.1.1.2",
+    "aurelia-router": "^1.0.0-beta.1.1.0",
+    "aurelia-templating": "^1.0.0-beta.1.1.0",
+    "aurelia-templating-binding": "^1.0.0-beta.1.1.0",
+    "aurelia-templating-resources": "^1.0.0-beta.1.1.0",
+    "aurelia-templating-router": "^1.0.0-beta.1.1.0",
+    "core-js": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel": "babel-core@^5.8.24",
+    "babel-runtime": "^5.8.24",
+    "core-js": "^2.0.3"
+  },
+  "aurelia": {
+    "documentation": {
+      "articles": []
+    }
+  },
+  "gitHead": "1103dc7d154eadd5e335f76abf69ae60fe42a1e0",
+  "_id": "aurelia-bootstrapper@1.0.0-beta.1.1.1",
+  "scripts": {},
+  "_shasum": "60affb2aafef5c9a6ae254489f927ad12e51e32d",
+  "_from": ".",
+  "_npmVersion": "3.3.12",
+  "_nodeVersion": "5.2.0",
+  "_npmUser": {
+    "name": "aureliaeffect",
+    "email": "info@durandal.io"
+  },
+  "dist": {
+    "shasum": "60affb2aafef5c9a6ae254489f927ad12e51e32d",
+    "tarball": "http://registry.npmjs.org/aurelia-bootstrapper/-/aurelia-bootstrapper-1.0.0-beta.1.1.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "aureliaeffect",
+      "email": "info@durandal.io"
+    }
+  ],
+  "directories": {
+    "dist": "dist/amd"
+  },
+  "registry": "npm",
+  "jspmPackage": true,
+  "format": "amd",
+  "ignore": [
+    "node_modules"
+  ],
+  "dependencies": {
+    "aurelia-event-aggregator": "aurelia-event-aggregator@^1.0.0-beta.1.1.0",
+    "aurelia-framework": "aurelia-framework@^1.0.0-beta.1.1.0",
+    "aurelia-history": "aurelia-history@^1.0.0-beta.1.1.1",
+    "aurelia-history-browser": "aurelia-history-browser@^1.0.0-beta.1.1.1",
+    "aurelia-loader-default": "aurelia-loader-default@^1.0.0-beta.1.1.1",
+    "aurelia-logging-console": "aurelia-logging-console@^1.0.0-beta.1.1.3",
+    "aurelia-pal": "aurelia-pal@^1.0.0-beta.1.1.1",
+    "aurelia-pal-browser": "aurelia-pal-browser@^1.0.0-beta.1.1.2",
+    "aurelia-router": "aurelia-router@^1.0.0-beta.1.1.0",
+    "aurelia-templating": "aurelia-templating@^1.0.0-beta.1.1.0",
+    "aurelia-templating-binding": "aurelia-templating-binding@^1.0.0-beta.1.1.0",
+    "aurelia-templating-resources": "aurelia-templating-resources@^1.0.0-beta.1.1.0",
+    "aurelia-templating-router": "aurelia-templating-router@^1.0.0-beta.1.1.0",
+    "core-js": "core-js@^2.0.3"
+  }
+}

@@ -17,8 +17,8 @@ namespace GrandOakOrders
             bundles.Add(styleBundle);
 
             var jsBundle = new CustomScriptBundle(SiteScriptPath);
-            jsBundle.Include("~/jspm_packages/github/components/jquery@2.1.4/jquery.js");
-            jsBundle.Include("~/jspm_packages/github/moment/moment@2.10.6/moment.js");
+            jsBundle.Include("~/jspm_packages/npm/jquery@2.2.0/dist/jquery.js");
+            jsBundle.Include("~/jspm_packages/github/moment/moment@2.11.2/moment.js");
             jsBundle.Include("~/jspm_packages/github/amsul/pickadate.js@3.5.6/lib/picker.js");
             jsBundle.Include("~/jspm_packages/github/amsul/pickadate.js@3.5.6/lib/picker.date.js");
             jsBundle.Include("~/jspm_packages/github/amsul/pickadate.js@3.5.6/lib/picker.time.js");

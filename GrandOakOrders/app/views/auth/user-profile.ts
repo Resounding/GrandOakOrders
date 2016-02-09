@@ -1,7 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {customElement} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {AuthService} from 'paulvanbladel/aurelia-auth';
+import {AuthService} from 'aurelia-auth';
 import {Router} from 'aurelia-router';
 
 @inject(AuthService, EventAggregator, Router)
