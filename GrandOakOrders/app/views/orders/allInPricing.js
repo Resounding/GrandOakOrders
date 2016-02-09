@@ -45,7 +45,7 @@ System.register(['aurelia-framework', '../../models/order', 'aurelia-event-aggre
                     var unitPrice = parseFloat((this.pricingModel.subTotal / itemOnInvoice.Quantity).toFixed(2));
                     itemOnInvoice.UnitPrice = unitPrice;
                     // re-adjust
-                    this.model.Gratuity = this.pricingModel.grandTotal - this.model.SubTotal - this.model.TotalTax;
+                    this.model.Gratuity = parseFloat((this.pricingModel.grandTotal - this.model.SubTotal - this.model.TotalTax + this.pricingModel._deposit).toFixed(2));
                     $('.modal', this.element).closeModal();
                 };
                 __decorate([
@@ -65,11 +65,26 @@ System.register(['aurelia-framework', '../../models/order', 'aurelia-event-aggre
                 function PricingModel(order, events) {
                     this.order = order;
                     this._gratuity = order.Gratuity;
+                    this._deposit = order.Deposit;
                     this._subTotal = order.SubTotal;
                     this._grandTotal = order.GrandTotal;
                     var itemOnInvoice = underscore_1.default.find(order.Items, function (item) { return item.ShowOnInvoice; });
                     this._itemOnInvoice = new order_1.OrderItemViewModel(itemOnInvoice, events);
                 }
+                Object.defineProperty(PricingModel.prototype, "deposit", {
+                    get: function () {
+                        return this._deposit;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(PricingModel.prototype, "depositDisplay", {
+                    get: function () {
+                        return "$" + this._deposit.toFixed(2);
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
                 Object.defineProperty(PricingModel.prototype, "gratuity", {
                     get: function () {
                         return this._gratuity;
@@ -77,9 +92,11 @@ System.register(['aurelia-framework', '../../models/order', 'aurelia-event-aggre
                     set: function (val) {
                         var number = parseFloat(val.toString());
                         if (!isNaN(number)) {
+                            var desiredTotal = this._grandTotal;
                             this._gratuity = number;
                             var subTotalWithTax = parseFloat((this._subTotal * (1 + this.order.TaxRate)).toFixed(2));
-                            this._grandTotal = parseFloat((this._gratuity + subTotalWithTax).toFixed(2));
+                            this._grandTotal = parseFloat((this._gratuity + subTotalWithTax - this._deposit).toFixed(2));
+                            this.grandTotal = desiredTotal;
                         }
                     },
                     enumerable: true,
@@ -115,11 +132,11 @@ System.register(['aurelia-framework', '../../models/order', 'aurelia-event-aggre
                 });
                 Object.defineProperty(PricingModel.prototype, "unitPriceDisplay", {
                     get: function () {
-                        var people = this.order.Inquiry.People;
-                        var unit = this._subTotal / people;
+                        var quantity = parseFloat(this._itemOnInvoice.Quantity.toString());
+                        var unit = this._subTotal / quantity;
                         if (isNaN(unit) || !isFinite(unit))
                             return '';
-                        return "(" + people + " people @ $" + unit.toFixed(2) + ")";
+                        return "(" + quantity + " items @ $" + unit.toFixed(2) + ")";
                     },
                     enumerable: true,
                     configurable: true
@@ -132,29 +149,58 @@ System.register(['aurelia-framework', '../../models/order', 'aurelia-event-aggre
                         var number = parseFloat(val.toString());
                         if (!isNaN(number)) {
                             this._grandTotal = number;
-                            var subTotalWithTax = this._grandTotal - this._gratuity;
+                            var subTotalWithTax = this._grandTotal - this._gratuity + this._deposit;
                             var subTotal = parseFloat((subTotalWithTax / (1 + this.order.TaxRate)).toFixed(2));
                             var unitPrice = parseFloat((subTotal / this._itemOnInvoice.Quantity).toFixed(2));
                             this._itemOnInvoice.UnitPrice = unitPrice;
                             subTotal = this._itemOnInvoice.TotalPrice;
                             subTotalWithTax = parseFloat((subTotal * (1 + this.order.TaxRate)).toFixed(2));
                             this._subTotal = subTotal;
-                            this._gratuity = parseFloat((this._grandTotal - subTotalWithTax).toFixed(2));
+                            this._gratuity = parseFloat((this._grandTotal - subTotalWithTax + this._deposit).toFixed(2));
                         }
                     },
                     enumerable: true,
                     configurable: true
                 });
-                Object.defineProperty(PricingModel.prototype, "gratuityPercentageDisplay", {
+                Object.defineProperty(PricingModel.prototype, "grandTotalDisplay", {
                     get: function () {
-                        var percent = this._gratuity / this._subTotal;
-                        if (isNaN(percent) || !isFinite(percent))
-                            return 'N/A';
-                        return (percent * 100).toFixed(2) + "%";
+                        return "" + this._grandTotal.toFixed(2);
+                    },
+                    set: function (val) {
                     },
                     enumerable: true,
                     configurable: true
                 });
+                Object.defineProperty(PricingModel.prototype, "totalBeforeDeposit", {
+                    get: function () {
+                        return parseFloat((this._grandTotal + this._deposit).toFixed(2));
+                    },
+                    set: function (val) {
+                        var number = parseFloat(val.toString()) || 0;
+                        var afterDeposit = parseFloat((number - this._deposit).toFixed(2));
+                        this.grandTotal = afterDeposit;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(PricingModel.prototype, "gratuityPercentage", {
+                    get: function () {
+                        var percent = parseFloat(((this._gratuity / this._subTotal) * 100).toFixed(2)) || 0;
+                        return percent;
+                    },
+                    set: function (val) {
+                        var number = (parseFloat(val.toString()) || 0) / 100;
+                        this._gratuity = parseFloat((number * this._subTotal).toFixed(2));
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                __decorate([
+                    aurelia_binding_1.computedFrom('_deposit')
+                ], PricingModel.prototype, "deposit", null);
+                __decorate([
+                    aurelia_binding_1.computedFrom('_deposit')
+                ], PricingModel.prototype, "depositDisplay", null);
                 __decorate([
                     aurelia_binding_1.computedFrom('_gratuity')
                 ], PricingModel.prototype, "gratuity", null);
@@ -174,8 +220,14 @@ System.register(['aurelia-framework', '../../models/order', 'aurelia-event-aggre
                     aurelia_binding_1.computedFrom('_grandTotal')
                 ], PricingModel.prototype, "grandTotal", null);
                 __decorate([
+                    aurelia_binding_1.computedFrom('_grandTotal')
+                ], PricingModel.prototype, "grandTotalDisplay", null);
+                __decorate([
+                    aurelia_binding_1.computedFrom('_grandTotal')
+                ], PricingModel.prototype, "totalBeforeDeposit", null);
+                __decorate([
                     aurelia_binding_1.computedFrom('_gratuity', '_subTotal')
-                ], PricingModel.prototype, "gratuityPercentageDisplay", null);
+                ], PricingModel.prototype, "gratuityPercentage", null);
                 return PricingModel;
             })();
         }

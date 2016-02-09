@@ -15,17 +15,30 @@
                 </div>
                 <div class="row">
                     <h5 class="col s7">Gratuity:</h5>
-                    <h5 class="col s2 text-right">${pricingModel.gratuityPercentageDisplay}</h5>
+                    <div class="col s2" style="white-space: nowrap;">
+                        <input type="text" class="text-right h5" value.bind="pricingModel.gratuityPercentage & debounce">
+                        %
+                    </div>
                     <div class="col s3">
-                        <input type="text" class="text-right h5" value.bind="pricingModel.gratuity" currency>
+                        <input type="text" class="text-right h5" value.bind="pricingModel.gratuity & debounce" currency>
                     </div>
                 </div>
                 <div class="divider"></div>
                 <div class="row">
                     <h5 class="col s9">Grand Total:</h5>
                     <div class="col s3">
-                        <input type="text" class="text-right h5" value.bind="pricingModel.grandTotal" currency>
+                        <input type="text" class="text-right h5" value.bind="pricingModel.totalBeforeDeposit" currency>
                     </div>
+                </div>
+                <div class="divider" show.bind="pricingModel.deposit"></div>
+                <div class="row" show.bind="pricingModel.deposit">
+                    <h5 class="col s9">Less Deposit:</h5>
+                    <h5 class="col s3 text-right">(${pricingModel.depositDisplay})</h5>
+                </div>
+                <div class="divider" show.bind="pricingModel.deposit"></div>
+                <div class="row" show.bind="pricingModel.deposit">
+                    <h5 class="col s9">Total Owing:</h5>
+                    <h5 class="col s3 text-right">$${pricingModel.grandTotalDisplay}</h5>
                 </div>
             </form>
         </div>
