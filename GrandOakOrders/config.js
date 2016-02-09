@@ -45,7 +45,7 @@ System.config({
     "fetch": "github:github/fetch@0.9.0",
     "handlebars": "npm:handlebars@4.0.5",
     "jquery": "npm:jquery@2.2.0",
-    "moment": "github:moment/moment@2.11.2",
+    "moment": "npm:moment@2.11.2",
     "source-map": "npm:source-map@0.5.3",
     "text": "github:systemjs/plugin-text@0.0.2",
     "typeahead.js": "npm:typeahead.js@0.11.1",
@@ -327,6 +327,9 @@ System.config({
       "is-buffer": "npm:is-buffer@1.1.2"
     },
     "npm:lazy-cache@1.0.3": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:moment@2.11.2": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:optimist@0.6.1": {
