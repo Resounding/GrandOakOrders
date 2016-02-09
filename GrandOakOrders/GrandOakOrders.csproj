@@ -3575,7 +3575,6 @@
     <EmbeddedResource Include="Migrations\201602061413586_EmailOpenedEvent.resx">
       <DependentUpon>201602061413586_EmailOpenedEvent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reports\QuoteReport.resx">
       <DependentUpon>QuoteReport.cs</DependentUpon>
     </EmbeddedResource>
