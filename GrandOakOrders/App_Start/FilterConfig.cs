@@ -38,10 +38,8 @@ namespace GrandOakOrders
 
         public GOCModule()
         {
-            var username = ConfigurationManager.AppSettings["SendGridUserName"];
-            var password = ConfigurationManager.AppSettings["SendGridPassword"];
-            var credentials = new NetworkCredential(username, password);
-            _transportWeb = new Web(credentials);
+            var apiKey = ConfigurationManager.AppSettings["SendGridApiKey"];
+            _transportWeb = new Web(apiKey);
         }
 
         protected override void SendMail(MailMessage mail)
@@ -50,7 +48,8 @@ namespace GrandOakOrders
                 To = new [] { new MailAddress("cliffe@resounding.ca", "Cliffe Hodgkinson"), },
                 Subject = "Grand Oak Orders error",
                 From = new MailAddress("elmah@resounding.ca"),
-                Text = mail.Body
+                Text = mail.Body,
+                Html = mail.Body
             };
 
             Task.Factory
