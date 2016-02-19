@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Exceptions;
 using GrandOakOrders.Data.Entities;
 using GrandOakOrders.Data.Repositories;
 using GrandOakOrders.Models;
@@ -100,13 +100,31 @@ namespace GrandOakOrders.Controllers
                 ["delivery_id"] = delivery.Id.ToString()
             });
 
-            var username = ConfigurationManager.AppSettings["SendGridUserName"];
-            var password = ConfigurationManager.AppSettings["SendGridPassword"];
-            var credentials = new NetworkCredential(username, password);
+            try {
+                var apiKey = ConfigurationManager.AppSettings["SendGridApiKey"];
+                var transportWeb = new Web(apiKey);
+                await transportWeb.DeliverAsync(mailMessage);
 
-            var transportWeb = new Web(credentials);
-            await transportWeb.DeliverAsync(mailMessage);
-            
+            } catch (InvalidApiRequestException ex) {
+                var errorMessage = string.Join(", ", ex.Errors);
+                Exception error = ex;
+                while (error != null) {
+                    errorMessage += $",{error.Message}";
+                    error = error.InnerException;
+                }
+                await _repo.LogEmailDeliveryError(delivery.Id, errorMessage);
+                throw;
+
+            } catch (Exception ex) {
+                var errorMessage = string.Empty;
+                var error = ex;
+                while (error != null) {
+                    errorMessage += $",{error.Message}";
+                    error = error.InnerException;
+                }
+                await _repo.LogEmailDeliveryError(delivery.Id, errorMessage);
+                throw;
+            }
 
             var email = string.Join(";", model.Address);
             if (!string.IsNullOrWhiteSpace(email)) {

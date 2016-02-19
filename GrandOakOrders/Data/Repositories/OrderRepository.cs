@@ -160,7 +160,8 @@ namespace GrandOakOrders.Data.Repositories
                 Message = message.Text,
                 OrderId = orderId,
                 Sent = DateTime.Now,
-                SentBy = who
+                SentBy = who,
+                DeliveryError = string.Empty
             };
             _context.EmailDeliveries.Add(delivery);
             await _context.SaveChangesAsync();
@@ -173,6 +174,15 @@ namespace GrandOakOrders.Data.Repositories
             var delivery = await _context.EmailDeliveries.FirstOrDefaultAsync(d => d.Id == deliveryId);
             if (delivery != null) {
                 delivery.DeliveredDate = DateTime.Now;
+            }
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task LogEmailDeliveryError(int deliveryId, string error)
+        {
+            var delivery = await _context.EmailDeliveries.FirstOrDefaultAsync(d => d.Id == deliveryId);
+            if (delivery != null) {
+                delivery.DeliveryError = error;
             }
             await _context.SaveChangesAsync();
         }

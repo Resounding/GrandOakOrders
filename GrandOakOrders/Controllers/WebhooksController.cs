@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -25,11 +24,9 @@ namespace GrandOakOrders.Controllers
 
         public WebhooksController()
         {
-            var username = ConfigurationManager.AppSettings["SendGridUserName"];
-            var password = ConfigurationManager.AppSettings["SendGridPassword"];
-            var credentials = new NetworkCredential(username, password);
 
-            _transportWeb = new Web(credentials);
+            var apiKey = ConfigurationManager.AppSettings["SendGridApiKey"];
+            _transportWeb = new Web(apiKey);
 
             _orderRepository = new OrderRepository();
         }

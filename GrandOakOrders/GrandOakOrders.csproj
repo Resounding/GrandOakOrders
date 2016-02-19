@@ -3438,6 +3438,10 @@
     <Compile Include="Migrations\201602061413586_EmailOpenedEvent.Designer.cs">
       <DependentUpon>201602061413586_EmailOpenedEvent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602190248119_EmailDeliveryError.cs" />
+    <Compile Include="Migrations\201602190248119_EmailDeliveryError.Designer.cs">
+      <DependentUpon>201602190248119_EmailDeliveryError.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
     <Compile Include="Models\EmailInputModel.cs" />
@@ -3538,6 +3542,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602061413586_EmailOpenedEvent.resx">
       <DependentUpon>201602061413586_EmailOpenedEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602190248119_EmailDeliveryError.resx">
+      <DependentUpon>201602190248119_EmailDeliveryError.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\QuoteReport.resx">
       <DependentUpon>QuoteReport.cs</DependentUpon>
