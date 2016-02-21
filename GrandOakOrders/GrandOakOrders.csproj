@@ -2483,6 +2483,7 @@
     <Content Include="jspm_packages\npm\longest%401.0.1\index.js" />
     <Content Include="jspm_packages\npm\minimist%400.0.10.js" />
     <Content Include="jspm_packages\npm\minimist%400.0.10\index.js" />
+    <Content Include="jspm_packages\npm\moment%402.11.2.js" />
     <Content Include="jspm_packages\npm\moment%402.11.2\locale\af.js" />
     <Content Include="jspm_packages\npm\moment%402.11.2\locale\ar-ma.js" />
     <Content Include="jspm_packages\npm\moment%402.11.2\locale\ar-sa.js" />
