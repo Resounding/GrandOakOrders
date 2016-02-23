@@ -347,6 +347,7 @@ export class OrderViewModel implements OrderPojo {
     }
 
     isValid(): boolean {
+        if (this.IsCancelled) return true;
         if (_.any(this.Items, (item:OrderItemPojo) => !item.isValid())) return false;
         return true;
     }
