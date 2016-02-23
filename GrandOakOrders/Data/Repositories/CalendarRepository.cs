@@ -17,7 +17,7 @@ namespace GrandOakOrders.Data.Repositories
             var startOfStart = start.Date;
 
             var inquiries = await _context.Inquiries
-                .Where(i => i.EventDate >= startOfStart && i.EventDate <= endOfEnd)
+                .Where(i => i.OutcomeId != "CLOSE" && i.EventDate >= startOfStart && i.EventDate <= endOfEnd)
                 .ToListAsync();
 
             var inquiryIds = inquiries.Select(i => i.Id).ToList();
