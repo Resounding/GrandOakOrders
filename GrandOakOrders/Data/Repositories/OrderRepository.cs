@@ -19,7 +19,7 @@ namespace GrandOakOrders.Data.Repositories
                 .Include(o => o.Inquiry);
 
             if (!all) {
-                orderQuery = orderQuery.Where(o => o.CompletedDate == null && o.InvoiceDate == null);
+                orderQuery = orderQuery.Where(o => o.CompletedDate == null && o.InvoiceDate == null && !o.IsCancelled);
             }
 
             var orders = await orderQuery.ToListAsync();
