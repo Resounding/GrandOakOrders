@@ -106,6 +106,8 @@ define(['exports', 'core-js'], function (exports, _coreJs) {
 
     HttpClient.prototype.fetch = (function (_fetch) {
       function fetch(_x, _x2) {
+        // ch 2016-02-23 monkey-patch to avoid error in ff on login
+        if (_x2 && _x2.credentials === true) delete _x2.credentials;
         return _fetch.apply(this, arguments);
       }
 
