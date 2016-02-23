@@ -284,6 +284,8 @@ System.register(['./inquiry', './emailDelivery', 'aurelia-event-aggregator', 'au
                     }
                 };
                 OrderViewModel.prototype.isValid = function () {
+                    if (this.IsCancelled)
+                        return true;
                     if (underscore_1.default.any(this.Items, function (item) { return !item.isValid(); }))
                         return false;
                     return true;
