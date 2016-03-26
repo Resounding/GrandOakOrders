@@ -98,6 +98,7 @@ namespace GrandOakOrders.Data.Repositories
             dborder.Inquiry.People = order.Inquiry.People;
             dborder.Inquiry.Summary = order.Inquiry.Summary;
             dborder.Inquiry.Description = order.Inquiry.Description;
+            dborder.Inquiry.DeliveryType = order.Inquiry.DeliveryType;
             dborder.Inquiry.Location = order.Inquiry.Location;
             dborder.Inquiry.LocationAddress = order.Inquiry.LocationAddress;
 
