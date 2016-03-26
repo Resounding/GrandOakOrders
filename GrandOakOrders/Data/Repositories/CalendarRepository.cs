@@ -22,8 +22,17 @@ namespace GrandOakOrders.Data.Repositories
 
             var inquiryIds = inquiries.Select(i => i.Id).ToList();
             var orders = await _context.Orders
-                .Where(o => inquiryIds.Contains(o.InquiryId) && !o.IsCancelled)
+                .Where(o => inquiryIds.Contains(o.InquiryId))
                 .ToListAsync();
+
+            var cancelledInquiries = orders
+                .Where(o => o.IsCancelled)
+                .Select(o => o.InquiryId)
+                .ToList();
+
+            inquiries = inquiries
+                .Where(i => !cancelledInquiries.Contains(i.Id))
+                .ToList();
 
             var events = inquiries.Select(i => {
                 var order = orders.FirstOrDefault(o => o.InquiryId == i.Id);
