@@ -329,13 +329,31 @@ export class OrderViewModel implements OrderPojo {
     }
 
     removeItem(item) {
-        var index = this.Items.indexOf(item);
+        const index = this.Items.indexOf(item);
         if (index !== -1) {
             this.Items.splice(index, 1);
         }
         if (!this.Items.length) {
             this.addItem();
         }
+        this.resort();
+    }
+
+    moveUp(item) {
+        const index = this.Items.indexOf(item);
+        if (index <= 0) return;
+
+        this.Items.splice(index, 1);
+        this.Items.splice(index - 1, 0, item);
+        this.resort();
+    }
+
+    moveDown(item) {
+        const index = this.Items.indexOf(item);
+        if (index === -1 || index >= this.Items.length) return;
+
+        this.Items.splice(index, 1);
+        this.Items.splice(index + 1, 0, item);
         this.resort();
     }
 

@@ -143,6 +143,14 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                     this._model.removeItem(item);
                     this.sortItems();
                 };
+                EditOrder.prototype.moveUp = function (item) {
+                    this._model.moveUp(item);
+                    this.sortItems();
+                };
+                EditOrder.prototype.moveDown = function (item) {
+                    this._model.moveDown(item);
+                    this.sortItems();
+                };
                 EditOrder.prototype.sortItems = function () {
                     this.sortedItems = underscore_1.default.sortBy(this._model.Items, function (item) { return item.SortOrder; });
                 };

@@ -2,11 +2,23 @@
     <require from="../../controls/currencyTextbox"></require>
 
     <div class="row">
-        <h5 class="col s1">
-            <button type="button" class="btn red btn-floating" click.trigger="removeItem()">
-                <i class="material-icons">remove</i>
-            </button>
-        </h5>
+        <div class="col s1 row">
+            <div class="col s12">
+                <button type="button" class="btn red btn-floating" click.trigger="removeItem()">
+                    <i class="material-icons small">remove</i>
+                </button>    
+            </div>
+            <div class="col s6">
+                <button type="button" class="btn blue btn-floating" click.trigger="moveItemDown()">
+                    <i class="material-icons small">keyboard_arrow_down</i>
+                </button>
+            </div>
+            <div class="col s6">
+                <button type="button" class="btn blue btn-floating" click.trigger="moveItemUp()">
+                    <i class="material-icons small">keyboard_arrow_up</i>
+                </button>
+            </div>            
+        </div>
         <h5 class="col s1">${item.SortOrder}</h5>
         <div class="col s5 input-field">
             <input id="description_${item.Id}" type="text" name="description" placeholder="Description" value.bind="item.Description" class="${_submitted && !item.Description ? 'invalid' : ''}" required>

@@ -276,6 +276,22 @@ System.register(['./inquiry', './emailDelivery', 'aurelia-event-aggregator', 'au
                     }
                     this.resort();
                 };
+                OrderViewModel.prototype.moveUp = function (item) {
+                    var index = this.Items.indexOf(item);
+                    if (index <= 0)
+                        return;
+                    this.Items.splice(index, 1);
+                    this.Items.splice(index - 1, 0, item);
+                    this.resort();
+                };
+                OrderViewModel.prototype.moveDown = function (item) {
+                    var index = this.Items.indexOf(item);
+                    if (index === -1 || index >= this.Items.length)
+                        return;
+                    this.Items.splice(index, 1);
+                    this.Items.splice(index + 1, 0, item);
+                    this.resort();
+                };
                 OrderViewModel.prototype.resort = function () {
                     var index = 1;
                     for (var _i = 0, _a = this.Items; _i < _a.length; _i++) {

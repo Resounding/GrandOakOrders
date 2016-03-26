@@ -143,6 +143,16 @@ export class EditOrder implements IAllInPricingHost {
         this.sortItems();
     }
 
+    moveUp(item) {
+        this._model.moveUp(item);
+        this.sortItems();
+    }
+
+    moveDown(item) {
+        this._model.moveDown(item);
+        this.sortItems();
+    }
+
     sortItems() {
         this.sortedItems = _.sortBy(this._model.Items, (item) => item.SortOrder);
     }

@@ -71,6 +71,12 @@ export class OrderItem {
     removeItem() {
         this.parent.removeItem(this.item);
     }
+    moveItemUp() {
+        this.parent.moveUp(this.item);
+    }
+    moveItemDown() {
+        this.parent.moveDown(this.item);
+    }
 
     get _submitted(): boolean {
         return this.parent && this.parent._submitted;

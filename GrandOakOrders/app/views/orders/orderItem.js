@@ -82,6 +82,12 @@ System.register(['aurelia-framework', 'underscore'], function(exports_1) {
                 OrderItem.prototype.removeItem = function () {
                     this.parent.removeItem(this.item);
                 };
+                OrderItem.prototype.moveItemUp = function () {
+                    this.parent.moveUp(this.item);
+                };
+                OrderItem.prototype.moveItemDown = function () {
+                    this.parent.moveDown(this.item);
+                };
                 Object.defineProperty(OrderItem.prototype, "_submitted", {
                     get: function () {
                         return this.parent && this.parent._submitted;
