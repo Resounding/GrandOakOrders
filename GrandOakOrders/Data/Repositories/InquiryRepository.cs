@@ -37,10 +37,14 @@ namespace GrandOakOrders.Data.Repositories
             inquiry.CreatedBy = inquiry.UpdatedBy = who;
             _context.Inquiries.Add(inquiry);
 
-            var existingCustomer = await _context.Customers.AnyAsync(c => c.CompanyName == inquiry.Organization || c.ContactPerson == inquiry.ContactPerson);
-            if (!existingCustomer) {
+            var existingCustomer = await _context.Customers.FirstOrDefaultAsync(c => c.CompanyName == inquiry.Organization || c.ContactPerson == inquiry.ContactPerson);
+            if (existingCustomer != null) {
+                existingCustomer.ContactPerson = inquiry.ContactPerson;
+                existingCustomer.Email = inquiry.Email;
+                existingCustomer.Phone = inquiry.Phone;
+            } else {
                 var customer = new Customer {
-                    CompanyName =  inquiry.Organization,
+                    CompanyName = inquiry.Organization,
                     ContactPerson = inquiry.ContactPerson,
                     Email = inquiry.Email,
                     Phone = inquiry.Phone
