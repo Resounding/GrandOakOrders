@@ -277,25 +277,30 @@ System.register(['./inquiry', './emailDelivery', 'aurelia-event-aggregator', 'au
                     this.resort();
                 };
                 OrderViewModel.prototype.moveUp = function (item) {
-                    var index = this.Items.indexOf(item);
-                    if (index <= 0)
-                        return;
-                    this.Items.splice(index, 1);
-                    this.Items.splice(index - 1, 0, item);
+                    if (item.SortOrder > 0) {
+                        var newOrder = item.SortOrder - 1;
+                        var other = underscore_1.default.find(this.Items, function (i) { return i.SortOrder === newOrder; });
+                        if (other) {
+                            other.SortOrder = item.SortOrder;
+                        }
+                        item.SortOrder = newOrder;
+                    }
                     this.resort();
                 };
                 OrderViewModel.prototype.moveDown = function (item) {
-                    var index = this.Items.indexOf(item);
-                    if (index === -1 || index >= this.Items.length)
-                        return;
-                    this.Items.splice(index, 1);
-                    this.Items.splice(index + 1, 0, item);
+                    var newOrder = item.SortOrder + 1;
+                    var other = underscore_1.default.find(this.Items, function (i) { return i.SortOrder === newOrder; });
+                    if (other) {
+                        other.SortOrder = item.SortOrder;
+                    }
+                    item.SortOrder = newOrder;
                     this.resort();
                 };
                 OrderViewModel.prototype.resort = function () {
                     var index = 1;
-                    for (var _i = 0, _a = this.Items; _i < _a.length; _i++) {
-                        var item = _a[_i];
+                    var sortedItems = underscore_1.default.sortBy(this.Items, function (i) { return i.SortOrder; });
+                    for (var _i = 0; _i < sortedItems.length; _i++) {
+                        var item = sortedItems[_i];
                         item.SortOrder = index++;
                     }
                 };

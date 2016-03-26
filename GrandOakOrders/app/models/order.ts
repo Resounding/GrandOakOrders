@@ -339,27 +339,37 @@ export class OrderViewModel implements OrderPojo {
         this.resort();
     }
 
-    moveUp(item) {
-        const index = this.Items.indexOf(item);
-        if (index <= 0) return;
+    moveUp(item:OrderItemViewModel) {
+        
+        if (item.SortOrder > 0) {
+            const newOrder = item.SortOrder - 1;
+            const other = _.find(this.Items, (i) => i.SortOrder === newOrder);
+            if (other) {
+                other.SortOrder = item.SortOrder;
+            }
 
-        this.Items.splice(index, 1);
-        this.Items.splice(index - 1, 0, item);
+            item.SortOrder = newOrder;
+        }
+        
         this.resort();
     }
 
-    moveDown(item) {
-        const index = this.Items.indexOf(item);
-        if (index === -1 || index >= this.Items.length) return;
+    moveDown(item: OrderItemViewModel) {
+        const newOrder = item.SortOrder + 1;
+        const other = _.find(this.Items, (i) => i.SortOrder === newOrder);
+        if (other) {
+            other.SortOrder = item.SortOrder;
+        }
 
-        this.Items.splice(index, 1);
-        this.Items.splice(index + 1, 0, item);
+        item.SortOrder = newOrder;
+
         this.resort();
     }
 
     resort() {
         let index = 1;
-        for (let item of this.Items) {
+        const sortedItems = _.sortBy(this.Items, (i) => i.SortOrder);
+        for (let item of sortedItems) {
             item.SortOrder = index++;
         }
     }
