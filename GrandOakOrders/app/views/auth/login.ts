@@ -13,12 +13,17 @@ export class Login {
 		this.params = params;
 	}
 	
-	login() {
-		this.auth.authenticate('google', false, null)
+    login() {
+        debugger;
+        this.auth.authenticate('google', false, null)
             .then(() => {
                 this.events.publish('user:changed');
-				var to = this.params.to || 'home';
-				this.router.navigate(to);
-			});
+                var to = this.params.to || 'home';
+                this.router.navigate(to);
+            })
+            .catch((ex) => {
+                debugger;
+                console.log(ex);
+            });
 	}
 }

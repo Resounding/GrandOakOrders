@@ -1,10 +1,10 @@
 /* */ 
 (function(process) {
-  var wd = require("yiewd"),
-      colors = require("colors"),
-      expect = require("chai").expect,
-      _ = require("underscore"),
-      f = require("util").format,
+  var wd = require('yiewd'),
+      colors = require('colors'),
+      expect = require('chai').expect,
+      _ = require('underscore'),
+      f = require('util').format,
       env = process.env;
   var browser,
       caps;
@@ -310,4 +310,4 @@
       });
     });
   });
-})(require("process"));
+})(require('process'));

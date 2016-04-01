@@ -34,11 +34,16 @@ System.register(['aurelia-framework', 'aurelia-event-aggregator', 'aurelia-route
                 };
                 Login.prototype.login = function () {
                     var _this = this;
+                    debugger;
                     this.auth.authenticate('google', false, null)
                         .then(function () {
                         _this.events.publish('user:changed');
                         var to = _this.params.to || 'home';
                         _this.router.navigate(to);
+                    })
+                        .catch(function (ex) {
+                        debugger;
+                        console.log(ex);
                     });
                 };
                 Login = __decorate([

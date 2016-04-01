@@ -1,6 +1,6 @@
 /* */ 
-var URI = require("../src/uri");
-var should = require("should");
+var URI = require('../src/uri');
+var should = require('should');
 describe('URI', function() {
   it('should parse the query string passed to it', function() {
     var location = URI('?a=b');

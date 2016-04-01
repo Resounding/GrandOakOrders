@@ -1051,4 +1051,4 @@
       root.async = async;
     }
   }());
-})(require("process"));
+})(require('process'));

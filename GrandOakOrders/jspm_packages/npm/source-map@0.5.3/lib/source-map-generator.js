@@ -1,9 +1,9 @@
 /* */ 
 {
-  var base64VLQ = require("./base64-vlq");
-  var util = require("./util");
-  var ArraySet = require("./array-set").ArraySet;
-  var MappingList = require("./mapping-list").MappingList;
+  var base64VLQ = require('./base64-vlq');
+  var util = require('./util');
+  var ArraySet = require('./array-set').ArraySet;
+  var MappingList = require('./mapping-list').MappingList;
   function SourceMapGenerator(aArgs) {
     if (!aArgs) {
       aArgs = {};

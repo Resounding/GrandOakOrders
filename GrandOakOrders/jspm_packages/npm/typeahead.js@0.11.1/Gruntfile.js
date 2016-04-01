@@ -1,6 +1,6 @@
 /* */ 
-var semver = require("semver"),
-    f = require("util").format,
+var semver = require('semver'),
+    f = require('util').format,
     files = {
       common: ['src/common/utils.js'],
       bloodhound: ['src/bloodhound/version.js', 'src/bloodhound/tokenizers.js', 'src/bloodhound/lru_cache.js', 'src/bloodhound/persistent_storage.js', 'src/bloodhound/transport.js', 'src/bloodhound/search_index.js', 'src/bloodhound/prefetch.js', 'src/bloodhound/remote.js', 'src/bloodhound/options_parser.js', 'src/bloodhound/bloodhound.js'],

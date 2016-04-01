@@ -1,11 +1,11 @@
 /* */ 
 (function(process) {
-  var assert = require("assert"),
-      path = require("path"),
-      Completion = require("./lib/completion"),
-      Parser = require("./lib/parser"),
-      Usage = require("./lib/usage"),
-      Validation = require("./lib/validation");
+  var assert = require('assert'),
+      path = require('path'),
+      Completion = require('./lib/completion'),
+      Parser = require('./lib/parser'),
+      Usage = require('./lib/usage'),
+      Validation = require('./lib/validation');
   Argv(process.argv.slice(2));
   var exports = module.exports = Argv;
   function Argv(processArgs, cwd) {
@@ -325,7 +325,7 @@
       return validation;
     };
     self.terminalWidth = function() {
-      return require("window-size").width;
+      return require('window-size').width;
     };
     Object.defineProperty(self, 'argv', {
       get: function() {
@@ -416,4 +416,4 @@
       }
     });
   }
-})(require("process"));
+})(require('process'));

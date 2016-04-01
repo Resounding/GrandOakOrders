@@ -1,6 +1,6 @@
 /* */ 
 {
-  var util = require("./util");
+  var util = require('./util');
   function ArraySet() {
     this._array = [];
     this._set = {};

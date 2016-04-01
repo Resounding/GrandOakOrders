@@ -1,6 +1,6 @@
 /* */ 
-var URI = require("../src/uri");
-var should = require("should");
+var URI = require('../src/uri');
+var should = require('should');
 describe('URI', function() {
   describe('extend', function() {
     it('should merge two objects', function() {

@@ -35,7 +35,7 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-auth'], fu
                         .catch(function (err) {
                         if (err.statusCode === 401) {
                             _this.auth.authenticate('google', false, null)
-                                .then(_this.load)
+                                .then(function () { return _this.load(); })
                                 .catch(function () { return _this.router.navigateToRoute('login'); });
                         }
                         else {

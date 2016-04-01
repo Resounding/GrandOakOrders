@@ -2,17 +2,15 @@
 
 import {RouterConfiguration, AppRouter} from 'aurelia-router';
 import {inject} from 'aurelia-framework';
-import HttpClientConfig from 'aurelia-auth/app.httpClient.config';
 import {AuthorizeStep, FetchConfig} from 'aurelia-auth';
 
-@inject(HttpClientConfig, FetchConfig)
+@inject(FetchConfig)
 export class App {
 	router:AppRouter;
 	
-	constructor(private httpClientConfig:HttpClientConfig, private fetchConfig:FetchConfig) { }
+	constructor(private fetchConfig:FetchConfig) { }
 	
 	activate() {
-        this.httpClientConfig.configure();
 	    this.fetchConfig.configure();
         toastr.options.positionClass = 'toast-bottom-left';
 	}

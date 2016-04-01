@@ -1,8 +1,8 @@
 /* */ 
 (function(process) {
   {
-    var SourceMapGenerator = require("./source-map-generator").SourceMapGenerator;
-    var util = require("./util");
+    var SourceMapGenerator = require('./source-map-generator').SourceMapGenerator;
+    var util = require('./util');
     var REGEX_NEWLINE = /(\r?\n)/;
     var NEWLINE_CODE = 10;
     var isSourceNode = "$$$isSourceNode$$$";
@@ -254,4 +254,4 @@
     };
     exports.SourceNode = SourceNode;
   }
-})(require("process"));
+})(require('process'));

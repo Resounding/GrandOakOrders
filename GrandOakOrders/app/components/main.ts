@@ -6,7 +6,7 @@ export function configure(aurelia) {
 		.standardConfiguration()
         .developmentLogging()
 		.plugin('aurelia-auth', (baseConfig) => {
-			var configuration = config();
+            var configuration = config();
 			baseConfig.configure(configuration);	
 		});
 		

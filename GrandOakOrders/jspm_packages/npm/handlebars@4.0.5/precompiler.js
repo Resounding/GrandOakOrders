@@ -246,4 +246,4 @@
       return value;
     }
   });
-})(require("process"));
+})(require('process'));

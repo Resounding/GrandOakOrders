@@ -121,4 +121,4 @@
     });
     return Bloodhound;
   })();
-})(require("process"));
+})(require('process'));

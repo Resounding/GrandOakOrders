@@ -1,6 +1,6 @@
 /* */ 
-var URI = require("../src/uri");
-var should = require("should");
+var URI = require('../src/uri');
+var should = require('should');
 describe('URI', function() {
   describe('search', function() {
     it('should work with full urls', function() {

@@ -7,7 +7,7 @@
         return root["Bloodhound"] = factory(a0);
       });
     } else if (typeof exports === "object") {
-      module.exports = factory(require("jquery"));
+      module.exports = factory(require('jquery'));
     } else {
       root["Bloodhound"] = factory(jQuery);
     }
@@ -954,4 +954,4 @@
     }();
     return Bloodhound;
   });
-})(require("process"));
+})(require('process'));

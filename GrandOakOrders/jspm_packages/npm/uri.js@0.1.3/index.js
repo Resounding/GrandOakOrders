@@ -1,2 +1,2 @@
 /* */ 
-module.exports = exports = require("./src/uri");
+module.exports = exports = require('./src/uri');

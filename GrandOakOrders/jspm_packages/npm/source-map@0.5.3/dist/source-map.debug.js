@@ -1576,4 +1576,4 @@
     }]);
   });
   ;
-})(require("process"));
+})(require('process'));
