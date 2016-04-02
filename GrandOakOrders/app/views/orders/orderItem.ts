@@ -51,8 +51,8 @@ export class OrderItem {
                     this.item.OrderingNotes = item.OrderingNotes;
                     this.item.InvoiceNotes = item.InvoiceNotes;
                     $(`label[for=description_${item.Id}]`).addClass('active');
-                }).on('typeahead:active', (e, item:ItemTemplate) => {
-                        $(`label[for=description_${item.Id}]`).addClass('active');
+                }).on('typeahead:active', (e) => {
+                        $(`label[for="${e.target.id}"]`).addClass('active');
                     }
                 );
 

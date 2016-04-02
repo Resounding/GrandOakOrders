@@ -4,11 +4,11 @@
 /// <reference path="../../../typings/toastr/toastr.d.ts" />
 
 import {inject} from 'aurelia-framework';
-import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
+import {HttpClient, HttpResponseMessage} from 'aurelia-fetch-client';
 import {Router} from 'aurelia-router';
 import {InquiryPojo} from '../../models/inquiry';
 import {EmailDelivery} from '../../models/emailDelivery';
-import {OrderViewModel, OrderItemPojo} from '../../models/order';
+import {OrderPojo, OrderViewModel, OrderItemPojo} from '../../models/order';
 import {Email} from '../../models/email';
 import {ItemTemplate} from '../../models/itemTemplate';
 import {IAllInPricingHost, AllInPricing} from './allInPricing';
@@ -29,102 +29,108 @@ export class EditOrder implements IAllInPricingHost {
     constructor(private httpClient: HttpClient, private router: Router, private element:HTMLElement) { }
 
     activate(params) {
-        this.httpClient.get('/api/items')
+        this.httpClient.fetch('/api/items')
             .then((response: HttpResponseMessage) => {
+                response.json().then((content) => {
+                    content.forEach(i => this._itemTemplates.push(new ItemTemplate(i)));
+                });
 
-                response.content.forEach(i => this._itemTemplates.push(new ItemTemplate(i)));
-
-                this.httpClient.get(`/api/orders/${params.id}`)
+                this.httpClient.fetch(`/api/orders/${params.id}`)
                     .then((response: HttpResponseMessage) => {
-                        this._model = new OrderViewModel(response.content);
-                        this._email = new Email(this._model, this.httpClient);
+                        response.json().then((content:OrderPojo) => {
 
-                        console.log(this._model);
-                        if (!this._model.Items.length) {
-                            this.addItem();
-                        }
+                            this._model = new OrderViewModel(content);
+                            this._email = new Email(this._model, this.httpClient);
 
-                        this.sortItems();
-                        this._toAddresses = (this._model.Inquiry.Email || '').split(';');
-                        this._originalPeople = this._model.Inquiry.People;
-
-                        this.httpClient.get('/API/Settings/DefaultInvoiceBccAddress')
-                            .then((settingsResponse: HttpResponseMessage) => {
-                                this._bccAddresses = (settingsResponse.content || '').toString().split(';');
-                            });
-
-                        window.setTimeout(_.bind(() => {
-                            var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element),
-                                $eventDate = $('.datepicker.event', this.element),
-                                $invoiceDate = $('.datepicker.invoice', this.element),
-                                $timepicker = $('.timepicker', this.element),
-                                $dropdown = $('.dropdown-button', this.element),
-                                $kitchenReport = $('.kitchen-report', this.element),
-                                $quoteReport = $('.quote-report', this.element),
-                                $invoiceReport = $('.invoice-report', this.element);
-
-                            $kitchenReport.on('click', this.showKitchenReport.bind(this));
-                            $quoteReport.on('click', this.showQuoteReport.bind(this));
-                            $invoiceReport.on('click', this.showInvoiceReport.bind(this));
-
-                            $dropdown.dropdown({
-                                belowOrigin: true
-                            });
-
-                            $collapsible
-                                .collapsible({ accordion: false })
-                                .on('materialize:opened', (e) => {
-                                    var $el = $(e.target).parent();
-                                    window.setTimeout(() => {
-                                        $el.find('textarea').trigger('autoresize');
-                                        $el.find('textarea,input').first().focus();
-                                    }, 50);
-                                });
-
-                            $eventDate.pickadate({
-                                    container: 'body',
-                                    format: 'dddd mmm d, yyyy'
-                                })
-                                .on('change', (e) => {
-                                    this._model.Inquiry.EventDate = e.target.value;
-                                });
-
-                            $invoiceDate
-                                .val(this._model.InvoiceDateDisplay)
-                                .pickadate({
-                                    container: 'body',
-                                    format: 'dddd mmm d, yyyy'
-                                })
-                                .on('change', (e) => {
-                                    this._model.InvoiceDate = e.target.value;
-                                });
-
-                            $timepicker
-                                .pickatime({
-                                    container: 'body',
-                                    format: 'h:i A',
-                                    formatLabel: 'h:i A',
-                                    interval: 15,
-                                    min: [7, 0],
-                                    max: [21, 0]
-                                })
-                                .on('change', (e) => {
-                                    this._model.Inquiry.EventTime = e.target.value;
-                                });
-
-                            try {
-                                $eventDate.pickadate('picker')
-                                    .set('select', this._model.Inquiry.EventDate);
-                            } catch (e) {
+                            console.log(this._model);
+                            if (!this._model.Items.length) {
+                                this.addItem();
                             }
 
-                            try {
-                                $timepicker.pickatime('picker')
-                                    .set('select', this._model.Inquiry.EventTime);
-                            } catch (e) {
-                            }
+                            this.sortItems();
+                            this._toAddresses = (this._model.Inquiry.Email || '').split(';');
+                            this._originalPeople = this._model.Inquiry.People;
 
-                        }, this), 1000);
+                            this.httpClient.fetch('/API/Settings/DefaultInvoiceBccAddress')
+                                .then((settingsResponse: HttpResponseMessage) => {
+                                    settingsResponse.json().then((settingsContent) => {
+                                        this._bccAddresses = (settingsContent || '').toString().split(';');
+                                    });
+                                });
+
+                            window.setTimeout(_.bind(() => {
+                                var $collapsible = $('.collapsible[data-collapsible=expandable]', this.element),
+                                    $eventDate = $('.datepicker.event', this.element),
+                                    $invoiceDate = $('.datepicker.invoice', this.element),
+                                    $timepicker = $('.timepicker', this.element),
+                                    $dropdown = $('.dropdown-button', this.element),
+                                    $kitchenReport = $('.kitchen-report', this.element),
+                                    $quoteReport = $('.quote-report', this.element),
+                                    $invoiceReport = $('.invoice-report', this.element);
+
+                                $kitchenReport.on('click', this.showKitchenReport.bind(this));
+                                $quoteReport.on('click', this.showQuoteReport.bind(this));
+                                $invoiceReport.on('click', this.showInvoiceReport.bind(this));
+
+                                $dropdown.dropdown({
+                                    belowOrigin: true
+                                });
+
+                                $collapsible
+                                    .collapsible({ accordion: false })
+                                    .on('materialize:opened', (e) => {
+                                        var $el = $(e.target).parent();
+                                        window.setTimeout(() => {
+                                            $el.find('textarea').trigger('autoresize');
+                                            $el.find('textarea,input').first().focus();
+                                        }, 50);
+                                    });
+
+                                $eventDate.pickadate({
+                                        container: 'body',
+                                        format: 'dddd mmm d, yyyy'
+                                    })
+                                    .on('change', (e) => {
+                                        this._model.Inquiry.EventDate = e.target.value;
+                                    });
+
+                                $invoiceDate
+                                    .val(this._model.InvoiceDateDisplay)
+                                    .pickadate({
+                                        container: 'body',
+                                        format: 'dddd mmm d, yyyy'
+                                    })
+                                    .on('change', (e) => {
+                                        this._model.InvoiceDate = e.target.value;
+                                    });
+
+                                $timepicker
+                                    .pickatime({
+                                        container: 'body',
+                                        format: 'h:i A',
+                                        formatLabel: 'h:i A',
+                                        interval: 15,
+                                        min: [7, 0],
+                                        max: [21, 0]
+                                    })
+                                    .on('change', (e) => {
+                                        this._model.Inquiry.EventTime = e.target.value;
+                                    });
+
+                                try {
+                                    $eventDate.pickadate('picker')
+                                        .set('select', this._model.Inquiry.EventDate);
+                                } catch (e) {
+                                }
+
+                                try {
+                                    $timepicker.pickatime('picker')
+                                        .set('select', this._model.Inquiry.EventTime);
+                                } catch (e) {
+                                }
+
+                            }, this), 1000);
+                        });
                     });
             });
     }
@@ -249,17 +255,21 @@ export class EditOrder implements IAllInPricingHost {
         if (!this._model.isValid()) {
             return Promise.reject(null);
         } else {
-            const order = this._model.toJSON();
-            order.Inquiry.Email = this._toAddresses.join(';');
+            const order = this._model.toJSON(),
+                headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            if (this._toAddresses.length && _.any(this._toAddresses, (a) => a)) {
+                order.Inquiry.Email = this._toAddresses.join(';');
+            }
 
-            return this.httpClient.patch(`/API/Orders/${this._model.Id}`, order)
+            return this.httpClient.fetch(`/API/Orders/${this._model.Id}`, { method: 'patch', body: JSON.stringify(order), headers })
                 .then((result) => {
-                    const edited = result.content;
-
-                    this._model.Items.forEach((item, index) => {
-                        if (item.Id < 0) {
-                            item.Id = edited.Items[index].Id;
-                        }
+                    result.json().then((content) => {
+                        this._model.Items.forEach((item, index) => {
+                            if (item.Id < 0) {
+                                item.Id = content.Items[index].Id;
+                            }
+                        });
                     });
                 })
                 .catch(this.onError);
@@ -279,9 +289,11 @@ export class EditOrder implements IAllInPricingHost {
                     e.preventDefault();
                     this._email.send(this._toAddresses, this._bccAddresses)
                         .then((result: HttpResponseMessage) => {
-                            var delivery = new EmailDelivery(result.content);
-                            this._model.EmailDeliveries.push(delivery);
-                            $modal.closeModal();
+                            result.json().then((content:EmailDelivery) => {
+                                var delivery = new EmailDelivery(content);
+                                this._model.EmailDeliveries.push(delivery);
+                                $modal.closeModal();
+                            });
                         })
                         .catch((err: HttpResponseMessage) => {
                             console.log(err);

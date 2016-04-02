@@ -1,4 +1,4 @@
-﻿import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
+﻿import {HttpClient, HttpResponseMessage} from 'aurelia-fetch-client';
 import {OrderPojo} from './order';
 
 export class Email {
@@ -27,7 +27,9 @@ Jan-Willem Stulp`;
     send(email: string[], bcc: string[]): Promise<any> {
         this.email = email;
         this.bcc = bcc;
-        return this.httpClient.post(`/api/orders/${this.order.Id}/emailInvoice`, this.toJSON());
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.httpClient.fetch(`/api/orders/${this.order.Id}/emailInvoice`, { method: 'post', body: JSON.stringify(this.toJSON()), headers });
     }
 
     toJSON() {

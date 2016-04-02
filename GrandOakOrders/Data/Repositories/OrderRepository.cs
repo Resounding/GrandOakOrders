@@ -101,6 +101,8 @@ namespace GrandOakOrders.Data.Repositories
             dborder.Inquiry.DeliveryType = order.Inquiry.DeliveryType;
             dborder.Inquiry.Location = order.Inquiry.Location;
             dborder.Inquiry.LocationAddress = order.Inquiry.LocationAddress;
+            dborder.Inquiry.Phone = order.Inquiry.Phone;
+            dborder.Inquiry.Email = order.Inquiry.Email;
 
             var submittedIds = order.Items.Select(i => i.Id).ToList();
             var deleted = dborder.Items

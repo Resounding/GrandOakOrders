@@ -48,12 +48,12 @@ System.register(['aurelia-binding', 'underscore'], function(exports_1) {
                 ItemTemplate.prototype.save = function () {
                     var _this = this;
                     if (this.Id) {
-                        this.httpClient.put("/api/items/" + this.Id, this)
+                        this.httpClient.fetch("/api/items/" + this.Id, { method: 'put', body: this })
                             .then(function () { return _this.events.publish('item:updated', _this.toJSON()); })
                             .catch(this.onError);
                     }
                     else {
-                        this.httpClient.post('/api/items', this)
+                        this.httpClient.fetch('/api/items', { method: 'post', body: this })
                             .then(function (result) {
                             underscore_1.default.extend(_this, result.content);
                             _this.events.publish('item:created', _this.toJSON());
@@ -65,7 +65,7 @@ System.register(['aurelia-binding', 'underscore'], function(exports_1) {
                 ItemTemplate.prototype.destroy = function () {
                     var _this = this;
                     if (this.Id) {
-                        this.httpClient.delete("/api/items/" + this.Id)
+                        this.httpClient.fetch("/api/items/" + this.Id, { method: 'delete' })
                             .then(function () { return _this.events.publish('item:deleted', _this.toJSON()); })
                             .catch(this.onError);
                     }

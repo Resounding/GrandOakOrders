@@ -1,5 +1,5 @@
 ﻿import {inject} from 'aurelia-framework';
-import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
+import {HttpClient, HttpResponseMessage} from 'aurelia-fetch-client';
 import {Router} from 'aurelia-router';
 import {OrderPojo, OrderViewModel, OrderItemViewModel} from '../../models/order';
 import moment from 'moment';
@@ -21,20 +21,22 @@ export class OrdersList {
     load() {
         const queryString = this.showAll ? '?all=true' : '';
 
-        this.httpClient.get(`/api/orders${queryString}`)
-			.then((res: HttpResponseMessage) => {
-                this.orders = _.chain(res.content)
-                    .map((order: OrderPojo) => new OrderViewModel(order))
-                    .sortBy((order: OrderViewModel) => {
-                        console.log(order.EventDate);
-                        return order.EventDate;
-                    })
-                    .value();
+        this.httpClient.fetch(`/api/orders${queryString}`)
+            .then((res: HttpResponseMessage) => {
+                res.json().then((content) => {
+                    this.orders = _.chain(content)
+                        .map((order: OrderPojo) => new OrderViewModel(order))
+                        .sortBy((order: OrderViewModel) => {
+                            console.log(order.EventDate);
+                            return order.EventDate;
+                        })
+                        .value();
 
-                _.each(this.orders, (order) => {
-                    order.hasOrderingNotes = _.any(order.Items, (item: OrderItemViewModel) => item.OrderingNotes);
+                    _.each(this.orders, (order) => {
+                        order.hasOrderingNotes = _.any(order.Items, (item:OrderItemViewModel) => item.OrderingNotes);
+                    });
                 });
-			}, (err) => {
+            }, (err) => {
 				console.log(err);	
 			});
     }

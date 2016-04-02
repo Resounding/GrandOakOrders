@@ -2,22 +2,22 @@
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
 /// <reference path="../../../typings/es6-promise/es6-promise.d.ts" />
 /// <reference path="../../../typings/toastr/toastr.d.ts" />
-System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '../../models/emailDelivery', '../../models/order', '../../models/email', '../../models/itemTemplate', 'underscore'], function(exports_1) {
+System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-router', '../../models/emailDelivery', '../../models/order', '../../models/email', '../../models/itemTemplate', 'underscore'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var aurelia_framework_1, aurelia_http_client_1, aurelia_router_1, emailDelivery_1, order_1, email_1, itemTemplate_1, underscore_1;
+    var aurelia_framework_1, aurelia_fetch_client_1, aurelia_router_1, emailDelivery_1, order_1, email_1, itemTemplate_1, underscore_1;
     var EditOrder;
     return {
         setters:[
             function (aurelia_framework_1_1) {
                 aurelia_framework_1 = aurelia_framework_1_1;
             },
-            function (aurelia_http_client_1_1) {
-                aurelia_http_client_1 = aurelia_http_client_1_1;
+            function (aurelia_fetch_client_1_1) {
+                aurelia_fetch_client_1 = aurelia_fetch_client_1_1;
             },
             function (aurelia_router_1_1) {
                 aurelia_router_1 = aurelia_router_1_1;
@@ -49,82 +49,88 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                 }
                 EditOrder.prototype.activate = function (params) {
                     var _this = this;
-                    this.httpClient.get('/api/items')
+                    this.httpClient.fetch('/api/items')
                         .then(function (response) {
-                        response.content.forEach(function (i) { return _this._itemTemplates.push(new itemTemplate_1.ItemTemplate(i)); });
-                        _this.httpClient.get("/api/orders/" + params.id)
+                        response.json().then(function (content) {
+                            content.forEach(function (i) { return _this._itemTemplates.push(new itemTemplate_1.ItemTemplate(i)); });
+                        });
+                        _this.httpClient.fetch("/api/orders/" + params.id)
                             .then(function (response) {
-                            _this._model = new order_1.OrderViewModel(response.content);
-                            _this._email = new email_1.Email(_this._model, _this.httpClient);
-                            console.log(_this._model);
-                            if (!_this._model.Items.length) {
-                                _this.addItem();
-                            }
-                            _this.sortItems();
-                            _this._toAddresses = (_this._model.Inquiry.Email || '').split(';');
-                            _this._originalPeople = _this._model.Inquiry.People;
-                            _this.httpClient.get('/API/Settings/DefaultInvoiceBccAddress')
-                                .then(function (settingsResponse) {
-                                _this._bccAddresses = (settingsResponse.content || '').toString().split(';');
+                            response.json().then(function (content) {
+                                _this._model = new order_1.OrderViewModel(content);
+                                _this._email = new email_1.Email(_this._model, _this.httpClient);
+                                console.log(_this._model);
+                                if (!_this._model.Items.length) {
+                                    _this.addItem();
+                                }
+                                _this.sortItems();
+                                _this._toAddresses = (_this._model.Inquiry.Email || '').split(';');
+                                _this._originalPeople = _this._model.Inquiry.People;
+                                _this.httpClient.fetch('/API/Settings/DefaultInvoiceBccAddress')
+                                    .then(function (settingsResponse) {
+                                    settingsResponse.json().then(function (settingsContent) {
+                                        _this._bccAddresses = (settingsContent || '').toString().split(';');
+                                    });
+                                });
+                                window.setTimeout(underscore_1.default.bind(function () {
+                                    var $collapsible = $('.collapsible[data-collapsible=expandable]', _this.element), $eventDate = $('.datepicker.event', _this.element), $invoiceDate = $('.datepicker.invoice', _this.element), $timepicker = $('.timepicker', _this.element), $dropdown = $('.dropdown-button', _this.element), $kitchenReport = $('.kitchen-report', _this.element), $quoteReport = $('.quote-report', _this.element), $invoiceReport = $('.invoice-report', _this.element);
+                                    $kitchenReport.on('click', _this.showKitchenReport.bind(_this));
+                                    $quoteReport.on('click', _this.showQuoteReport.bind(_this));
+                                    $invoiceReport.on('click', _this.showInvoiceReport.bind(_this));
+                                    $dropdown.dropdown({
+                                        belowOrigin: true
+                                    });
+                                    $collapsible
+                                        .collapsible({ accordion: false })
+                                        .on('materialize:opened', function (e) {
+                                        var $el = $(e.target).parent();
+                                        window.setTimeout(function () {
+                                            $el.find('textarea').trigger('autoresize');
+                                            $el.find('textarea,input').first().focus();
+                                        }, 50);
+                                    });
+                                    $eventDate.pickadate({
+                                        container: 'body',
+                                        format: 'dddd mmm d, yyyy'
+                                    })
+                                        .on('change', function (e) {
+                                        _this._model.Inquiry.EventDate = e.target.value;
+                                    });
+                                    $invoiceDate
+                                        .val(_this._model.InvoiceDateDisplay)
+                                        .pickadate({
+                                        container: 'body',
+                                        format: 'dddd mmm d, yyyy'
+                                    })
+                                        .on('change', function (e) {
+                                        _this._model.InvoiceDate = e.target.value;
+                                    });
+                                    $timepicker
+                                        .pickatime({
+                                        container: 'body',
+                                        format: 'h:i A',
+                                        formatLabel: 'h:i A',
+                                        interval: 15,
+                                        min: [7, 0],
+                                        max: [21, 0]
+                                    })
+                                        .on('change', function (e) {
+                                        _this._model.Inquiry.EventTime = e.target.value;
+                                    });
+                                    try {
+                                        $eventDate.pickadate('picker')
+                                            .set('select', _this._model.Inquiry.EventDate);
+                                    }
+                                    catch (e) {
+                                    }
+                                    try {
+                                        $timepicker.pickatime('picker')
+                                            .set('select', _this._model.Inquiry.EventTime);
+                                    }
+                                    catch (e) {
+                                    }
+                                }, _this), 1000);
                             });
-                            window.setTimeout(underscore_1.default.bind(function () {
-                                var $collapsible = $('.collapsible[data-collapsible=expandable]', _this.element), $eventDate = $('.datepicker.event', _this.element), $invoiceDate = $('.datepicker.invoice', _this.element), $timepicker = $('.timepicker', _this.element), $dropdown = $('.dropdown-button', _this.element), $kitchenReport = $('.kitchen-report', _this.element), $quoteReport = $('.quote-report', _this.element), $invoiceReport = $('.invoice-report', _this.element);
-                                $kitchenReport.on('click', _this.showKitchenReport.bind(_this));
-                                $quoteReport.on('click', _this.showQuoteReport.bind(_this));
-                                $invoiceReport.on('click', _this.showInvoiceReport.bind(_this));
-                                $dropdown.dropdown({
-                                    belowOrigin: true
-                                });
-                                $collapsible
-                                    .collapsible({ accordion: false })
-                                    .on('materialize:opened', function (e) {
-                                    var $el = $(e.target).parent();
-                                    window.setTimeout(function () {
-                                        $el.find('textarea').trigger('autoresize');
-                                        $el.find('textarea,input').first().focus();
-                                    }, 50);
-                                });
-                                $eventDate.pickadate({
-                                    container: 'body',
-                                    format: 'dddd mmm d, yyyy'
-                                })
-                                    .on('change', function (e) {
-                                    _this._model.Inquiry.EventDate = e.target.value;
-                                });
-                                $invoiceDate
-                                    .val(_this._model.InvoiceDateDisplay)
-                                    .pickadate({
-                                    container: 'body',
-                                    format: 'dddd mmm d, yyyy'
-                                })
-                                    .on('change', function (e) {
-                                    _this._model.InvoiceDate = e.target.value;
-                                });
-                                $timepicker
-                                    .pickatime({
-                                    container: 'body',
-                                    format: 'h:i A',
-                                    formatLabel: 'h:i A',
-                                    interval: 15,
-                                    min: [7, 0],
-                                    max: [21, 0]
-                                })
-                                    .on('change', function (e) {
-                                    _this._model.Inquiry.EventTime = e.target.value;
-                                });
-                                try {
-                                    $eventDate.pickadate('picker')
-                                        .set('select', _this._model.Inquiry.EventDate);
-                                }
-                                catch (e) {
-                                }
-                                try {
-                                    $timepicker.pickatime('picker')
-                                        .set('select', _this._model.Inquiry.EventTime);
-                                }
-                                catch (e) {
-                                }
-                            }, _this), 1000);
                         });
                     });
                 };
@@ -231,15 +237,19 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                         return Promise.reject(null);
                     }
                     else {
-                        var order = this._model.toJSON();
-                        order.Inquiry.Email = this._toAddresses.join(';');
-                        return this.httpClient.patch("/API/Orders/" + this._model.Id, order)
+                        var order = this._model.toJSON(), headers = new Headers();
+                        headers.append('Content-Type', 'application/json');
+                        if (this._toAddresses.length && underscore_1.default.any(this._toAddresses, function (a) { return a; })) {
+                            order.Inquiry.Email = this._toAddresses.join(';');
+                        }
+                        return this.httpClient.fetch("/API/Orders/" + this._model.Id, { method: 'patch', body: JSON.stringify(order), headers: headers })
                             .then(function (result) {
-                            var edited = result.content;
-                            _this._model.Items.forEach(function (item, index) {
-                                if (item.Id < 0) {
-                                    item.Id = edited.Items[index].Id;
-                                }
+                            result.json().then(function (content) {
+                                _this._model.Items.forEach(function (item, index) {
+                                    if (item.Id < 0) {
+                                        item.Id = content.Items[index].Id;
+                                    }
+                                });
                             });
                         })
                             .catch(this.onError);
@@ -258,9 +268,11 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                                 e.preventDefault();
                                 _this._email.send(_this._toAddresses, _this._bccAddresses)
                                     .then(function (result) {
-                                    var delivery = new emailDelivery_1.EmailDelivery(result.content);
-                                    _this._model.EmailDeliveries.push(delivery);
-                                    $modal.closeModal();
+                                    result.json().then(function (content) {
+                                        var delivery = new emailDelivery_1.EmailDelivery(content);
+                                        _this._model.EmailDeliveries.push(delivery);
+                                        $modal.closeModal();
+                                    });
                                 })
                                     .catch(function (err) {
                                     console.log(err);
@@ -284,7 +296,7 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                     toastr.error(msg);
                 };
                 EditOrder = __decorate([
-                    aurelia_framework_1.inject(aurelia_http_client_1.HttpClient, aurelia_router_1.Router, Element)
+                    aurelia_framework_1.inject(aurelia_fetch_client_1.HttpClient, aurelia_router_1.Router, Element)
                 ], EditOrder);
                 return EditOrder;
             })();

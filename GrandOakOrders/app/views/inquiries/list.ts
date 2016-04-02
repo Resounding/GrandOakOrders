@@ -1,5 +1,6 @@
+import {InquiryPojo} from '../../models/inquiry'
 import {inject} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-http-client';
+import {HttpClient} from 'aurelia-fetch-client';
 import moment from 'moment';
 import _ from 'underscore';
 
@@ -11,37 +12,39 @@ export class InquiriesList {
 	requests = [];
 	
 	constructor(private httpClient:HttpClient) {
-		
-		this.httpClient.get('/api/inquiries')
-			.then((res) => {
-                this.requests = _.map(res.content, (request) => {
-                    var createdAt = moment(request.CreatedAt),
-                        display = {
-                            id: request.Id,
-                            title: request.Organization,
-                            summary: request.Summary,
-                            people: request.People,
-                            date: '',
-                            createdDate: createdAt.format(DATE_FORMAT),
-                            createdTime: createdAt.format(TIME_FORMAT),
-                            location: request.Location,
-                            address: request.LocationAddress,
-                            createdBy: request.CreatedBy
-                        };
 
-                    if (request.ContactPerson) {
-                        display.title += ' (' + request.ContactPerson + ')';
-                    }
-                    
-                    if (_.isDate(request.EventDate)) {
-                        var m = moment(request.EventDate);
-                        display.date = m.format(DATE_FORMAT) + ' ' + m.format(TIME_FORMAT);
-                    }
+	    this.httpClient.fetch('/api/inquiries')
+	        .then((res) => {
+	            res.json().then((content) => {
+	                this.requests = _.map(content, (request:InquiryPojo) => {
+	                    var createdAt = moment(request.CreatedAt),
+	                        display = {
+	                            id: request.Id,
+	                            title: request.Organization,
+	                            summary: request.Summary,
+	                            people: request.People,
+	                            date: '',
+	                            createdDate: createdAt.format(DATE_FORMAT),
+	                            createdTime: createdAt.format(TIME_FORMAT),
+	                            location: request.Location,
+	                            address: request.LocationAddress,
+	                            createdBy: request.CreatedBy
+	                        };
 
-                    return display;
-                });
-			}, (err) => {
-				console.log(err);	
-			});
+	                    if (request.ContactPerson) {
+	                        display.title += ' (' + request.ContactPerson + ')';
+	                    }
+
+	                    if (_.isDate(request.EventDate)) {
+	                        var m = moment(request.EventDate);
+	                        display.date = m.format(DATE_FORMAT) + ' ' + m.format(TIME_FORMAT);
+	                    }
+
+	                    return display;
+	                });
+	            }, (err) => {
+	                console.log(err);
+	            });
+	        });
 	}
 }

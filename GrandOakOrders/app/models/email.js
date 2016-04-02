@@ -23,7 +23,9 @@ System.register([], function(exports_1) {
                 Email.prototype.send = function (email, bcc) {
                     this.email = email;
                     this.bcc = bcc;
-                    return this.httpClient.post("/api/orders/" + this.order.Id + "/emailInvoice", this.toJSON());
+                    var headers = new Headers();
+                    headers.append('Content-Type', 'application/json');
+                    return this.httpClient.fetch("/api/orders/" + this.order.Id + "/emailInvoice", { method: 'post', body: JSON.stringify(this.toJSON()), headers: headers });
                 };
                 Email.prototype.toJSON = function () {
                     return {

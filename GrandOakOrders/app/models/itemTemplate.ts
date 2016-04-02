@@ -1,4 +1,4 @@
-﻿import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
+﻿import {HttpClient, HttpResponseMessage} from 'aurelia-fetch-client';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {computedFrom} from 'aurelia-binding';
 import _ from 'underscore';
@@ -44,11 +44,11 @@ export class ItemTemplate {
 
     save() {
         if (this.Id) {
-            this.httpClient.put(`/api/items/${this.Id}`, this)
+            this.httpClient.fetch(`/api/items/${this.Id}`, { method: 'put', body: this })
                 .then(() => this.events.publish('item:updated', this.toJSON()))
                 .catch(this.onError);
         } else {
-            this.httpClient.post('/api/items', this)
+            this.httpClient.fetch('/api/items', { method: 'post', body: this })
                 .then((result) => {
                     _.extend(this, result.content);
                     this.events.publish('item:created', this.toJSON());
@@ -60,7 +60,7 @@ export class ItemTemplate {
 
     destroy() {
         if (this.Id) {
-            this.httpClient.delete(`/api/items/${this.Id}`)
+            this.httpClient.fetch(`/api/items/${this.Id}`, { method: 'delete' })
                 .then(() => this.events.publish('item:deleted', this.toJSON()))
                 .catch(this.onError);
         } else {

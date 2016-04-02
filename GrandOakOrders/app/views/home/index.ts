@@ -1,5 +1,5 @@
 import {inject} from 'aurelia-framework';
-import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
+import {HttpClient, HttpResponseMessage} from 'aurelia-fetch-client';
 import {Router} from 'aurelia-router';
 import {AuthService} from 'aurelia-auth';
 import {InquiryPojo} from '../../models/inquiry';
@@ -20,7 +20,7 @@ export default class Home {
     }
 
     load() {
-        this.httpClient.get('/API/Home')
+        this.httpClient.fetch('/API/Home')
             .then((response: HttpResponseMessage) => {
                 this.content = response.content;
             })

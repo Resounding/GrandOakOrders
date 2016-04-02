@@ -3,7 +3,7 @@
 /// <reference path="../../../typings/toastr/toastr.d.ts" />
 
 import {inject} from 'aurelia-framework';
-import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
+import {HttpClient, HttpResponseMessage} from 'aurelia-fetch-client';
 import {Router} from 'aurelia-router';
 import {InquiryViewModel, InquiryPojo} from '../../models/inquiry';
 import * as _ from 'underscore'
@@ -18,19 +18,22 @@ export class InquiryDetail {
     private _customers:Array<Customer>;
 	
 	constructor(private httpClient: HttpClient, private router: Router, private element: Element) {
-	    httpClient.get('/API/Customers')
-	        .then((results: HttpResponseMessage) => {
-	            this._customers = results.content;
+	    httpClient.fetch('/API/Customers')
+            .then((results: HttpResponseMessage) => {
+	            results.json().then((content:Array<Customer>) => {
+	                this._customers = content;
+	            });
 	        })
             .catch(this.onError);
 	}
 	
     activate(params) {
         if (params.id) {
-            this.httpClient.get(`/api/inquiries/${params.id}`)
+            this.httpClient.fetch(`/api/inquiries/${params.id}`)
                 .then((res: HttpResponseMessage) => {
-                    var inquiry: InquiryPojo = res.content;
-                    this._model = new InquiryViewModel(inquiry);
+                    res.json().then((content:InquiryPojo) => {
+                        this._model = new InquiryViewModel(content);
+                    });
                 });
         } else {
             // check to see if there was a date passed in.
@@ -112,16 +115,19 @@ export class InquiryDetail {
             e.preventDefault();
         } else {
 
-            var inquiry = this._model.toJSON();
+            var inquiry = this._model.toJSON(),
+                headers = new Headers();
+
+            headers.append('Content-Type', 'application/json');
 
             if (inquiry.Id) {
                 // edit
-                this.httpClient.put(`/api/inquiries/${inquiry.Id}`, inquiry)
+                this.httpClient.fetch(`/api/inquiries/${inquiry.Id}`, { method: 'put', body: inquiry, headers })
                     .then(this.onSaved.bind(this))
                     .catch(this.onError);
             } else {
                 // create
-                this.httpClient.post('/api/inquiries', inquiry)
+                this.httpClient.fetch('/api/inquiries', { method: 'post', body: JSON.stringify(inquiry), headers })
                     .then(this.onSaved.bind(this))
                     .catch(this.onError);
             }
@@ -130,8 +136,10 @@ export class InquiryDetail {
 
     onSaved(response: HttpResponseMessage) {
         console.log(response);
-        if (response.statusCode == 201) {
-            this.router.navigateToRoute('edit order', { id: response.content.Id });
+        if (response.status === 201) {
+            response.json().then((content) => {
+                this.router.navigateToRoute('edit order', { id: content.Id });
+            });
         } else {
             this.router.navigateToRoute('inquiries');
         }

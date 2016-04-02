@@ -68,8 +68,8 @@ System.register(['aurelia-framework', 'underscore'], function(exports_1) {
                             _this.item.OrderingNotes = item.OrderingNotes;
                             _this.item.InvoiceNotes = item.InvoiceNotes;
                             $("label[for=description_" + item.Id + "]").addClass('active');
-                        }).on('typeahead:active', function (e, item) {
-                            $("label[for=description_" + item.Id + "]").addClass('active');
+                        }).on('typeahead:active', function (e) {
+                            $("label[for=\"" + e.target.id + "\"]").addClass('active');
                         });
                     }, this), 500);
                 };

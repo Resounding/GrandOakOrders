@@ -1,5 +1,5 @@
 ﻿import {inject} from 'aurelia-framework';
-import {HttpClient, HttpResponseMessage} from 'aurelia-http-client';
+import {HttpClient, HttpResponseMessage} from 'aurelia-fetch-client';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Router} from 'aurelia-router';
 import {ItemTemplate} from '../../models/itemTemplate';
@@ -15,7 +15,7 @@ export class ItemList {
     }
 
     activate() {
-        this.httpClient.get('/api/items')
+        this.httpClient.fetch('/api/items')
             .then((response: HttpResponseMessage) => {
                 response.content.forEach(i => this._items.push(new ItemTemplate(i, this.events, this.httpClient)));
             });

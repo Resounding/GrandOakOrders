@@ -1,14 +1,14 @@
 /// <reference path="../../../typings/jquery/jquery.d.ts" />
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
 /// <reference path="../../../typings/toastr/toastr.d.ts" />
-System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '../../models/inquiry', 'underscore', 'uri.js'], function(exports_1) {
+System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-router', '../../models/inquiry', 'underscore', 'uri.js'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var aurelia_framework_1, aurelia_http_client_1, aurelia_router_1, inquiry_1, _, uri;
+    var aurelia_framework_1, aurelia_fetch_client_1, aurelia_router_1, inquiry_1, _, uri;
     var InquiryDetail;
     function substringMatcher(strs) {
         return function (q, cb) {
@@ -29,8 +29,8 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
             function (aurelia_framework_1_1) {
                 aurelia_framework_1 = aurelia_framework_1_1;
             },
-            function (aurelia_http_client_1_1) {
-                aurelia_http_client_1 = aurelia_http_client_1_1;
+            function (aurelia_fetch_client_1_1) {
+                aurelia_fetch_client_1 = aurelia_fetch_client_1_1;
             },
             function (aurelia_router_1_1) {
                 aurelia_router_1 = aurelia_router_1_1;
@@ -53,19 +53,22 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                     this.element = element;
                     this._model = new inquiry_1.InquiryViewModel();
                     this._submitted = false;
-                    httpClient.get('/API/Customers')
+                    httpClient.fetch('/API/Customers')
                         .then(function (results) {
-                        _this._customers = results.content;
+                        results.json().then(function (content) {
+                            _this._customers = content;
+                        });
                     })
                         .catch(this.onError);
                 }
                 InquiryDetail.prototype.activate = function (params) {
                     var _this = this;
                     if (params.id) {
-                        this.httpClient.get("/api/inquiries/" + params.id)
+                        this.httpClient.fetch("/api/inquiries/" + params.id)
                             .then(function (res) {
-                            var inquiry = res.content;
-                            _this._model = new inquiry_1.InquiryViewModel(inquiry);
+                            res.json().then(function (content) {
+                                _this._model = new inquiry_1.InquiryViewModel(content);
+                            });
                         });
                     }
                     else {
@@ -138,25 +141,29 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                         e.preventDefault();
                     }
                     else {
-                        var inquiry = this._model.toJSON();
+                        var inquiry = this._model.toJSON(), headers = new Headers();
+                        headers.append('Content-Type', 'application/json');
                         if (inquiry.Id) {
                             // edit
-                            this.httpClient.put("/api/inquiries/" + inquiry.Id, inquiry)
+                            this.httpClient.fetch("/api/inquiries/" + inquiry.Id, { method: 'put', body: inquiry, headers: headers })
                                 .then(this.onSaved.bind(this))
                                 .catch(this.onError);
                         }
                         else {
                             // create
-                            this.httpClient.post('/api/inquiries', inquiry)
+                            this.httpClient.fetch('/api/inquiries', { method: 'post', body: JSON.stringify(inquiry), headers: headers })
                                 .then(this.onSaved.bind(this))
                                 .catch(this.onError);
                         }
                     }
                 };
                 InquiryDetail.prototype.onSaved = function (response) {
+                    var _this = this;
                     console.log(response);
-                    if (response.statusCode == 201) {
-                        this.router.navigateToRoute('edit order', { id: response.content.Id });
+                    if (response.status === 201) {
+                        response.json().then(function (content) {
+                            _this.router.navigateToRoute('edit order', { id: content.Id });
+                        });
                     }
                     else {
                         this.router.navigateToRoute('inquiries');
@@ -167,7 +174,7 @@ System.register(['aurelia-framework', 'aurelia-http-client', 'aurelia-router', '
                     toastr.error('There was a problem saving the inquiry: ' + err);
                 };
                 InquiryDetail = __decorate([
-                    aurelia_framework_1.inject(aurelia_http_client_1.HttpClient, aurelia_router_1.Router, Element)
+                    aurelia_framework_1.inject(aurelia_fetch_client_1.HttpClient, aurelia_router_1.Router, Element)
                 ], InquiryDetail);
                 return InquiryDetail;
             })();
