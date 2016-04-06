@@ -43,15 +43,23 @@ export class ItemTemplate {
     }
 
     save() {
+        const body = JSON.stringify(this),
+              headers = new Headers();
+        headers.append('Content-Type', 'application/json');        
+
         if (this.Id) {
-            this.httpClient.fetch(`/api/items/${this.Id}`, { method: 'put', body: this })
-                .then(() => this.events.publish('item:updated', this.toJSON()))
+            this.httpClient.fetch(`/api/items/${this.Id}`, { method: 'put', body, headers })
+                .then(() => {
+                    this.events.publish('item:updated', this.toJSON());
+                })
                 .catch(this.onError);
         } else {
-            this.httpClient.fetch('/api/items', { method: 'post', body: this })
+            this.httpClient.fetch('/api/items', { method: 'post', body, headers })
                 .then((result) => {
-                    _.extend(this, result.content);
-                    this.events.publish('item:created', this.toJSON());
+                    result.json().then((content) => {
+                        _.extend(this, content);
+                        this.events.publish('item:created', this.toJSON());
+                    });
                 })
                 .catch(this.onError);
         }

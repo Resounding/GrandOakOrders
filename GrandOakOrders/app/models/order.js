@@ -1,7 +1,9 @@
 /// <reference path="../../typings/jquery/jquery.d.ts" />
 /// <reference path="../../typings/moment/moment.d.ts" />
 /// <reference path="../../typings/underscore/underscore.d.ts" />
-System.register(['./inquiry', './emailDelivery', 'aurelia-event-aggregator', 'aurelia-dependency-injection', 'underscore', 'moment'], function(exports_1) {
+System.register(['./inquiry', './emailDelivery', 'aurelia-event-aggregator', 'aurelia-dependency-injection', 'underscore', 'moment'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var inquiry_1, emailDelivery_1, aurelia_event_aggregator_1, aurelia_dependency_injection_1, underscore_1, moment_1;
     var DATE_FORMAT, TIME_FORMAT, OrderItemViewModel, OrderViewModel;
     return {
@@ -124,7 +126,7 @@ System.register(['./inquiry', './emailDelivery', 'aurelia-event-aggregator', 'au
                     };
                 };
                 return OrderItemViewModel;
-            })();
+            }());
             exports_1("OrderItemViewModel", OrderItemViewModel);
             OrderViewModel = (function () {
                 function OrderViewModel(model) {
@@ -278,12 +280,12 @@ System.register(['./inquiry', './emailDelivery', 'aurelia-event-aggregator', 'au
                 };
                 OrderViewModel.prototype.moveUp = function (item) {
                     if (item.SortOrder > 0) {
-                        var newOrder = item.SortOrder - 1;
-                        var other = underscore_1.default.find(this.Items, function (i) { return i.SortOrder === newOrder; });
+                        var newOrder_1 = item.SortOrder - 1;
+                        var other = underscore_1.default.find(this.Items, function (i) { return i.SortOrder === newOrder_1; });
                         if (other) {
                             other.SortOrder = item.SortOrder;
                         }
-                        item.SortOrder = newOrder;
+                        item.SortOrder = newOrder_1;
                     }
                     this.resort();
                 };
@@ -299,8 +301,8 @@ System.register(['./inquiry', './emailDelivery', 'aurelia-event-aggregator', 'au
                 OrderViewModel.prototype.resort = function () {
                     var index = 1;
                     var sortedItems = underscore_1.default.sortBy(this.Items, function (i) { return i.SortOrder; });
-                    for (var _i = 0; _i < sortedItems.length; _i++) {
-                        var item = sortedItems[_i];
+                    for (var _i = 0, sortedItems_1 = sortedItems; _i < sortedItems_1.length; _i++) {
+                        var item = sortedItems_1[_i];
                         item.SortOrder = index++;
                     }
                 };
@@ -340,7 +342,7 @@ System.register(['./inquiry', './emailDelivery', 'aurelia-event-aggregator', 'au
                     };
                 };
                 return OrderViewModel;
-            })();
+            }());
             exports_1("OrderViewModel", OrderViewModel);
         }
     }

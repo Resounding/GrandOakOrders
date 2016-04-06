@@ -1,6 +1,8 @@
 ///<reference path="../../typings/moment/moment.d.ts" />
 ///<reference path="../../typings/underscore/underscore.d.ts" />
-System.register(['moment', 'underscore'], function(exports_1) {
+System.register(['moment', 'underscore'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var moment_1, underscore_1;
     var InquiryViewModel;
     return {
@@ -126,7 +128,7 @@ System.register(['moment', 'underscore'], function(exports_1) {
                 InquiryViewModel.DATE_FORMAT = 'dddd MMM D, YYYY';
                 InquiryViewModel.TIME_FORMAT = 'h:mm A';
                 return InquiryViewModel;
-            })();
+            }());
             exports_1("InquiryViewModel", InquiryViewModel);
         }
     }

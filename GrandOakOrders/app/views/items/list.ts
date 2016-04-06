@@ -17,7 +17,9 @@ export class ItemList {
     activate() {
         this.httpClient.fetch('/api/items')
             .then((response: HttpResponseMessage) => {
-                response.content.forEach(i => this._items.push(new ItemTemplate(i, this.events, this.httpClient)));
+                response.json().then((content) => {
+                    content.forEach(i => this._items.push(new ItemTemplate(i, this.events, this.httpClient)));
+                });
             });
 
         this.events.subscribe('item:updated', item => {

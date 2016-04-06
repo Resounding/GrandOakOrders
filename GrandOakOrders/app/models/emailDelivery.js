@@ -1,4 +1,6 @@
-System.register(['moment'], function(exports_1) {
+System.register(['moment'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var moment_1;
     var EmailDelivery;
     return {
@@ -44,7 +46,7 @@ System.register(['moment'], function(exports_1) {
                     configurable: true
                 });
                 return EmailDelivery;
-            })();
+            }());
             exports_1("EmailDelivery", EmailDelivery);
         }
     }

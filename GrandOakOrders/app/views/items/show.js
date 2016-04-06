@@ -1,34 +1,40 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-        case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
-        case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
-        case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
+System.register(['aurelia-framework'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var aurelia_framework_1;
+    var ShowItem;
+    return {
+        setters:[
+            function (aurelia_framework_1_1) {
+                aurelia_framework_1 = aurelia_framework_1_1;
+            }],
+        execute: function() {
+            ShowItem = (function () {
+                function ShowItem(element) {
+                    this.element = element;
+                }
+                ShowItem.prototype.onVisibleChanged = function (visible) {
+                    this.element.style.display = visible ? '' : 'none';
+                };
+                __decorate([
+                    aurelia_framework_1.bindable
+                ], ShowItem.prototype, "model", void 0);
+                __decorate([
+                    aurelia_framework_1.bindable({ changeHandler: 'onVisibleChanged' })
+                ], ShowItem.prototype, "visible", void 0);
+                ShowItem = __decorate([
+                    aurelia_framework_1.customElement('show-item'),
+                    aurelia_framework_1.inject(Element)
+                ], ShowItem);
+                return ShowItem;
+            }());
+            exports_1("ShowItem", ShowItem);
+        }
     }
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-import { customElement, bindable, inject } from 'aurelia-framework';
-import { ItemTemplate } from "../../models/itemTemplate";
-export let ShowItem = class {
-    constructor(element) {
-        this.element = element;
-    }
-    onVisibleChanged(visible) {
-        this.element.style.display = visible ? '' : 'none';
-    }
-};
-__decorate([
-    bindable, 
-    __metadata('design:type', ItemTemplate)
-], ShowItem.prototype, "model");
-__decorate([
-    bindable({ changeHandler: 'onVisibleChanged' }), 
-    __metadata('design:type', Boolean)
-], ShowItem.prototype, "visible");
-ShowItem = __decorate([
-    customElement('show-item'),
-    inject(Element), 
-    __metadata('design:paramtypes', [Element])
-], ShowItem);
+});

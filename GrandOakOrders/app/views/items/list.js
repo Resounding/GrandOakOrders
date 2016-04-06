@@ -1,4 +1,6 @@
-System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-event-aggregator', 'aurelia-router', '../../models/itemTemplate', 'underscore'], function(exports_1) {
+System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-event-aggregator', 'aurelia-router', '../../models/itemTemplate', 'underscore'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -40,7 +42,9 @@ System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-event-agg
                     var _this = this;
                     this.httpClient.fetch('/api/items')
                         .then(function (response) {
-                        response.content.forEach(function (i) { return _this._items.push(new itemTemplate_1.ItemTemplate(i, _this.events, _this.httpClient)); });
+                        response.json().then(function (content) {
+                            content.forEach(function (i) { return _this._items.push(new itemTemplate_1.ItemTemplate(i, _this.events, _this.httpClient)); });
+                        });
                     });
                     this.events.subscribe('item:updated', function (item) {
                         var existing = underscore_1.default.find(_this._items, function (i) { return i.Id === item.Id; });
@@ -95,7 +99,7 @@ System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-event-agg
                     aurelia_framework_1.inject(aurelia_fetch_client_1.HttpClient, aurelia_router_1.Router, aurelia_event_aggregator_1.EventAggregator, Element)
                 ], ItemList);
                 return ItemList;
-            })();
+            }());
             exports_1("ItemList", ItemList);
         }
     }

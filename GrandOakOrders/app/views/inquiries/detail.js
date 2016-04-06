@@ -1,7 +1,9 @@
 /// <reference path="../../../typings/jquery/jquery.d.ts" />
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
 /// <reference path="../../../typings/toastr/toastr.d.ts" />
-System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-router', '../../models/inquiry', 'underscore', 'uri.js'], function(exports_1) {
+System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-router', '../../models/inquiry', 'underscore', 'uri.js'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -177,7 +179,7 @@ System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-router', 
                     aurelia_framework_1.inject(aurelia_fetch_client_1.HttpClient, aurelia_router_1.Router, Element)
                 ], InquiryDetail);
                 return InquiryDetail;
-            })();
+            }());
             exports_1("InquiryDetail", InquiryDetail);
         }
     }

@@ -1,4 +1,6 @@
-System.register(['aurelia-binding', 'underscore'], function(exports_1) {
+System.register(['aurelia-binding', 'underscore'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47,16 +49,22 @@ System.register(['aurelia-binding', 'underscore'], function(exports_1) {
                 };
                 ItemTemplate.prototype.save = function () {
                     var _this = this;
+                    var body = JSON.stringify(this), headers = new Headers();
+                    headers.append('Content-Type', 'application/json');
                     if (this.Id) {
-                        this.httpClient.fetch("/api/items/" + this.Id, { method: 'put', body: this })
-                            .then(function () { return _this.events.publish('item:updated', _this.toJSON()); })
+                        this.httpClient.fetch("/api/items/" + this.Id, { method: 'put', body: body, headers: headers })
+                            .then(function () {
+                            _this.events.publish('item:updated', _this.toJSON());
+                        })
                             .catch(this.onError);
                     }
                     else {
-                        this.httpClient.fetch('/api/items', { method: 'post', body: this })
+                        this.httpClient.fetch('/api/items', { method: 'post', body: body, headers: headers })
                             .then(function (result) {
-                            underscore_1.default.extend(_this, result.content);
-                            _this.events.publish('item:created', _this.toJSON());
+                            result.json().then(function (content) {
+                                underscore_1.default.extend(_this, content);
+                                _this.events.publish('item:created', _this.toJSON());
+                            });
                         })
                             .catch(this.onError);
                     }
@@ -94,7 +102,7 @@ System.register(['aurelia-binding', 'underscore'], function(exports_1) {
                     aurelia_binding_1.computedFrom('UnitPrice')
                 ], ItemTemplate.prototype, "unitPriceDisplay", null);
                 return ItemTemplate;
-            })();
+            }());
             exports_1("ItemTemplate", ItemTemplate);
         }
     }

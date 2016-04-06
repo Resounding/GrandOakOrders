@@ -1,4 +1,6 @@
-System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-auth'], function(exports_1) {
+System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-auth'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -30,10 +32,12 @@ System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-auth'], f
                     var _this = this;
                     this.httpClient.fetch('/API/Home')
                         .then(function (response) {
-                        _this.content = response.content;
+                        response.json().then(function (content) {
+                            _this.content = content;
+                        });
                     })
                         .catch(function (err) {
-                        if (err.statusCode === 401) {
+                        if (err.status === 401) {
                             _this.auth.authenticate('google', false, null)
                                 .then(function () { return _this.load(); })
                                 .catch(function () { return _this.router.navigateToRoute('login'); });
@@ -47,7 +51,7 @@ System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-auth'], f
                     aurelia_framework_1.inject(aurelia_fetch_client_1.HttpClient, aurelia_auth_1.AuthService)
                 ], Home);
                 return Home;
-            })();
+            }());
             exports_1("default", Home);
         }
     }

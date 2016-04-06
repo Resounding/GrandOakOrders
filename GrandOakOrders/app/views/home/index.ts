@@ -22,10 +22,12 @@ export default class Home {
     load() {
         this.httpClient.fetch('/API/Home')
             .then((response: HttpResponseMessage) => {
-                this.content = response.content;
+                response.json().then((content) => {
+                    this.content = content;
+                });
             })
             .catch((err:HttpResponseMessage) => {
-                if(err.statusCode === 401) {
+                if(err.status === 401) {
                     this.auth.authenticate('google', false, null)
                         .then(() => this.load())
                         .catch(() => this.router.navigateToRoute('login'));
