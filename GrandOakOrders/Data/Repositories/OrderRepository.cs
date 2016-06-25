@@ -91,18 +91,35 @@ namespace GrandOakOrders.Data.Repositories
             dborder.TaxCode = order.TaxCode;
             dborder.TaxRate = order.TaxRate;
 
-            dborder.Inquiry.Organization = order.Inquiry.Organization;
-            dborder.Inquiry.ContactPerson = order.Inquiry.ContactPerson;
-            dborder.Inquiry.EventDate = order.Inquiry.EventDate;
-            dborder.Inquiry.EventTime = order.Inquiry.EventTime;
-            dborder.Inquiry.People = order.Inquiry.People;
-            dborder.Inquiry.Summary = order.Inquiry.Summary;
-            dborder.Inquiry.Description = order.Inquiry.Description;
-            dborder.Inquiry.DeliveryType = order.Inquiry.DeliveryType;
-            dborder.Inquiry.Location = order.Inquiry.Location;
-            dborder.Inquiry.LocationAddress = order.Inquiry.LocationAddress;
-            dborder.Inquiry.Phone = order.Inquiry.Phone;
-            dborder.Inquiry.Email = order.Inquiry.Email;
+            var inquiry = dborder.Inquiry;
+
+            inquiry.Organization = order.Inquiry.Organization;
+            inquiry.ContactPerson = order.Inquiry.ContactPerson;
+            inquiry.EventDate = order.Inquiry.EventDate;
+            inquiry.EventTime = order.Inquiry.EventTime;
+            inquiry.People = order.Inquiry.People;
+            inquiry.Summary = order.Inquiry.Summary;
+            inquiry.Description = order.Inquiry.Description;
+            inquiry.DeliveryType = order.Inquiry.DeliveryType;
+            inquiry.Location = order.Inquiry.Location;
+            inquiry.LocationAddress = order.Inquiry.LocationAddress;
+            inquiry.Phone = order.Inquiry.Phone;
+            inquiry.Email = order.Inquiry.Email;
+
+            var existingCustomer = await _context.Customers.FirstOrDefaultAsync(c => c.CompanyName == inquiry.Organization || c.ContactPerson == inquiry.ContactPerson);
+            if (existingCustomer != null) {
+                existingCustomer.ContactPerson = inquiry.ContactPerson;
+                existingCustomer.Email = inquiry.Email;
+                existingCustomer.Phone = inquiry.Phone;
+            } else {
+                var customer = new Customer {
+                    CompanyName = inquiry.Organization,
+                    ContactPerson = inquiry.ContactPerson,
+                    Email = inquiry.Email,
+                    Phone = inquiry.Phone
+                };
+                _context.Customers.Add(customer);
+            }
 
             var submittedIds = order.Items.Select(i => i.Id).ToList();
             var deleted = dborder.Items
