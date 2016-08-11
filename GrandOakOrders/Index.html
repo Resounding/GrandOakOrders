@@ -10,7 +10,24 @@
     <link rel="stylesheet" href="/content/site.css">
 </head>
 <body>
-    <div class="content" aurelia-app="./app/components/main"></div>
+    <div class="content" aurelia-app="./app/components/main">
+        <div style="margin-top: 30%;">
+            <div>
+                <div class="preloader-wrapper big active" style="margin-left: auto; margin-right: auto; display: block;">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                            <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1 class="blue-text center-align">Loading, please wait...</h1>
+        </div>
+    </div>
     <script src="/Bundles/Vendor"></script>
     <script src="config.js"></script>
     <script>

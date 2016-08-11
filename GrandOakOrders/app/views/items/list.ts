@@ -3,7 +3,7 @@ import {HttpClient, HttpResponseMessage} from 'aurelia-fetch-client';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Router} from 'aurelia-router';
 import {ItemTemplate} from '../../models/itemTemplate';
-import _ from 'underscore';
+import * as _ from 'underscore';
 
 @inject(HttpClient, Router, EventAggregator, Element)
 export class ItemList {

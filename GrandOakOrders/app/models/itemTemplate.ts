@@ -1,7 +1,7 @@
 ﻿import {HttpClient, HttpResponseMessage} from 'aurelia-fetch-client';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {computedFrom} from 'aurelia-binding';
-import _ from 'underscore';
+import * as _ from 'underscore';
 
 export class ItemTemplate {
 

@@ -12,7 +12,7 @@ import {OrderPojo, OrderViewModel, OrderItemPojo} from '../../models/order';
 import {Email} from '../../models/email';
 import {ItemTemplate} from '../../models/itemTemplate';
 import {IAllInPricingHost, AllInPricing} from './allInPricing';
-import _ from 'underscore';
+import * as _ from 'underscore';
 
 @inject(HttpClient, Router, Element)
 export class EditOrder implements IAllInPricingHost {
@@ -218,10 +218,6 @@ export class EditOrder implements IAllInPricingHost {
 
         const $el = $(e.target),
             url = $el.attr('href');
-
-        if (!this._model.InvoiceDate) {
-            this._model.InvoiceDate = new Date();
-        }
 
         this.submit()
             .then(() => window.open(url, '_blank'))

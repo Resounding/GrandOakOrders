@@ -1,5 +1,5 @@
 ﻿import {OrderViewModel} from '../models/order';
-import _ from 'underscore';
+import * as _ from 'underscore';
 
 export class OrderFilterValueConverter {
     toView(array: OrderViewModel[], filterText:string):OrderViewModel[] {

@@ -1,18 +1,17 @@
 /// <reference path="../../typings/jquery/jquery.d.ts" />
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-        case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
-        case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
-        case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
-    }
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { inject } from 'aurelia-framework';
-import { EventAggregator } from 'aurelia-event-aggregator';
-export let CurrencyCustomAttribute = class {
+const aurelia_framework_1 = require('aurelia-framework');
+const aurelia_event_aggregator_1 = require('aurelia-event-aggregator');
+let CurrencyCustomAttribute = class CurrencyCustomAttribute {
     constructor(element, events) {
         this.element = element;
         this.events = events;
@@ -40,7 +39,8 @@ export let CurrencyCustomAttribute = class {
     }
 };
 CurrencyCustomAttribute = __decorate([
-    inject(Element, EventAggregator), 
-    __metadata('design:paramtypes', [HTMLInputElement, (typeof (_a = typeof EventAggregator !== 'undefined' && EventAggregator) === 'function' && _a) || Object])
+    aurelia_framework_1.inject(Element, aurelia_event_aggregator_1.EventAggregator), 
+    __metadata('design:paramtypes', [HTMLInputElement, (typeof (_a = typeof aurelia_event_aggregator_1.EventAggregator !== 'undefined' && aurelia_event_aggregator_1.EventAggregator) === 'function' && _a) || Object])
 ], CurrencyCustomAttribute);
+exports.CurrencyCustomAttribute = CurrencyCustomAttribute;
 var _a;

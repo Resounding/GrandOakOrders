@@ -2,7 +2,7 @@
 import {OrderViewModel, OrderItemViewModel} from '../../models/order';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {computedFrom} from 'aurelia-binding';
-import _ from 'underscore';
+import * as _ from 'underscore';
 
 @customElement('all-in-pricing')
 @inject(EventAggregator, Element)

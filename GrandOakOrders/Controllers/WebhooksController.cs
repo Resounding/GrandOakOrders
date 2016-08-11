@@ -54,21 +54,24 @@ namespace GrandOakOrders.Controllers
                         var fromAddress = ConfigurationManager.AppSettings["EmailFromAddress"];
 
                         foreach (var email in events) {
-                            if (sendEmail && email.Email != toAddress && email.Email != fromAddress) {
-                                // ReSharper disable once PossibleInvalidOperationException
-                                var id = email.OrderId.Value.ToString("0000");
-                                var body =
-                                    $"A {email.Event} notification was received for the email sent to {email.Email} regarding  Order # {id}.";
+                            // Don't send a notification every time they open it.
+                            if (email.Event != "open") {
+                                if (sendEmail && email.Email != toAddress && email.Email != fromAddress) {
+                                    // ReSharper disable once PossibleInvalidOperationException
+                                    var id = email.OrderId.Value.ToString("0000");
+                                    var body =
+                                        $"A {email.Event} notification was received for the email sent to {email.Email} regarding  Order # {id}.";
 
-                                var mailMessage = new SendGridMessage {
-                                    Subject = "Grand Oak Orders email " + email.Event,
-                                    From = new MailAddress(fromAddress, "Grand Oak Orders"),
-                                    Text = body,
-                                    Html = body
-                                };
-                                mailMessage.AddTo(toAddress);
+                                    var mailMessage = new SendGridMessage {
+                                        Subject = "Grand Oak Orders email " + email.Event,
+                                        From = new MailAddress(fromAddress, "Grand Oak Orders"),
+                                        Text = body,
+                                        Html = body
+                                    };
+                                    mailMessage.AddTo(toAddress);
 
-                                await _transportWeb.DeliverAsync(mailMessage);
+                                    await _transportWeb.DeliverAsync(mailMessage);
+                                }
                             }
 
                             if (!email.DeliveryId.HasValue || email.Email == toAddress && email.Email == fromAddress) continue;
