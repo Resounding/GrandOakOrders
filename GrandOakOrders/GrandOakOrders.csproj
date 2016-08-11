@@ -2775,7 +2775,6 @@
     <Content Include="jspm_packages\npm\querystring%400.2.0\package.json" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\Readme.md" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\test.js" />
-    <Content Include="jspm_packages\npm\querystring%400.2.0\test\.index.js.un~" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\test\common-index.js" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\test\index.js" />
     <Content Include="jspm_packages\npm\querystring%400.2.0\test\tap-index.js" />
