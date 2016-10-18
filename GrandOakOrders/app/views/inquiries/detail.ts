@@ -122,7 +122,7 @@ export class InquiryDetail {
 
             if (inquiry.Id) {
                 // edit
-                this.httpClient.fetch(`/api/inquiries/${inquiry.Id}`, { method: 'put', body: inquiry, headers })
+                this.httpClient.fetch(`/api/inquiries/${inquiry.Id}`, { method: 'put', body: JSON.stringify(inquiry), headers })
                     .then(this.onSaved.bind(this))
                     .catch(this.onError);
             } else {

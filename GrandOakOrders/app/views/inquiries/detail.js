@@ -111,7 +111,7 @@ let InquiryDetail = class InquiryDetail {
             headers.append('Content-Type', 'application/json');
             if (inquiry.Id) {
                 // edit
-                this.httpClient.fetch(`/api/inquiries/${inquiry.Id}`, { method: 'put', body: inquiry, headers: headers })
+                this.httpClient.fetch(`/api/inquiries/${inquiry.Id}`, { method: 'put', body: JSON.stringify(inquiry), headers: headers })
                     .then(this.onSaved.bind(this))
                     .catch(this.onError);
             }
