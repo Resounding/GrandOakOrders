@@ -38,6 +38,7 @@
             this.line1 = new GrapeCity.ActiveReports.SectionReportModel.Line();
             this.pageFooter = new GrapeCity.ActiveReports.SectionReportModel.PageFooter();
             this.infoPageNumber = new GrapeCity.ActiveReports.SectionReportModel.ReportInfo();
+            this.lblPrintedOn = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.reportHeader = new GrapeCity.ActiveReports.SectionReportModel.ReportHeader();
             this.lblOrganization = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.lblContactPerson = new GrapeCity.ActiveReports.SectionReportModel.Label();
@@ -59,7 +60,10 @@
             this.lblPeople = new GrapeCity.ActiveReports.SectionReportModel.Label();
             this.txtPeople = new GrapeCity.ActiveReports.SectionReportModel.TextBox();
             this.reportFooter = new GrapeCity.ActiveReports.SectionReportModel.ReportFooter();
-            this.lblPrintedOn = new GrapeCity.ActiveReports.SectionReportModel.Label();
+            this.chkInvoice = new GrapeCity.ActiveReports.SectionReportModel.CheckBox();
+            this.chkCash = new GrapeCity.ActiveReports.SectionReportModel.CheckBox();
+            this.line3 = new GrapeCity.ActiveReports.SectionReportModel.Line();
+            this.label1 = new GrapeCity.ActiveReports.SectionReportModel.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKitchenNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblItemDescription)).BeginInit();
@@ -67,6 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblKitchenNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.infoPageNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblPrintedOn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblOrganization)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblContactPerson)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEventDateTime)).BeginInit();
@@ -85,7 +90,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPickupNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblPeople)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeople)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblPrintedOn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkInvoice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkCash)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.label1)).BeginInit();
             // 
             // pageHeader
             // 
@@ -203,6 +210,17 @@
             this.infoPageNumber.Style = "font-family: Segoe UI; text-align: right";
             this.infoPageNumber.Top = 0F;
             this.infoPageNumber.Width = 1.5F;
+            // 
+            // lblPrintedOn
+            // 
+            this.lblPrintedOn.Height = 0.2F;
+            this.lblPrintedOn.HyperLink = null;
+            this.lblPrintedOn.Left = 0F;
+            this.lblPrintedOn.Name = "lblPrintedOn";
+            this.lblPrintedOn.Style = "";
+            this.lblPrintedOn.Text = "Printed On";
+            this.lblPrintedOn.Top = 0F;
+            this.lblPrintedOn.Width = 4F;
             // 
             // reportHeader
             // 
@@ -444,19 +462,57 @@
             // 
             // reportFooter
             // 
-            this.reportFooter.Height = 0F;
+            this.reportFooter.Controls.AddRange(new GrapeCity.ActiveReports.SectionReportModel.ARControl[] {
+            this.chkInvoice,
+            this.chkCash,
+            this.label1,
+            this.line3});
+            this.reportFooter.Height = 0.5625F;
             this.reportFooter.Name = "reportFooter";
             // 
-            // lblPrintedOn
+            // chkInvoice
             // 
-            this.lblPrintedOn.Height = 0.2F;
-            this.lblPrintedOn.HyperLink = null;
-            this.lblPrintedOn.Left = 0F;
-            this.lblPrintedOn.Name = "lblPrintedOn";
-            this.lblPrintedOn.Style = "";
-            this.lblPrintedOn.Text = "Printed On";
-            this.lblPrintedOn.Top = 0F;
-            this.lblPrintedOn.Width = 4F;
+            this.chkInvoice.Height = 0.2F;
+            this.chkInvoice.Left = 0.1F;
+            this.chkInvoice.Name = "chkInvoice";
+            this.chkInvoice.Style = "font-family: Segoe UI; font-size: 14pt";
+            this.chkInvoice.Text = "Invoice";
+            this.chkInvoice.Top = 0.156F;
+            this.chkInvoice.Width = 0.9F;
+            // 
+            // chkCash
+            // 
+            this.chkCash.Height = 0.2F;
+            this.chkCash.Left = 1.1F;
+            this.chkCash.Name = "chkCash";
+            this.chkCash.Style = "font-family: Segoe UI; font-size: 14pt";
+            this.chkCash.Text = "Cash";
+            this.chkCash.Top = 0.156F;
+            this.chkCash.Width = 0.9F;
+            // 
+            // line3
+            // 
+            this.line3.Height = 0F;
+            this.line3.Left = 3F;
+            this.line3.LineWeight = 1F;
+            this.line3.Name = "line3";
+            this.line3.Top = 0.356F;
+            this.line3.Width = 3F;
+            this.line3.X1 = 3F;
+            this.line3.X2 = 6F;
+            this.line3.Y1 = 0.356F;
+            this.line3.Y2 = 0.356F;
+            // 
+            // label1
+            // 
+            this.label1.Height = 0.2F;
+            this.label1.HyperLink = null;
+            this.label1.Left = 3F;
+            this.label1.Name = "label1";
+            this.label1.Style = "font-family: Segoe UI";
+            this.label1.Text = "Staff signoff";
+            this.label1.Top = 0.362F;
+            this.label1.Width = 1F;
             // 
             // KitchenOrderReport
             // 
@@ -486,6 +542,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblKitchenNotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.infoPageNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblPrintedOn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblOrganization)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblContactPerson)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEventDateTime)).EndInit();
@@ -504,7 +561,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPickupNotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblPeople)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPeople)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblPrintedOn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkInvoice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkCash)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.label1)).EndInit();
 
         }
         #endregion
@@ -539,5 +598,9 @@
         private GrapeCity.ActiveReports.SectionReportModel.Label lblPeople;
         private GrapeCity.ActiveReports.SectionReportModel.TextBox txtPeople;
         private GrapeCity.ActiveReports.SectionReportModel.Label lblPrintedOn;
+        private GrapeCity.ActiveReports.SectionReportModel.CheckBox chkInvoice;
+        private GrapeCity.ActiveReports.SectionReportModel.CheckBox chkCash;
+        private GrapeCity.ActiveReports.SectionReportModel.Label label1;
+        private GrapeCity.ActiveReports.SectionReportModel.Line line3;
     }
 }
