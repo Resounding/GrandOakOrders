@@ -198,6 +198,7 @@
             this.pageFooter.Controls.AddRange(new GrapeCity.ActiveReports.SectionReportModel.ARControl[] {
             this.infoPageNumber,
             this.lblPrintedOn});
+            this.pageFooter.Height = 0.3F;
             this.pageFooter.Name = "pageFooter";
             this.pageFooter.Format += new System.EventHandler(this.OnPageFooterFormat);
             // 
@@ -208,7 +209,7 @@
             this.infoPageNumber.Left = 5F;
             this.infoPageNumber.Name = "infoPageNumber";
             this.infoPageNumber.Style = "font-family: Segoe UI; text-align: right";
-            this.infoPageNumber.Top = 0F;
+            this.infoPageNumber.Top = 0.05F;
             this.infoPageNumber.Width = 1.5F;
             // 
             // lblPrintedOn
@@ -219,7 +220,7 @@
             this.lblPrintedOn.Name = "lblPrintedOn";
             this.lblPrintedOn.Style = "";
             this.lblPrintedOn.Text = "Printed On";
-            this.lblPrintedOn.Top = 0F;
+            this.lblPrintedOn.Top = 0.05F;
             this.lblPrintedOn.Width = 4F;
             // 
             // reportHeader
@@ -467,27 +468,28 @@
             this.chkCash,
             this.label1,
             this.line3});
-            this.reportFooter.Height = 0.5625F;
+            this.reportFooter.Height = 0.4F;
             this.reportFooter.Name = "reportFooter";
+            this.reportFooter.PrintAtBottom = true;
             // 
             // chkInvoice
             // 
-            this.chkInvoice.Height = 0.2F;
+            this.chkInvoice.Height = 0.25F;
             this.chkInvoice.Left = 0.1F;
             this.chkInvoice.Name = "chkInvoice";
             this.chkInvoice.Style = "font-family: Segoe UI; font-size: 14pt";
-            this.chkInvoice.Text = "Invoice";
-            this.chkInvoice.Top = 0.156F;
-            this.chkInvoice.Width = 0.9F;
+            this.chkInvoice.Text = "  Invoice";
+            this.chkInvoice.Top = 0.1F;
+            this.chkInvoice.Width = 1.25F;
             // 
             // chkCash
             // 
-            this.chkCash.Height = 0.2F;
-            this.chkCash.Left = 1.1F;
+            this.chkCash.Height = 0.25F;
+            this.chkCash.Left = 1.5F;
             this.chkCash.Name = "chkCash";
             this.chkCash.Style = "font-family: Segoe UI; font-size: 14pt";
-            this.chkCash.Text = "Cash";
-            this.chkCash.Top = 0.156F;
+            this.chkCash.Text = "  Cash";
+            this.chkCash.Top = 0.1F;
             this.chkCash.Width = 0.9F;
             // 
             // line3
@@ -496,12 +498,12 @@
             this.line3.Left = 3F;
             this.line3.LineWeight = 1F;
             this.line3.Name = "line3";
-            this.line3.Top = 0.356F;
+            this.line3.Top = 0.1F;
             this.line3.Width = 3.5F;
             this.line3.X1 = 3F;
             this.line3.X2 = 6.5F;
-            this.line3.Y1 = 0.356F;
-            this.line3.Y2 = 0.356F;
+            this.line3.Y1 = 0.1F;
+            this.line3.Y2 = 0.1F;
             // 
             // label1
             // 
@@ -511,7 +513,7 @@
             this.label1.Name = "label1";
             this.label1.Style = "font-family: Segoe UI";
             this.label1.Text = "Staff signoff";
-            this.label1.Top = 0.362F;
+            this.label1.Top = 0.09999999F;
             this.label1.Width = 1F;
             // 
             // KitchenOrderReport
