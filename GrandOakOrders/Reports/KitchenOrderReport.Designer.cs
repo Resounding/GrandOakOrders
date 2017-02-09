@@ -497,9 +497,9 @@
             this.line3.LineWeight = 1F;
             this.line3.Name = "line3";
             this.line3.Top = 0.356F;
-            this.line3.Width = 3F;
+            this.line3.Width = 3.5F;
             this.line3.X1 = 3F;
-            this.line3.X2 = 6F;
+            this.line3.X2 = 6.5F;
             this.line3.Y1 = 0.356F;
             this.line3.Y2 = 0.356F;
             // 

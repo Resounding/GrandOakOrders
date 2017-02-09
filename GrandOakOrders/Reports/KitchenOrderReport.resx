@@ -120,6 +120,24 @@
   <data name="txtQuantity.OutputFormat" xml:space="preserve">
     <value>#,##0.##</value>
   </data>
+  <data name="txtQuantity.OutputFormat" xml:space="preserve">
+    <value>#,##0.##</value>
+  </data>
+  <data name="txtEventDate.OutputFormat" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtSummary.OutputFormat" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtAllergyNotes.OutputFormat" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtLocation.OutputFormat" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPickupNotes.OutputFormat" xml:space="preserve">
+    <value />
+  </data>
   <data name="txtEventDate.OutputFormat" xml:space="preserve">
     <value />
   </data>
