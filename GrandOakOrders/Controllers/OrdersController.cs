@@ -161,7 +161,7 @@ namespace GrandOakOrders.Controllers
                 await reminderRepo.CreateReminder(reminder);
 
                 if (order.Inquiry.EventTime.HasValue) {
-                    var time = new DateTime(order.Inquiry.EventTime.Value.Ticks).ToString("hh:mm tt");
+                    var time = new DateTime(order.Inquiry.EventTime.Value.Ticks).AddHours(-2).ToString("hh:mm tt");
                     date = DateTime.Parse(order.Inquiry.EventDate.Value.ToString("yyyy-MM-dd ") + time);
                     offset = new DateTimeOffset(date, easternZone.BaseUtcOffset);
                     reminder = new Reminder {
