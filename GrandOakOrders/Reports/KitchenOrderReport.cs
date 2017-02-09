@@ -28,6 +28,9 @@ namespace GrandOakOrders.Reports
 
             txtOrganization.Text = _order.Inquiry.Organization;
             txtContactPerson.Text = _order.Inquiry.ContactPerson;
+            if (!string.IsNullOrEmpty(_order.Inquiry.Phone)) {
+                txtContactPerson.Text += $" ({_order.Inquiry.Phone})";
+            }
             txtPeople.Text = _order.Inquiry.People.ToString();
             if (_order.Inquiry.EventDate.HasValue) {
                 txtEventDate.Text = _order.Inquiry.EventDate.Value.ToString("dddd d MMM, yyyy");
