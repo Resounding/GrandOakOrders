@@ -35,6 +35,19 @@ namespace GrandOakOrders.Data.Repositories
                 .Include(o => o.EmailDeliveries)
                 .FirstOrDefaultAsync(o => o.Id == id);
 
+            foreach (var delivery in order.EmailDeliveries) {
+                if (delivery.BouncedDate.HasValue) {
+                    delivery.BouncedDate = delivery.BouncedDate.Value.ToUniversalTime();
+                }
+                if (delivery.DeliveredDate.HasValue) {
+                    delivery.DeliveredDate = delivery.DeliveredDate.Value.ToUniversalTime();
+                }
+                if (delivery.OpenedDate.HasValue) {
+                    delivery.OpenedDate = delivery.OpenedDate.Value.ToUniversalTime();
+                }
+                delivery.Sent = delivery.Sent.ToUniversalTime();
+            }
+
             return order;
         }
 
