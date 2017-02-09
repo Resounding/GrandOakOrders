@@ -269,36 +269,46 @@ export class EditOrder implements IAllInPricingHost {
     }
 
     emailInvoice() {
-        var $modal = $('#emailModal');
-        
-        $modal.openModal({
-            ready: () => {
-                $modal.off().on('click', 'button.cancel', (e) => {
-                    e.preventDefault();
-                    $modal.closeModal();
-                });
-                $modal.off().on('click', 'button.blue', _.bind((e) => {
-                    e.preventDefault();
-                    this._email.send(this._toAddresses, this._bccAddresses)
-                        .then((result: HttpResponseMessage) => {
-                            result.json().then((content:EmailDelivery) => {
-                                var delivery = new EmailDelivery(content);
-                                this._model.EmailDeliveries.push(delivery);
+        this.submit()
+            .then(() => {
+                var $modal = $('#emailModal');
+
+                $modal.openModal({
+                    ready: () => {
+                        $modal.off().on('click',
+                            'button.cancel',
+                            (e) => {
+                                e.preventDefault();
                                 $modal.closeModal();
                             });
-                        })
-                        .catch((err: HttpResponseMessage) => {
-                            console.log(err);
-                            var msg = 'There was a problem sending the email';
-                            if (err) {
-                                msg += `: ${err}`;
-                            }
-                            toastr.error(msg);
-                        });
-                }, this));
-                $modal.find('iframe').attr('src', this._email.reportUrl);
-            }
-        });
+                        $modal.off().on('click',
+                            'button.blue',
+                            _.bind((e) => {
+                                    e.preventDefault();
+
+                                    this._email.send(this._toAddresses, this._bccAddresses)
+                                        .then((result: HttpResponseMessage) => {
+                                            result.json().then((content: EmailDelivery) => {
+                                                var delivery = new EmailDelivery(content);
+                                                this._model.EmailDeliveries.push(delivery);
+                                                $modal.closeModal();
+                                            });
+                                        })
+                                        .catch((err: HttpResponseMessage) => {
+                                            console.log(err);
+                                            var msg = 'There was a problem sending the email';
+                                            if (err) {
+                                                msg += `: ${err}`;
+                                            }
+                                            toastr.error(msg);
+                                        });
+                                },
+                                this));
+                        $modal.find('iframe').attr('src', this._email.reportUrl);
+                    }
+                });
+            })
+            .catch(() => toastr.error('There are errors on the Order.'));
     }
 
     onError(err) {
