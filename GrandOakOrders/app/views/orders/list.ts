@@ -2,8 +2,6 @@
 import {HttpClient, HttpResponseMessage} from 'aurelia-fetch-client';
 import {Router} from 'aurelia-router';
 import {OrderPojo, OrderViewModel, OrderItemViewModel} from '../../models/order';
-import * as moment from 'moment';
-import * as _ from 'underscore';
 
 @inject(HttpClient, Router)
 export class OrdersList {

@@ -2,7 +2,6 @@
 import {OrderItemPojo} from '../../models/order';
 import {ItemTemplate} from '../../models/itemTemplate';
 import {EditOrder} from './edit';
-import * as _ from 'underscore';
 
 @customElement('order-item')
 @inject(Element)

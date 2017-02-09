@@ -6,8 +6,6 @@ import {InquiryPojo, InquiryViewModel} from './inquiry';
 import {EmailDelivery} from './emailDelivery';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Container} from 'aurelia-dependency-injection';
-import * as _ from 'underscore';
-import * as moment from 'moment';
 
 const DATE_FORMAT: string = 'dddd MMM D, YYYY';
 const TIME_FORMAT: string = 'h:mm A';

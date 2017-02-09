@@ -1,6 +1,4 @@
-﻿import * as moment from 'moment';
-
-export class EmailDelivery {
+﻿export class EmailDelivery {
     Id: number;
     From: string;
     To: string;

@@ -1,6 +1,5 @@
 ﻿import {customElement, bindable, inject} from 'aurelia-framework';
 import {ItemTemplate} from "../../models/itemTemplate";
-import * as _ from 'underscore';
 
 @customElement('edit-item')
 @inject(Element)

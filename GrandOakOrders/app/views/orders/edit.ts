@@ -12,7 +12,6 @@ import {OrderPojo, OrderViewModel, OrderItemPojo} from '../../models/order';
 import {Email} from '../../models/email';
 import {ItemTemplate} from '../../models/itemTemplate';
 import {IAllInPricingHost, AllInPricing} from './allInPricing';
-import * as _ from 'underscore';
 
 @inject(HttpClient, Router, Element)
 export class EditOrder implements IAllInPricingHost {
@@ -254,10 +253,7 @@ export class EditOrder implements IAllInPricingHost {
             const order = this._model.toJSON(),
                 headers = new Headers();
             headers.append('Content-Type', 'application/json');
-            if (this._toAddresses.length && _.any(this._toAddresses, (a) => a)) {
-                order.Inquiry.Email = this._toAddresses.join(';');
-            }
-
+            
             return this.httpClient.fetch(`/API/Orders/${this._model.Id}`, { method: 'patch', body: JSON.stringify(order), headers })
                 .then((result) => {
                     result.json().then((content) => {

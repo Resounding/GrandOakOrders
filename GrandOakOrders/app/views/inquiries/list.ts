@@ -1,8 +1,6 @@
 import {InquiryPojo} from '../../models/inquiry'
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
-import * as moment from 'moment';
-import * as _ from 'underscore';
 
 const DATE_FORMAT: string = 'ddd MMM D';
 const TIME_FORMAT: string = 'h:mm A';

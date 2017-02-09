@@ -3300,6 +3300,8 @@
     <Content Include="packages.config" />
     <None Include="content\site.scss" />
     <Content Include="tsd.json" />
+    <None Include="Properties\PublishProfiles\GrandOakOrders-beta - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\GrandOakOrders-beta - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -3370,6 +3372,7 @@
     <EmbeddedResource Include="Migrations\201602190248119_EmailDeliveryError.resx">
       <DependentUpon>201602190248119_EmailDeliveryError.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reports\QuoteReport.resx">
       <DependentUpon>QuoteReport.cs</DependentUpon>
     </EmbeddedResource>

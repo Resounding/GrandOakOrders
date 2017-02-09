@@ -6,7 +6,6 @@ import {inject} from 'aurelia-framework';
 import {HttpClient, HttpResponseMessage} from 'aurelia-fetch-client';
 import {Router} from 'aurelia-router';
 import {InquiryViewModel, InquiryPojo} from '../../models/inquiry';
-import * as _ from 'underscore'
 import * as uri from 'uri.js'
 import {Customer} from '../../models/customer';
 

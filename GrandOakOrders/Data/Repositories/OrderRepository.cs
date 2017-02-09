@@ -149,6 +149,7 @@ namespace GrandOakOrders.Data.Repositories
                     i.InvoiceNotes = edit.InvoiceNotes;
                     i.ShowToKitchen = edit.ShowToKitchen;
                     i.ShowOnInvoice = edit.ShowOnInvoice;
+                    i.SortOrder = edit.SortOrder;
                 });
 
             var added = order.Items

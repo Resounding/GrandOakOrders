@@ -1,46 +1,58 @@
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const aurelia_framework_1 = require('aurelia-framework');
-const aurelia_fetch_client_1 = require('aurelia-fetch-client');
-const aurelia_router_1 = require('aurelia-router');
-const aurelia_auth_1 = require('aurelia-auth');
-let Home = class Home {
-    constructor(httpClient, auth, router) {
-        this.httpClient = httpClient;
-        this.auth = auth;
-        this.router = router;
-        this.load();
+System.register(['aurelia-framework', 'aurelia-fetch-client', 'aurelia-auth'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var aurelia_framework_1, aurelia_fetch_client_1, aurelia_auth_1;
+    var Home;
+    return {
+        setters:[
+            function (aurelia_framework_1_1) {
+                aurelia_framework_1 = aurelia_framework_1_1;
+            },
+            function (aurelia_fetch_client_1_1) {
+                aurelia_fetch_client_1 = aurelia_fetch_client_1_1;
+            },
+            function (aurelia_auth_1_1) {
+                aurelia_auth_1 = aurelia_auth_1_1;
+            }],
+        execute: function() {
+            Home = (function () {
+                function Home(httpClient, auth, router) {
+                    this.httpClient = httpClient;
+                    this.auth = auth;
+                    this.router = router;
+                    this.load();
+                }
+                Home.prototype.load = function () {
+                    var _this = this;
+                    this.httpClient.fetch('/API/Home')
+                        .then(function (response) {
+                        response.json().then(function (content) {
+                            _this.content = content;
+                        });
+                    })
+                        .catch(function (err) {
+                        if (err.status === 401) {
+                            _this.auth.authenticate('google', false, null)
+                                .then(function () { return _this.load(); })
+                                .catch(function () { return _this.router.navigateToRoute('login'); });
+                        }
+                        else {
+                            console.log(err);
+                        }
+                    });
+                };
+                Home = __decorate([
+                    aurelia_framework_1.inject(aurelia_fetch_client_1.HttpClient, aurelia_auth_1.AuthService)
+                ], Home);
+                return Home;
+            }());
+            exports_1("default", Home);
+        }
     }
-    load() {
-        this.httpClient.fetch('/API/Home')
-            .then((response) => {
-            response.json().then((content) => {
-                this.content = content;
-            });
-        })
-            .catch((err) => {
-            if (err.status === 401) {
-                this.auth.authenticate('google', false, null)
-                    .then(() => this.load())
-                    .catch(() => this.router.navigateToRoute('login'));
-            }
-            else {
-                console.log(err);
-            }
-        });
-    }
-};
-Home = __decorate([
-    aurelia_framework_1.inject(aurelia_fetch_client_1.HttpClient, aurelia_auth_1.AuthService), 
-    __metadata('design:paramtypes', [(typeof (_a = typeof aurelia_fetch_client_1.HttpClient !== 'undefined' && aurelia_fetch_client_1.HttpClient) === 'function' && _a) || Object, (typeof (_b = typeof aurelia_auth_1.AuthService !== 'undefined' && aurelia_auth_1.AuthService) === 'function' && _b) || Object, (typeof (_c = typeof aurelia_router_1.Router !== 'undefined' && aurelia_router_1.Router) === 'function' && _c) || Object])
-], Home);
-exports.default = Home;
-var _a, _b, _c;
+});
