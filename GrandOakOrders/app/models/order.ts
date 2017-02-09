@@ -175,6 +175,7 @@ export class OrderViewModel implements OrderPojo {
 
     Items: Array<OrderItemPojo>;
     EmailDeliveries: Array<EmailDelivery>;
+    Reminders?: Array<any>
 
     TaxCode: string;
     TaxRate: number;

@@ -33,6 +33,7 @@ namespace GrandOakOrders.Data.Repositories
                 .Include(o => o.Items)
                 .Include(o => o.Inquiry)
                 .Include(o => o.EmailDeliveries)
+                .Include(o => o.Reminders)
                 .FirstOrDefaultAsync(o => o.Id == id);
 
             foreach (var delivery in order.EmailDeliveries) {

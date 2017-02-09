@@ -18,6 +18,7 @@ namespace GrandOakOrders.Data.Maps
             HasRequired(o => o.Inquiry).WithMany().HasForeignKey(o => o.InquiryId);
             HasRequired(o => o.Tax).WithMany().HasForeignKey(o => o.TaxCode);
             HasMany(o => o.Items).WithRequired().HasForeignKey(i => i.OrderId);
+            HasMany(o => o.Reminders).WithRequired(r => r.Order).HasForeignKey(r => r.OrderId);
         }
     }
 }

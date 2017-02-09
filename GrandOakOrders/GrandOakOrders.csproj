@@ -3202,6 +3202,7 @@
     <Compile Include="Data\Entities\ItemTemplate.cs" />
     <Compile Include="Data\Entities\Order.cs" />
     <Compile Include="Data\Entities\OrderItem.cs" />
+    <Compile Include="Data\Entities\Reminder.cs" />
     <Compile Include="Data\Entities\Tax.cs" />
     <Compile Include="Data\Entities\User.cs" />
     <Compile Include="Data\GrandOakDbContext.cs" />
@@ -3213,6 +3214,7 @@
     <Compile Include="Data\Repositories\CustomerRepository.cs" />
     <Compile Include="Data\Repositories\InquiryRepository.cs" />
     <Compile Include="Data\Repositories\ItemTemplateRepository.cs" />
+    <Compile Include="Data\Repositories\ReminderRepository.cs" />
     <Compile Include="Data\Repositories\OrderRepository.cs" />
     <Compile Include="Data\Repositories\UserRepository.cs" />
     <Compile Include="Migrations\201508291348252_Users.cs" />
@@ -3266,6 +3268,10 @@
     <Compile Include="Migrations\201602190248119_EmailDeliveryError.cs" />
     <Compile Include="Migrations\201602190248119_EmailDeliveryError.Designer.cs">
       <DependentUpon>201602190248119_EmailDeliveryError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702091642460_Reminders.cs" />
+    <Compile Include="Migrations\201702091642460_Reminders.Designer.cs">
+      <DependentUpon>201702091642460_Reminders.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
@@ -3371,6 +3377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602190248119_EmailDeliveryError.resx">
       <DependentUpon>201602190248119_EmailDeliveryError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702091642460_Reminders.resx">
+      <DependentUpon>201702091642460_Reminders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reports\QuoteReport.resx">

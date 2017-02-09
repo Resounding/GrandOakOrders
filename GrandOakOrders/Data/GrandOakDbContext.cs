@@ -29,6 +29,7 @@ namespace GrandOakOrders.Data
         public virtual DbSet<ItemTemplate> ItemTemplates { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<Reminder> Reminders { get; set; }
         public virtual DbSet<Tax> Taxes { get; set; }
         public virtual DbSet<User> Users { get; set; }
 

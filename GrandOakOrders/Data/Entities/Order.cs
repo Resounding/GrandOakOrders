@@ -36,5 +36,6 @@ namespace GrandOakOrders.Data.Entities
         public Tax Tax { get; set; }
 
         public ICollection<EmailDelivery> EmailDeliveries { get; set; }
+        public ICollection<Reminder> Reminders { get; set; }
     }
 }

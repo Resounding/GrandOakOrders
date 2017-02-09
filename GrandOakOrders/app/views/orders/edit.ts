@@ -244,6 +244,30 @@ export class EditOrder implements IAllInPricingHost {
             .catch(this.onError);
     }
 
+    createReminders(e) {
+        e.preventDefault();
+
+        this.httpClient.fetch(`/API/Orders/${this._model.Id}/Reminders`, { method: 'put' })
+            .then(result => {
+                if(result.ok) {
+                    this._model.Reminders.push({ });
+                }
+            })
+            .catch(this.onError);
+    }
+
+    removeReminders(e) {
+        e.preventDefault();
+
+        this.httpClient.fetch(`/API/Orders/${this._model.Id}/Reminders`, { method: 'delete' })
+            .then(result => {
+                if(result.ok) {
+                    this._model.Reminders = [];
+                }
+            })
+            .catch(this.onError);
+    }
+
     submit(): Promise<any> {
         this._submitted = true;
 

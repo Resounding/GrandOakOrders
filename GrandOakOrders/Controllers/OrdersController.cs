@@ -137,5 +137,51 @@ namespace GrandOakOrders.Controllers
 
             return Ok(delivery);
         }
+
+        [Route("{id:int}/Reminders")]
+        [HttpPut]
+        public async Task<IHttpActionResult> AddReminders(int id)
+        {
+            var order = await _repo.Get(id);
+            if (order?.Inquiry == null) {
+                return NotFound();
+            }
+
+            var reminderRepo = new ReminderRepository();
+
+            if (order.Inquiry.EventDate.HasValue) {
+                var easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+                var date = DateTime.Parse(order.Inquiry.EventDate.Value.AddDays(-1).ToString("yyyy-MM-dd") + " 8:00 AM");
+                var offset = new DateTimeOffset(date, easternZone.BaseUtcOffset);
+
+                var reminder = new Reminder {
+                    OrderId = id,
+                    ReminderTime = offset
+                };
+                await reminderRepo.CreateReminder(reminder);
+
+                if (order.Inquiry.EventTime.HasValue) {
+                    var time = new DateTime(order.Inquiry.EventTime.Value.Ticks).ToString("hh:mm tt");
+                    date = DateTime.Parse(order.Inquiry.EventDate.Value.ToString("yyyy-MM-dd ") + time);
+                    offset = new DateTimeOffset(date, easternZone.BaseUtcOffset);
+                    reminder = new Reminder {
+                        OrderId = id,
+                        ReminderTime = offset
+                    };
+                    await reminderRepo.CreateReminder(reminder);
+                }
+            }
+
+            return Ok();
+        }
+
+        [Route("{id:int}/Reminders")]
+        [HttpDelete]
+        public async Task<IHttpActionResult> RemoveReminders(int id)
+        {
+            var reminderRepo = new ReminderRepository();
+            await reminderRepo.RemoveReminders(id);
+            return Ok();
+        }
     }
 }
