@@ -23,6 +23,10 @@ Jan-Willem Stulp`;
     get reportUrl() {
         return `/Reports/Invoices/${this.order.Id}?format=pdf`;
     }
+    
+    get quoteReportUrl() {
+        return `/Reports/Quotes/${this.order.Id}?format=pdf`;
+    }
 
     send(email: string[], bcc: string[]): Promise<any> {
         this.email = email;
@@ -30,6 +34,14 @@ Jan-Willem Stulp`;
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.httpClient.fetch(`/api/orders/${this.order.Id}/emailInvoice`, { method: 'post', body: JSON.stringify(this.toJSON()), headers });
+    }
+
+    sendQuote(email: string[], bcc: string[]): Promise<any> {
+        this.email = email;
+        this.bcc = bcc;
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.httpClient.fetch(`/api/orders/${this.order.Id}/emailQuote`, { method: 'post', body: JSON.stringify(this.toJSON()), headers });
     }
 
     toJSON() {

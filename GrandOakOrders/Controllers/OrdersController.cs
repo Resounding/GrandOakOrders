@@ -138,6 +138,91 @@ namespace GrandOakOrders.Controllers
             return Ok(delivery);
         }
 
+        [Route("{id:int}/EmailQuote")]
+        [HttpPost]
+        public async Task<IHttpActionResult> EmailQuote(EmailInputModel model)
+        {
+            var fromAddress = ConfigurationManager.AppSettings["EmailFromAddress"];
+            var user = Request.GetOwinContext().Request.User;
+
+            var order = await _repo.Get(model.OrderId);
+            var report = new QuoteReport(order) as SectionReport;
+            report.Run();
+            var memStream = new MemoryStream();
+            var pdfExport = new PdfExport();
+            pdfExport.Export(report.Document, memStream);
+            memStream.Position = 0;
+            var attachments = new Dictionary<string, MemoryStream> {
+                {$"Quote {order.Id.ToString("0000")}.pdf", memStream  }
+            };
+
+            var mailMessage = new SendGridMessage {
+                Subject = model.Subject,
+                From = new MailAddress(fromAddress, user.Identity.Name),
+                Text = model.Body,
+                Html = model.Body.Replace("\n", "<br>"),
+                StreamedAttachments = attachments
+            };
+            var to = model.Address.Where(a => !string.IsNullOrWhiteSpace(a)).ToList();
+
+            if (to.Any()) {
+                mailMessage.AddTo(to);
+
+                model.Bcc.ToList().ForEach(bcc => {
+                    if (!string.IsNullOrWhiteSpace(bcc)) {
+                        mailMessage.AddBcc(bcc);
+                    }
+                });
+            } else {
+                to = model.Bcc.Where(a => !string.IsNullOrWhiteSpace(a)).ToList();
+                mailMessage.AddTo(to);
+            }
+
+            var delivery = await _repo.RecordInvoiceEmail(mailMessage, order.Id, user.Identity.Name);
+
+            mailMessage.AddUniqueArgs(new Dictionary<string, string> {
+                ["order_id"] = order.Id.ToString(),
+                ["delivery_id"] = delivery.Id.ToString()
+            });
+
+            try {
+                var apiKey = ConfigurationManager.AppSettings["SendGridApiKey"];
+                var transportWeb = new Web(apiKey);
+                await transportWeb.DeliverAsync(mailMessage);
+
+            } catch (InvalidApiRequestException ex) {
+                var errorMessage = string.Join(", ", ex.Errors);
+                Exception error = ex;
+                while (error != null) {
+                    errorMessage += $",{error.Message}";
+                    error = error.InnerException;
+                }
+                await _repo.LogEmailDeliveryError(delivery.Id, errorMessage);
+                throw;
+
+            } catch (Exception ex) {
+                var errorMessage = string.Empty;
+                var error = ex;
+                while (error != null) {
+                    errorMessage += $",{error.Message}";
+                    error = error.InnerException;
+                }
+                await _repo.LogEmailDeliveryError(delivery.Id, errorMessage);
+                throw;
+            }
+
+            var email = string.Join(";", model.Address);
+            if (!string.IsNullOrWhiteSpace(email)) {
+                order.Inquiry.Email = email;
+            }
+            if (order.InvoiceDate == null) {
+                order.InvoiceDate = DateTime.Now;
+            }
+            await _repo.Edit(order, user.Identity.Name);
+
+            return Ok(delivery);
+        }
+
         [Route("{id:int}/Reminders")]
         [HttpPut]
         public async Task<IHttpActionResult> AddReminders(int id)

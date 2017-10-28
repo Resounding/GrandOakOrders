@@ -276,6 +276,43 @@ let EditOrder = class EditOrder {
         })
             .catch(() => toastr.error('There are errors on the Order.'));
     }
+    emailQuote() {
+        this.submit()
+            .then(() => {
+                var $modal = $('#emailQuoteModal');
+                this._email.subject = this._email.subject.replace('invoice', 'quote');
+                this._email.body = this._email.body.replace('invoice', 'quote');
+                $modal.openModal({
+                    ready: () => {
+                        $modal.off().on('click', 'button.cancel', (e) => {
+                            e.preventDefault();
+                            $modal.closeModal();
+                        });
+                        $modal.off().on('click', 'button.blue', _.bind((e) => {
+                            e.preventDefault();
+                            this._email.sendQuote(this._toAddresses, this._bccAddresses)
+                                .then((result) => {
+                                    result.json().then((content) => {
+                                        var delivery = new emailDelivery_1.EmailDelivery(content);
+                                        this._model.EmailDeliveries.push(delivery);
+                                        $modal.closeModal();
+                                    });
+                                })
+                                .catch((err) => {
+                                    console.log(err);
+                                    var msg = 'There was a problem sending the email';
+                                    if (err) {
+                                        msg += `: ${err}`;
+                                    }
+                                    toastr.error(msg);
+                                });
+                        }, this));
+                        $modal.find('iframe').attr('src', this._email.quoteReportUrl);
+                    }
+                });
+            })
+            .catch(() => toastr.error('There are errors on the Order.'));
+    }
     onError(err) {
         console.log(err);
         var msg = 'There was a problem saving the order';

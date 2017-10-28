@@ -17,12 +17,22 @@ Jan-Willem Stulp`;
     get reportUrl() {
         return `/Reports/Invoices/${this.order.Id}?format=pdf`;
     }
+    get quoteReportUrl() {
+        return `/Reports/Quotes/${this.order.Id}?format=pdf`;
+    }
     send(email, bcc) {
         this.email = email;
         this.bcc = bcc;
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.httpClient.fetch(`/api/orders/${this.order.Id}/emailInvoice`, { method: 'post', body: JSON.stringify(this.toJSON()), headers: headers });
+    }
+    sendQuote(email, bcc) {
+        this.email = email;
+        this.bcc = bcc;
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.httpClient.fetch(`/api/orders/${this.order.Id}/emailQuote`, { method: 'post', body: JSON.stringify(this.toJSON()), headers: headers });
     }
     toJSON() {
         return {
