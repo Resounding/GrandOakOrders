@@ -133,9 +133,9 @@ namespace GrandOakOrders.Controllers
             if (order.InvoiceDate == null) {
                 order.InvoiceDate = DateTime.Now;
             }
-            await _repo.Edit(order, user.Identity.Name);
+            var edited = await _repo.Edit(order, user.Identity.Name);
 
-            return Ok(delivery);
+            return Ok(edited);
         }
 
         [Route("{id:int}/EmailQuote")]

@@ -312,8 +312,8 @@ export class EditOrder implements IAllInPricingHost {
 
                                     this._email.send(this._toAddresses, this._bccAddresses)
                                         .then((result: HttpResponseMessage) => {
-                                            result.json().then((content: EmailDelivery) => {
-                                                var delivery = new EmailDelivery(content);
+                                            result.json().then((content: OrderPojo) => {
+                                                this._model = new OrderViewModel(content);
                                                 this._model.EmailDeliveries.push(delivery);
                                                 $modal.closeModal();
                                             });

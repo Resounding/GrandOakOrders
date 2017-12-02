@@ -256,8 +256,7 @@ let EditOrder = class EditOrder {
                         this._email.send(this._toAddresses, this._bccAddresses)
                             .then((result) => {
                             result.json().then((content) => {
-                                var delivery = new emailDelivery_1.EmailDelivery(content);
-                                this._model.EmailDeliveries.push(delivery);
+                                this._model = new order_1.OrderViewModel(content);
                                 $modal.closeModal();
                             });
                         })
