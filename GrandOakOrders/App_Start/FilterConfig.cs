@@ -145,7 +145,11 @@ namespace GrandOakOrders
                 var loginInfo = new UserLoginInfo("google", token);
                 user = await userManager.FindAsync(loginInfo);
                 if(user != null) {
-                    _session[token] = user;
+                    if (_session.ContainsKey(token)) {
+                        _session[token] = user;
+                    } else {
+                        _session.Add(token, user);
+                    }
                 }
             }
 
