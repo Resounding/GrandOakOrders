@@ -175,14 +175,15 @@ namespace GrandOakOrders.Data.Repositories
                 i.UpdatedAt = now;
                 i.CreatedBy = who;
             });
-            _context.OrderItems.AddRange(added);                 
+            _context.OrderItems.AddRange(added);
 
             using (var tx = _context.Database.BeginTransaction()) {
                 await _context.SaveChangesAsync();
                 tx.Commit();
             }
 
-            return order;
+            var returnValue = await Get(order.Id);
+            return returnValue;
         }
 
         public async Task<EmailDelivery> RecordInvoiceEmail(SendGridMessage message, int orderId, string who)
