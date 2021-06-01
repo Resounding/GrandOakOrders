@@ -90,7 +90,7 @@ namespace GrandOakOrders.Controllers
 
         private async Task<GoogleProfileResponse> GetGoogleProfile(string token)
         {
-            var url = ConfigurationManager.AppSettings["GooglePlusProfileURL"];
+            var url = ConfigurationManager.AppSettings["GooglePeopleProfileURL"];
             var client = new HttpClient();
             var profileRequest = new HttpRequestMessage {
                 RequestUri = new Uri(url),
@@ -104,19 +104,22 @@ namespace GrandOakOrders.Controllers
                 throw new ApplicationException(err);
             }
 
-
             var profile = await profileResponse.Content.ReadAsAsync<GoogleProfileResponse>();
             return profile;    
         }
 
         private async Task<User> CreateUser(GoogleProfileResponse profile, string token)
         {
+            var displayName = profile.names?.FirstOrDefault(n => n.metadata?.primary == true)?.displayName;
+            var id = profile.names?.FirstOrDefault(n => n.metadata?.primary == true && n.metadata?.source?.type == "PROFILE")?.metadata.source?.id;
+            var email = profile.emailAddresses?.FirstOrDefault((e => e.metadata?.primary == true))?.value;
+
             var user = new User {
                 AccessToken = token,
-                DisplayName = profile.name,
-                UserName = profile.email,
-                Email = profile.email,
-                Id = profile.sub
+                DisplayName = displayName,
+                UserName = email,
+                Email = email,
+                Id = id
             };
             var userManager = Request.GetOwinContext().GetUserManager<GrandOakUserManager>();
             await userManager.CreateAsync(user);
